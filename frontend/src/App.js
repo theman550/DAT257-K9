@@ -10,7 +10,7 @@ function App() {
   }, [])
   
   if (message === '') {
-    return <div>loading...</div>
+    return <div className='message'>loading...</div>
   }
   
   return (
