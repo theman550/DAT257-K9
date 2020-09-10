@@ -1,6 +1,3 @@
-
-<!-- Den här filen är ytterst skräpig och ska bara demonstrera hello-world första veckan -->
-
 <?php
     $response = getTrip();
     header("Access-Control-Allow-Origin: *");

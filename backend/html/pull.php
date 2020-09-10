@@ -1,6 +1,6 @@
 <?php
 
 // Use in the “Post-Receive URLs” section of your GitHub repo.
-shell_exec( ‘cd /var/www/html/ && git reset –hard HEAD && git pull’ );
+shell_exec( "cd /var/www/DAT257-K9/ && git pull" );
 
 ?>
