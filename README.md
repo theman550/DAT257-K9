@@ -1,6 +1,13 @@
 # DAT257-K9
 Project for course DAT257
 
+# Rules
+- Never work on the master branch, always work on a feature branch
+- When you want to push something, push it to your feature branch, then do a pull request
+- Always use linter (e.g. eslint) before you do a pull request
+- Always write tests for your code, use test driven development (TDD)
+- Create meaningful commits and write informational commit messages
+
 # Individual reflections
 https://studentchalmersse.sharepoint.com/sites/K9-Agilekurs/Shared%20Documents/Forms/AllItems.aspx?RootFolder=%2Fsites%2FK9%2DAgilekurs%2FShared%20Documents%2FGeneral%2Findividuella%20reflektioner&FolderCTID=0x012000A7E3CD2C1D8C6A408337BA5441387C34
 
@@ -9,3 +16,6 @@ https://studentchalmersse.sharepoint.com/:w:/r/sites/K9-Agilekurs/_layouts/15/Do
 
 # Social contract
 https://studentchalmersse.sharepoint.com/:w:/r/sites/K9-Agilekurs/_layouts/15/Doc.aspx?sourcedoc=%7B98F4E432-84CF-4B6D-985B-27A6FE108DC3%7D&file=Social%20contract.docx&action=edit&mobileredirect=true
+
+# Scrum board
+https://app.clubhouse.io/eda257k9
