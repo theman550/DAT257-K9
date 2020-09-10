@@ -1,8 +1,20 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
 function App() {
+  const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    fetch('http://spilg.xyz/index.php?function=hello_world')
+      .then(response => response.json())
+      .then(message => setMessage(message))
+  }, [])
+  
+  if (message === '') {
+    return <div>loading...</div>
+  }
+  
   return (
-    <div>Samåkningsapp</div>
+    <div>{message}</div>
   )
 }
 
