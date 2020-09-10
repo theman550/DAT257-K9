@@ -20,13 +20,7 @@
             echo $row["Start"] . " -> " . $row["Slut"] . "</br>";
         }
     }
-
     mysqli_close($connection);
-
-    if($_GET['function'] == 'hello_world'){
-        $response = "Jadå!";
-        echo $response;
-    }
 ?>
 
 <!DOCTYPE HTML>
@@ -50,34 +44,11 @@
 
 
 
-<!-- if($_GET['function']=='hello_world'){
-        echo "funkar nog inte men vem vet";
-    }
+<!-- 
 
-    $request = NULL;
-    switch($_SERVER['REQUEST_METHOD'])
-    {
-        case 'GET': $the_request = &$_GET; break;
-        case 'POST': $the_request = &$_POST; break;
-    default:
-
-    $myFile = "log.txt";
-    $fh = fopen($myFile, 'a') or die("can't open file");
-    fwrite($fh, "write this to my file\n");
-    fclose($fh);
-
-
-    }
-
-
-
-# Ansluta till DB
-
-
-
-    $text = $_GET['text'];
-    echo $text;
--->
-
-
-
+### Kan användas för att skriva meddelanden till fil, om det är smidigt.
+        $myFile = "log.txt";
+        $fh = fopen($myFile, 'a') or die("can't open file");
+        fwrite($fh, detSomSkaSkrivas);
+        fclose($fh);
+ -->
