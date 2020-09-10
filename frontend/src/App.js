@@ -4,7 +4,7 @@ function App() {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    fetch('http://spilg.xyz/index.php?function=hello_world')
+    fetch('http://spilg.xyz/hello_world.php')
       .then(response => response.json())
       .then(message => setMessage(message))
   }, [])
