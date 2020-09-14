@@ -1,18 +1,18 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import {render} from '@testing-library/react'
+import {render, screen} from '@testing-library/react'
 import App from './App'
 
-let app
+describe('App', () => {
+  beforeEach(() => {
+    render(<App />)
+  })
 
-beforeEach(() => {
-  app = render(<App />)
-})
+  it('renders navigation', () => {
+    expect(screen.getByText('Share-a-ride')).toBeInTheDocument()
+  })
 
-it('renders loading...', () => {
-  expect(app.container).toHaveTextContent('loading...')
-})
-
-it('renders hello world', () => {
-  setTimeout(() => expect(app.container).toHaveTextContent('Hello -> World'), 1000)
+  it('renders home', () => {
+    expect(screen.getByText('Home')).toBeInTheDocument()
+  })
 })
