@@ -17,10 +17,6 @@ describe('Navigation', () => {
     expect(screen.getByText('Share-a-ride')).toBeInTheDocument()
   })
 
-  it('renders login link', () => {
-    expect(screen.getByText('Login')).toBeInTheDocument()
-  })
-
   it('renders search link', () => {
     expect(screen.getByText('Search')).toBeInTheDocument()
   })
