@@ -12,16 +12,16 @@ function App() {
       <Navigation />
       <Switch>
         <Route path='/search'>
-          <p>Search</p>
+          <p>Search page</p>
         </Route>
         <Route path='/add'>
-          <p>Add trip</p>
+          <p>Add trip page</p>
         </Route>
         <Route path='/login'>
-          <p>Login</p>
+          <p>Login page</p>
         </Route>
         <Route path='/'>
-          <p>Home</p>
+          <p>Home page</p>
         </Route>
       </Switch>
     </Router>
