@@ -25,20 +25,33 @@ const Li = styled.li`
   margin-right: 2rem;
 `
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 const Navigation = () => {
   return (
     <Nav>
-      <H3>Share-a-ride</H3>
+      <H3>
+        <StyledLink to='/'>
+          Share-a-ride
+        </StyledLink>
+      </H3>
       <Ul>
         <Li>
-          <Link style={{textDecoration: 'none'}} to='/search'>
+          <StyledLink to='/search'>
             Search
-          </Link>
+          </StyledLink>
         </Li>
         <Li>
-          <Link style={{textDecoration: 'none'}} to='/add'>
+          <StyledLink to='/add'>
             Add trip
-          </Link>
+          </StyledLink>
         </Li>
       </Ul>
     </Nav>
