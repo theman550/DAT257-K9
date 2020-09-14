@@ -2,6 +2,9 @@ import React from 'react'
 import {Formik, Field} from "formik" 
 import {Component} from 'react'
 import './Form.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMap, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+
 
 
 
@@ -12,11 +15,16 @@ import './Form.css'
     console.log(values);
 }
 
+
 form = (props) => {
+ 
     return (<form onSubmit={props.handleSubmit} className="Form">
       
+      
+      <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> 
         <Field name="origin" placeholder="Enter Origin" className="input"/> 
-        <Field name="destenation" placeholder="Enter Destenation" className="input"/>
+        <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> 
+        <Field name="destenation" placeholder="Destenation" className="input"/>
         <div className="seats">
           <label>Seats</label>
           <br/>
@@ -28,23 +36,20 @@ form = (props) => {
         </Field>
         </div>
        
-        <div className="input">
+        <div >
         <label>Date</label>
         <br/>
-        <Field name="date" type="date" id="date1">
-          
+        <Field name="date" type="date" className="input">
         </Field>
-
         </div>
-        
-        
-        <div className="input">
+        <div>
         <label>Time</label>
         <br/>
-        <Field name="time" type="time"></Field>
+        <Field name="time" type="time" className="input"></Field>
         </div>
-        
+        <i class="fal fa-bus-alt"></i>
         <button type="submit" className="Modal">Find Ride</button>
+        
     </form>)
 }
 
@@ -54,11 +59,8 @@ render(){
                 <Formik initialValues={{origin:"",destenation:"",seats:"1",date:"",time:""}} 
                      onSubmit={this.onSubmit}
                      render={this.form} />
-
             </div>)
  }
-
-
 
 }
 

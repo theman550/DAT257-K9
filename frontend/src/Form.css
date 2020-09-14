@@ -8,7 +8,7 @@
    
    box-sizing: border-box;
    font-family: "Roboto", sans-serif;
-   width: 400px;
+   width: 700px;
    border-radius: 5px;
    background:#262626;
    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
@@ -20,21 +20,32 @@
    transform: translate(-50%, -50%);
    background-size: cover;
    border-radius: 5px;
+   font-size: medium;
  }
    
  .input {
     border: none;
     border-bottom: 1px solid #333;
-    background: none;
+    background-color: #262626;
+    
     width: 100%;
     font-size: 18px;
     line-height: 1.2;
     outline: none;
-    color: #777A8C;
+    color: #9677D9;;
   }
 
   .seats{
-      color: #777A8C;
+      color: #595959;
+      background-color: #262626;
+  }
+
+  label{
+    color: #9677D9;
+      
+      
+      
+
   }
 
 
@@ -54,6 +65,19 @@
     cursor: pointer;
   }
 
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #9677D9;
+    font-size: medium;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    opacity: 0.3;
+    
+  }
+
+  .icon{
+    position: absolute;
+    right: 20px;
+  }
 
 
   
