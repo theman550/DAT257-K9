@@ -19,11 +19,10 @@ render(){
         <Switch>
           <Route path='/search'>
             <p>Search</p>
-            <Search/>
-            
           </Route>
           <Route path='/add'>
             <p>Add trip</p>
+            <Search/>
           </Route>
           <Route path='/login'>
             <p>Login</p>

@@ -8,7 +8,7 @@ const Navigation = () => {
       <ul>
         <li>
           <Link to='/search'>
-            Search12
+            Search
           </Link>
         </li>
         <li>
