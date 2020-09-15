@@ -2,13 +2,9 @@ import React, { Component } from "react";
 
 export default class Login extends Component {
 
-    handlesubmit(values)
-    {
-        console.log("values");
-    }
     render() {
         return (
-            <form action="http://localhost:3000/?" method="post">
+            <form action="" method="post">
                 <h3>Sign In</h3>
 
                 <div className="form-group">

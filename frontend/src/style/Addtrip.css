@@ -1,9 +1,10 @@
 
 @import 'https://fonts.googleapis.com/css?family=Noto+Sans';
-.Form {
+.Addtrip form {
    box-sizing: border-box;
    font-family: "Roboto", sans-serif;
-   width: 700px;
+   width: 1000px;
+   height: 500px;
    border-radius: 5px;
    background:#262626;
    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
@@ -18,10 +19,11 @@
    font-size: medium;
  }
    
- .input {
+ .Addtrip .input {
     border: none;
     border-bottom: 1px solid #333;
     background-color: #262626;
+    margin-bottom: 50px;
     
     width: 100%;
     font-size: 18px;
@@ -30,19 +32,22 @@
     color: #9677D9;;
   }
 
-  .seats{
+  .Addtrip .seats{
       color: #595959;
       background-color: #262626;
+      margin-bottom: 20px;
   }
 
-  label{
+  .Addtrip  label{
     color: #9677D9;
+    font-size: large;
   }
 
 
-  .Modal {
+  .Addtrip .Modal {
     position: relative;
     margin: 15px 0 5px 0;
+    margin-top: 0px;
     left: 30%;
     transform: translateX(-50%);
     background: #9677D9;
@@ -57,7 +62,7 @@
   }
 
 
-  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  .Addtrip  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #9677D9;
     font-size: medium;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -65,7 +70,7 @@
     
   }
 
-  .icon{
+  .Addtrip .icon{
     position: absolute;
     right: 20px;
   }

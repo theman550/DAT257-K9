@@ -1,0 +1,17 @@
+En resa innehåller:
+
+ 
+
+Start (Sträng)
+    Göteborg
+    Malmö
+    Stockholm
+    Borås \m/
+Destination (Sträng)
+    -||-
+Starttid (datetime)
+Pris (int)
+Antal tillgängliga säten (int)
+Beskrivningsfält (Sträng)
+ReseID (randomInt)
+AnvändarID (randomInt)

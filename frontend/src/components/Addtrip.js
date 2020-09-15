@@ -2,13 +2,13 @@
 import React from 'react'
 import {Formik, Field} from "formik" 
 import {Component} from 'react'
-import '../Form.css'
+import '../style/Addtrip.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 
 
 
-class Search extends Component{
+class Addtrip extends Component{
     
 onSubmit=(values) =>{
     console.log(values);
@@ -17,10 +17,10 @@ onSubmit=(values) =>{
 
 form = (props) => {
  
-    return (<form onSubmit={props.handleSubmit} className="Form">
-      
-      
-      <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> 
+    return (<div className="Addtrip">
+    
+    <form onSubmit={props.handleSubmit} className="Form">
+       <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> 
         <Field name="origin" placeholder="Enter Origin" className="input"/> 
         <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> 
         <Field name="destenation" placeholder="Destenation" className="input"/>
@@ -49,7 +49,8 @@ form = (props) => {
         <i class="fal fa-bus-alt"></i>
         <button type="submit" className="Modal">ADD Ride</button>
         
-    </form>)
+    </form>
+    </div>)
 }
 
   render(){ return (<div className="SearchGui">
@@ -59,4 +60,4 @@ form = (props) => {
             </div>)
  }
 }
-    export default Search
+    export default Addtrip

@@ -1,0 +1,98 @@
+ .reg form{
+    box-sizing: border-box;
+   font-family: "Roboto", sans-serif;
+   width: 1000px;
+   height: 550px;
+   border-radius: 5px;
+   background:#262626;
+   box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+   padding: 20px;
+   text-align: center;
+   position: absolute;
+   top: 55%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-size: cover;
+   border-radius: 5px;
+   font-size: medium;
+   
+  }
+   h1{
+    font-size: 38px;
+    text-align:center;
+    color: #9677D9;
+  }
+  
+  .reg label {
+    display:block;
+    width:x;
+    height:y;
+    text-align:right;
+    color: #9677D9;
+    font-size: large;
+  }
+
+  .reg  table.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .reg th, td {
+    padding: 0 20px 0 0;
+  }
+
+  .reg  input[type=text] {
+    
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(255, 249, 249);
+    color: rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .reg input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(255, 249, 249);
+    color: rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .reg input[type=submit] {
+    position: relative;
+    margin: 15px 0 5px 0;
+    margin-top: 20px;
+    left: 30%;
+    transform: translateX(-50%);
+    background: #9677D9;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    color: white;
+    width: 60%;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    
+   
+    
+    
+  }
+
+  .reg .container{
+    background-color: antiquewhite;
+    border-style: hidden;
+    border-radius: 15px;
+    padding:18px;
+    text-align: center;
+    box-shadow: 0 8px 6px -6px black;
+    
+  }
