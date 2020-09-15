@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class Login extends Component {
-
     render() {
         return (
             <form action="" method="post">
@@ -25,10 +24,11 @@ export default class Login extends Component {
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">Submit</button>
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                    Forgot
+                    {' '}
+                    <a href="#">password?</a>
                 </p>
             </form>
         );
     }
 }
-
