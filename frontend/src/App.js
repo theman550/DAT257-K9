@@ -1,20 +1,30 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
+import Navigation from './components/Navigation'
 
 function App() {
-  const [message, setMessage] = useState('')
-
-  useEffect(() => {
-    fetch('http://spilg.xyz/hello_world.php')
-      .then(response => response.json())
-      .then(message => setMessage(message))
-  }, [])
-  
-  if (message === '') {
-    return <div className='message'>loading...</div>
-  }
-  
   return (
-    <div>{message}</div>
+    <Router>
+      <Navigation />
+      <Switch>
+        <Route path='/search'>
+          <p>Search page</p>
+        </Route>
+        <Route path='/add'>
+          <p>Add trip page</p>
+        </Route>
+        <Route path='/login'>
+          <p>Login page</p>
+        </Route>
+        <Route path='/'>
+          <p>Home page</p>
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 
