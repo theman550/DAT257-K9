@@ -47,7 +47,7 @@ form = (props) => {
         <Field name="time" type="time" className="input"></Field>
         </div>
         <i class="fal fa-bus-alt"></i>
-        <button type="submit" className="Modal">Find Ride</button>
+        <button type="submit" className="Modal">ADD Ride</button>
         
     </form>)
 }

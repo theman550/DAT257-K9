@@ -1,11 +1,6 @@
 
 @import 'https://fonts.googleapis.com/css?family=Noto+Sans';
-
-
-
 .Form {
-   
-   
    box-sizing: border-box;
    font-family: "Roboto", sans-serif;
    width: 700px;
@@ -42,10 +37,6 @@
 
   label{
     color: #9677D9;
-      
-      
-      
-
   }
 
 
