@@ -1,18 +1,28 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import {render} from '@testing-library/react'
+import {render, screen, fireEvent} from '@testing-library/react'
 import App from './App'
 
-let app
+describe('App', () => {
+  beforeEach(() => {
+    render(<App />)
+  })
 
-beforeEach(() => {
-  app = render(<App />)
-})
+  it('renders logo', () => {
+    expect(screen.getByText('Share-a-ride')).toBeInTheDocument()
+  })
 
-it('renders loading...', () => {
-  expect(app.container).toHaveTextContent('loading...')
-})
+  it('renders home by default', () => {
+    expect(screen.getByText('Home page')).toBeInTheDocument()
+  })
 
-it('renders hello world', () => {
-  setTimeout(() => expect(app.container).toHaveTextContent('Hello -> World'), 1000)
+  it('renders search page when clicking search link in navbar', () => {
+    fireEvent.click(screen.getByText('Search'))
+    expect(screen.getByText('Search page')).toBeInTheDocument()
+  })
+
+  it('renders add page when clicking add trip link in navbar', () => {
+    fireEvent.click(screen.getByText('Add trip'))
+    expect(screen.getByText('Add trip page')).toBeInTheDocument()
+  })
 })

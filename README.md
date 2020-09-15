@@ -8,6 +8,13 @@ Project for course DAT257
 - Always write tests for your code, use test driven development (TDD)
 - Create meaningful commits and write informational commit messages
 
+# Linting frontend
+In [your working directory]/frontend
+```
+npm run lint
+```
+Fix all errors/warnings before creating a pull request.
+
 # Individual reflections
 https://studentchalmersse.sharepoint.com/sites/K9-Agilekurs/Shared%20Documents/Forms/AllItems.aspx?RootFolder=%2Fsites%2FK9%2DAgilekurs%2FShared%20Documents%2FGeneral%2Findividuella%20reflektioner&FolderCTID=0x012000A7E3CD2C1D8C6A408337BA5441387C34
 
