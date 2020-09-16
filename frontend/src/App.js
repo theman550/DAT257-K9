@@ -4,19 +4,19 @@ import Addtrip from './components/Addtrip';
 import Login from './components/Login';
 import Form from './components/Form';
 import Navigation from './components/Navigation';
+
 class App extends Component {
     render() {
         return (
-
             <Router>
                 <Navigation />
                 <Switch>
                     <Route path="/reg">
-                        <p>Register Page</p>
+                        <p>Register page</p>
                         <Form />
                     </Route>
                     <Route path="/search">
-                        <p> Search Page </p>
+                        <p> Search page </p>
                     </Route>
                     <Route path="/add">
                         <p> Add trip page </p>
@@ -27,7 +27,7 @@ class App extends Component {
                         <Login />
                     </Route>
                     <Route path="/">
-                        <p>Home Page </p>
+                        <p>Home page </p>
                     </Route>
                 </Switch>
             </Router>

@@ -27,5 +27,11 @@ module.exports = {
 
         // Indent props with 4 spaces
         'react/jsx-indent-props': ['error', 4],
+
+        "import/no-named-as-default-member": 0,
+
+        "import/no-named-as-default": 0,
+
+        "parser": 0
     },
 };
