@@ -1,12 +1,12 @@
 <?php
 include("connectDB.php");
 
-writeTrip("lidkoping", "skövde", null, 100, 5, "bästa resan nånsin!", createUserID());
 #Här tänker jag mig att huvudlogiken för servern ska vara
 if(isset($_GET['function'])){
     switch($_GET['function']){
         case "writeTrip":
-            writeTrip();
+            //writeTrip();
+            writeTrip("lidkoping", "skövde", null, 100, 5, "bästa resan nånsin!", createUserID());
             break;
         case "readTrips":
             $response = readTrips();
@@ -33,13 +33,18 @@ function sendResponse($response){
 #Den här funktionen går lätt att bygga vidare på med fler argument
 function readTrips(){
     if(isset($_GET['from'])){ 
-        $sql = "SELECT * FROM Resa WHERE Start = '{$_GET['from']}'";
+        $sql = "SELECT * FROM Resa WHERE startLocation = '{$_GET['from']}'";
+    }
+    elseif(isset($_GET['tripID'])){
+        $sql = "SELECT * FROM Resa WHERE tripID = '{$_GET['tripID']}'";
+    }
+    elseif(isset($_GET['userID'])){
+        $sql = "SELECT * FROM Resa WHERE userID = '{$_GET['userID']}'";
     }
     else{
         $sql = "SELECT * FROM Resa";
     }
-    $result = queryDB($sql, true);
-    //printRows($result);
+    $result = queryDB($sql);
     return $result;
 }
 
@@ -50,9 +55,9 @@ function writeTrip($startLocation, $destination, $startTime, $price, $seatsAvail
     'Slut' => 'Vildsvin',
     'Pris' => '321'
     ];
-    $start = $POST['Start'];
-    $slut = $POST['Slut'];
-    $pris = $POST['Pris'];
+    $start = $POST['startLocation'];
+    $slut = $POST['destination'];
+    $pris = $POST['Price'];
 
     //$sql = "INSERT INTO Resa (Start, Slut, Pris) VALUES ('{$start}', '{$slut}', '{$pris}')";
 	// uppdaterad med nya databas formatet, detta är fortfarande en dummy/exempel insert
@@ -75,7 +80,7 @@ function printRows($result){
     if($result -> num_rows > 0){
         echo "<b><u>Resultat från query: </br></b></u>";
         while($row = mysqli_fetch_assoc($result)){
-            echo "<li>" . $row["Start"] . " -> " . $row["Slut"] . "</br>";
+            echo "<li>" . $row["startLocation"] . " -> " . $row["destination"] . "</br>";
         }
     }
 }
