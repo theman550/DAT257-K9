@@ -4,7 +4,6 @@ import Addtrip from './components/Addtrip';
 import Login from './components/Login';
 import Form from './components/Form';
 import Navigation from './components/Navigation';
-
 class App extends Component {
     render() {
         return (

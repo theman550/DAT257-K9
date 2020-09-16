@@ -7,21 +7,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 
 
-
 class Addtrip extends Component{
-    
+
 onSubmit=(values) =>{
     console.log(values);
 }
 
 
 form = (props) => {
- 
-    return (<div className="Addtrip">
-    
+    return (
+    <div className="Addtrip">
     <form onSubmit={props.handleSubmit} className="Form">
        <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> 
-        <Field name="origin" placeholder="Enter Origin" className="input"/> 
+       <Field name="origin" placeholder="Origin" className="input"/>
         <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" /> 
         <Field name="destenation" placeholder="Destenation" className="input"/>
         <div className="seats">
@@ -53,11 +51,15 @@ form = (props) => {
     </div>)
 }
 
-  render(){ return (<div className="SearchGui">
+  render(){ 
+   return ( 
+    <div className="SearchGui">
                 <Formik initialValues={{origin:"",destenation:"",seats:"1",date:"",time:""}} 
                      onSubmit={this.onSubmit}
                      render={this.form} />
             </div>)
  }
-}
+  }
+ 
+
     export default Addtrip

@@ -96,3 +96,14 @@
     box-shadow: 0 8px 6px -6px black;
     
   }
+
+
+  .suggestions  {
+    background-color: blanchedalmond;
+    width: 200px;
+    height: 150px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    overflow-y: scroll;
+    color: #9677D9;;
+  }
