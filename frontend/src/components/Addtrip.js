@@ -82,7 +82,7 @@ form = (props) => {
     <div className="Addtrip">
     <Form onSubmit={props.handleSubmit} className="Form">
        <Icon icon={faMapMarkerAlt} className="icon" /> 
-       <Input name="origin" placeholder="Origin" className="input"/>
+       <Input  name="origin" placeholder="Origin" className="input"/>
         <Icon icon={faMapMarkerAlt} className="icon" /> 
         <Input name="destenation" placeholder="Destenation" className="input"/>
         <div className="seats">
@@ -108,7 +108,7 @@ form = (props) => {
         <Input name="time" type="time" className="input"></Input>
         </div>
         <i class="fal fa-bus-alt"></i>
-        <Button type="submit" className="Modal">ADD Ride</Button>
+        <Button data-testid= "add-button" type="submit" className="Modal">ADD Ride</Button>
         
     </Form>
     </div>)
@@ -117,7 +117,7 @@ form = (props) => {
   render(){ 
    return ( 
     <div className="SearchGui">
-                <Formik initialValues={{origin:"",destenation:"",seats:"1",date:"",time:""}} 
+                <Formik data-testid="form"initialValues={{origin:"",destenation:"",seats:"1",date:"",time:""}} 
                      onSubmit={this.onSubmit}
                      render={this.form} />
             </div>)
