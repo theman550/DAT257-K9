@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 jobs:
-  test_pull_request:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,7 +16,5 @@ jobs:
         working-directory: ./frontend
       - run: npm test
         working-directory: ./frontend
-      - name: Use current action
-        uses: getsentry/action-eslint-fix@v1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm run lint
+        working-directory: ./frontend
