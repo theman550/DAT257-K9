@@ -8,7 +8,11 @@ const Nav = styled.nav`
   color: white;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, rgba(128, 100, 247, 1) 0%, rgba(245, 186, 156, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(128, 100, 247, 1) 0%,
+    rgba(245, 186, 156, 1) 100%
+  );
   width: 100%;
 `;
 
