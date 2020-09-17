@@ -116,8 +116,9 @@ const AddTrip = () => (
         origin: '', destenation: '', seats: '1', date: '', time: '',
       }}
       onSubmit={onSubmit}
-      render={form}
-    />
+    >
+      {form}
+    </Formik>
   </div>
 );
 
