@@ -8,7 +8,11 @@ const Nav = styled.nav`
   color: white;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, rgba(128,100,247,1) 0%, rgba(245,186,156,1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(128, 100, 247, 1) 0%,
+    rgba(245, 186, 156, 1) 100%
+  );
   width: 100%;
 `;
 
@@ -28,42 +32,26 @@ const Li = styled.li`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: white;
-  
+
   &:hover {
     text-decoration: underline;
   }
 `;
 
 const Navigation = () => (
-    <Nav>
-        <H3>
-            <StyledLink to="/">
-                Share-a-ride
-            </StyledLink>
-        </H3>
-        <Ul>
-            <Li>
-                <StyledLink to="/search">
-                    Search
-                </StyledLink>
-            </Li>
-            <Li>
-                <StyledLink to="/add">
-                    Add trip
-                </StyledLink>
-            </Li>
-            <Li>
-                <StyledLink to="/login">
-                    Login
-                </StyledLink>
-            </Li>
-            <Li>
-                <StyledLink to="/reg">
-                    Register
-                </StyledLink>
-            </Li>
-        </Ul>
-    </Nav>
+  <Nav>
+    <H3>
+      <StyledLink to="/">Share-a-ride</StyledLink>
+    </H3>
+    <Ul>
+      <Li>
+        <StyledLink to="/search">Search</StyledLink>
+      </Li>
+      <Li>
+        <StyledLink to="/add">Add trip</StyledLink>
+      </Li>
+    </Ul>
+  </Nav>
 );
 
 export default Navigation;
