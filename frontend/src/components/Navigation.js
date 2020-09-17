@@ -34,22 +34,20 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const Navigation = () => {
-  return (
-    <Nav>
-      <H3>
-        <StyledLink to="/">Share-a-ride</StyledLink>
-      </H3>
-      <Ul>
-        <Li>
-          <StyledLink to="/search">Search</StyledLink>
-        </Li>
-        <Li>
-          <StyledLink to="/add">Add trip</StyledLink>
-        </Li>
-      </Ul>
-    </Nav>
-  );
-};
+const Navigation = () => (
+  <Nav>
+    <H3>
+      <StyledLink to="/">Share-a-ride</StyledLink>
+    </H3>
+    <Ul>
+      <Li>
+        <StyledLink to="/search">Search</StyledLink>
+      </Li>
+      <Li>
+        <StyledLink to="/add">Add trip</StyledLink>
+      </Li>
+    </Ul>
+  </Nav>
+);
 
 export default Navigation;

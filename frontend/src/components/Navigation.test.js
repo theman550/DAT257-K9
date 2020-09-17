@@ -9,7 +9,7 @@ describe('Navigation', () => {
     render(
       <Router>
         <Navigation />
-      </Router>
+      </Router>,
     );
   });
 

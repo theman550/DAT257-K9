@@ -2,10 +2,9 @@
   "env": {
     "browser": true
   },
-  "extends": ["airbnb", "prettier", "plugin:jest/recommended"],
-  "plugins": ["prettier", "jest"],
+  "extends": ["airbnb", "plugin:jest/recommended"],
+  "plugins": ["jest"],
   "rules": {
-    "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }
