@@ -50,6 +50,9 @@ const Navigation = () => (
       <Li>
         <StyledLink to="/add">Add trip</StyledLink>
       </Li>
+      <Li>
+        <StyledLink to="/login">Login</StyledLink>
+      </Li>
     </Ul>
   </Nav>
 );
