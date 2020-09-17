@@ -1,8 +1,8 @@
-import React from 'react'
-import {Formik, Field} from "formik" 
-import {Component} from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+/* eslint-disable react/jsx-filename-extension */
+import React from 'react';
+import { Formik, Field } from 'formik';
+
+import { MapPin } from 'react-feather';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -47,7 +47,7 @@ const Label = styled.label`
     font-size: large;
 `;
 
-const Button=styled.button `
+const Button = styled.button`
 position: relative;
     margin: 15px 0 5px 0;
     margin-top: 0px;
@@ -64,63 +64,62 @@ position: relative;
     cursor: pointer;
     `;
 
-const Icon = styled(FontAwesomeIcon)`
+const Icon = styled(MapPin)`
     color: #9677D9;
     font-size: large;
     position: absolute;
     right: 20px;
 `;
 
-export default class Addtrip extends Component{
-
-onSubmit = (values) => {
+const onSubmit = (values) => {
     console.log(values);
-}
+};
 
-form = (props) => {
-    return (
+const form = (props) => (
     <div className="Addtrip">
-    <Form onSubmit={props.handleSubmit} className="Form">
-       <Icon icon={faMapMarkerAlt} className="icon" /> 
-       <Input  name="origin" placeholder="Origin" className="input"/>
-        <Icon icon={faMapMarkerAlt} className="icon" /> 
-        <Input name="destenation" placeholder="Destenation" className="input"/>
-        <div className="seats">
-          <Label>Seats</Label>
-          <br/>
-        <Input name="seats" component="select" className="seats">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </Input>
-        </div>
-       
-        <div >
-        <Label>Date</Label>
-        <br/>
-        <Input name="date" type="date" className="input">
-        </Input>
-        </div>
-        <div>
-        <Label>Time</Label>
-        <br/>
-        <Input name="time" type="time" className="input"></Input>
-        </div>
-        <i class="fal fa-bus-alt"></i>
-        <Button data-testid= "add-button" type="submit" className="Modal">ADD Ride</Button>
-        
-    </Form>
-    </div>)
-}
+        <Form onSubmit={props.handleSubmit} className="Form">
+            <Icon size={17} className="icon" />
+            <Input name="origin" placeholder="Origin" className="input" />
+            <Icon size={17} className="icon" />
+            <Input name="destenation" placeholder="Destenation" className="input" />
+            <div className="seats">
+                <Label>Seats</Label>
+                <br />
+                <Input name="seats" component="select" className="seats">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </Input>
+            </div>
 
-  render(){ 
-   return ( 
+            <div>
+                <Label>Date</Label>
+                <br />
+                <Input name="date" type="date" className="input" />
+            </div>
+            <div>
+                <Label>Time</Label>
+                <br />
+                <Input name="time" type="time" className="input" />
+            </div>
+            <i className="fal fa-bus-alt" />
+            <Button data-testid="add-button" type="submit" className="Modal">ADD Ride</Button>
+
+        </Form>
+    </div>
+);
+const Addtrip = () => (
     <div className="SearchGui">
-                <Formik data-testid="form"initialValues={{origin:"",destenation:"",seats:"1",date:"",time:""}} 
-                     onSubmit={this.onSubmit}
-                     render={this.form} />
-            </div>)
- }
-  }
- 
+        <Formik
+            data-testid="form"
+            initialValues={{
+                origin: '', destenation: '', seats: '1', date: '', time: '',
+            }}
+            onSubmit={onSubmit}
+            render={form}
+        />
+    </div>
+);
+
+export default Addtrip;
