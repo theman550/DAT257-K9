@@ -2,7 +2,7 @@ name: Frontend continuous integration
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   test_pull_request:
@@ -16,3 +16,7 @@ jobs:
         working-directory: ./frontend
       - run: npm test
         working-directory: ./frontend
+      - name: Use current action
+        uses: getsentry/action-eslint-fix@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
