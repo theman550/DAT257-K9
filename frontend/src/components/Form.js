@@ -1,110 +1,126 @@
-import React, { Component } from 'react'
-//import App from '../App'
-import styled from 'styled-components'
+import React, { Component }  from 'react';
+import { useState } from 'react';
+import styled from 'styled-components';
 
-class Form extends Component {
+const F = styled.form`
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    width: 1000px;
+    height: 505px;
+    border-radius: 5px;
+    background:#262626;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+    text-align: center;
+    position: absolute;
+    top: 55.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+    border-radius: 5px;
+    font-size: medium;
+    `;
+const H1 = styled.h1`
+    font-size: 38px;
+    text-align:center;
+    color: #9677D9;
+    `;
+const Table = styled.table`
+    margin-left: auto;
+    margin-right: auto;
+    `;
+const InputText = styled.input`
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(255, 249, 249);
+    color: rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+    `;
+const InputPassword = styled.input`
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(255, 249, 249);
+    color: rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+    `;
+const InputSub = styled.input`
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    background: #9677D9;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    color: white;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    `;
+const Form = () => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        alert(`First name: ${firstName},
+               Last name: ${lastName},
+               E-mil: ${email},
+               User name: ${userName},
+               Password: ${password}`);
+    };
 
-    constructor(props) {
-        super(props)
+    return (
+        <F onSubmit={handleSubmit}>
+            <H1>User account</H1>
+            <Table class="center">
+                <tr>
+                    <td>
+                        <InputText type="text" name={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="First name" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <InputText type="text" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <InputText type="text" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <InputText type="text" name={userName} onChange={(event) => setUserName(event.target.value)} placeholder="User name" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <InputPassword type="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <InputPassword type="password" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <InputSub type="submit" value="Submit" />
+                    </td>
+                </tr>
+            </Table>
+        </F>
+    );
+};
 
-        this.state = {
-            firstName: "",
-            lastName: "",
-            userName: "",
-            Email: "",
-            password: "",
-            confirmPassword:""
-        }
-        this.handleSubmit=this.handleSubmit.bind(this)
-    }
-
-    firsthandler = (event) => {
-        this.setState({
-            firstName: event.target.value
-        })
-    }
-    lasthandler = (event) => {
-        this.setState({
-            lastName: event.target.value
-        })
-    }
-    userhandler = (event) => {
-        this.setState({
-            userName: event.target.value
-        })
-    }
-
-    Emailhandler = (event) => {
-        this.setState({
-            Email: event.target.value
-        })
-    }
-
-    passwordhandler = (event) => {
-        this.setState({
-            password: event.target.value
-        })
-    }
-
-    confirmhandler = (event) => {
-        this.setState({
-            confirmPassword: event.target.value
-        })
-    }
-
-    handleSubmit = (event) => {
-        alert(`${this.state.firstName} ${this.state.lastName}  ${this.state.userName}  ${this.state.Email}  ${this.state.password}  ${this.state.confirmPassword} `)
-        console.log(this.state);
-        this.setState({
-            firstName: "",
-            lastName: "",
-            Email: "",
-			userName: "",
-            password: "",
-            confirmPassword: "",
-        })
-     event.preventDefault() 
-    }
-    render() {
-        return (
-            <div>
-
-                <form onSubmit={this.handleSubmit}>
-                    <h1>UserAccount</h1>
-                    <table class="center">
-                        <tr>
-                            <td><label>First name</label></td>
-                            <td><input type="text" value={this.state.firstName} onChange={this.firsthandler} placeholder="FirstName" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Last name</label></td>
-                            <td><input type="text" value={this.state.lastName} onChange={this.lasthandler} placeholder="LastName" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Email</label></td>
-                            <td><input type="text" value={this.state.Email} onChange={this.Emailhandler} placeholder="Email" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Username</label></td>
-                            <td><input type="text" value={this.state.userName} onChange={this.userhandler} placeholder="UserName" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Password</label></td>
-                            <td><input type="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Password" /></td>
-                        </tr>
-                        <tr>
-                            <td><label>Confirm password</label></td>
-                            <td><input type="password" value={this.state.confirmPassword} onChange={this.confirmhandler} placeholder="Password" /></td>
-                        </tr>
-                        <tr>
-                    <td><label></label></td>
-                        <td><input type="submit" value="Submit" /></td>
-                    </tr>
-                    </table>
-                </form>
-            </div>
-        )
-    }
-}
-
-export default Form
+export default Form;
