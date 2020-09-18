@@ -84,4 +84,48 @@ function printRows($result){
         }
     }
 }
+function createAccount($email, $password, $firstname, $lastname)
+{
+	$userID = createUserID();
+	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+	if(!validMail($email))
+	{
+		// hantera, JSON retur?
+		return null; 
+	}
+	$sql = "INSERT INTO Users (userID, email, firstname, lastname, password) VALUES ('$userID', '$email', '$firstname', '$lastname', '$hashedPassword')";
+	echo $sql;
+	queryDB($sql);
+	return $userID;
+}
+// kollar så att mailen inte redan finns i databas
+function validMail($email)
+{
+	$sql = "SELECT * FROM Users WHERE email = '$email'";
+	$result = queryDB($sql);
+	if (mysqli_num_rows($result) > 0)
+	{
+		return false;
+	}	
+	return true;
+	// if(!filter_var($email, FILTER_VALIDATE_EMAIL)) skulle kunna användas för att kontrollera att formatet av mailen är rätt, men det borde frontend göra tycker jag	
+}
+// returnar lösenordsHash i databas
+function getPassword($email)
+{
+	$query = "SELECT password FROM Users WHERE email ='$email'";
+	$password = queryDB($query);
+	return $password;
+}
+// https://stackoverflow.com/questions/1354999/keep-me-logged-in-the-best-approach länk om hur man lägger till bra säkerhet enkelt.
+// jämnför om lösenord i plaintext angivet för en email matchar den hashade verisionen av det lösenordet
+function tryLogin($email, $password)
+{	
+	$row = mysqli_fetch_assoc(getPassword($email));
+	if(password_verify($password, $row['password']))
+	{
+		// sätt session <-- http://www.learningaboutelectronics.com/How-to-use-sessions-to-track-user-data-using-PHP.php
+		echo 'logged in';
+	}
+}
 ?>
