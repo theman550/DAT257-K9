@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const F = styled.form`
@@ -64,63 +63,65 @@ const InputSub = styled.input`
     cursor: pointer;
     `;
 const Form = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        alert(`First name: ${firstName},
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // eslint-disable-next-line
+    alert(`First name: ${firstName}, 
                Last name: ${lastName},
                E-mil: ${email},
                User name: ${userName},
-               Password: ${password}`);
-    };
+               Password: ${password},
+               ConfirmPassword: ${confirmPassword}`);
+  };
 
-    return (
-        <F onSubmit={handleSubmit}>
-            <H1>User account</H1>
-            <Table class="center">
-                <tr>
-                    <td>
-                        <InputText type="text" name={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="First name" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <InputText type="text" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <InputText type="text" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <InputText type="text" name={userName} onChange={(event) => setUserName(event.target.value)} placeholder="User name" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <InputPassword type="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <InputPassword type="password" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <InputSub type="submit" value="Submit" />
-                    </td>
-                </tr>
-            </Table>
-        </F>
-    );
+  return (
+    <F onSubmit={handleSubmit}>
+      <H1>User account</H1>
+      <Table class="center">
+        <tr>
+          <td>
+            <InputText type="text" name={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="First name" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <InputText type="text" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <InputText type="text" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <InputText type="text" name={userName} onChange={(event) => setUserName(event.target.value)} placeholder="User name" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <InputPassword type="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <InputPassword type="password" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <InputSub type="submit" value="Submit" />
+          </td>
+        </tr>
+      </Table>
+    </F>
+  );
 };
 
 export default Form;
