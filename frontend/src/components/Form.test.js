@@ -16,30 +16,30 @@ describe('Form', () => {
     );
   });
 
-  it('renders FirstName', () => {
-    expect(screen.getByText('FirstName')).toBeInTheDocument();
+  it('renders firstName', () => {
+    expect(screen.getByAltText('firstName')).toBeInTheDocument();
   });
 
-  it('renders LastName', () => {
-    expect(screen.getByText('LastName')).toBeInTheDocument();
+  it('renders lastName', () => {
+    expect(screen.getByAltText('lastName')).toBeInTheDocument();
   });
 
-  it('renders Email', () => {
-    expect(screen.getByText('Email')).toBeInTheDocument();
+  it('renders email', () => {
+    expect(screen.getByAltText('email')).toBeInTheDocument();
   });
-  it('renders USerName', () => {
-    expect(screen.getByText('USerName')).toBeInTheDocument();
-  });
-
-  it('renders Password', () => {
-    expect(screen.getByText('USerName')).toBeInTheDocument();
+  it('renders userName', () => {
+    expect(screen.getByAltText('userName')).toBeInTheDocument();
   });
 
-  it('renders ConfirmPassword', () => {
-    expect(screen.getByText('ConfirmPassword')).toBeInTheDocument();
+  it('renders password', () => {
+    expect(screen.getByAltText('password')).toBeInTheDocument();
+  });
+
+  it('renders confirmPassword', () => {
+    expect(screen.getByAltText('confirmPassword')).toBeInTheDocument();
   });
 
   it('submit button', () => {
-    expect(screen.queryAllByTestId('Submit')).toBeTruthy();
+    expect(screen.getByAltText('submit')).toBeTruthy();
   });
 });

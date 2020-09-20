@@ -83,42 +83,56 @@ const Form = () => {
   return (
     <F onSubmit={handleSubmit}>
       <H1>User account</H1>
-      <Table class="center">
-        <tr>
-          <td>
-            <InputText type="text" name={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="First name" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <InputText type="text" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <InputText type="text" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <InputText type="text" name={userName} onChange={(event) => setUserName(event.target.value)} placeholder="User name" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <InputPassword type="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <InputPassword type="password" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <InputSub type="submit" value="Submit" />
-          </td>
-        </tr>
+      <Table className="center">
+        <tbody>
+          <tr>
+            <td>
+              <InputText type="text" alt="firstName" name={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="First name" />
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+              <InputText type="text" alt="lastName" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name" />
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+              <InputText type="text" alt="email" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+              <InputText type="text" alt="userName" name={userName} onChange={(event) => setUserName(event.target.value)} placeholder="User name" />
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+              <InputPassword type="password" alt="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+              <InputPassword type="password" alt="confirmPassword" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" />
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+              <InputSub type="submit" alt="submit" value="Submit" />
+            </td>
+          </tr>
+        </tbody>
       </Table>
     </F>
   );
