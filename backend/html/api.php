@@ -128,4 +128,69 @@ function tryLogin($email, $password)
 		echo 'logged in';
 	}
 }
+function tripExists($tripID)
+{
+	$query = "SELECT * FROM Resa WHERE tripID = '$tripID'";
+	$result = queryDB($query);
+	if(mysqli_num_rows($result) > 0)
+		return true;
+	return false;
+}
+function removeTrip($tripID)
+{
+	$sql = "DELETE FROM Resa WHERE tripID = '$tripID'";
+	queryDB($sql);
+}
+// testar om expected av element finns i databasen i varje steg, och om $onlyAdd = false, kollar om det är korrekt efter borttagning och att alla idn som lagts till finns
+function testTrip($numOfTests, $onlyAdd = false, $path ="testing/worldcities.csv") // $path ska vara path till csv fil och filnamn.csv dvs -> path/worldcities.csv, $numOfTests måste vara reasonable längd, tror det finns 15k entries, så absolut inte längre än 5k tests
+{
+	$numOfTripsAtStart = mysqli_num_rows(queryDB("SELECT * FROM Resa"));
+	$allTrips = [];
+	if(($handle = fopen($path, "r" )) !== FALSE)
+	{
+		$row1 = fgetcsv($handle, 1000, ","); // första raden har info om input typ
+		for($i = 0; $i < $numOfTests; $i++)
+		{
+			$row1 = fgetcsv($handle, 1000, ",");
+			$row2 = fgetcsv($handle, 1000, ",");
+			array_push($allTrips, writeTrip($row1[0], $row2[0], null, 300, 10, $row1[0] . " --> " . $row2[0], createUserID()));
+		}
+	}	
+	$currentNumOfTrips = mysqli_num_rows(queryDB("SELECT * FROM Resa"));
+	if($currentNumOfTrips != $numOfTripsAtStart + $numOfTests)
+	{
+		fclose($handle);
+		return false;
+	}
+	if(!$onlyAdd)
+	{
+		foreach($allTrips as $tripID)
+		{
+			if(!tripExists($tripID))
+				return false;
+			removeTrip($tripID);
+		}
+	}
+	if(mysqli_num_rows(queryDB("SELECT * FROM Resa")) != $numOfTripsAtStart && !$onlyAdd)
+	{
+		fclose($handle);
+		return false;
+	}
+	fclose($handle);
+	return true;
+}
+function filterExpiredTrips($extraConditions = null)
+{
+	$currentTime = date('d-m-y h:i:s');
+	$query;
+	if($extraConditions != null)
+	{
+		$query = "SELECT * FROM Resa WHERE startTime >='$currentTime' AND " . $extraConditions;
+	}
+	else
+	{
+		$query = "SELECT * FROM Resa WHERE startTime >='$currentTime'"; // ändra till >=
+	}
+	return (queryDB($query));
+}
 ?>
