@@ -6,7 +6,9 @@ import Notification from './components/Notification';
 const App = () => {
   const [notification, setNotification] = useState(null);
 
-  const showNotification = (msg, color, seconds) => { // eslint-disable-line
+  // TODO: First to use this function can remove the next line
+  // eslint-disable-next-line
+  const showNotification = (msg, color, seconds) => {
     setNotification({ msg, color });
     setTimeout(() => {
       setNotification(null);
