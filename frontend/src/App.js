@@ -1,11 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import Notification from './components/Notification';
 
-function App() {
+const App = () => {
+  const [notification, setNotification] = useState(null)
+
+  const showNotification = (msg, color, seconds) => {
+    setNotification({msg, color})
+    setTimeout(() => {
+      setNotification(null)
+    }, seconds * 1000)
+  }
+
   return (
     <Router>
       <Navigation />
+      {notification && 
+        <Notification msg={notification.msg} color={notification.color} />
+      }
       <Switch>
         <Route path="/search">
           <p>Search page</p>
