@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const StyledDiv = styled.div`
   font-family: Kufam;
   color: white;
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
   border-radius: 0.2rem;
   margin: 0.2rem;
   padding: 1rem;
