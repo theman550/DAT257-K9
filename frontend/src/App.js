@@ -31,6 +31,7 @@ const App = () => {
     setTimeout(() => {
       setNotification(null);
     }, seconds * 1000);
+  };
 
   return (
     <ThemeProvider theme={theme}>
