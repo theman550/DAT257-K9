@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import Notification from './components/Notification';
 
-function App() {
+const App = () => {
+  const [notification, setNotification] = useState(null);
+
+  // TODO: First to use this function can remove the next line
+  // eslint-disable-next-line
+  const showNotification = (msg, color, seconds) => {
+    setNotification({ msg, color });
+    setTimeout(() => {
+      setNotification(null);
+    }, seconds * 1000);
+  };
+
   return (
     <Router>
       <Navigation />
+      {notification
+        && <Notification msg={notification.msg} color={notification.color} />}
       <Switch>
         <Route path="/search">
           <p>Search page</p>
@@ -22,6 +36,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;
