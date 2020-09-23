@@ -8,40 +8,39 @@ describe('SearchTrip', () => {
     render(<SearchTrip />)
   })
 
-  test('renders header', () => {
-    expect(screen.getByText('Search for trips')).toBeInTheDocument()
-  })
-
   test('renders the form', () => {
     expect(screen.getByRole('form')).toBeInTheDocument()
   })
 
   test('renders start location input', () => {
-    expect(screen.getByLabelText('From:')).toBeInTheDocument()
+    expect(screen.getByLabelText('From')).toBeInTheDocument()
   })
 
   test('renders destination input', () => {
-    expect(screen.getByLabelText('To:')).toBeInTheDocument()
+    expect(screen.getByLabelText('To')).toBeInTheDocument()
 
   })
 
   test('renders date selector', () => {
-    expect(screen.getByLabelText('Date:')).toBeInTheDocument()
+    expect(screen.getByLabelText('Date')).toBeInTheDocument()
   })
 
   test('renders time selector', () => {
-    expect(screen.getByLabelText('Time:')).toBeInTheDocument()
+    expect(screen.getByLabelText('Time')).toBeInTheDocument()
   })
 
   test('renders seats selector', () => {
-    expect(screen.getByLabelText('Seats:')).toBeInTheDocument()
+    expect(screen.getByLabelText('Seats')).toBeInTheDocument()
   })
 
   test('renders price selector', () => {
-    expect(screen.getByLabelText('Price:')).toBeInTheDocument()
+    expect(screen.getByLabelText('Price')).toBeInTheDocument()
   })
 
   test('renders search button', () => {
     expect(screen.getByRole('button')).toBeInTheDocument()
   })
+
+
+  // TODO: skriv tester för olika inputs
 })
