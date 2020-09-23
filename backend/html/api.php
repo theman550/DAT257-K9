@@ -84,4 +84,113 @@ function printRows($result){
         }
     }
 }
+function createAccount($email, $password, $firstname, $lastname)
+{
+	$userID = createUserID();
+	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+	if(!validMail($email))
+	{
+		// hantera, JSON retur?
+		return null; 
+	}
+	$sql = "INSERT INTO Users (userID, email, firstname, lastname, password) VALUES ('$userID', '$email', '$firstname', '$lastname', '$hashedPassword')";
+	echo $sql;
+	queryDB($sql);
+	return $userID;
+}
+// kollar så att mailen inte redan finns i databas
+function validMail($email)
+{
+	$sql = "SELECT * FROM Users WHERE email = '$email'";
+	$result = queryDB($sql);
+	if (mysqli_num_rows($result) > 0)
+	{
+		return false;
+	}	
+	return true;
+	// if(!filter_var($email, FILTER_VALIDATE_EMAIL)) skulle kunna användas för att kontrollera att formatet av mailen är rätt, men det borde frontend göra tycker jag	
+}
+// returnar lösenordsHash i databas
+function getPassword($email)
+{
+	$query = "SELECT password FROM Users WHERE email ='$email'";
+	$password = queryDB($query);
+	return $password;
+}
+// https://stackoverflow.com/questions/1354999/keep-me-logged-in-the-best-approach länk om hur man lägger till bra säkerhet enkelt.
+// jämnför om lösenord i plaintext angivet för en email matchar den hashade verisionen av det lösenordet
+function tryLogin($email, $password)
+{	
+	$row = mysqli_fetch_assoc(getPassword($email));
+	if(password_verify($password, $row['password']))
+	{
+		// sätt session <-- http://www.learningaboutelectronics.com/How-to-use-sessions-to-track-user-data-using-PHP.php
+		echo 'logged in';
+	}
+}
+function tripExists($tripID)
+{
+	$query = "SELECT * FROM Resa WHERE tripID = '$tripID'";
+	$result = queryDB($query);
+	if(mysqli_num_rows($result) > 0)
+		return true;
+	return false;
+}
+function removeTrip($tripID)
+{
+	$sql = "DELETE FROM Resa WHERE tripID = '$tripID'";
+	queryDB($sql);
+}
+// testar om expected av element finns i databasen i varje steg, och om $onlyAdd = false, kollar om det är korrekt efter borttagning och att alla idn som lagts till finns
+function testTrip($numOfTests, $onlyAdd = false, $path ="testing/worldcities.csv") // $path ska vara path till csv fil och filnamn.csv dvs -> path/worldcities.csv, $numOfTests måste vara reasonable längd, tror det finns 15k entries, så absolut inte längre än 5k tests
+{
+	$numOfTripsAtStart = mysqli_num_rows(queryDB("SELECT * FROM Resa"));
+	$allTrips = [];
+	if(($handle = fopen($path, "r" )) !== FALSE)
+	{
+		$row1 = fgetcsv($handle, 1000, ","); // första raden har info om input typ
+		for($i = 0; $i < $numOfTests; $i++)
+		{
+			$row1 = fgetcsv($handle, 1000, ",");
+			$row2 = fgetcsv($handle, 1000, ",");
+			array_push($allTrips, writeTrip($row1[0], $row2[0], null, 300, 10, $row1[0] . " --> " . $row2[0], createUserID()));
+		}
+	}	
+	$currentNumOfTrips = mysqli_num_rows(queryDB("SELECT * FROM Resa"));
+	if($currentNumOfTrips != $numOfTripsAtStart + $numOfTests)
+	{
+		fclose($handle);
+		return false;
+	}
+	if(!$onlyAdd)
+	{
+		foreach($allTrips as $tripID)
+		{
+			if(!tripExists($tripID))
+				return false;
+			removeTrip($tripID);
+		}
+	}
+	if(mysqli_num_rows(queryDB("SELECT * FROM Resa")) != $numOfTripsAtStart && !$onlyAdd)
+	{
+		fclose($handle);
+		return false;
+	}
+	fclose($handle);
+	return true;
+}
+function filterExpiredTrips($extraConditions = null)
+{
+	$currentTime = date('d-m-y h:i:s');
+	$query;
+	if($extraConditions != null)
+	{
+		$query = "SELECT * FROM Resa WHERE startTime >='$currentTime' AND " . $extraConditions;
+	}
+	else
+	{
+		$query = "SELECT * FROM Resa WHERE startTime >='$currentTime'"; // ändra till >=
+	}
+	return (queryDB($query));
+}
 ?>

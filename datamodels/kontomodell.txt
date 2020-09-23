@@ -1,0 +1,7 @@
+
+användarnamn
+lösenord
+förnamn
+efternamn
+mail
+
