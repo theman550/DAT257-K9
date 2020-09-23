@@ -1,26 +1,7 @@
 <?php
 include("connectDB.php");
-//readTrips();
-//echo testTrip(4, false, "test_files/worldcities.csv");
-//filterExpiredTrips("startLocation = 'lidkoping'");
-//echo testTrip(20, "test_files/worldcities.csv");
-//createAccount("flippo1@hotmail.com", "hemligt", "emil", "holmberg");
-//tryLogin("flippo@hotmail.com", "hemligt"); //$2y$10$6EBRayDCHGnIe/zh2Q5oquiQ9GZXGk9EkELS2pHO84ryE7imlHvOy
-#Här tänker jag mig att huvudlogiken för servern ska vara
-if(isset($_GET['function'])){
-    switch($_GET['function']){
-        case "writeTrip":
-            //writeTrip();
-            writeTrip("lidkoping", "skövde", null, 100, 5, "bästa resan nånsin!", createUserID());
-            break;
-        case "readTrips":
-            $response = readTrips();
-            sendResponse($response);
-            break;
-        }
-}
-
-#skickar svar i json-format
+#skickar svar i json-format 
+// tror inte denna behövs/används(?)
 function sendResponse($response){ 
     if ($response->num_rows > 0) {
         $rows = $response->fetch_all(MYSQLI_ASSOC);
@@ -108,19 +89,8 @@ function testTrip($numOfTests, $onlyAdd = false, $path ="testing/worldcities.csv
 }
 #Skriver en ny resa till databasen
 function writeTrip($startLocation, $destination, $startTime, $price, $seatsAvailable, $description, $userID/*la till variabler temp för testning, ska vara post senare*/){ 
-    /*$POST = [ #Det här ska simulera den $_POST vi får från frontend
-    'Start' => 'Myskoxe',
-    'Slut' => 'Vildsvin',
-    'Pris' => '321'
-    ];
-    $start = $POST['startLocation'];
-    $slut = $POST['destination'];
-    $pris = $POST['Price'];*/
-
-    //$sql = "INSERT INTO Resa (Start, Slut, Pris) VALUES ('{$start}', '{$slut}', '{$pris}')";
-	// uppdaterad med nya databas formatet, detta är fortfarande en dummy/exempel insert
 	$tripID = createTripID();
-	$sql = "INSERT INTO Resa (startLocation, destination, price, tripID, startTime, seatsAvailable, description, userID) VALUES ('$startLocation', '$destination', '$price', '$tripID', '" . date('2020-09-15 22:20:31') . "' , '$seatsAvailable', '$description', '$userID')";
+	$sql = "INSERT INTO Resa (startLocation, destination, price, tripID, startTime, seatsAvailable, description, userID) VALUES ('$startLocation', '$destination', '$price', '$tripID', '" . $startTime/*date('2020-09-15 22:20:31')*/ . "' , '$seatsAvailable', '$description', '$userID')";
     queryDB($sql);
 	return $tripID; // detta är mest för testningens skull, men borde kanske alltid returnera? Ponera: skapar resa, resa ändras direkt efter på frontend, förutsätter att en resa som läggs till ska visas någonstans och att man vill ha en referens i form av id till den resan
 }
@@ -134,7 +104,8 @@ function createUserID()
 {
 	return (uniqid('user-', true));
 }
-#Printar en query
+#Printar en query 
+// Behövs/används denna(?)
 function printRows($result){
     if($result -> num_rows > 0){
         echo "<b><u>Resultat från query: </br></b></u>";
