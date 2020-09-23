@@ -18,7 +18,7 @@ describe('App', () => {
 
   it('renders search page when clicking search link in navbar', () => {
     fireEvent.click(screen.getByText('Search'));
-    expect(screen.getByText('Search page')).toBeInTheDocument();
+    expect(screen.getByText('Search for trips')).toBeInTheDocument();
   });
 
   it('renders add page when clicking add trip link in navbar', () => {

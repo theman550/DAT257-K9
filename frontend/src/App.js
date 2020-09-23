@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import SearchTrip from './components/SearchTrip'
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <Navigation />
       <Switch>
         <Route path="/search">
-          <p>Search page</p>
+          <SearchTrip />
         </Route>
         <Route path="/add">
           <p>Add trip page</p>
