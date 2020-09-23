@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Navigation from './components/Navigation';
+import AddTrip from './components/AddTrip';
 import Notification from './components/Notification';
 
 /**
@@ -30,8 +31,8 @@ const App = () => {
     setTimeout(() => {
       setNotification(null);
     }, seconds * 1000);
-    
-    return (
+
+  return (
     <ThemeProvider theme={theme}>
       <Router>
         <Navigation />
@@ -43,6 +44,7 @@ const App = () => {
           </Route>
           <Route path="/add">
             <p>Add trip page</p>
+            <AddTrip />
           </Route>
           <Route path="/login">
             <p>Login page</p>
