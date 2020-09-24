@@ -1,24 +1,24 @@
 <?php
+
 include("connectDB.php");
-#skickar svar i json-format 
-// tror inte denna behövs/används(?)
-function sendResponse($response){ 
-    if ($response->num_rows > 0) {
-        $rows = $response->fetch_all(MYSQLI_ASSOC);
-        $response = json_encode($rows);
-    } else {
-        $response = "no results found";
-    }
-    $json_response = json_encode($response);
-    header("Access-Control-Allow-Origin: *");
-    header('Content-Type: application/json');
+
+#skickar query i json-format 
+function sendResponseQuery($response){
+	if ($response->num_rows > 0) {
+		$rows = $response->fetch_all(MYSQLI_ASSOC);
+		$response = json_encode($rows); //Gör varje rad till json
+	} else {
+		$response = "no results found";
+	}
+	$json_response = json_encode($response); //Gör hela arrayen till json
     echo $json_response;
 }
+//Kan endast hantera sträng/array
+function sendResponseString($response){
+	echo json_encode($response);
+}
 
-#Om "from" är satt returneras endast resor därifrån, annars alla
-#Den här funktionen går lätt att bygga vidare på med fler argument
-function readTrips()
-{
+function readTrips(){
 	$filterArray = getTripGETParameters();
 	$query = "SELECT * FROM Resa WHERE '1' = '1'"; // syntax fel i query skapandet om inte '1' = '1' och jag vill lägga till flera ands, om inga argument läggs till returneras alla resor.
 	for($i = 0; $i < count($filterArray); $i++)
@@ -49,71 +49,40 @@ function removeTrip($tripID)
 	$sql = "DELETE FROM Resa WHERE tripID = '$tripID'";
 	queryDB($sql);
 }
-// testar om expected av element finns i databasen i varje steg, och om $onlyAdd = false, kollar om det är korrekt efter borttagning och att alla idn som lagts till finns
-function testTrip($numOfTests, $onlyAdd = false, $path ="testing/worldcities.csv") // $path ska vara path till csv fil och filnamn.csv dvs -> path/worldcities.csv, $numOfTests måste vara reasonable längd, tror det finns 15k entries, så absolut inte längre än 5k tests
-{
-	$numOfTripsAtStart = mysqli_num_rows(queryDB("SELECT * FROM Resa"));
-	$allTrips = [];
-	if(($handle = fopen($path, "r" )) !== FALSE)
-	{
-		$row1 = fgetcsv($handle, 1000, ","); // första raden har info om input typ
-		for($i = 0; $i < $numOfTests; $i++)
-		{
-			$row1 = fgetcsv($handle, 1000, ",");
-			$row2 = fgetcsv($handle, 1000, ",");
-			array_push($allTrips, writeTrip($row1[0], $row2[0], null, 300, 10, $row1[0] . " --> " . $row2[0], createUserID()));
-		}
-	}	
-	$currentNumOfTrips = mysqli_num_rows(queryDB("SELECT * FROM Resa"));
-	if($currentNumOfTrips != $numOfTripsAtStart + $numOfTests)
-	{
-		fclose($handle);
-		return false;
-	}
-	if(!$onlyAdd)
-	{
-		foreach($allTrips as $tripID)
-		{
-			if(!tripExists($tripID))
-				return false;
-			removeTrip($tripID);
-		}
-	}
-	if(mysqli_num_rows(queryDB("SELECT * FROM Resa")) != $numOfTripsAtStart && !$onlyAdd)
-	{
-		fclose($handle);
-		return false;
-	}
-	fclose($handle);
-	return true;
+
+function writeTrip($data){ 
+    $tripID = createTripID();
+	$sql = "INSERT INTO Resa (startLocation, destination, price, tripID, startTime, seatsAvailable, description, userID) VALUES (
+        '{$data->startLocation}',
+        '{$data->destination}',
+        '{$data->price}',
+        '{$tripID}',
+        '{$data->startTime}',
+        '{$data->seatsAvailable}',
+        '{$data->description}',
+        '{$data->userID}')";
+    $status = queryDB($sql);
+    if($status === true){ // Var allt ok, returnera ID
+        http_response_code(201);
+        return $tripID;
+    }
+    else{ // Annars returnera ilska och en nolla
+        http_response_code(400);
+        return 0;
+    }
 }
-#Skriver en ny resa till databasen
-function writeTrip($startLocation, $destination, $startTime, $price, $seatsAvailable, $description, $userID/*la till variabler temp för testning, ska vara post senare*/){ 
-	$tripID = createTripID();
-	$sql = "INSERT INTO Resa (startLocation, destination, price, tripID, startTime, seatsAvailable, description, userID) VALUES ('$startLocation', '$destination', '$price', '$tripID', '" . $startTime/*date('2020-09-15 22:20:31')*/ . "' , '$seatsAvailable', '$description', '$userID')";
-    queryDB($sql);
-	return $tripID; // detta är mest för testningens skull, men borde kanske alltid returnera? Ponera: skapar resa, resa ändras direkt efter på frontend, förutsätter att en resa som läggs till ska visas någonstans och att man vill ha en referens i form av id till den resan
-}
+
 // generar trip-id på form "trip-xxxxx...x"
 function createTripID()
 {
 	return (uniqid('trip-', true));
-}
+} 
 // genererar user-id på form "user-xxxx...x"
 function createUserID()
 {
 	return (uniqid('user-', true));
 }
-#Printar en query 
-// Behövs/används denna(?)
-function printRows($result){
-    if($result -> num_rows > 0){
-        echo "<b><u>Resultat från query: </br></b></u>";
-        while($row = mysqli_fetch_assoc($result)){
-            echo "<li>" . $row["startLocation"] . " -> " . $row["destination"] . "</br>";
-        }
-    }
-}
+
 // skapar nytt konto i databas om mail inte redan finns inlagd, lösenord hashas också innan
 function createAccount($email, $password, $firstname, $lastname)
 {
