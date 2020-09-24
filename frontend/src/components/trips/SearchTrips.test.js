@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { screen, render } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import SearchTrips from './SearchTrips';
 
@@ -55,5 +55,57 @@ describe('SearchTrips', () => {
     expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
   });
 
-  // TODO: skriv tester för olika inputs
+  test('should accept a start location', () => {
+    const input = screen.getByLabelText('From');
+    fireEvent.change(input, {target: {value: 'Göteborg'}});
+    expect(input.value).toBe('Göteborg');
+  })
+
+  test('should accept a destination', () => {
+    const input = screen.getByLabelText('To');
+    fireEvent.change(input, {target: {value: 'Oslo'}});
+    expect(input.value).toBe('Oslo');
+  })
+
+  test('should accept a date', () => {
+    const input = screen.getByLabelText('Date');
+    fireEvent.change(input, {target: {value: '2020-09-24'}});
+    expect(input.value).toBe('2020-09-24');
+  })
+
+  test('should accept a time', () => {
+    const input = screen.getByLabelText('Time');
+    fireEvent.change(input, {target: {value: '18:00'}});
+    expect(input.value).toBe('18:00');
+  })
+
+  test('should accept number of seats', () => {
+    const input = screen.getByLabelText('Seats');
+    fireEvent.change(input, {target: {value: '4'}});
+    expect(input.value).toBe('4');
+  })
+
+  test('should accept price', () => {
+    const input = screen.getByLabelText('Price');
+    fireEvent.change(input, {target: {value: '100'}});
+    expect(input.value).toBe('100');
+  })
+
+  test('should not accept a negative price', () => {
+    const input = screen.getByLabelText('Price');
+    const searchBtn = screen.getByRole('button', {name: 'Search'});
+
+    fireEvent.change(input, {target: {value: '-100'}});
+    fireEvent.click(searchBtn);
+    expect(searchBtn).toBeInTheDocument();
+  })
+
+  test('should not accept a negative seat number', () => {
+    const input = screen.getByLabelText('Seats');
+    const searchBtn = screen.getByRole('button', {name: 'Search'});
+
+    fireEvent.change(input, {target: {value: '-1'}});
+    fireEvent.click(searchBtn);
+    expect(searchBtn).toBeInTheDocument();
+  })
 });
