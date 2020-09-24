@@ -1,46 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
+import {
+  FieldFactory,
+  PrimaryButton,
+  Label
+} from './UI';
+
+const StyledInput = FieldFactory(styled.input``)
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  background-color: #1a1a1a;
-  font-family: Kufam;
-  color: #f0ebff;
+  background-color: ${props => props.theme.colors.fill};
   max-width: 400px;
   padding: 1rem;
-
-  & button {
-    font-size: 1.2rem;
-    font-weight: bold;
-    width: 100%;
-    background-color: #8064f7;
-    color: #f0ebff;
-    border: none;
-    border-radius: 0.3rem;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    cursor: pointer;
-  }
-
-  & button:hover {
-    background-color: #5945ad;
-  }
-
-  & input {
-    color: #f0ebff;
-    background-color: #1a1a1a;
-    border: 1px solid grey;
-    border-radius: 0.3rem;
-    padding: 0.2rem;
-    margin: 0.2rem 0;
-  }
+  margin: 1rem;
+  border-radius: 10px;
+  -webkit-box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
+  -moz-box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
+  box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
 `
 
 const StyledTextRow = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 
   &:nth-child(1) {
     margin: 0;
@@ -50,7 +34,7 @@ const StyledTextRow = styled.div`
 const StyledSelectRow = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 `
 
 const StyledSelectColumn = styled.div`
@@ -71,39 +55,50 @@ const StyledSelectColumn = styled.div`
   }
 `
 
+const StyledButton = styled(PrimaryButton)`
+  padding: 0.75rem;
+  height: 80%;
+  width: 100%;
+  margin-top: 0.75rem;
+`
+
 const SearchTrip = () => {
+  const handleSubmit = e => {
+    e.preventDefault();
+  }
+
   return (
-    <StyledForm aria-label='Search form'>
+    <StyledForm aria-label='Search form' onSubmit={handleSubmit}>
       <StyledTextRow>
-        <label htmlFor='from'>From</label>
-        <input type='text' id='from' placeholder='Enter start location...'></input>
+        <Label htmlFor='from'>From</Label>
+        <StyledInput type='text' id='from' placeholder='Enter start location...'></StyledInput>
       </StyledTextRow>
       <StyledTextRow>
-        <label htmlFor='to'>To</label>
-        <input type='text' id='to' placeholder='Enter destination...'></input>
+        <Label htmlFor='to'>To</Label>
+        <StyledInput type='text' id='to' placeholder='Enter destination...'></StyledInput>
       </StyledTextRow>
       <StyledSelectRow>
         <StyledSelectColumn>
-          <label htmlFor='date'>Date</label>
-          <input type='date' id='date'></input>
+          <Label htmlFor='date'>Date</Label>
+          <StyledInput type='date' id='date'></StyledInput>
         </StyledSelectColumn>
         <StyledSelectColumn>
-          <label htmlFor='time'>Time</label>
-          <input type='time' id='time'></input>
+          <Label htmlFor='time'>Time</Label>
+          <StyledInput type='time' id='time'></StyledInput>
         </StyledSelectColumn> 
       </StyledSelectRow>
       <StyledSelectRow>
         <StyledSelectColumn>
-          <label htmlFor='seats'>Seats</label>
-          <input type='number' id='seats' min='0' max='4'></input>
+          <Label htmlFor='seats'>Seats</Label>
+          <StyledInput type='number' id='seats' min='0' max='4'></StyledInput>
         </StyledSelectColumn>
         <StyledSelectColumn>
-          <label htmlFor='price'>Price</label>
-          <input type='number' id='price' min='0' max='1000'></input>
+          <Label htmlFor='price'>Price</Label>
+          <StyledInput type='number' id='price' min='0' max='1000'></StyledInput>
         </StyledSelectColumn>
       </StyledSelectRow>
       <StyledSelectRow>
-        <button type='submit'>Search</button>
+        <StyledButton type='submit'>Search</StyledButton>
       </StyledSelectRow>
     </StyledForm>
   )
