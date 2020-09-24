@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
   FieldFactory,
@@ -71,7 +72,7 @@ const StyledButton = styled(PrimaryButton)`
   }
 `;
 
-const SearchTrip = ({ closeSearch }) => {
+const SearchTrips = ({ closeSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -118,4 +119,8 @@ const SearchTrip = ({ closeSearch }) => {
   );
 };
 
-export default SearchTrip;
+SearchTrips.propTypes = {
+  closeSearch: PropTypes.func.isRequired,
+};
+
+export default SearchTrips;

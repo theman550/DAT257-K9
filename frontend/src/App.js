@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Navigation from './components/Navigation';
-import Trips from './components/trips/Trips';
+import Trips from './screens/Trips';
 import AddTrip from './components/AddTrip';
 import Notification from './components/Notification';
 

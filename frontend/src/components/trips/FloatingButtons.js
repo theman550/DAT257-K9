@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Search, Plus } from 'react-feather';
 import { PrimaryButton } from '../UI';
@@ -32,5 +33,10 @@ const FloatingButtons = ({ openSearch, openAdd }) => (
     </RoundButton>
   </ButtonContainer>
 );
+
+FloatingButtons.propTypes = {
+  openSearch: PropTypes.func.isRequired,
+  openAdd: PropTypes.func.isRequired,
+};
 
 export default FloatingButtons;

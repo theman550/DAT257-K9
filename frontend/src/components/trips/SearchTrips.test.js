@@ -1,8 +1,8 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { screen, render } from '@testing-library/react';
+import { screen, render} from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import SearchTrip from './SearchTrips';
+import SearchTrips from './SearchTrips';
 
 const theme = {
   colors: {
@@ -14,11 +14,11 @@ const theme = {
   },
 };
 
-describe('SearchTrip', () => {
+describe('SearchTrips', () => {
   beforeEach(() => {
     render(
       <ThemeProvider theme={theme}>
-        <SearchTrip />
+        <SearchTrips closeSearch={() => ''} />
       </ThemeProvider>,
     );
   });
@@ -52,7 +52,7 @@ describe('SearchTrip', () => {
   });
 
   test('renders search button', () => {
-    expect(screen.getByRole('button', {name: 'Search'})).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
   });
 
   // TODO: skriv tester för olika inputs
