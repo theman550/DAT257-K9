@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Navigation from './components/Navigation';
-import SearchTrip from './components/SearchTrip'
+import Trips from './components/trips/Trips';
 import AddTrip from './components/AddTrip';
 import Notification from './components/Notification';
 
@@ -41,8 +41,11 @@ const App = () => {
         {notification
           && <Notification msg={notification.msg} color={notification.color} />}
         <Switch>
+          <Route path="/trips">
+            <Trips />
+          </Route>
           <Route path="/search">
-            <SearchTrip />
+            <p>Search page</p>
           </Route>
           <Route path="/add">
             <p>Add trip page</p>

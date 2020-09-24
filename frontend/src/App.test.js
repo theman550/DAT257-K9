@@ -18,7 +18,7 @@ describe('App', () => {
 
   it('renders search page when clicking search link in navbar', () => {
     fireEvent.click(screen.getByText('Search'));
-    expect(screen.getByRole('button', {name: 'Search'})).toBeInTheDocument();
+    expect(screen.getByText('Search page')).toBeInTheDocument();
   });
 
   it('renders add page when clicking add trip link in navbar', () => {
