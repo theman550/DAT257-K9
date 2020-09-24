@@ -19,7 +19,7 @@ describe('Trip card', () => {
     render(
       <ThemeProvider theme={theme}>
         <Card
-          id='1'
+          id="1"
           origin="Göteborg"
           destination="Malmö"
           seats={4}
