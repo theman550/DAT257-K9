@@ -86,10 +86,8 @@ const Form = () => {
         password,
       }),
     }).then((response) => response.json())
-      .then((data) => /* eslint-disable no-console */console.log(data))
-      /* eslint-enable no-console */
-      .catch((error) => /* eslint-disable no-console */console.log(error));
-  /* eslint-enable no-console */
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
 
   return (
