@@ -11,7 +11,7 @@ const F = styled.form`
     box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
     text-align: center;
     position: absolute;
-    top: 55.5%;
+    top: 56%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-size: cover;
@@ -71,13 +71,23 @@ const Form = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
-    // eslint-disable-next-line
-    alert(`First name: ${firstName}, 
-               Last name: ${lastName},
-               E-mil: ${email},
-               User name: ${userName},
-               Password: ${password},
-               ConfirmPassword: ${confirmPassword}`);
+
+    fetch('http://spilg.xyz/api/user/', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstname: firstName,
+        lastname: lastName,
+        email,
+        password,
+      }),
+    }).then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
 
   return (
