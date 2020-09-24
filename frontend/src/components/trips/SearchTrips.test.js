@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { screen, render} from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import SearchTrips from './SearchTrips';
 
