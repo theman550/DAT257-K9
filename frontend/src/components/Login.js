@@ -11,22 +11,21 @@ box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14)
 `;
 const Button = styled.button`
 position: relative;
-    margin: 15px 0 5px 0;
-    margin-top: 0px;
-    margin-left:80px;
-    left: 30%;
-    transform: translateX(-50%);
-    background: #9677D9;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    color: white;
-    width: 30%;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 14px;
-    cursor: pointer;
+margin: 15px 0 5px 0;
+margin-top: 0px;
+margin-left:80px;
+left: 30%;
+transform: translateX(-50%);
+background: #9677D9;
+border: none;
+border-radius: 5px;
+padding: 10px;
+color: white;
+width: 30%;
+font-family: "Noto Sans", sans-serif;
+font-size: 14px;
+cursor: pointer;
     `;
-
 const Input = styled.input`
 border: none;
 border-bottom: 1px solid #333;
@@ -38,10 +37,10 @@ line-height: 1.2;
 outline: none;
 color: #9677D9;
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: #9677D9;
-  font-size: medium;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  opacity: 0.3;
+color: #9677D9;
+font-size: medium;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+opacity: 0.3;
 }
 `;
 const H3 = styled.h3`
@@ -53,25 +52,21 @@ font-size: 23px;
 margin-left:150px;
 `;
 const Label = styled.label`
-    color: #9677D9;
-    font-size: large;
-    
+color: #9677D9;
+font-size: large;
 `;
-
 const P = styled.p`
-    color: #9677D9;
-    font-size: large;
+color: #9677D9;
+font-size: large;
 `;
-
 const Div = styled.div`
 .form-group{
-    margin-top:20px;
+margin-top:20px;
 }
 `;
-
 const A = styled.a`
-    color: white;
-    font-size: large;
+color: white;
+font-size: large;
 `;
 
 const Login = () => (
@@ -80,12 +75,12 @@ const Login = () => (
 
     <div className="form-group">
 
-      <Input type="email" className="form-control" align="center" placeholder="Enter email" />
+      <Input data-testid="email"type="email" className="form-control" align="center" placeholder="Enter email" />
     </div>
 
     <div className="form-group">
 
-      <Input type="password" className="form-control" align="center" placeholder="Enter password" />
+      <Input data-testid="password" type="password" className="form-control" align="center" placeholder="Enter password" />
     </div>
 
     <Div className="form-group">
