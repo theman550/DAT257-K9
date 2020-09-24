@@ -39,7 +39,7 @@ const App = () => {
       <Router>
         <Navigation />
         {notification
-          && <Notification msg={notification.msg} color={notification.color} />}
+          && <Notification msg={notification.msg} color={notification.color} /> }
         <Switch>
           <Route path="/trips">
             <Trips />

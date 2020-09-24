@@ -176,8 +176,30 @@ const Icon = styled(MapPin)`
   right: 20px;
 `;
 
-const onSubmit = () => {
-  // console.log(JSON.stringify(values));
+const onSubmit = (values) => {
+  const newvalues = {
+
+    startLocation: values.startLocation,
+    destination: values.destination,
+    seatsAvailable: values.seatsAvailable,
+    startTime: `${values.startTime} ${values.time}`,
+    price: values.price,
+    description: values.description,
+  };
+
+  // Test the data.------------
+  const jsdata = JSON.stringify(newvalues);
+  console.log(jsdata);
+  //--------------------------
+
+  fetch('http://spilg.xyz/api.php?function=writeTrip', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newvalues),
+  }).then((respones) => respones).then((data) => console.log(data));
 };
 
 const form = (props) => (
