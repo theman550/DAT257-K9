@@ -6,7 +6,7 @@ include("connectDB.php");
 function sendResponseQuery($response){
 	if ($response->num_rows > 0) {
 		$rows = $response->fetch_all(MYSQLI_ASSOC);
-		$response = json_encode($rows); //Gör varje rad till json
+		$response = $rows; //Gör varje rad till json
 	} else {
 		$response = "no results found";
 	}
