@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import TripCard from '../../components/Trip/Card/Card';
+import config from '../../config';
 
 const sampleTrips = [
   {
@@ -66,7 +67,7 @@ const ScreensDisplay = () => {
     console.log('Retrieving trips');
 
     try {
-      const res = await fetch('http://spilg.xyz/api.php?function=readTrips');
+      const res = await fetch(`${config.url.api}trips/`);
       const data = await res.json();
 
       if (!res.ok) {
