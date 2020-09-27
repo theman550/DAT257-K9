@@ -20,6 +20,14 @@ const Form = styled.form`
   background-size: cover;
   border-radius: 5px;
   font-size: medium;
+
+  @media(min-width:320px) and (max-width:640px)
+  {
+    width: 400px;
+    height: 550px;
+  }
+
+
 `;
 
 const BG = styled.div`
@@ -37,6 +45,11 @@ const Discription = styled(Field)`
   box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
   color:white;
   font-size: large;
+  @media(min-width:320px) and (max-width:640px)
+  {
+    width: 400px;
+    height: 550px;
+  }
 `;
 
 const Div = styled.div`
