@@ -1,57 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
+import { LogIn, Map } from 'react-feather';
 
 const Nav = styled.nav`
   display: flex;
-  font-family: Kufam;
-  color: white;
   justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(
-    90deg,
-    rgba(128, 100, 247, 1) 0%,
-    rgba(245, 186, 156, 1) 100%
-  );
+  position: fixed;
+  z-index: 1;
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: ${props => props.theme.padding.section};
 `;
 
-const H3 = styled.h3`
-  margin-left: 2rem;
-`;
+const Navigation = () => {
+  const themeContext = useContext(ThemeContext);
 
-const Ul = styled.ul`
-  display: flex;
-  list-style-type: none;
-`;
-
-const Li = styled.li`
-  margin-right: 2rem;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const Navigation = () => (
-  <Nav>
-    <H3>
-      <StyledLink to="/">Share-a-ride</StyledLink>
-    </H3>
-    <Ul>
-      <Li>
-        <StyledLink to="/search">Search</StyledLink>
-      </Li>
-      <Li>
-        <StyledLink to="/add">Add trip</StyledLink>
-      </Li>
-    </Ul>
-  </Nav>
-);
+  return (
+    <Nav>
+      <Link to="/account"><LogIn color={themeContext.colors.primary} /></Link>
+      <Link to="/"><Map color={themeContext.colors.primary} /></Link>
+    </Nav>
+  )
+};
 
 export default Navigation;

@@ -13,15 +13,11 @@ describe('Navigation', () => {
     );
   });
 
-  it('renders Share-a-ride', () => {
-    expect(screen.getByText('Share-a-ride')).toBeInTheDocument();
+  it('renders account button', () => {
+    expect(screen.getByTitle('Account')).toBeInTheDocument();
   });
 
-  it('renders search link', () => {
-    expect(screen.getByText('Search')).toBeInTheDocument();
-  });
-
-  it('renders add trip link', () => {
-    expect(screen.getByText('Add trip')).toBeInTheDocument();
+  it('renders trips button', () => {
+    expect(screen.getByTitle('Trips')).toBeInTheDocument();
   });
 });
