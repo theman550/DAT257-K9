@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Field } from 'formik';
 import { MapPin } from 'react-feather';
+import { PlusCircle } from 'react-feather';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -21,11 +22,28 @@ const Form = styled.form`
   border-radius: 5px;
   font-size: medium;
 
-  @media(min-width:320px) and (max-width:640px)
+  @media(min-width:320px) and (max-width:460px)
   {
-    width: 400px;
+    width: 300px;
     height: 550px;
   }
+  
+  @media(min-width:461px) and (max-width:640px)
+  {
+    width: 400px;
+    
+   
+  }
+
+  @media(min-width:640px) and (max-width:1111px)
+  {
+    width: 550px;
+    
+   
+  }
+
+ 
+
 
 
 `;
@@ -45,10 +63,10 @@ const Discription = styled(Field)`
   box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
   color:white;
   font-size: large;
-  @media(min-width:320px) and (max-width:640px)
+  @media(min-width:320px) and (max-width:460px)
   {
-    width: 400px;
-    height: 550px;
+    width: 250px;
+    height: 50px;
   }
 `;
 
@@ -58,6 +76,51 @@ const Div = styled.div`
   line-height: 1.2;
   float:left;
   border-radius: 20px;
+
+  @media(min-width:320px) and (max-width:460px)
+  {
+   float:none;
+   margin-top:-30px;
+  }
+
+
+ 
+`;
+const Ds = styled.div`
+  width: 30.3%;
+  font-size: 18px;
+  line-height: 1.2;
+  float:left;
+  border-radius: 20px;
+
+  @media(min-width:320px) and (max-width:460px)
+  {
+   float:right;
+   margin-top:-30px;
+  }
+
+
+ 
+`;
+
+const Pd = styled.div`
+  width: 30.3%;
+  font-size: 18px;
+  line-height: 1.2;
+  float:left;
+  border-radius: 20px;
+
+  @media(min-width:320px) and (max-width:460px)
+  {
+   float:none;
+  position:relative;
+  top:20%;
+  
+  }
+
+
+
+ 
 `;
 
 const Input = styled(Field)`
@@ -84,6 +147,11 @@ const Input = styled(Field)`
 const Seats = styled(Input)`
   width: 20%;
   line-height: 1.2;
+  @media(min-width:320px) and (max-width:460px)
+  {
+  
+    width:50%;
+  }
 `;
 
 const Price = styled(Input)`
@@ -93,12 +161,22 @@ const Price = styled(Input)`
   color:white;
   border-radius: 5px;
   border-color: #9677D9;
+  @media(min-width:320px) and (max-width:460px)
+  {
+  
+    width:90%;
+  }
 `;
 
 const Option = styled(Input)`
   width: 70%;
   font-size: 18px;
   line-height: 1.2;
+  @media(min-width:320px) and (max-width:460px)
+  {
+  
+    width:200%;
+  }
 `;
 
 const Dis = styled(Div)`
@@ -108,11 +186,20 @@ const Dis = styled(Div)`
   float:left;
   margin-top:-100px;
   margin-left:-40px;
+
+  @media(min-width:320px) and (max-width:460px)
+  {
+   float:none;
+   margin-top:-120px;
+   margin-left:-10px;
+  }
+
 `;
 
 const Label = styled.label`
   color: #9677D9;
   font-size: large;
+
 `;
 
 const Button = styled.button`
@@ -180,6 +267,13 @@ const Button = styled.button`
     border-color: #9677D9;
     color: White;
   }
+
+
+  @media(min-width:320px) and (max-width:640px)
+  {
+    border:none;
+    margin-left:200px;
+  }
 `;
 
 const Icon = styled(MapPin)`
@@ -189,8 +283,42 @@ const Icon = styled(MapPin)`
   right: 20px;
 `;
 
-const onSubmit = () => {
-  // console.log(JSON.stringify(values));
+const Plus = styled(PlusCircle)`
+@media(min-width:320px) and (max-width:640px)
+{
+  color: #9677D9;
+  
+
+  
+}
+ 
+  
+`;
+
+const onSubmit = (values) => {
+  const newvalues = {
+
+    startLocation: values.startLocation,
+    destination: values.destination,
+    seatsAvailable: values.seatsAvailable,
+    startTime: `${values.startTime} ${values.time}`,
+    price: values.price,
+    description: values.description,
+  };
+
+  // Test the data.------------
+  const jsdata = JSON.stringify(newvalues);
+  console.log(jsdata);
+  //--------------------------
+
+  fetch('http://spilg.xyz/api.php?function=writetrip/', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newvalues),
+  }).then((respones) => respones).then((data) => console.log(data));
 };
 
 const form = (props) => (
@@ -202,7 +330,7 @@ const form = (props) => (
       <Input name="startLocation" placeholder="Origin" className="input" />
       <Icon size={17} className="icon" />
       <Input name="destination" placeholder="Destenation" className="input" />
-      <Div className="seats">
+      <Ds className="seats">
         <Label>Seats</Label>
         <br />
         <br />
@@ -212,7 +340,7 @@ const form = (props) => (
           <option value="3">3</option>
           <option value="4">4</option>
         </Seats>
-      </Div>
+      </Ds>
 
       <Div>
         <Label>Date</Label>
@@ -227,13 +355,12 @@ const form = (props) => (
         <Option name="time" type="time" />
       </Div>
 
-      <Div>
+      <Pd>
         <Label>Price</Label>
         <br />
-        <br />
         <Price name="price" />
-        <Label> SEK </Label>
-      </Div>
+        <Label></Label>
+      </Pd>
 
       <Dis>
         <Label>Description</Label>
@@ -245,7 +372,9 @@ const form = (props) => (
       </Dis>
 
       <i className="fal fa-bus-alt" />
-      <Button data-testid="add-button" type="submit" className="Modal">ADD Ride</Button>
+      <Button data-testid="add-button" type="submit" className="Modal">
+        <Plus size={40}/>
+      </Button>
     </Form>
 
   </div>
