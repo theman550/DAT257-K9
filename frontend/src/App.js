@@ -26,7 +26,7 @@ const App = () => {
           && <Notification msg={notification.msg} color={notification.color} /> }
         <Switch>
           <Route path="/account">
-            <p>Search page</p>
+            <p>TODO: Login</p>
           </Route>
           <Route path="/">
             <Trips />
