@@ -5,22 +5,7 @@ import Navigation from './components/Navigation';
 import Trips from './screens/Trips';
 import AddTrip from './components/AddTrip';
 import Notification from './components/Notification';
-
-/**
- * Access like this:
- * const MyFancyButton = styled.button`
- * background: ${props => props.theme.colors.primary}
- * `
- */
-const theme = {
-  colors: {
-    primary: '#8064f7',
-    secondary: '#f5ba9c',
-    fill: '#1a1a1a',
-    alternateFill: '#f0ebff',
-    inactive: '#707386',
-  },
-};
+import theme from './themes/base';
 
 const App = () => {
   const [notification, setNotification] = useState(null);
