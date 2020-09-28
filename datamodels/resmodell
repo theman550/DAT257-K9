@@ -2,16 +2,11 @@ En resa innehåller:
 
  
 
-Start (Sträng)
-    Göteborg
-    Malmö
-    Stockholm
-    Borås \m/
-Destination (Sträng)
-    -||-
-Starttid (datetime)
-Pris (int)
-Antal tillgängliga säten (int)
-Beskrivningsfält (Sträng)
-ReseID (randomInt)
-AnvändarID (randomInt)
+startLocation (string)
+destination (string)
+price (int)
+tripID (trip-xxxx..xx) <-- Kommer vara på denna formen, men vi skapar den i backend så mer än det behöver ni inte veta.
+startTime (Datetime)
+seatsAvailable (int)
+description (sträng)
+userID (user-xxxx..xx) <-- Kommer vara på denna formen, men vi skapar den i backend så mer än det behöver ni inte veta.
