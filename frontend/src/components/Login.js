@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -69,33 +69,56 @@ color: white;
 font-size: large;
 `;
 
-const Login = () => (
-  <Form action="" method="post">
-    <H3>Sign In</H3>
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    <div className="form-group">
+    fetch('http://spilg.xyz/api/users/', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        Email: email,
+        Password: password,
+      }),
+    })
+      .then((response) => response)
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+  };
 
-      <Input data-testid="email"type="email" className="form-control" align="center" placeholder="Enter email" />
-    </div>
+  return (
+    <Form onSubmit={handleSubmit}>
+      <H3>Sign In</H3>
 
-    <div className="form-group">
+      <div className="form-group">
 
-      <Input data-testid="password" type="password" className="form-control" align="center" placeholder="Enter password" />
-    </div>
-
-    <Div className="form-group">
-      <div className="custom-control custom-checkbox">
-        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-        <Label className="custom-control-label" htmlFor="customCheck1">Remember me</Label>
+        <Input data-testid="email" type="email" className="form-control" align="center" name={email} placeholder="Enter email" onChange={(event) => setEmail(event.target.value)} />
       </div>
-    </Div>
 
-    <Button type="submit" className="button">Submit</Button>
-    <P className="forgot-password text-right">
-      Forgot
-      <A href="#">password?</A>
-    </P>
-  </Form>
-);
+      <div className="form-group">
+
+        <Input data-testid="password" type="password" className="form-control" align="center" name={password} placeholder="Enter password" onChange={(event) => setPassword(event.target.value)} />
+      </div>
+
+      <Div className="form-group">
+        <div className="custom-control custom-checkbox">
+          <input type="checkbox" className="custom-control-input" id="customCheck1" />
+          <Label className="custom-control-label" htmlFor="customCheck1">Remember me</Label>
+        </div>
+      </Div>
+
+      <Button type="submit" className="button">Submit</Button>
+      <P className="forgot-password text-right">
+        Forgot
+        <A href="#">password?</A>
+      </P>
+    </Form>
+  );
+};
 
 export default Login;
