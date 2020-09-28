@@ -1,0 +1,6 @@
+userID (user-xxxx..xx) <-- Vi fixar detta id i backend.
+email (string)
+firstname (string)
+lastname (string)
+password (string) (Hashas innan lagring i databas)
+

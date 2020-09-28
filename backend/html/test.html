@@ -1,0 +1,52 @@
+<script>
+
+function getTrip(){
+    var startLocation = document.getElementById("startLocation").value;
+    var destination = document.getElementById("destination").value;
+    fetch('http://localhost/api/trips/?startLocation=' + startLocation + '&destination=' + destination, {mode:'cors'})
+    .then(response => response.json())    
+     .then(data => document.getElementById("text").innerHTML = data)
+    .then(data => document.getElementById("text2").innerHTML = JSON.parse(data))
+    .then(data => document.getElementById("text3").innerHTML = data[0]['startLocation']);
+}
+
+
+function writeTrip(){
+    var data = {startLocation : document.getElementById('startLocation').value, destination : document.getElementById('destination').value, price : "123", seatsAvailable : "3", 
+            startTime : "2020-09-15 22:20:31", description : "Sitt still och använd bälte", userID : "user-5f6217df576f20.34313761"};
+    fetch("http://localhost/api/trips/", { 
+        mode:'cors',
+        // Adding method type 
+        method: "POST", 
+        // Adding body or contents to send 
+        body: JSON.stringify(data),
+        // Adding headers to the request 
+        headers: { 
+        'Content-Type': "application/json",
+        } 
+    })
+    .then(response => response.json()) 
+
+    .then(json => document.getElementById("text").innerHTML = json); 
+    document.getElementById("text2").innerHTML="";
+    document.getElementById("text3").innerHTML="";
+}
+
+</script>  
+<form>
+    <label for="startLocation">startLocation: </label><br>
+    <input type="text" id="startLocation" name="startLocation" value="Stockholm"><br>
+    <label for="destination">destination: </label><br>
+    <input type="text" id="destination" name="destination" value="Kristianstad">
+</form>
+
+
+</br>
+<button onClick="getTrip()">GetTrip</button>
+<button onClick="writeTrip()">writeTrip</button>
+
+<p id="text"></p> </br></br></br></br>
+
+<p id="text2"></p> </br></br></br></br>
+
+<p id="text3"></p></br></br></br></br>
