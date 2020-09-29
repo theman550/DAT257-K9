@@ -6,6 +6,7 @@ import Trips from './screens/Trips';
 import AddTrip from './components/AddTrip';
 import Notification from './components/Notification';
 import theme from './themes/base';
+import Login from './components/Login';
 
 const App = () => {
   const [notification, setNotification] = useState(null);
@@ -38,6 +39,7 @@ const App = () => {
           </Route>
           <Route path="/login">
             <p>Login page</p>
+            <Login />
           </Route>
           <Route path="/">
             <p>Home page</p>
