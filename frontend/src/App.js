@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import Trips from './screens/Trips';
 import AddTrip from './components/AddTrip';
 import Notification from './components/Notification';
+import theme from './themes/base';
 import Login from './components/Login';
 
 const App = () => {
