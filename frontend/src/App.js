@@ -5,7 +5,7 @@ import Navigation from './components/Navigation';
 import Trips from './screens/Trips';
 import Notification from './components/Notification';
 import theme from './themes/base';
-import Login from './components/Login';
+import Account from './screens/Account';
 
 const App = () => {
   const [notification, setNotification] = useState(null);
@@ -27,7 +27,7 @@ const App = () => {
           && <Notification msg={notification.msg} color={notification.color} /> }
         <Switch>
           <Route path="/account">
-            <Login />
+            <Account />
           </Route>
           <Route path="/">
             <Trips />
