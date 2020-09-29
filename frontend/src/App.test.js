@@ -23,6 +23,6 @@ describe('App', () => {
 
   it('renders account page when clicking accout button in navbar', () => {
     fireEvent.click(screen.getByLabelText('Account'));
-    expect(screen.getByText('TODO: Login')).toBeInTheDocument();
+    expect(screen.getByText('Sign In')).toBeInTheDocument();
   });
 });
