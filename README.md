@@ -33,6 +33,7 @@ Fix all errors/warnings before creating a pull request.
 
 # Styling frontend
 - Try to the best of your ability to follow established design mockups.
+- Style your components to be responsive. With the right CSS units, responsiveness should come naturally!
 - Follow [CSS best practices](https://gist.github.com/basham/2175a16ab7c60ce8e001); choose the right units!
 - Consistent styling is achieved by styled-component's ThemeProvider. Your styles should depend on these properties! See theme definitions in 'frontend/src/themes'.
 - Apply color according to the agreed color scheme.
