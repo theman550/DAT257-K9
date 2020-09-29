@@ -25,10 +25,10 @@ const RoundButton = styled(PrimaryButton)`
 
 const FloatingButtons = ({ openSearch, openAdd }) => (
   <ButtonContainer>
-    <RoundButton aria-label='Search' onClick={openSearch}>
+    <RoundButton aria-label="Search" onClick={openSearch}>
       <Search />
     </RoundButton>
-    <RoundButton aria-label='Add' onClick={openAdd}>
+    <RoundButton aria-label="Add" onClick={openAdd}>
       <Plus />
     </RoundButton>
   </ButtonContainer>

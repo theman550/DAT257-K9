@@ -12,8 +12,9 @@ describe('Navigation', () => {
       <ThemeProvider theme={theme}>
         <Router>
           <Navigation />
-        </Router>,
-      </ThemeProvider>
+        </Router>
+        ,
+      </ThemeProvider>,
     );
   });
 

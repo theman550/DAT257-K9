@@ -70,7 +70,7 @@ const ScreensDisplay = () => {
     console.log('Retrieving trips');
 
     try {
-      const res = await fetch(`${config.url.api}trips/`);
+      const res = await fetch(`${config.api.url}trips/`);
       const data = await res.json();
 
       if (!res.ok) {
