@@ -21,7 +21,7 @@ const Header = styled.div`
     position: relative;
 
     box-sizing: content-box;
-    padding: 1rem;
+    padding: ${(props) => props.theme.padding.section};
 
     background: -moz-linear-gradient(0deg, rgba(128,100,247,1) 0%, rgba(245,186,156,1) 100%); /* ff3.6+ */
     background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(128,100,247,1)), color-stop(100%, rgba(245,186,156,1))); /* safari4+,chrome */
@@ -34,7 +34,7 @@ const Header = styled.div`
 
 const Body = styled.div`
     box-sizing: content-box;
-    padding: 1.5rem 2rem;
+    padding: ${(props) => props.theme.padding.sectionAccent};
 `;
 const Card = ({ headerContent, bodyContent }) => (
   <CardContainer>

@@ -74,13 +74,18 @@ const ScreensDisplay = () => {
         throw new Error(data.data || data.message || 'No error message provided');
       }
 
-      console.log('Received trips, first ten', JSON.parse(data).slice(0, 9));
+      console.log('Received trips, first ten', data.slice(0, 9));
       // Adding driver property until API resource is implemented
       // Converting date string to Date object
       setTrips(
-        JSON.parse(data)
-          .map((trip) => ({ ...trip, driver: sampleTrips[0].driver }))
-          .map((trip) => ({ ...trip, startTime: new Date(trip.startTime) })),
+        data
+          .map((trip) => ({
+            ...trip,
+            driver: sampleTrips[0].driver,
+            startTime: new Date(trip.startTime),
+            seatsAvailable: Number.parseInt(trip.seatsAvailable, 10),
+            price: Number.parseInt(trip.price, 10),
+          })),
       );
     } catch (error) {
       console.warn('Could not retrieve trips', error.message);
