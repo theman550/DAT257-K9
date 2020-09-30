@@ -27,7 +27,7 @@ const CardHeader = styled.div`
 
     // Re-apply padding since 'position: absolute' neglects padding
     box-sizing: content-box;
-    padding: 1rem;
+    padding: ${(props) => props.theme.padding.section};
 `;
 
 const Driver = styled.div`
@@ -36,7 +36,7 @@ const Driver = styled.div`
 
     .details {
         display: flex;
-        margin-bottom: 0.25rem;
+        margin-bottom: ${(props) => props.theme.spacing.vNeighbor};
     }
 
     .details > h3 {
@@ -44,7 +44,7 @@ const Driver = styled.div`
     }
 
     .details > :not(h3) {
-        margin-right: 0.25rem;
+        margin-right: ${(props) => props.theme.spacing.hNeighbor};
     }
 
     .details > h3:not(:last-child) {
@@ -59,7 +59,7 @@ const CardBody = styled.div`
 
 const TripDetails = styled.div`
     display: flex;
-    margin-bottom: 1rem;
+    margin-bottom: ${(props) => props.theme.spacing.subsection};
 
     & > div:not(:last-child) {
         margin-right: 4rem;
@@ -87,7 +87,7 @@ const StyledForm = styled(Form)`
     align-items: flex-end;
 
     & > *:not(:last-child) {
-        margin-right: 2rem;
+        margin-right: ${(props) => props.theme.spacing.subsection};
     }
 
     & > ${PrimaryButton} {

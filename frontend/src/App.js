@@ -3,10 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Navigation from './components/Navigation';
 import Trips from './screens/Trips';
-import AddTrip from './components/AddTrip';
 import Notification from './components/Notification';
-import Login from './components/Login';
 import theme from './themes/base';
+import Account from './screens/Account';
 
 const App = () => {
   const [notification, setNotification] = useState(null);
@@ -27,22 +26,14 @@ const App = () => {
         {notification
           && <Notification msg={notification.msg} color={notification.color} /> }
         <Switch>
+          <Route path="/account">
+            <Account />
+          </Route>
           <Route path="/trips">
             <Trips />
           </Route>
-          <Route path="/search">
-            <p>Search page</p>
-          </Route>
-          <Route path="/add">
-            <p>Add trip page</p>
-            <AddTrip />
-          </Route>
-          <Route path="/login">
-            <p>Login page</p>
-            <Login />
-          </Route>
           <Route path="/">
-            <p>Home page</p>
+            <p>Welcome to Share-a-ride</p>
           </Route>
         </Switch>
       </Router>

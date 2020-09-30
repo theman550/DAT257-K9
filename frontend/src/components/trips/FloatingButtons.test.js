@@ -3,16 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { screen, render, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import FloatingButtons from './FloatingButtons';
-
-const theme = {
-  colors: {
-    primary: '#8064f7',
-    secondary: '#f5ba9c',
-    fill: '#1a1a1a',
-    alternateFill: '#f0ebff',
-    inactive: '#707386',
-  },
-};
+import theme from '../../themes/base';
 
 const openSearch = jest.fn();
 const openAdd = jest.fn();

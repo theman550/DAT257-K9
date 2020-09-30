@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-	$response = readTrips();
+	$response = readFilteredTable(getTripGETParameters(), "Resa");
 	sendResponseQuery($response);
 }
 
