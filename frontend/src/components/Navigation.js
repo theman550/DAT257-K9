@@ -7,7 +7,7 @@ import { H2 } from './UI';
 const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
-  position: fixed;
+  position: sticky;
   z-index: 1;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
