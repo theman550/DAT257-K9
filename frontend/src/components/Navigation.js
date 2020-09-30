@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { LogIn, Map } from 'react-feather';
+import { LogIn, Map, MapPin } from 'react-feather';
 import { H2 } from './UI';
 
 const Nav = styled.nav`
@@ -13,44 +13,67 @@ const Nav = styled.nav`
   background-color: rgba(0, 0, 0, 0.7);
   padding: ${(props) => props.theme.padding.section};
 
-  @media only screen and (min-width: 765px) {
-    & > h2 {
-      flex-grow: 20;
-    }
-       
-    & > a {
-      flex-grow: 1;
-    }
+  & > div {
+    display: flex;
+    align-items: center;
   }
 `;
 
 const StyledH2 = styled(H2)`
-  @media only screen and (max-width: 765px) {
-    display: none;
+  margin-left: ${props => props.theme.spacing.subsection};
+
+  & > a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: ${props => props.theme.colors.primary};
+  }
+
+  & > a:hover {
+    color: white;
+  }
+
+  & > a > span {
+    margin-top: ${props => props.theme.spacing.vNeighbor};
+    margin-left: ${props => props.theme.spacing.hNeighbor};
+  }
+
+  @media only screen and (max-width: 48em) {
+    & > a > span {
+      display: none;
+    }
   }
 `;
 
 const StyledLogInIcon = styled(LogIn)`
   color: ${(props) => props.theme.colors.primary};
+  margin-left: ${props => props.theme.spacing.subsection};
+  margin-right: ${props => props.theme.spacing.subsection};
   
   &:hover {
     color: white;
   }
 `;
 
-const StyledMapIcon = styled(Map)`
+const StyledMapPinIcon = styled(MapPin)`
   color: ${(props) => props.theme.colors.primary};
   
   &:hover {
     color: white;
   }
-`;
+`
 
 const Navigation = () => (
   <Nav>
-    <StyledH2>Share-a-ride</StyledH2>
-    <Link aria-label="Account" to="/account"><StyledLogInIcon /></Link>
-    <Link aria-label="Trips" to="/"><StyledMapIcon /></Link>
+    <StyledH2>
+      <Link aria-label="Home" to="/">
+        <Map /><span>{' '}Share-a-ride</span>
+      </Link>
+    </StyledH2>
+    <div>
+      <Link aria-label="Trips" to="/trips"><StyledMapPinIcon /></Link>
+      <Link aria-label="Account" to="/account"><StyledLogInIcon /></Link>
+    </div>
   </Nav>
 );
 
