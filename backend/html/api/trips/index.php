@@ -1,6 +1,6 @@
 <?php
 define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
-include(ABS_PATH . "/api.php");
+include(ABS_PATH . "/agilecourse/api.php");
 
 /* include(dirname(__FILE__) . "\api.php");
 include(dirname(__FILE__) . "\debug.php");
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-	$response = readTrips();
+	$response = readFilteredTable(getTripGETParameters(), "Resa");
 	sendResponseQuery($response);
 }
 
