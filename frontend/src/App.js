@@ -5,23 +5,9 @@ import Navigation from './components/Navigation';
 import Trips from './screens/Trips';
 
 import Notification from './components/Notification';
+import theme from './themes/base';
+import Login from './components/Login';
 import AddTrip from './components/trips/AddTrip';
-
-/**
- * Access like this:
- * const MyFancyButton = styled.button`
- * background: ${props => props.theme.colors.primary}
- * `
- */
-const theme = {
-  colors: {
-    primary: '#8064f7',
-    secondary: '#f5ba9c',
-    fill: '#1a1a1a',
-    alternateFill: '#f0ebff',
-    inactive: '#707386',
-  },
-};
 
 const App = () => {
   const [notification, setNotification] = useState(null);
@@ -54,6 +40,7 @@ const App = () => {
           </Route>
           <Route path="/login">
             <p>Login page</p>
+            <Login />
           </Route>
           <Route path="/">
             <p>Home page</p>

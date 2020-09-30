@@ -64,6 +64,7 @@ const StyledSelectColumn = styled.div`
 
   &:nth-child(2) {
     margin-left: 1rem;
+    
   }
   
 `;
