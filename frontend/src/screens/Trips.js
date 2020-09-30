@@ -3,6 +3,7 @@ import Modal, { ModalProvider } from 'styled-react-modal';
 import SearchTrip from '../components/trips/SearchTrips';
 import FloatingButtons from '../components/trips/FloatingButtons';
 import DisplayScreen from './Trip/Display';
+import Addtrip from '../components/trips/AddTrip';
 
 const Trips = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -24,7 +25,7 @@ const Trips = () => {
           onBackgroundClick={() => setIsAddOpen(false)}
           onEscapeKeydown={() => setIsAddOpen(false)}
         >
-          <p style={{ color: 'white' }}>TODO: Add component</p>
+          <Addtrip closeAdd={() => setIsAddOpen(false)} showNotification={() => {}} />
         </Modal>
         <FloatingButtons
           openSearch={() => setIsSearchOpen(true)}

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Formik, Field } from 'formik';
 import {
@@ -7,7 +7,6 @@ import {
   PrimaryButton,
   Label,
 } from '../UI';
-import Notification from '../Notification';
 
 const StyledInput = FieldFactory(Field);
 
@@ -34,13 +33,6 @@ const StyledTextRow = styled.div`
   &:nth-child(1) {
     margin: 0;
   }
-`;
-
-const AddNotification = styled.div`
-width:80%;
-margin: 30% auto;
-margin-top:-27%;
-
 `;
 
 const StyledSelectRow = styled.div`
@@ -84,8 +76,7 @@ const StyledButton = styled(PrimaryButton)`
   }
 `;
 
-const AddTrip = ({ closeAdd }) => {
-  const [notification, setNotification] = useState(null);
+const AddTrip = ({ closeAdd, showNotification }) => {
   const onSubmit = (values) => {
     const newvalues = {
 
@@ -96,16 +87,8 @@ const AddTrip = ({ closeAdd }) => {
       price: values.price,
       description: values.description,
     };
-
-    const showNotification = (msg, color, seconds) => {
-      setNotification({ msg, color });
-      setTimeout(() => {
-        setNotification(null);
-      }, seconds * 1000);
-    };
-
+    // Test the data. we must remove it in final product.
     console.log(values);
-    // Test the data.------------
     const jsdata = JSON.stringify(newvalues);
     console.log(jsdata);
     //--------------------------
@@ -138,7 +121,6 @@ const AddTrip = ({ closeAdd }) => {
         <Label htmlFor="to">To</Label>
         <StyledInput name="destination" type="text" id="to" placeholder="Enter destination..." />
       </StyledTextRow>
-
       <StyledSelectRow>
         <StyledSelectColumn>
           <Label htmlFor="date">Date</Label>
@@ -159,7 +141,6 @@ const AddTrip = ({ closeAdd }) => {
           <StyledInput name="price" type="number" id="price" min="0" max="1000" />
         </StyledSelectColumn>
       </StyledSelectRow>
-
       <StyledSelectRow>
         <StyledSelectColumn>
           <Label htmlFor="description">description</Label>
@@ -168,15 +149,14 @@ const AddTrip = ({ closeAdd }) => {
       </StyledSelectRow>
 
       <StyledSelectRow>
-        <StyledButton type="submit">Add</StyledButton>
         <StyledButton onClick={closeAdd} type="button">Close</StyledButton>
+        <StyledButton type="submit">Add</StyledButton>
       </StyledSelectRow>
     </StyledForm>
   );
 
   return (
     <div className="SearchGui">
-
       <Formik
         data-testid="form"
         initialValues={{
@@ -186,10 +166,6 @@ const AddTrip = ({ closeAdd }) => {
       >
         {form}
       </Formik>
-      <AddNotification>
-        {notification
-      && <Notification msg={notification.msg} color={notification.color} />}
-      </AddNotification>
     </div>
   );
 };

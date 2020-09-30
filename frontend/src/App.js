@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Navigation from './components/Navigation';
 import Trips from './screens/Trips';
-
 import Notification from './components/Notification';
 import theme from './themes/base';
 import Login from './components/Login';
@@ -14,7 +13,7 @@ const App = () => {
 
   // TODO: First to use this function can remove the next line
   // eslint-disable-next-line
-  const showNotification = (msg, color, seconds) => {
+   const showNotification = (msg, color, seconds) => {
     setNotification({ msg, color });
     setTimeout(() => {
       setNotification(null);
@@ -36,7 +35,7 @@ const App = () => {
           </Route>
           <Route path="/add">
             <p>Add trip page</p>
-            <AddTrip />
+            <AddTrip showNotification={showNotification} />
           </Route>
           <Route path="/login">
             <p>Login page</p>
@@ -48,7 +47,6 @@ const App = () => {
         </Switch>
       </Router>
     </ThemeProvider>
-
   );
 };
 
