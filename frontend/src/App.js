@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Navigation from './components/Navigation';
 import Trips from './screens/Trips';
-import AddTrip from './components/AddTrip';
+
 import Notification from './components/Notification';
+import AddTrip from './components/trips/AddTrip';
 
 /**
  * Access like this:
@@ -60,6 +61,7 @@ const App = () => {
         </Switch>
       </Router>
     </ThemeProvider>
+
   );
 };
 
