@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const F = styled.form`
     box-sizing: border-box;
     font-family: "Roboto", sans-erif;
-    width: 100%;
+    width: 99%;
     border-radius: 5px;
     background:#262626;
     box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
