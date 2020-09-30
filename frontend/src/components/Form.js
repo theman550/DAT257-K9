@@ -3,9 +3,8 @@ import styled from 'styled-components';
 
 const F = styled.form`
     box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
-    width: 1000px;
-    height: 505px;
+    font-family: "Roboto", sans-erif;
+    width: 100%;
     border-radius: 5px;
     background:#262626;
     box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
@@ -18,6 +17,7 @@ const F = styled.form`
     border-radius: 5px;
     font-size: medium;
     `;
+
 const H1 = styled.h1`
     font-size: 38px;
     text-align:center;
@@ -89,7 +89,6 @@ const Form = () => {
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
   };
-
   return (
     <F onSubmit={handleSubmit}>
       <H1>User account</H1>
