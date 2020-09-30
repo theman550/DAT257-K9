@@ -6,6 +6,7 @@ import Trips from './screens/Trips';
 import AddTrip from './components/AddTrip';
 import Notification from './components/Notification';
 import Login from './components/Login';
+import theme from './themes/base';
 
 const App = () => {
   const [notification, setNotification] = useState(null);
