@@ -8,6 +8,22 @@ Project for course DAT257
 - Always write tests for your code, use test driven development (TDD)
 - Create meaningful commits and write informational commit messages
 
+# Configuring frontend's environment
+The frontend can be run in different environments depending on the variable "REACT_APP_ENV".
+Different environments changes certain environment-specific definitions such as API url, and others.
+"development" is default, to explicitly set environment type:
+```
+set "REACT_APP_ENV=production" && npm start
+```
+where 'production' can be either development, testing, or production.
+
+To read and use an environment-specific variable in your code; simply import the config and read from it:
+```
+import config from './config';
+...
+console.log(config.api.url);
+```
+
 # Linting frontend
 In [your working directory]/frontend
 ```
@@ -17,6 +33,7 @@ Fix all errors/warnings before creating a pull request.
 
 # Styling frontend
 - Try to the best of your ability to follow established design mockups.
+- Style your components to be responsive. With the right CSS units, responsiveness should come naturally!
 - Follow [CSS best practices](https://gist.github.com/basham/2175a16ab7c60ce8e001); choose the right units!
 - Consistent styling is achieved by styled-component's ThemeProvider. Your styles should depend on these properties! See theme definitions in 'frontend/src/themes'.
 - Apply color according to the agreed color scheme.
