@@ -18,6 +18,10 @@ describe('Navigation', () => {
     );
   });
 
+  it('renders home button', () => {
+    expect(screen.getByLabelText('Home')).toBeInTheDocument();
+  });
+
   it('renders account button', () => {
     expect(screen.getByLabelText('Account')).toBeInTheDocument();
   });

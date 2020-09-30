@@ -29,8 +29,11 @@ const App = () => {
           <Route path="/account">
             <Account />
           </Route>
-          <Route path="/">
+          <Route path="/trips">
             <Trips />
+          </Route>
+          <Route path="/">
+            <p>Welcome to Share-a-ride</p>
           </Route>
         </Switch>
       </Router>

@@ -8,6 +8,10 @@ describe('App', () => {
     render(<App />);
   });
 
+  it('renders navbar with home button', () => {
+    expect(screen.getByLabelText('Home')).toBeInTheDocument();
+  });
+
   it('renders navbar with account button', () => {
     expect(screen.getByLabelText('Account')).toBeInTheDocument();
   });

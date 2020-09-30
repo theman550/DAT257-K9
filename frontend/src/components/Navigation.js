@@ -20,13 +20,13 @@ const Nav = styled.nav`
 `;
 
 const StyledH2 = styled(H2)`
-  margin-left: ${props => props.theme.spacing.subsection};
+  margin-left: ${(props) => props.theme.spacing.subsection};
 
   & > a {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
 
   & > a:hover {
@@ -34,8 +34,8 @@ const StyledH2 = styled(H2)`
   }
 
   & > a > span {
-    margin-top: ${props => props.theme.spacing.vNeighbor};
-    margin-left: ${props => props.theme.spacing.hNeighbor};
+    margin-top: ${(props) => props.theme.spacing.vNeighbor};
+    margin-left: ${(props) => props.theme.spacing.hNeighbor};
   }
 
   @media only screen and (max-width: 48em) {
@@ -47,8 +47,8 @@ const StyledH2 = styled(H2)`
 
 const StyledLogInIcon = styled(LogIn)`
   color: ${(props) => props.theme.colors.primary};
-  margin-left: ${props => props.theme.spacing.subsection};
-  margin-right: ${props => props.theme.spacing.subsection};
+  margin-left: ${(props) => props.theme.spacing.subsection};
+  margin-right: ${(props) => props.theme.spacing.subsection};
   
   &:hover {
     color: white;
@@ -61,13 +61,17 @@ const StyledMapPinIcon = styled(MapPin)`
   &:hover {
     color: white;
   }
-`
+`;
 
 const Navigation = () => (
   <Nav>
     <StyledH2>
       <Link aria-label="Home" to="/">
-        <Map /><span>{' '}Share-a-ride</span>
+        <Map />
+        <span>
+          {' '}
+          Share-a-ride
+        </span>
       </Link>
     </StyledH2>
     <div>
