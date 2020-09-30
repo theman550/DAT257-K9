@@ -88,7 +88,6 @@ const Form = () => {
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
   };
-  
   return (
     <F onSubmit={handleSubmit}>
       <H1>User account</H1>
