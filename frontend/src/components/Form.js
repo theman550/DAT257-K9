@@ -4,7 +4,7 @@ import config from '../config';
 
 const F = styled.form`
     box-sizing: border-box;
-    font-family: "Roboto", sans-erif;
+    font-family: "Roboto", sans-serif;
     width: 99%;
     border-radius: 5px;
     background:#262626;
@@ -18,7 +18,6 @@ const F = styled.form`
     border-radius: 5px;
     font-size: medium;
     `;
-
 const H1 = styled.h1`
     font-size: 38px;
     text-align:center;
@@ -90,6 +89,7 @@ const Form = () => {
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
   };
+  
   return (
     <F onSubmit={handleSubmit}>
       <H1>User account</H1>
