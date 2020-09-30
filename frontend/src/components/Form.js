@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import config from '../config';
 
 const F = styled.form`
     box-sizing: border-box;
@@ -71,7 +72,7 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('http://spilg.xyz/api/user/', {
+    fetch(`${config.api.url}user/`, {
       method: 'POST',
       mode: 'cors',
       headers: {

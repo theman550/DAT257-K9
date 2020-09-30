@@ -1,42 +1,34 @@
 <?php
+define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
+include(ABS_PATH . "/api.php");
+
+/* include(dirname(__FILE__) . "\api.php");
+include(dirname(__FILE__) . "\debug.php");
+ */
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-include(dirname(dirname(__FILE__)) . "/api.php");
-if ($_SERVER['REQUEST_METHOD'] === 'GET') 
-{
-	$result = readTrips();
-	if(mysqli_num_rows($result) > 0)
-	{
-		$post_arr = array();
-		$post_arr['trips'] = array();
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+header('Access-Control-Max-Age: 1000');	
 
-		while($row = mysqli_fetch_assoc($result))
-		{
-			$post_item = array(
-			'startLocation' => $row['startLocation'],
-			'destination'   => $row['destination'],
-			'price'         => $row['price'],
-			'tripID'        => $row['tripID'],
-			'startTime'     => $row['startTime'],
-			'seatsAvailable' => $row['seatsAvailable'],
-			'description'   => $row['description'],
-			'userID'        => $row['userID']
-			);
-			array_push($post_arr['trips'], $post_item);
-		}
-		echo json_encode($post_arr);
-	}
+//Chrome skickar en pre-flight request av typ OPTIONS som 
+//vill ha flaggor, den här biten löser det
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+	header('Access-Control-Allow-Origin: *');
+	header('Content-Type: application/json');
+	header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+	header('Access-Control-Max-Age: 1000');	
 }
-else if($_SERVER['REQUEST_METHOD'] === 'POST')
-{
+
+else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+	$response = readFilteredTable(getTripGETParameters(), "Resa");
+	sendResponseQuery($response);
+}
+
+else if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	$data = json_decode(file_get_contents("php://input", true));
-	$tripID = "error";
-	if(!empty($data))
-	{
-		$test = $data->startLocation;
-		$tripID = writeTrip($data->startLocation, $data->destination, $data->startTime, $data->price, $data->seatsAvailable, $data->description, $data->userID);
-	}
-	echo json_encode(
-	array('message' => $tripID));
+	$response = writeTrip($data);
+	sendResponseString($response);
 }
 ?>

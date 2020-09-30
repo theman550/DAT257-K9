@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 /**
- * @param {*} Field is the field component, either input field or third-party
+ * @param {*} Field is any input/field component. For example HTML's input field or third-party.
  */
 const FieldFactory = (Field) => styled(Field)`
     // Remove default field styling

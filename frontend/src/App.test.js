@@ -8,21 +8,25 @@ describe('App', () => {
     render(<App />);
   });
 
-  it('renders logo', () => {
-    expect(screen.getByText('Share-a-ride')).toBeInTheDocument();
+  it('renders navbar with home button', () => {
+    expect(screen.getByLabelText('Home')).toBeInTheDocument();
   });
 
-  it('renders home by default', () => {
-    expect(screen.getByText('Home page')).toBeInTheDocument();
+  it('renders navbar with account button', () => {
+    expect(screen.getByLabelText('Account')).toBeInTheDocument();
   });
 
-  it('renders search page when clicking search link in navbar', () => {
-    fireEvent.click(screen.getByText('Search'));
-    expect(screen.getByText('Search page')).toBeInTheDocument();
+  it('renders navbar with trips button', () => {
+    expect(screen.getByLabelText('Trips')).toBeInTheDocument();
   });
 
-  it('renders add page when clicking add trip link in navbar', () => {
-    fireEvent.click(screen.getByText('Add trip'));
-    expect(screen.getByText('Add trip page')).toBeInTheDocument();
+  it('renders trips page when clicking trips button in navbar', () => {
+    fireEvent.click(screen.getByLabelText('Trips'));
+    expect(screen.getByLabelText('Search')).toBeInTheDocument();
+  });
+
+  it('renders account page when clicking accout button in navbar', () => {
+    fireEvent.click(screen.getByLabelText('Account'));
+    expect(screen.getByText('Sign In')).toBeInTheDocument();
   });
 });

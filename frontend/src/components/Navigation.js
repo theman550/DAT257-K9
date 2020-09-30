@@ -1,56 +1,83 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { LogIn, Map, MapPin } from 'react-feather';
+import { H2 } from './UI';
 
 const Nav = styled.nav`
   display: flex;
-  font-family: Kufam;
-  color: white;
   justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(
-    90deg,
-    rgba(128, 100, 247, 1) 0%,
-    rgba(245, 186, 156, 1) 100%
-  );
+  position: fixed;
+  z-index: 1;
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: ${(props) => props.theme.padding.section};
+
+  & > div {
+    display: flex;
+    align-items: center;
+  }
 `;
 
-const H3 = styled.h3`
-  margin-left: 2rem;
+const StyledH2 = styled(H2)`
+  margin-left: ${(props) => props.theme.spacing.subsection};
+
+  & > a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.primary};
+  }
+
+  & > a:hover {
+    color: white;
+  }
+
+  & > a > span {
+    margin-top: ${(props) => props.theme.spacing.vNeighbor};
+    margin-left: ${(props) => props.theme.spacing.hNeighbor};
+  }
+
+  @media only screen and (max-width: 48em) {
+    & > a > span {
+      display: none;
+    }
+  }
 `;
 
-const Ul = styled.ul`
-  display: flex;
-  list-style-type: none;
-`;
-
-const Li = styled.li`
-  margin-right: 2rem;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-
+const StyledLogInIcon = styled(LogIn)`
+  color: ${(props) => props.theme.colors.primary};
+  margin-left: ${(props) => props.theme.spacing.subsection};
+  margin-right: ${(props) => props.theme.spacing.subsection};
+  
   &:hover {
-    text-decoration: underline;
+    color: white;
+  }
+`;
+
+const StyledMapPinIcon = styled(MapPin)`
+  color: ${(props) => props.theme.colors.primary};
+  
+  &:hover {
+    color: white;
   }
 `;
 
 const Navigation = () => (
   <Nav>
-    <H3>
-      <StyledLink to="/">Share-a-ride</StyledLink>
-    </H3>
-    <Ul>
-      <Li>
-        <StyledLink to="/search">Search</StyledLink>
-      </Li>
-      <Li>
-        <StyledLink to="/add">Add trip</StyledLink>
-      </Li>
-    </Ul>
+    <StyledH2>
+      <Link aria-label="Home" to="/">
+        <Map />
+        <span>
+          {' '}
+          Share-a-ride
+        </span>
+      </Link>
+    </StyledH2>
+    <div>
+      <Link aria-label="Trips" to="/trips"><StyledMapPinIcon /></Link>
+      <Link aria-label="Account" to="/account"><StyledLogInIcon /></Link>
+    </div>
   </Nav>
 );
 
