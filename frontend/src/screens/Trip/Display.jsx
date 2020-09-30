@@ -36,6 +36,8 @@ const Wrapper = styled.div`
     align-items: center;
 
     padding: 1rem;
+    padding-top: 5rem;
+    margin-bottom: 5rem;
     background-color: ${(props) => props.theme.colors.fill};
 
     // Set each card to have a width of 500px
@@ -52,6 +54,7 @@ const Wrapper = styled.div`
     // make the cards take up the entire width
     @media only screen and (max-width: 40em) {
         padding: 0;
+        padding-top: 5rem;
 
         & > * {
             border-radius: 0px;
@@ -67,7 +70,7 @@ const ScreensDisplay = () => {
     console.log('Retrieving trips');
 
     try {
-      const res = await fetch(`${config.url.api}trips/`);
+      const res = await fetch(`${config.api.url}trips/`);
       const data = await res.json();
 
       if (!res.ok) {
