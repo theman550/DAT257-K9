@@ -1,6 +1,6 @@
 <?php
 	define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
-	include(ABS_PATH . "/agilecourse/api.php");
+	include(ABS_PATH . "/api.php");
 
 	/* include(dirname(__FILE__) . "\api.php");
 	include(dirname(__FILE__) . "\debug.php");
