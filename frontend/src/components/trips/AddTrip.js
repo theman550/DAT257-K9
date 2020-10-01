@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { Formik, Field } from 'formik';
@@ -9,6 +9,13 @@ import {
 } from '../UI';
 
 const StyledInput = FieldFactory(Field);
+
+const Div = styled.div`
+max-width:500px;
+width:100%;
+margin: 30% auto;
+margin-top:40%;
+`;
 
 const StyledForm = styled.form`
   display: flex;
@@ -87,11 +94,6 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       price: values.price,
       description: values.description,
     };
-    // Test the data. we must remove it in final product.
-    console.log(values);
-    const jsdata = JSON.stringify(newvalues);
-    console.log(jsdata);
-    //--------------------------
 
     fetch('http://spilg.xyz/api/trips/', {
       method: 'POST',
@@ -112,6 +114,7 @@ const AddTrip = ({ closeAdd, showNotification }) => {
   };
 
   const form = (props) => (
+    // eslint-disable-next-line react/prop-types
     <StyledForm aria-label="AddTrip form" onSubmit={props.handleSubmit}>
       <StyledTextRow>
         <Label htmlFor="from">From</Label>
@@ -156,7 +159,7 @@ const AddTrip = ({ closeAdd, showNotification }) => {
   );
 
   return (
-    <div className="SearchGui">
+    <Div>
       <Formik
         data-testid="form"
         initialValues={{
@@ -166,8 +169,13 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       >
         {form}
       </Formik>
-    </div>
+    </Div>
   );
+};
+
+AddTrip.propTypes = {
+  closeAdd: PropTypes.func.isRequired,
+  showNotification: PropTypes.func.isRequired,
 };
 
 export default AddTrip;

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Modal, { ModalProvider } from 'styled-react-modal';
 import SearchTrip from '../components/trips/SearchTrips';
 import FloatingButtons from '../components/trips/FloatingButtons';
 import DisplayScreen from './Trip/Display';
-import Addtrip from '../components/trips/AddTrip';
+import AddTrip from '../components/trips/AddTrip';
 
-const Trips = () => {
+const Trips = ({ showNotification }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
 
@@ -25,7 +26,7 @@ const Trips = () => {
           onBackgroundClick={() => setIsAddOpen(false)}
           onEscapeKeydown={() => setIsAddOpen(false)}
         >
-          <Addtrip closeAdd={() => setIsAddOpen(false)} showNotification={() => {}} />
+          <AddTrip closeAdd={() => setIsAddOpen(false)} showNotification={showNotification} />
         </Modal>
         <FloatingButtons
           openSearch={() => setIsSearchOpen(true)}
@@ -34,6 +35,10 @@ const Trips = () => {
       </ModalProvider>
     </div>
   );
+};
+
+Trips.propTypes = {
+  showNotification: PropTypes.func.isRequired,
 };
 
 export default Trips;
