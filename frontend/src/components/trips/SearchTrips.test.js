@@ -31,12 +31,8 @@ describe('SearchTrips', () => {
     expect(screen.getByLabelText('To')).toBeInTheDocument();
   });
 
-  test('renders date selector', () => {
-    expect(screen.getByLabelText('Date')).toBeInTheDocument();
-  });
-
-  test('renders time selector', () => {
-    expect(screen.getByLabelText('Time')).toBeInTheDocument();
+  test('renders datetime selector', () => {
+    expect(screen.getByLabelText('Date/time')).toBeInTheDocument();
   });
 
   test('renders seats selector', () => {
@@ -63,16 +59,10 @@ describe('SearchTrips', () => {
     expect(input.value).toBe('Oslo');
   });
 
-  test('should accept a date', () => {
-    const input = screen.getByLabelText('Date');
-    fireEvent.change(input, { target: { value: '2020-09-24' } });
-    expect(input.value).toBe('2020-09-24');
-  });
-
-  test('should accept a time', () => {
-    const input = screen.getByLabelText('Time');
-    fireEvent.change(input, { target: { value: '18:00' } });
-    expect(input.value).toBe('18:00');
+  test('should accept a datetime', () => {
+    const input = screen.getByLabelText('Date/time');
+    fireEvent.change(input, { target: { value: '2020-10-01T15:35:35' } });
+    expect(input.value).toBe('2020-10-01T15:35');
   });
 
   test('should accept number of seats', () => {
