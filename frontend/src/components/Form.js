@@ -28,7 +28,7 @@ const F = styled.form`
 const H1 = styled(H2)`
     font-size: 38px;
     text-align:center;
-    color: #9677D9;
+    color: ${(props) => props.theme.colors.primary};
     `;
 const Table = styled.table`
     margin-left: auto;
@@ -42,7 +42,6 @@ const InputText = FieldFactory(styled.input`
     box-sizing: border-box;
     border: none;
     border-radius: 15px;
-    color: rgb(10, 10, 10);
     font-family: Arial, Helvetica, sans-serif;
     `);
 const InputPassword = FieldFactory(styled.input`
@@ -53,7 +52,6 @@ const InputPassword = FieldFactory(styled.input`
     box-sizing: border-box;
     border: none;
     border-radius: 15px;
-    color: rgb(10, 10, 10);
     font-family: Arial, Helvetica, sans-serif;
     `);
 const Button = styled.button`
@@ -67,7 +65,7 @@ const Button = styled.button`
     border: none;
     border-radius: 5px;
     padding: 10px;
-    color: white;
+    color: ${(props) => props.theme.colors.alternateFill};
     width: 60%;
     font-family: "Noto Sans", sans-serif;
     font-size: 14px;
