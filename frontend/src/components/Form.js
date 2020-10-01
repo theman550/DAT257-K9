@@ -65,7 +65,7 @@ const Button = styled.button`
     margin-left:80px;
     left: 5%; 
     transform: translateX(-50%);
-    background: #9677D9;
+    background: ${(props) => props.theme.colors.primary};
     border: none;
     border-radius: 5px;
     padding: 10px;
