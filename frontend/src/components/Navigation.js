@@ -5,9 +5,15 @@ import { LogIn, Map, MapPin } from 'react-feather';
 import { H2 } from './UI';
 
 const Nav = styled.nav`
+  height: ${(props) => props.theme.size.navbar};
   display: flex;
   justify-content: space-between;
+
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
   z-index: 1;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);

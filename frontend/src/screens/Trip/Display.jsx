@@ -36,7 +36,6 @@ const Wrapper = styled.div`
     align-items: center;
 
     padding: 1rem;
-    padding-top: 5rem;
     margin-bottom: 5rem;
     background-color: ${(props) => props.theme.colors.fill};
 
@@ -54,7 +53,6 @@ const Wrapper = styled.div`
     // make the cards take up the entire width
     @media only screen and (max-width: 40em) {
         padding: 0;
-        padding-top: 5rem;
 
         & > * {
             border-radius: 0px;
