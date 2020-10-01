@@ -7,17 +7,21 @@ import DisplayScreen from './Trip/Display';
 const Trips = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [filteredTrips, setFilteredTrips] = useState([]);
 
   return (
     <div>
-      <DisplayScreen />
+      <DisplayScreen filteredTrips={filteredTrips} />
       <ModalProvider>
         <Modal
           isOpen={isSearchOpen}
           onBackgroundClick={() => setIsSearchOpen(false)}
           onEscapeKeydown={() => setIsSearchOpen(false)}
         >
-          <SearchTrip closeSearch={() => setIsSearchOpen(false)} />
+          <SearchTrip
+            closeSearch={() => setIsSearchOpen(false)}
+            setFilteredTrips={setFilteredTrips}
+          />
         </Modal>
         <Modal
           isOpen={isAddOpen}

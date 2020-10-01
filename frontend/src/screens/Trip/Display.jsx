@@ -61,12 +61,10 @@ const Wrapper = styled.div`
     }
 `;
 
-const ScreensDisplay = () => {
-  const [trips, setTrips] = useState([]);
+const ScreensDisplay = ({ filteredTrips }) => {
+  const [trips, setTrips] = useState(filteredTrips);
 
   const getTrips = async () => {
-    console.log('Retrieving trips');
-
     try {
       const res = await fetch(`${config.api.url}trips/`);
       const data = await res.json();
@@ -75,7 +73,6 @@ const ScreensDisplay = () => {
         throw new Error(data.data || data.message || 'No error message provided');
       }
 
-      console.log('Received trips, first ten', data.slice(0, 9));
       // Adding driver property until API resource is implemented
       // Converting date string to Date object
       setTrips(
