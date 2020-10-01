@@ -17,10 +17,10 @@ function sendResponseQuery($response){
 function sendResponseString($response){
 	echo json_encode($response);
 }
-
-function readTrips(){
-	$filterArray = getTripGETParameters();
-	$query = "SELECT * FROM Resa WHERE '1' = '1'"; // syntax fel i query skapandet om inte '1' = '1' och jag vill lägga till flera ands, om inga argument läggs till returneras alla resor.
+// skrev om denna så att den funkar både för users och trips, tar en array av alla gets och hämtar bara de columnerna istället för alla(vill ej returnera password i json) 
+function readFilteredTable($filterArray, $table){
+	$toSelect = implode(",", $filterArray); // blir till string från array, t.ex [1,2,3,4] -> "1,2,3,4" 
+	$query = "SELECT $toSelect FROM $table WHERE '1' = '1'"; // syntax fel i query skapandet om inte '1' = '1' och jag vill lägga till flera ands, om inga argument läggs till returneras alla resor.
 	for($i = 0; $i < count($filterArray); $i++)
 	{
 		if(isset($_GET[$filterArray[$i]]))
@@ -35,6 +35,10 @@ function readTrips(){
 function getTripGETParameters()
 {
 	return array("startLocation", "destination", "price", "tripID", "startTime", "seatsAvailable", "description", "userID");
+}
+function getUserGETParameters()
+{
+	return array("userID", "email", "firstname", "lastname");
 }
 function tripExists($tripID)
 {
@@ -94,7 +98,6 @@ function createAccount($email, $password, $firstname, $lastname)
 		return null; 
 	}
 	$sql = "INSERT INTO Users (userID, email, firstname, lastname, password) VALUES ('$userID', '$email', '$firstname', '$lastname', '$hashedPassword')";
-	echo $sql;
 	queryDB($sql);
 	return $userID;
 }
@@ -117,6 +120,7 @@ function getPassword($email)
 	$password = queryDB($query);
 	return $password;
 }
+
 // https://stackoverflow.com/questions/1354999/keep-me-logged-in-the-best-approach länk om hur man lägger till bra säkerhet enkelt.
 // jämnför om lösenord i plaintext angivet för en email matchar den hashade verisionen av det lösenordet
 function tryLogin($email, $password)
