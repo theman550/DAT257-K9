@@ -89,7 +89,16 @@ const SearchTrips = ({ closeSearch, setFilteredTrips }) => {
     e.preventDefault();
 
     const createQuery = () => {
-      const parameters = [from, to, datetime, seats, minPrice, maxPrice];
+      let query = '';
+
+      if (from !== '') query += 'startLocation=' + from + '&';
+      if (to !== '') query += 'destination=' + to + '&';
+      if (datetime !== '') query += 'startTime=' + datetime + '&';
+      if (seats !== '') query += 'seatsAvailable=' + seats + '&';
+      if (minPrice !== '') query += 'priceMin=' + minPrice + '&';
+      if (maxPrice !== '') query += 'priceMax=' + maxPrice;
+
+      return query;
     }
 
     try {
