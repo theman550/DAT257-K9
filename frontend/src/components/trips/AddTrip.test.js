@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { screen, render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import Addtrip from './AddTrip';
+import AddTrip from './AddTrip';
 
 const theme = {
   colors: {
@@ -18,7 +18,10 @@ describe('SearchTrips', () => {
   beforeEach(() => {
     render(
       <ThemeProvider theme={theme}>
-        <Addtrip closeSearch={() => ''} />
+        <AddTrip
+          closeAdd={() => ''}
+          showNotification={() => ''}
+        />
       </ThemeProvider>,
     );
   });

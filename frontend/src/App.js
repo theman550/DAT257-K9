@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-import Navigation from './components/Navigation';
-import Trips from './screens/Trips';
-import Notification from './components/Notification';
 import theme from './themes/base';
-import Login from './components/Login';
-import AddTrip from './components/trips/AddTrip';
+import Navigation from './components/Navigation';
+import Notification from './components/Notification';
+import Trips from './screens/Trips';
 import Account from './screens/Account';
 
 const PageWrapper = styled.div`
@@ -15,6 +13,7 @@ const PageWrapper = styled.div`
 
 const App = () => {
   const [notification, setNotification] = useState(null);
+
   const showNotification = (msg, color, seconds) => {
     setNotification({ msg, color });
     setTimeout(() => {
@@ -26,9 +25,9 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <Navigation />
-        {notification
-          && <Notification msg={notification.msg} color={notification.color} />}
         <PageWrapper>
+          {notification
+            && <Notification msg={notification.msg} color={notification.color} />}
           <Switch>
             <Route path="/account">
               <Account />
@@ -36,19 +35,8 @@ const App = () => {
             <Route path="/trips">
               <Trips showNotification={showNotification} />
             </Route>
-            <Route path="/search">
-              <p>Search page</p>
-            </Route>
-            <Route path="/add">
-              <p>Add trip page</p>
-              <AddTrip showNotification={showNotification} closeAdd={() => { }} />
-            </Route>
-            <Route path="/login">
-              <p>Login page</p>
-              <Login />
-            </Route>
             <Route path="/">
-              <p>Home page</p>
+              <p>Welcome to Share-a-ride</p>
             </Route>
           </Switch>
         </PageWrapper>

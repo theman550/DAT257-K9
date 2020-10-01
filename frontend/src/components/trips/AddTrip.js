@@ -10,20 +10,12 @@ import {
 
 const StyledInput = FieldFactory(Field);
 
-const Div = styled.div`
-max-width:500px;
-width:100%;
-margin: 30% auto;
-margin-top:40%;
-`;
-
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   background-color: ${(props) => props.theme.colors.fill};
   padding: 1rem;
   margin: 30% auto;
-  margin-top:-1%;
   width: 80%;
   max-width: 400px;
   border-radius: 10px;
@@ -159,17 +151,15 @@ const AddTrip = ({ closeAdd, showNotification }) => {
   );
 
   return (
-    <Div>
-      <Formik
-        data-testid="form"
-        initialValues={{
-          startLocation: '', destination: '', seatsAvailable: 1, startTime: '', time: '', price: 0, description: '',
-        }}
-        onSubmit={onSubmit}
-      >
-        {form}
-      </Formik>
-    </Div>
+    <Formik
+      data-testid="form"
+      initialValues={{
+        startLocation: '', destination: '', seatsAvailable: 1, startTime: '', time: '', price: 0, description: '',
+      }}
+      onSubmit={onSubmit}
+    >
+      {form}
+    </Formik>
   );
 };
 
