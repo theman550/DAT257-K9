@@ -115,20 +115,20 @@ const AddTrip = ({ closeAdd, showNotification }) => {
     <StyledForm aria-label="AddTrip form" onSubmit={props.handleSubmit}>
       <StyledTextRow>
         <Label htmlFor="from">From</Label>
-        <StyledInput name="startLocation" type="text" id="from" placeholder="Enter start location..." />
+        <StyledInput name="startLocation" type="text" id="from" placeholder="Enter start location..." required />
       </StyledTextRow>
       <StyledTextRow>
         <Label htmlFor="to">To</Label>
-        <StyledInput name="destination" type="text" id="to" placeholder="Enter destination..." />
+        <StyledInput name="destination" type="text" id="to" placeholder="Enter destination..." required />
       </StyledTextRow>
       <StyledSelectRow>
         <StyledSelectColumn>
           <Label htmlFor="date">Date</Label>
-          <StyledInput name="startTime" type="date" id="date" />
+          <StyledInput name="startTime" type="date" id="date" required />
         </StyledSelectColumn>
         <StyledSelectColumn>
           <Label htmlFor="time">Time</Label>
-          <StyledInput name="time" type="time" />
+          <StyledInput name="time" type="time" required />
         </StyledSelectColumn>
       </StyledSelectRow>
       <StyledSelectRow>
