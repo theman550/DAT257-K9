@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TripCard from '../../components/Trip/Card/Card';
 import config from '../../config';
@@ -62,9 +63,14 @@ const Wrapper = styled.div`
 `;
 
 const ScreensDisplay = ({ filteredTrips }) => {
-  const [trips, setTrips] = useState(filteredTrips);
+  const [trips, setTrips] = useState([]);
 
   const getTrips = async () => {
+    if (filteredTrips.length > 0) {
+      setTrips(filteredTrips);
+      return;
+    }
+
     try {
       const res = await fetch(`${config.api.url}trips/`);
       const data = await res.json();
@@ -91,7 +97,7 @@ const ScreensDisplay = ({ filteredTrips }) => {
   };
 
   // Same functionality as componentDidMount, only runs on the first render
-  useEffect(() => { getTrips(); }, []);
+  useEffect(() => { getTrips(); }, [filteredTrips]); // eslint-disable-line
 
   return (
     <Wrapper>
@@ -108,6 +114,10 @@ const ScreensDisplay = ({ filteredTrips }) => {
       ))}
     </Wrapper>
   );
+};
+
+ScreensDisplay.propTypes = {
+  filteredTrips: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ScreensDisplay;

@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import {
-  screen, render, fireEvent, waitForElement,
+  screen, render, fireEvent,
 } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import SearchTrips from './SearchTrips';
@@ -14,6 +14,7 @@ describe('SearchTrips', () => {
         <SearchTrips
           closeSearch={() => ''}
           setFilteredTrips={() => ''}
+          showNotification={() => ''}
         />
       </ThemeProvider>,
     );

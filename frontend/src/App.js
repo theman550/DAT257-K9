@@ -14,8 +14,6 @@ const PageWrapper = styled.div`
 const App = () => {
   const [notification, setNotification] = useState(null);
 
-  // TODO: First to use this function can remove the next line
-  // eslint-disable-next-line
   const showNotification = (msg, color, seconds) => {
     setNotification({ msg, color });
     setTimeout(() => {
@@ -27,15 +25,15 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <Navigation />
-        {notification
-          && <Notification msg={notification.msg} color={notification.color} /> }
         <PageWrapper>
+          {notification
+            && <Notification msg={notification.msg} color={notification.color} /> }
           <Switch>
             <Route path="/account">
               <Account />
             </Route>
             <Route path="/trips">
-              <Trips />
+              <Trips showNotification={showNotification} />
             </Route>
             <Route path="/">
               <p>Welcome to Share-a-ride</p>

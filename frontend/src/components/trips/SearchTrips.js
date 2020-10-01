@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import axios from 'axios';
 import config from '../../config';
 
 import {
@@ -16,11 +15,11 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   background-color: ${(props) => props.theme.colors.fill};
-  padding: ${props => props.theme.padding.section};
+  padding: ${(props) => props.theme.padding.section};
   margin: 30% auto;
   width: 90%;
   max-width: 26rem;
-  border-radius: ${props => props.theme.size.corner};
+  border-radius: ${(props) => props.theme.size.corner};
   -webkit-box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
   -moz-box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
   box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
@@ -29,7 +28,7 @@ const StyledForm = styled.form`
 const StyledTextRow = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: ${props => props.theme.spacing.subsection};
+  margin-top: ${(props) => props.theme.spacing.subsection};
 
   &:nth-child(1) {
     margin: 0;
@@ -40,7 +39,7 @@ const StyledSelectRow = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  margin-top: ${props => props.theme.spacing.subsection};
+  margin-top: ${(props) => props.theme.spacing.subsection};
 `;
 
 const StyledSelectColumn = styled.div`
@@ -53,7 +52,7 @@ const StyledSelectColumn = styled.div`
   }
 
   &:nth-child(2) {
-    margin-left: ${props => props.theme.spacing.subsection};
+    margin-left: ${(props) => props.theme.spacing.subsection};
   }
 
   & > div {
@@ -62,67 +61,72 @@ const StyledSelectColumn = styled.div`
 `;
 
 const StyledButton = styled(PrimaryButton)`
-  padding: ${props => props.theme.size.button};
+  padding: ${(props) => props.theme.size.button};
   width: 100%;
-  margin-top: ${props => props.theme.spacing.subsection};
+  margin-top: ${(props) => props.theme.spacing.subsection};
 
   &:nth-of-type(1) {
-    margin-right: ${props => props.theme.spacing.subsection};
+    margin-right: ${(props) => props.theme.spacing.subsection};
   }
 
   &:nth-of-type(2) {
-    margin-left: ${props => props.theme.spacing.subsection};
+    margin-left: ${(props) => props.theme.spacing.subsection};
   }
 `;
 
-const SearchTrips = ({ closeSearch, setFilteredTrips }) => {
+const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
-  const [datetime, setDatetime] = useState(
-    new Date().toISOString().slice(0, 19)
-  );
+  const [datetime, setDatetime] = useState('');
   const [seats, setSeats] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const createQuery = () => {
       let query = '';
 
-      if (from !== '') query += 'startLocation=' + from + '&';
-      if (to !== '') query += 'destination=' + to + '&';
-      if (datetime !== '') query += 'startTime=' + datetime + '&';
-      if (seats !== '') query += 'seatsAvailable=' + seats + '&';
-      if (minPrice !== '') query += 'priceMin=' + minPrice + '&';
-      if (maxPrice !== '') query += 'priceMax=' + maxPrice;
+      if (from !== '') query += `&startLocation=${from}`;
+      if (to !== '') query += `&destination=${to}`;
+      if (datetime !== '') query += `&startTime=${datetime}`;
+      if (seats !== '') query += `&seatsAvailable=${seats}`;
+      if (minPrice !== '') query += `&priceMin=${minPrice}`;
+      if (maxPrice !== '') query += `&priceMax=${maxPrice}`;
 
       return query;
-    }
+    };
 
     try {
-      const res = await fetch(`${config.api.url}trips?${createQuery()}`);
+      const url = `${config.api.url}trips/?${createQuery()}`;
+      const res = await fetch(url);
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.data || data.message || 'No error message provided');
+      if (typeof data !== 'string') {
+        setFilteredTrips(
+          data
+            .map((trip) => ({
+              ...trip,
+              driver: {
+                firstName: 'David',
+                lastName: 'Hernandez',
+                // avatarUrl: 'https://vip.nypost.com/wp-content/uploads/sites/2/2015/01/clark1.jpg',
+              },
+              startTime: new Date(trip.startTime),
+              seatsAvailable: Number.parseInt(trip.seatsAvailable, 10),
+              price: Number.parseInt(trip.price, 10),
+            })),
+        );
+      } else {
+        showNotification('No trips found', 'red', 3);
       }
-
-      setFilteredTrips(
-        data
-          .map((trip) => ({
-            ...trip,
-            driver: 'John Doe',
-            startTime: new Date(trip.startTime),
-            seatsAvailable: Number.parseInt(trip.seatsAvailable, 10),
-            price: Number.parseInt(trip.price, 10),
-          })),
-      );
     } catch (error) {
       console.warn('Could not retrieve trips', error.message);
     }
-  }
+
+    closeSearch();
+  };
 
   return (
     <StyledForm aria-label="Search form" onSubmit={handleSubmit}>
@@ -132,7 +136,7 @@ const SearchTrips = ({ closeSearch, setFilteredTrips }) => {
           type="text"
           id="from"
           value={from}
-          onChange={e => setFrom(e.target.value)}
+          onChange={(e) => setFrom(e.target.value)}
           placeholder="Enter start location..."
         />
       </StyledTextRow>
@@ -142,7 +146,7 @@ const SearchTrips = ({ closeSearch, setFilteredTrips }) => {
           type="text"
           id="to"
           value={to}
-          onChange={e => setTo(e.target.value)}
+          onChange={(e) => setTo(e.target.value)}
           placeholder="Enter destination..."
         />
       </StyledTextRow>
@@ -153,7 +157,7 @@ const SearchTrips = ({ closeSearch, setFilteredTrips }) => {
             type="datetime-local"
             id="datetime"
             value={datetime}
-            onChange={e => setDatetime(e.target.value)}   
+            onChange={(e) => setDatetime(e.target.value)}
           />
         </StyledSelectColumn>
       </StyledSelectRow>
@@ -166,28 +170,28 @@ const SearchTrips = ({ closeSearch, setFilteredTrips }) => {
             min="1"
             max="100"
             value={seats}
-            onChange={e => setSeats(e.target.value)}
-            placeholder='Enter seats...'
+            onChange={(e) => setSeats(e.target.value)}
+            placeholder="Enter seats..."
           />
         </StyledSelectColumn>
         <StyledSelectColumn>
           <Label htmlFor="price">Price</Label>
-          <StyledSelectRow id='price'>
+          <StyledSelectRow id="price">
             <StyledInput
               type="number"
               min="0"
               max="1000"
               value={minPrice}
-              onChange={e => setMinPrice(e.target.value)}
-              placeholder='Min'
+              onChange={(e) => setMinPrice(e.target.value)}
+              placeholder="Min"
             />
             <StyledInput
               type="number"
               min="0"
               max="1000"
               value={maxPrice}
-              onChange={e => setMaxPrice(e.target.value)}
-              placeholder='Max'
+              onChange={(e) => setMaxPrice(e.target.value)}
+              placeholder="Max"
             />
           </StyledSelectRow>
         </StyledSelectColumn>
@@ -202,7 +206,8 @@ const SearchTrips = ({ closeSearch, setFilteredTrips }) => {
 
 SearchTrips.propTypes = {
   closeSearch: PropTypes.func.isRequired,
-  setFilteredTrips: PropTypes.func.isRequired
+  setFilteredTrips: PropTypes.func.isRequired,
+  showNotification: PropTypes.func.isRequired,
 };
 
 export default SearchTrips;
