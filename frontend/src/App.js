@@ -34,7 +34,7 @@ const App = () => {
               <Account />
             </Route>
             <Route path="/trips">
-              <Trips showNotification={showNotification}/>
+              <Trips showNotification={showNotification} />
             </Route>
             <Route path="/search">
               <p>Search page</p>
