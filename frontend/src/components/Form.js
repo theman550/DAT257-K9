@@ -14,7 +14,7 @@ const F = styled.form`
     font-family: Kufam, sans-serif;
     width: 99%;
     border-radius: 5px;
-    background:#262626;
+    background: ${(props) => props.theme.colors.fill};
     box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
     text-align: center;
     position: absolute;
@@ -38,11 +38,10 @@ const InputText = FieldFactory(styled.input`
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    background: ${(props) => props.theme.colors.primary};
+    background: ${(props) => props.theme.colors.alternateFill};
     box-sizing: border-box;
     border: none;
     border-radius: 15px;
-    background-color: rgb(255, 249, 249);
     color: rgb(10, 10, 10);
     font-family: Arial, Helvetica, sans-serif;
     `);
@@ -50,11 +49,10 @@ const InputPassword = FieldFactory(styled.input`
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    background: ${(props) => props.theme.colors.primary};
+    background: ${(props) => props.theme.colors.alternateFill};
     box-sizing: border-box;
     border: none;
     border-radius: 15px;
-    background-color: rgb(255, 249, 249);
     color: rgb(10, 10, 10);
     font-family: Arial, Helvetica, sans-serif;
     `);
