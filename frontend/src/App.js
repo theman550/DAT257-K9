@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-import Navigation from './components/Navigation';
-import Trips from './screens/Trips';
-import Notification from './components/Notification';
 import theme from './themes/base';
+import Navigation from './components/Navigation';
+import Notification from './components/Notification';
+import Trips from './screens/Trips';
 import Account from './screens/Account';
 
 const PageWrapper = styled.div`
@@ -27,7 +27,7 @@ const App = () => {
         <Navigation />
         <PageWrapper>
           {notification
-            && <Notification msg={notification.msg} color={notification.color} /> }
+            && <Notification msg={notification.msg} color={notification.color} />}
           <Switch>
             <Route path="/account">
               <Account />
