@@ -21,7 +21,7 @@ const F = styled.form`
     text-align: center;
     background-size: cover;
     font-size: medium;
-    margin: 5em auto;
+    padding: ${(props) => props.theme.padding.section};
     `;
 
 const H1 = styled(H2)`
