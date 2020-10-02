@@ -21,7 +21,7 @@ const F = styled.form`
     text-align: center;
     background-size: cover;
     font-size: medium;
-    margin: 5em auto;
+    padding: ${(props) => props.theme.padding.section};
     `;
 
 const H1 = styled(H2)`
@@ -67,13 +67,12 @@ const Form = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch(`${config.api.url}user/`, {
+    fetch(`${config.api.url}users/`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -94,7 +93,7 @@ const Form = () => {
   return (
     <Wrapper>
       <F onSubmit={handleSubmit}>
-        <H1>User account</H1>
+        <H1>Register</H1>
         <Table className="center">
           <tbody>
             <tr>
@@ -114,13 +113,6 @@ const Form = () => {
             <tr>
               <td>
                 <InputText type="text" alt="email" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
-              </td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr>
-              <td>
-                <InputText type="text" alt="userName" name={userName} onChange={(event) => setUserName(event.target.value)} placeholder="User name" />
               </td>
             </tr>
           </tbody>

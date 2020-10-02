@@ -33,9 +33,6 @@ describe('Form', () => {
   it('renders email', () => {
     expect(screen.getByAltText('email')).toBeInTheDocument();
   });
-  it('renders userName', () => {
-    expect(screen.getByAltText('userName')).toBeInTheDocument();
-  });
 
   it('renders password', () => {
     expect(screen.getByAltText('password')).toBeInTheDocument();
