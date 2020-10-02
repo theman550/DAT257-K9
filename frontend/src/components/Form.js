@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import { H2 } from './UI/Typography';
 import FieldFactory from './UI/Field';
 import config from '../config';
+import { PrimaryButton } from './UI';
 
 const Wrapper = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
 `;
+
 const F = styled.form`
     box-sizing: border-box;
     font-family: Kufam, sans-serif;
@@ -17,23 +19,22 @@ const F = styled.form`
     background: ${(props) => props.theme.colors.fill};
     box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
     text-align: center;
-    position: absolute;
-    top: 56%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-size: cover;
-    border-radius: 5px;
     font-size: medium;
+    margin: 5em auto;
     `;
+
 const H1 = styled(H2)`
     font-size: 38px;
     text-align:center;
     color: ${(props) => props.theme.colors.primary};
     `;
+
 const Table = styled.table`
     margin-left: auto;
     margin-right: auto;
     `;
+
 const InputText = FieldFactory(styled.input`
     width: 100%;
     padding: 12px 20px;
@@ -42,8 +43,9 @@ const InputText = FieldFactory(styled.input`
     box-sizing: border-box;
     border: none;
     border-radius: 15px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Kufam;
     `);
+
 const InputPassword = FieldFactory(styled.input`
     width: 100%;
     padding: 12px 20px;
@@ -52,25 +54,15 @@ const InputPassword = FieldFactory(styled.input`
     box-sizing: border-box;
     border: none;
     border-radius: 15px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Kufam;
     `);
-const Button = styled.button`
-    position: relative;
-    margin: 15px 0 5px 0;
-    margin-top: 0px;
-    margin-left:80px;
-    left: 5%; 
-    transform: translateX(-50%);
-    background: ${(props) => props.theme.colors.primary};
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    color: ${(props) => props.theme.colors.alternateFill};
-    width: 60%;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-        `;
+
+const Button = styled(PrimaryButton)`
+  padding: 10px;
+  width: 60%;
+  cursor: pointer;
+  `;
+
 const Form = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
