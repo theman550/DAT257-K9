@@ -69,6 +69,7 @@ const TripDetails = styled.div`
 const AvatarContainer = styled.div`
     background-color: #1a1a1a;
     border-radius: 50%;
+    box-sizing: content-box;
     padding: 0.5rem;
     width: 15px;
     height: 15px;

@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import Navigation from './components/Navigation';
-import Trips from './screens/Trips';
-import Notification from './components/Notification';
+import styled, { ThemeProvider } from 'styled-components';
 import theme from './themes/base';
+import Navigation from './components/Navigation';
+import Notification from './components/Notification';
+import Trips from './screens/Trips';
 import Account from './screens/Account';
+
+const PageWrapper = styled.div`
+  margin-top: ${(props) => props.theme.size.navbar};
+`;
 
 const App = () => {
   const [notification, setNotification] = useState(null);
 
-  // TODO: First to use this function can remove the next line
-  // eslint-disable-next-line
   const showNotification = (msg, color, seconds) => {
     setNotification({ msg, color });
     setTimeout(() => {
@@ -23,19 +25,21 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <Navigation />
-        {notification
-          && <Notification msg={notification.msg} color={notification.color} /> }
-        <Switch>
-          <Route path="/account">
-            <Account />
-          </Route>
-          <Route path="/trips">
-            <Trips />
-          </Route>
-          <Route path="/">
-            <p>Welcome to Share-a-ride</p>
-          </Route>
-        </Switch>
+        <PageWrapper>
+          {notification
+            && <Notification msg={notification.msg} color={notification.color} />}
+          <Switch>
+            <Route path="/account">
+              <Account />
+            </Route>
+            <Route path="/trips">
+              <Trips showNotification={showNotification} />
+            </Route>
+            <Route path="/">
+              <p>Welcome to Share-a-ride</p>
+            </Route>
+          </Switch>
+        </PageWrapper>
       </Router>
     </ThemeProvider>
   );
