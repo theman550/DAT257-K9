@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TripCard from '../../components/Trip/Card/Card';
 import config from '../../config';
@@ -61,11 +62,14 @@ const Wrapper = styled.div`
     }
 `;
 
-const ScreensDisplay = () => {
+const ScreensDisplay = ({ filteredTrips }) => {
   const [trips, setTrips] = useState([]);
 
   const getTrips = async () => {
-    console.log('Retrieving trips');
+    if (filteredTrips.length > 0) {
+      setTrips(filteredTrips);
+      return;
+    }
 
     try {
       const res = await fetch(`${config.api.url}trips/`);
@@ -75,7 +79,6 @@ const ScreensDisplay = () => {
         throw new Error(data.data || data.message || 'No error message provided');
       }
 
-      console.log('Received trips, first ten', data.slice(0, 9));
       // Adding driver property until API resource is implemented
       // Converting date string to Date object
       setTrips(
@@ -94,7 +97,7 @@ const ScreensDisplay = () => {
   };
 
   // Same functionality as componentDidMount, only runs on the first render
-  useEffect(() => { getTrips(); }, []);
+  useEffect(() => { getTrips(); }, [filteredTrips]); // eslint-disable-line
 
   return (
     <Wrapper>
@@ -111,6 +114,10 @@ const ScreensDisplay = () => {
       ))}
     </Wrapper>
   );
+};
+
+ScreensDisplay.propTypes = {
+  filteredTrips: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ScreensDisplay;
