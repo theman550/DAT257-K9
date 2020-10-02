@@ -44,6 +44,12 @@ const theme = {
     // Section is spacing between completely different components
     section: '2rem',
   },
+
+  size: {
+    navbar: '60px',
+    corner: '0.5rem',
+    button: '0.75rem',
+  },
 };
 
 export default theme;
