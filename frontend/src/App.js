@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import Notification from './components/Notification';
 import Trips from './screens/Trips';
 import Account from './screens/Account';
+import RegisterForm from './components/Form';
 
 const PageWrapper = styled.div`
   margin-top: ${(props) => props.theme.size.navbar};
@@ -31,6 +32,9 @@ const App = () => {
           <Switch>
             <Route path="/account">
               <Account />
+            </Route>
+            <Route path="/register">
+              <RegisterForm />
             </Route>
             <Route path="/trips">
               <Trips showNotification={showNotification} />
