@@ -95,11 +95,11 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
       if (minPrice !== '') query += `&priceMin=${minPrice}`;
       if (maxPrice !== '') query += `&priceMax=${maxPrice}`;
 
-      return query;
+      return query === '' ? query : `?${query}`;
     };
 
     try {
-      const url = `${config.api.url}trips/?${createQuery()}`;
+      const url = `${config.api.url}trips/${createQuery()}`;
       const res = await fetch(url);
       const data = await res.json();
 
