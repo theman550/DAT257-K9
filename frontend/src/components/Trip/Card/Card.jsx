@@ -101,7 +101,7 @@ const StyledForm = styled(Form)`
 
 const SeatsField = styled(FieldFactory(Field))`
     // Make width to about 4 characters width
-    width: 4ch;
+    width: 6ch;
 `;
 
 const FieldContainer = styled.div`
