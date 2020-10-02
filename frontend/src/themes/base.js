@@ -47,6 +47,8 @@ const theme = {
 
   size: {
     navbar: '60px',
+    corner: '0.5rem',
+    button: '0.75rem',
   },
 };
 
