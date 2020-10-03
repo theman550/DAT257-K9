@@ -1,12 +1,12 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
-import Login from './Login';
+import LoginForm from './LoginForm';
 
-describe('Login', () => {
+describe('LoginForm', () => {
   beforeEach(() => {
     render(
-      <Login />,
+      <LoginForm />,
     );
   });
 

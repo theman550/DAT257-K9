@@ -5,7 +5,7 @@ import theme from './themes/base';
 import Navigation from './components/Navigation';
 import Notification from './components/Notification';
 import Trips from './screens/Trips';
-import Account from './screens/Account';
+import Login from './screens/Login';
 import RegisterForm from './components/Form';
 
 const PageWrapper = styled.div`
@@ -30,8 +30,8 @@ const App = () => {
           {notification
             && <Notification msg={notification.msg} color={notification.color} />}
           <Switch>
-            <Route path="/account">
-              <Account />
+            <Route path="/login">
+              <Login />
             </Route>
             <Route path="/register">
               <RegisterForm />

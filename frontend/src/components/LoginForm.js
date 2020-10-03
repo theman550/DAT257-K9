@@ -69,7 +69,7 @@ color: white;
 font-size: large;
 `;
 
-const Login = () => {
+const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = (event) => {
@@ -121,4 +121,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Login from '../components/Login';
+import LoginForm from '../components/LoginForm';
 
 const Container = styled.div`
   display: flex;
@@ -10,10 +10,10 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const Account = () => (
+const Login = () => (
   <Container>
-    <Login />
+    <LoginForm />
   </Container>
 );
 
-export default Account;
+export default Login;
