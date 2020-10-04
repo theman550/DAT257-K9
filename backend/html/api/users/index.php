@@ -1,6 +1,7 @@
 <?php
 	define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
 	include(ABS_PATH . "/api.php");
+	//include(ABS_PATH . "/agilecourse/api.php");
 
 	/* include(dirname(__FILE__) . "\api.php");
 	include(dirname(__FILE__) . "\debug.php");
@@ -27,7 +28,8 @@
 		echo json_encode($userID);
 	}
 	else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-		$response = readFilteredTable(getUserGETParameters(), "Users");
+		$filterArray = getUserGETParameters();
+		$response = readFilteredTable($filterArray, "Users", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">="));
 		sendResponseQuery($response);
 	}
 ?>
