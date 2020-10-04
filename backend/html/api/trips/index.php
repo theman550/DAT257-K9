@@ -1,10 +1,8 @@
 <?php
 define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
 include(ABS_PATH . "/api.php");
+//include(ABS_PATH . "/agilecourse/api.php");
 
-/* include(dirname(__FILE__) . "\api.php");
-include(dirname(__FILE__) . "\debug.php");
- */
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
@@ -22,7 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-	$response = readFilteredTable(getTripGETParameters(), "Resa");
+	$filterArray = getTripGETParameters();
+	$response = readFilteredTable($filterArray, "Resa", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">=") . "ORDER BY startTime ASC");
 	sendResponseQuery($response);
 }
 
