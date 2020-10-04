@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import config from '../../config';
 
 import {
   FieldFactory,
   PrimaryButton,
+  InactiveButton,
   Label,
 } from '../UI';
 
@@ -60,18 +61,20 @@ const StyledSelectColumn = styled.div`
   }
 `;
 
-const StyledButton = styled(PrimaryButton)`
+const Button = css`
   padding: ${(props) => props.theme.size.button};
   width: 100%;
   margin-top: ${(props) => props.theme.spacing.subsection};
+`;
 
-  &:nth-of-type(1) {
-    margin-right: ${(props) => props.theme.spacing.subsection};
-  }
+const StyledPrimaryButton = styled(PrimaryButton)`
+  ${Button}
+  margin-left: ${(props) => props.theme.spacing.subsection};
+`;
 
-  &:nth-of-type(2) {
-    margin-left: ${(props) => props.theme.spacing.subsection};
-  }
+const StyledInactiveButton = styled(InactiveButton)`
+  ${Button}
+  margin-right: ${(props) => props.theme.spacing.subsection};
 `;
 
 const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
@@ -197,8 +200,8 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
         </StyledSelectColumn>
       </StyledSelectRow>
       <StyledSelectRow>
-        <StyledButton onClick={closeSearch}>Close</StyledButton>
-        <StyledButton type="submit">Search</StyledButton>
+        <StyledInactiveButton onClick={closeSearch}>Close</StyledInactiveButton>
+        <StyledPrimaryButton type="submit">Search</StyledPrimaryButton>
       </StyledSelectRow>
     </StyledForm>
   );
