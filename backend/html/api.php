@@ -3,7 +3,6 @@
 include("connectDB.php");
 include_once("debug.php");
 include_once("dataValidation.php");
-
 define("SECRET_KEY", "f402a1dff337b00f3e5c121bb374ccfa802be479b6be1e812282db714a6e5c4fbd02b694a5ffbe073139693fa201719af75c8d876bd878df07534c3f695581cb"); // key ska ligga någon annanstans sen. 
 #skickar query i json-format 
 function sendResponseQuery($response){

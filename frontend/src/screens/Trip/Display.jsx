@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TripCard from '../../components/Trip/Card/Card';
+import config from '../../config';
 
 const sampleTrips = [
   {
@@ -35,6 +37,7 @@ const Wrapper = styled.div`
     align-items: center;
 
     padding: 1rem;
+    margin-bottom: 5rem;
     background-color: ${(props) => props.theme.colors.fill};
 
     // Set each card to have a width of 500px
@@ -59,27 +62,34 @@ const Wrapper = styled.div`
     }
 `;
 
-const ScreensDisplay = () => {
+const ScreensDisplay = ({ filteredTrips }) => {
   const [trips, setTrips] = useState([]);
 
   const getTrips = async () => {
-    console.log('Retrieving trips');
+    if (filteredTrips.length > 0) {
+      setTrips(filteredTrips);
+      return;
+    }
 
     try {
-      const res = await fetch('http://spilg.xyz/api.php?function=readTrips');
+      const res = await fetch(`${config.api.url}trips/`);
       const data = await res.json();
 
       if (!res.ok) {
         throw new Error(data.data || data.message || 'No error message provided');
       }
 
-      console.log('Received trips, first ten', JSON.parse(data).slice(0, 9));
       // Adding driver property until API resource is implemented
       // Converting date string to Date object
       setTrips(
-        JSON.parse(data)
-          .map((trip) => ({ ...trip, driver: sampleTrips[0].driver }))
-          .map((trip) => ({ ...trip, startTime: new Date(trip.startTime) })),
+        data
+          .map((trip) => ({
+            ...trip,
+            driver: sampleTrips[0].driver,
+            startTime: new Date(trip.startTime),
+            seatsAvailable: Number.parseInt(trip.seatsAvailable, 10),
+            price: Number.parseInt(trip.price, 10),
+          })),
       );
     } catch (error) {
       console.warn('Could not retrieve trips', error.message);
@@ -87,7 +97,7 @@ const ScreensDisplay = () => {
   };
 
   // Same functionality as componentDidMount, only runs on the first render
-  useEffect(() => { getTrips(); }, []);
+  useEffect(() => { getTrips(); }, [filteredTrips]); // eslint-disable-line
 
   return (
     <Wrapper>
@@ -104,6 +114,10 @@ const ScreensDisplay = () => {
       ))}
     </Wrapper>
   );
+};
+
+ScreensDisplay.propTypes = {
+  filteredTrips: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ScreensDisplay;
