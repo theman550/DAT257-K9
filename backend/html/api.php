@@ -1,6 +1,8 @@
 <?php
 
 include("connectDB.php");
+include_once("debug.php");
+include_once("dataValidation.php");
 
 #skickar query i json-format 
 function sendResponseQuery($response){
@@ -51,25 +53,34 @@ function removeTrip($tripID)
 }
 
 function writeTrip($data){ 
-    $tripID = createTripID();
-	$sql = "INSERT INTO Resa (startLocation, destination, price, tripID, startTime, seatsAvailable, description, userID) VALUES (
-        '{$data->startLocation}',
-        '{$data->destination}',
-        '{$data->price}',
-        '{$tripID}',
-        '{$data->startTime}',
-        '{$data->seatsAvailable}',
-        '{$data->description}',
-        '{$data->userID}')";
-    $status = queryDB($sql);
-    if($status === true){ // Var allt ok, returnera ID
-        http_response_code(201);
-        return $tripID;
-    }
-    else{ // Annars returnera ilska och en nolla
-        http_response_code(400);
-        return 0;
-    }
+	$validationResult = validate($data);
+	if($validationResult === TRUE){ //Endast om all data var okej, försök skapa entry
+		$return = array();
+		$tripID = createTripID();
+		$sql = "INSERT INTO Resa (startLocation, destination, price, tripID, startTime, seatsAvailable, description, userID) VALUES (
+			'{$data->startLocation}',
+			'{$data->destination}',
+			'{$data->price}',
+			'{$tripID}',
+			'{$data->startTime}',
+			'{$data->seatsAvailable}',
+			'{$data->description}',
+			'{$data->userID}')";
+		$status = queryDB($sql);
+		if($status === true){ // Var allt ok, returnera ID
+			http_response_code(201);
+			$return['tripID'] = $tripID;
+			return $return;
+		} //Borde aldrig kunna komma hit om validate gör sitt jobb
+		else{ // Annars returnera ilska och en nolla
+			http_response_code(400);
+			return 0;
+    	}
+	}
+	else{ //Skickar felmeddelandet från validate
+		http_response_code(400);
+		return $validationResult;
+	}
 }
 
 // generar trip-id på form "trip-xxxxx...x"
