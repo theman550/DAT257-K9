@@ -1,6 +1,8 @@
 <?php
 
 include("connectDB.php");
+include_once("debug.php");
+include_once("dataValidation.php");
 define("SECRET_KEY", "f402a1dff337b00f3e5c121bb374ccfa802be479b6be1e812282db714a6e5c4fbd02b694a5ffbe073139693fa201719af75c8d876bd878df07534c3f695581cb"); // key ska ligga någon annanstans sen. 
 #skickar query i json-format 
 function sendResponseQuery($response){
@@ -60,25 +62,34 @@ function removeTrip($tripID)
 }
 
 function writeTrip($data){ 
-    $tripID = createTripID();
-	$sql = "INSERT INTO Resa (startLocation, destination, price, tripID, startTime, seatsAvailable, description, userID) VALUES (
-        '{$data->startLocation}',
-        '{$data->destination}',
-        '{$data->price}',
-        '{$tripID}',
-        '{$data->startTime}',
-        '{$data->seatsAvailable}',
-        '{$data->description}',
-        '{$data->userID}')";
-    $status = queryDB($sql);
-    if($status === true){ // Var allt ok, returnera ID
-        http_response_code(201);
-        return $tripID;
-    }
-    else{ // Annars returnera ilska och en nolla
-        http_response_code(400);
-        return 0;
-    }
+	$validationResult = validate($data);
+	if($validationResult === TRUE){ //Endast om all data var okej, försök skapa entry
+		$return = array();
+		$tripID = createTripID();
+		$sql = "INSERT INTO Resa (startLocation, destination, price, tripID, startTime, seatsAvailable, description, userID) VALUES (
+			'{$data->startLocation}',
+			'{$data->destination}',
+			'{$data->price}',
+			'{$tripID}',
+			'{$data->startTime}',
+			'{$data->seatsAvailable}',
+			'{$data->description}',
+			'{$data->userID}')";
+		$status = queryDB($sql);
+		if($status === true){ // Var allt ok, returnera ID
+			http_response_code(201);
+			$return['tripID'] = $tripID;
+			return $return;
+		} //Borde aldrig kunna komma hit om validate gör sitt jobb
+		else{ // Annars returnera ilska och en nolla
+			http_response_code(400);
+			return 0;
+    	}
+	}
+	else{ //Skickar felmeddelandet från validate
+		http_response_code(400);
+		return $validationResult;
+	}
 }
 
 // generar trip-id på form "trip-xxxxx...x"

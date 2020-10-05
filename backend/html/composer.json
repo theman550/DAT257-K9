@@ -1,0 +1,5 @@
+{
+    "require": {
+        "beberlei/assert": "^3.2"
+    }
+}
