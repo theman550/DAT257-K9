@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Formik, Field } from 'formik';
 import {
@@ -7,6 +7,7 @@ import {
   PrimaryButton,
   Label,
 } from '../UI';
+import AutoSelect from './AutoSelect';
 
 const StyledInput = FieldFactory(Field);
 
@@ -25,6 +26,7 @@ const StyledForm = styled.form`
   margin: 30% auto;
   margin-top:-1%;
   width: 80%;
+  color:white;
   max-width: 400px;
   border-radius: 10px;
   -webkit-box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
@@ -84,7 +86,9 @@ const StyledButton = styled(PrimaryButton)`
 `;
 
 const AddTrip = ({ closeAdd, showNotification }) => {
+  const options = [];
   const onSubmit = (values) => {
+    console.log(values);
     const newvalues = {
 
       startLocation: values.startLocation,
@@ -94,7 +98,7 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       price: values.price,
       description: values.description,
     };
-
+    console.log(newvalues);
     fetch('http://spilg.xyz/api/trips/', {
       method: 'POST',
       mode: 'cors',
@@ -113,12 +117,32 @@ const AddTrip = ({ closeAdd, showNotification }) => {
     });
   };
 
+
+  const loadingData = async () =>{
+    const res = await fetch("https://catalog.skl.se/rowstore/dataset/8621fe21-0120-407e-a81f-705ef45f76d2");
+    const data = await res.json();
+    for(let i =0 ;i<98;i++)
+    {
+      options[i]=data.results[i].kommun;
+    }
+
+    console.log(options);
+    
+  };
+
   const form = (props) => (
     // eslint-disable-next-line react/prop-types
     <StyledForm aria-label="AddTrip form" onSubmit={props.handleSubmit}>
       <StyledTextRow>
         <Label htmlFor="from">From</Label>
-        <StyledInput name="startLocation" type="text" id="from" placeholder="Enter start location..." required />
+        <StyledInput name='startLocation' component={AutoSelect} 
+                    options={options}
+                    textFieldProps={{ fullWidth: true, 
+                    margin: 'normal',}}
+                    label="Enter Origin..."
+                    
+                    
+                  />
       </StyledTextRow>
       <StyledTextRow>
         <Label htmlFor="to">To</Label>
@@ -158,6 +182,7 @@ const AddTrip = ({ closeAdd, showNotification }) => {
     </StyledForm>
   );
 
+  useEffect(() => { loadingData(); }, []);
   return (
     <Div>
       <Formik
