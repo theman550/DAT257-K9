@@ -11,6 +11,8 @@ const Trips = ({ showNotification }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [filteredTrips, setFilteredTrips] = useState([]);
+  const [page, setPage] = useState(0);
+  const tripsPerPage = 10;
 
   const getTrips = async (query) => {
     try {
@@ -50,11 +52,17 @@ const Trips = ({ showNotification }) => {
 
   useEffect(() => {
     getTrips('');
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <div>
-      <DisplayScreen trips={filteredTrips} />
+      <DisplayScreen
+        trips={
+          filteredTrips.slice(
+            page * tripsPerPage, page * tripsPerPage + tripsPerPage
+          )
+        }
+      />
       <ModalProvider>
         <Modal
           isOpen={isSearchOpen}
@@ -64,7 +72,6 @@ const Trips = ({ showNotification }) => {
           <SearchTrip
             closeSearch={() => setIsSearchOpen(false)}
             getTrips={getTrips}
-            showNotification={showNotification}
           />
         </Modal>
         <Modal
