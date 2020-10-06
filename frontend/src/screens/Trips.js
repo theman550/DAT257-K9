@@ -6,6 +6,7 @@ import SearchTrip from '../components/trips/SearchTrips';
 import FloatingButtons from '../components/trips/FloatingButtons';
 import DisplayScreen from './Trip/Display';
 import AddTrip from '../components/trips/AddTrip';
+import Pagination from '../components/trips/Pagination';
 
 const Trips = ({ showNotification }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -84,11 +85,20 @@ const Trips = ({ showNotification }) => {
             showNotification={showNotification}
           />
         </Modal>
-        <FloatingButtons
-          openSearch={() => setIsSearchOpen(true)}
-          openAdd={() => setIsAddOpen(true)}
-        />
       </ModalProvider>
+      <Pagination
+        numberOfPages={
+          Math.floor(
+            filteredTrips.length / tripsPerPage
+          )
+        }
+        page={page}
+        setPage={setPage}
+      />
+      <FloatingButtons
+        openSearch={() => setIsSearchOpen(true)}
+        openAdd={() => setIsAddOpen(true)}
+      />
     </div>
   );
 };

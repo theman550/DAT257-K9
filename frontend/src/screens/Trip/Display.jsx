@@ -9,7 +9,6 @@ const Wrapper = styled.div`
     align-items: center;
 
     padding: 1rem;
-    margin-bottom: 5rem;
     background-color: ${(props) => props.theme.colors.fill};
 
     // Set each card to have a width of 500px
