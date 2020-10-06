@@ -189,7 +189,6 @@ function verifyToken($email, $token)
 // jämnför om lösenord i plaintext angivet för en email matchar den hashade verisionen av det lösenordet
 function tryLogin($email, $password, $rememberMe=0)
 {	
-	// session_start();
 	$token = "error";
 	$row = mysqli_fetch_assoc(getPassword($email));
 	if(password_verify($password, $row['password'])) 
@@ -215,6 +214,8 @@ function logUserIn($email)
 	else
 		$token = createToken($email);
 	setExpire($email, new DateInterval("PT1H"));
+	if (session_status() == PHP_SESSION_NONE)
+		session_start();
 	$_SESSION['loggedin'] = true;
 	$_SESSION["token"] = $token;
 	$_SESSION["email"] = $email;
@@ -243,15 +244,21 @@ function rememberMe() {
         }
     }
 }
-function logout($email, $token)
+function logout()
 {
-	$tokenFromDB = getTokenFromDB($email);
-	if($tokenFromDB == $token)
-	{ 
-		$interval = new DateInterval("P0Y");
-		setExpire($email, $interval); // sätter till nuvarande tiden, dvs nästa gång användaren försöker logga in har token expireat
+	if (session_status() == PHP_SESSION_NONE)
 		session_start();
-		session_destroy();
+	$token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
+	$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+	if($token && $email)
+	{
+		$tokenFromDB = getTokenFromDB($email);
+		if($tokenFromDB == $token)
+		{ 
+			$interval = new DateInterval("P0Y");
+			setExpire($email, $interval); // sätter till nuvarande tiden, dvs nästa gång användaren försöker logga in har token expireat
+			session_destroy();
+		}
 	}
 }
 // tar bort alla tider som gått ut, användning 0 parametrar ger alla tider som expireats utan filter, med extraconditions satt kan t.ex filterExpiredTrips("startLocation = 'lidkoping'"); som ger alla resor som inte gått ut och startar i lidkoping
