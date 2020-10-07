@@ -47,7 +47,7 @@ describe('Pagination', () => {
       <ThemeProvider theme={theme}>
         <Pagination
           numberOfPages={10}
-          page={0}
+          page={1}
           setPage={() => ''}
         />
       </ThemeProvider>
@@ -68,7 +68,7 @@ describe('Pagination', () => {
       <ThemeProvider theme={theme}>
         <Pagination
           numberOfPages={10}
-          page={1}
+          page={2}
           setPage={() => ''}
         />
       </ThemeProvider>
@@ -89,7 +89,7 @@ describe('Pagination', () => {
       <ThemeProvider theme={theme}>
         <Pagination
           numberOfPages={10}
-          page={2}
+          page={3}
           setPage={() => ''}
         />
       </ThemeProvider>
@@ -110,7 +110,7 @@ describe('Pagination', () => {
       <ThemeProvider theme={theme}>
         <Pagination
           numberOfPages={10}
-          page={3}
+          page={4}
           setPage={() => ''}
         />
       </ThemeProvider>
@@ -131,7 +131,7 @@ describe('Pagination', () => {
       <ThemeProvider theme={theme}>
         <Pagination
           numberOfPages={10}
-          page={4}
+          page={5}
           setPage={() => ''}
         />
       </ThemeProvider>
@@ -152,7 +152,7 @@ describe('Pagination', () => {
       <ThemeProvider theme={theme}>
         <Pagination
           numberOfPages={10}
-          page={6}
+          page={7}
           setPage={() => ''}
         />
       </ThemeProvider>
@@ -173,7 +173,7 @@ describe('Pagination', () => {
       <ThemeProvider theme={theme}>
         <Pagination
           numberOfPages={10}
-          page={7}
+          page={8}
           setPage={() => ''}
         />
       </ThemeProvider>
@@ -194,7 +194,7 @@ describe('Pagination', () => {
       <ThemeProvider theme={theme}>
         <Pagination
           numberOfPages={10}
-          page={8}
+          page={9}
           setPage={() => ''}
         />
       </ThemeProvider>
@@ -215,7 +215,7 @@ describe('Pagination', () => {
       <ThemeProvider theme={theme}>
         <Pagination
           numberOfPages={10}
-          page={9}
+          page={10}
           setPage={() => ''}
         />
       </ThemeProvider>
