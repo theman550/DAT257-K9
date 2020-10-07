@@ -152,19 +152,22 @@ function setExpire($email, $dateInterval)
 	$query = "UPDATE Users SET auth_expires = '$dateToInsert' where email = '$email'";
 	queryDB($query);
 }
-function confirmTokenExpired($email)
+function hasTokenExpired($email)
 {
 	date_default_timezone_set("Europe/Stockholm"); 
 	$query = "SELECT auth_expires FROM Users where email = '$email'";
 	$response = queryDB($query);
 	if(mysqli_num_rows($response) > 0)
 	{
-		$currentTime = date('d-m-y h:i:s');
+		$currentTime = time();//date('d-m-y h:i:s');
 		$row = $response->fetch_row(); // SKA bara ge tillbaka en rad eftersom email alltid är unik i databasen och ger max ett resultat
-		if($currentTime > $row[0])
-			return false;
-		else
+		if($currentTime > strtotime($row[0]))
 			return true;
+		else
+		{
+			echo 'here';
+			return false;
+		}
 	}
 	return false;
 }
@@ -209,10 +212,10 @@ function tryLogin($email, $password, $rememberMe=0)
 function logUserIn($email)
 {
 	$token = "";
-	if(confirmTokenExpired($email))
-		$token = getTokenFromDB($email);
-	else
+	if(hasTokenExpired($email))
 		$token = createToken($email);
+	else
+		$token = getTokenFromDB($email);
 	setExpire($email, new DateInterval("PT1H"));
 	if (session_status() == PHP_SESSION_NONE)
 		session_start();
