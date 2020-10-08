@@ -5,24 +5,29 @@ import { Autocomplete } from '@material-ui/lab';
 import { fieldToTextField } from 'formik-material-ui';
 import { LogIn, Map, MapPin } from 'react-feather';
 import { InputAdornment } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
 const AutoSelect = ({ textFieldProps, ...props }) => {
-    const styles = theme => ({
-        textField: {
-            width: '90%',
-            marginLeft: 'auto',
-            marginRight: 'auto',            
-            paddingBottom: 0,
-            marginTop: 0,
-            fontWeight: 500
-        },
-        input: {
-            color: 'white'
-        }
-    });
-
   const { form: { setTouched, setFieldValue } } = props;
   const { label,error, helperText, ...field } = fieldToTextField(props);
   const { name } = field;
+  
+
+const useStyles = makeStyles(theme => ({
+  inputRoot: {
+    color: "purple",
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "green"
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      borderColor: "red"
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "purple"
+    }
+  }
+}));
+
+const bashar = useStyles();
 
   return (
     <Autocomplete
@@ -32,6 +37,7 @@ const AutoSelect = ({ textFieldProps, ...props }) => {
       autoSelect={true}
       autoHighlight={true}
       autoComplete={true}
+      classes={bashar}
       onBlur={ () => setTouched({ [name]: true }) }
       renderInput={ props => (
         <TextField {...props} {...textFieldProps} 
@@ -41,12 +47,9 @@ const AutoSelect = ({ textFieldProps, ...props }) => {
             ...props.InputProps,
             style: {
                 color: "#707386",
-                '&:hover': {
-                    borderColor: '#FFFFFF',
-                    borderWidth: 2
-                }
-            
-
+                height:"30px"
+                
+               
             },
            
           }}

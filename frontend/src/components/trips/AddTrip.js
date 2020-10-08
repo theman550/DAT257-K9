@@ -8,6 +8,7 @@ import {
   Label,
 } from '../UI';
 import AutoSelect from './AutoSelect';
+import kommuner from './kommuner.json';
 
 const StyledInput = FieldFactory(Field);
 
@@ -88,9 +89,7 @@ const StyledButton = styled(PrimaryButton)`
 const AddTrip = ({ closeAdd, showNotification }) => {
   const options = [];
   const onSubmit = (values) => {
-    console.log(values);
     const newvalues = {
-
       startLocation: values.startLocation,
       destination: values.destination,
       seatsAvailable: values.seatsAvailable,
@@ -107,7 +106,6 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       },
       body: JSON.stringify(newvalues),
     }).then((respones) => respones).then((data) => {
-      console.log(data);
       if (data.status === 400) {
         showNotification('Sorry ! this is bad request , You should try agian with valid inputs ', '#CC354E', '5');
         console.log('Bad request');
@@ -117,17 +115,12 @@ const AddTrip = ({ closeAdd, showNotification }) => {
     });
   };
 
-
-  const loadingData = async () =>{
-    const res = await fetch("https://catalog.skl.se/rowstore/dataset/8621fe21-0120-407e-a81f-705ef45f76d2");
-    const data = await res.json();
-    for(let i =0 ;i<98;i++)
-    {
-      options[i]=data.results[i].kommun;
-    }
-
-    console.log(options);
-    
+  const loadingData = async () => {
+    console.log(kommuner);
+    kommuner.map((detail, index) => {
+      options[index] = detail.Kommun;
+      return options[index];
+    });
   };
 
   const form = (props) => (
@@ -135,18 +128,29 @@ const AddTrip = ({ closeAdd, showNotification }) => {
     <StyledForm aria-label="AddTrip form" onSubmit={props.handleSubmit}>
       <StyledTextRow>
         <Label htmlFor="from">From</Label>
-        <StyledInput name='startLocation' component={AutoSelect} 
-                    options={options}
-                    textFieldProps={{ fullWidth: true, 
-                    margin: 'normal',}}
-                    label="Enter Origin..."
-                    
-                    
-                  />
+        <StyledInput
+          name="startLocation"
+          component={AutoSelect}
+          options={options}
+          textFieldProps={{
+            fullWidth: true,
+            margin: 'normal',
+          }}
+          label="Enter Origin..."
+        />
       </StyledTextRow>
       <StyledTextRow>
         <Label htmlFor="to">To</Label>
-        <StyledInput name="destination" type="text" id="to" placeholder="Enter destination..." required />
+        <StyledInput
+          name="destination"
+          component={AutoSelect}
+          options={options}
+          textFieldProps={{
+            fullWidth: true,
+            margin: 'normal',
+          }}
+          label="Enter destination..."
+        />
       </StyledTextRow>
       <StyledSelectRow>
         <StyledSelectColumn>
