@@ -6,17 +6,17 @@
 export default {
   development: {
     api: {
-      url: 'http://spilg.xyz/api/',
+      url: 'https://spilg.xyz/api/',
     },
   },
   testing: {
     api: {
-      url: 'http://spilg.xyz/api/',
+      url: 'https://spilg.xyz/api/',
     },
   },
   production: {
     api: {
-      url: 'http://spilg.xyz/api/',
+      url: 'https://spilg.xyz/api/',
     },
   },
 };

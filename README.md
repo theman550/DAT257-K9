@@ -8,6 +8,12 @@ Project for course DAT257
 - Always write tests for your code, use test driven development (TDD)
 - Create meaningful commits and write informational commit messages
 
+# Definition of done
+- Acceptance critera must be fulfilled. 
+- All tests must pass.
+- The design should follow established design principled based on mockups. 
+- Code style should remain consistent. Preferably with the help of linters.
+
 # Configuring frontend's environment
 The frontend can be run in different environments depending on the variable "REACT_APP_ENV".
 Different environments changes certain environment-specific definitions such as API url, and others.
