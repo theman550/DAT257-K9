@@ -4,7 +4,6 @@ import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import Login from './Login';
 
-
 const theme = {
   colors: {
     primary: '#8064f7',
@@ -12,6 +11,7 @@ const theme = {
     fill: '#1a1a1a',
     alternateFill: '#f0ebff',
     inactive: '#707386',
+
   },
   padding: {
     section: '1rem 1rem',
@@ -28,8 +28,6 @@ const theme = {
 
 };
 
-
-
 describe('Login', () => {
   beforeEach(() => {
     render(
@@ -41,11 +39,11 @@ describe('Login', () => {
     );
   });
 
-  it('test sin in email address', () => {
+  it('test email address', () => {
     expect(screen.queryAllByTestId('email')).toBeTruthy();
   });
 
-  it('test sin in password', () => {
+  it('test  password', () => {
     expect(screen.queryAllByTestId('password')).toBeTruthy();
   });
 });
