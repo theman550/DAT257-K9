@@ -30,14 +30,6 @@ describe('SearchTrips', () => {
     expect(screen.getByRole('form')).toBeInTheDocument();
   });
 
-  test('renders start location input', () => {
-    expect(screen.getByLabelText('From')).toBeInTheDocument();
-  });
-
-  test('renders destination input', () => {
-    expect(screen.getByLabelText('To')).toBeInTheDocument();
-  });
-
   test('renders date selector', () => {
     expect(screen.getByLabelText('Date')).toBeInTheDocument();
   });
