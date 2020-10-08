@@ -33,7 +33,7 @@ const App = () => {
           <Switch>
             <Route path="/account">
               <ErrorBoundary sectionName="Account page">
-                <Account />
+                <Account showNotification={showNotification} />
               </ErrorBoundary>
             </Route>
             <Route path="/register">

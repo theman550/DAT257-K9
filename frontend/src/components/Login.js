@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { User } from 'react-feather';
+import config from '../config';
 import {
   FieldFactory,
   PrimaryButton,
@@ -14,52 +14,6 @@ const StyledInput = FieldFactory(styled.input``);
 const Icon = styled(User)`
 margin-left:40%;
 
-=======
-import styled from 'styled-components';
-import config from '../config';
-
-const Form = styled.form`
-background-color: #262626;
-width: 400px;
-height: 400px;
-margin: 7em auto;
-border-radius: 1.5em;
-box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14)
-`;
-const Button = styled.button`
-position: relative;
-margin: 15px 0 5px 0;
-margin-top: 0px;
-margin-left:80px;
-left: 30%;
-transform: translateX(-50%);
-background: #9677D9;
-border: none;
-border-radius: 5px;
-padding: 10px;
-color: white;
-width: 30%;
-font-family: "Noto Sans", sans-serif;
-font-size: 14px;
-cursor: pointer;
-    `;
-const Input = styled.input`
-border: none;
-border-bottom: 1px solid #333;
-background-color: #262626;
-margin-bottom: 60px;
-width: 90%;
-font-size: 18px;
-line-height: 1.2;
-outline: none;
-color: #9677D9;
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-color: #9677D9;
-font-size: medium;
-font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-opacity: 0.3;
-}
->>>>>>> origin
 `;
 const StyledForm = styled.form`
   display: flex;
@@ -101,7 +55,6 @@ const StyledPrimaryButton = styled(PrimaryButton)`
   margin-left: ${(props) => props.theme.spacing.subsection};
 `;
 
-
 const Login = ({ showNotification }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -109,16 +62,11 @@ const Login = ({ showNotification }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-<<<<<<< HEAD
-      const newvalue = {
+    const newvalue = {
       Email: username,
       Password: password,
     };
-
-    fetch('http://spilg.xyz/api/login/', {
-=======
     fetch(`${config.api.url}login/`, {
->>>>>>> origin
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -131,7 +79,7 @@ const Login = ({ showNotification }) => {
       .then((data) => {
         console.log(data);
         if (data.status === 400) {
-          showNotification('Invalid input ! ', '#CC354E', '5');
+          showNotification('Sorry the email or the paswword is not recognized! try again! ', '#CC354E', '5');
           console.log('Bad request');
         } else if (data.status === 201) {
           showNotification('Signed in sucessfully :)', '#378C2E', '7');
@@ -140,11 +88,11 @@ const Login = ({ showNotification }) => {
   };
 
   return (
-    <StyledForm aria-label="Signin form" onSubmit={handleSubmit}>
+    <StyledForm aria-label="Signin form" id="email" onSubmit={handleSubmit}>
       <StyledTextRow>
         <Icon size={55} color="#8064f7" />
-
       </StyledTextRow>
+
       <StyledTextRow>
         <Label htmlFor="username">Username</Label>
         <StyledInput
@@ -153,8 +101,10 @@ const Login = ({ showNotification }) => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Enter your username.."
+          data-testid="email"
         />
       </StyledTextRow>
+
       <StyledTextRow>
         <Label htmlFor="password">Password</Label>
         <StyledInput
@@ -163,13 +113,8 @@ const Login = ({ showNotification }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Enter your password..."
+          data-testid="password"
         />
-      </StyledTextRow>
-      <StyledTextRow>
-        <div className="checkbox">
-          <input type="checkbox"  id="customCheck1" />
-          <Label htmlFor="customCheck1"> Remember me</Label>
-        </div>
       </StyledTextRow>
 
       <StyledSelectRow>
