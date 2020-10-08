@@ -17,6 +17,7 @@ function sendResponseQuery($response){
 }
 //Kan endast hantera sträng/array
 function sendResponseString($response){
+	//logga(json_encode($response));
 	echo json_encode($response);
 }
 function returnStringQuery($filterArray, $comparisonOperator)
@@ -62,7 +63,7 @@ function removeTrip($tripID)
 }
 
 function writeTrip($data){ 
-	$validationResult = validate($data);
+	$validationResult = validateTrip($data);
 	if($validationResult === TRUE){ //Endast om all data var okej, försök skapa entry
 		$return = array();
 		$tripID = createTripID();
