@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { Formik, Field, Form, useField, FieldProps } from 'formik'
-import { TextField, Select, MenuItem, FormControl } from '@material-ui/core'
+import React from 'react';
+import { TextField} from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { fieldToTextField } from 'formik-material-ui';
-import { LogIn, Map, MapPin } from 'react-feather';
-import { InputAdornment } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 const AutoSelect = ({ textFieldProps, ...props }) => {
   const { form: { setTouched, setFieldValue } } = props;
@@ -27,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const bashar = useStyles();
+const classes = useStyles();
 
   return (
     <Autocomplete
@@ -37,7 +34,7 @@ const bashar = useStyles();
       autoSelect={true}
       autoHighlight={true}
       autoComplete={true}
-      classes={bashar}
+      classes={classes}
       onBlur={ () => setTouched({ [name]: true }) }
       renderInput={ props => (
         <TextField {...props} {...textFieldProps} 

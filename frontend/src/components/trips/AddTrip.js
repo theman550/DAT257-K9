@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Formik, Field } from 'formik';
+import config from '../../config';
 import {
   FieldFactory,
   PrimaryButton,
   Label,
+  InactiveButton,
 } from '../UI';
 import AutoSelect from './AutoSelect';
 import kommuner from './kommuner.json';
@@ -71,19 +73,21 @@ const StyledSelectColumn = styled.div`
   
 `;
 
-const StyledButton = styled(PrimaryButton)`
+const Button = css`
   padding: 0.75rem;
   height: 80%;
   width: 100%;
   margin-top: 0.75rem;
+`;
 
-  &:nth-of-type(1) {
-    margin-right: 0.75rem;
-  }
+const StyledPrimaryButton = styled(PrimaryButton)`
+  ${Button}
+  margin-left: 0.75rem;
+`;
 
-  &:nth-of-type(2) {
-    margin-left: 0.75rem;
-  }
+const StyledInactiveButton = styled(InactiveButton)`
+  ${Button}
+  margin-right: 0.75rem;
 `;
 
 const AddTrip = ({ closeAdd, showNotification }) => {
@@ -97,8 +101,8 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       price: values.price,
       description: values.description,
     };
-    console.log(newvalues);
-    fetch('http://spilg.xyz/api/trips/', {
+
+    fetch(`${config.api.url}trips/`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -106,6 +110,7 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       },
       body: JSON.stringify(newvalues),
     }).then((respones) => respones).then((data) => {
+      console.log(data);
       if (data.status === 400) {
         showNotification('Sorry ! this is bad request , You should try agian with valid inputs ', '#CC354E', '5');
         console.log('Bad request');
@@ -180,8 +185,8 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       </StyledSelectRow>
 
       <StyledSelectRow>
-        <StyledButton onClick={closeAdd} type="button">Close</StyledButton>
-        <StyledButton type="submit">Add</StyledButton>
+        <StyledInactiveButton onClick={closeAdd} type="button">Close</StyledInactiveButton>
+        <StyledPrimaryButton type="submit">Add</StyledPrimaryButton>
       </StyledSelectRow>
     </StyledForm>
   );
