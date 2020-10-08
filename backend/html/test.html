@@ -4,16 +4,32 @@ function getTrip(){
     var startLocation = document.getElementById("startLocation").value;
     var destination = document.getElementById("destination").value;
     fetch('http://localhost/api/trips/?startLocation=' + startLocation + '&destination=' + destination, {mode:'cors'})
-    .then(response => response.json())    
-     .then(data => document.getElementById("text").innerHTML = data)
-    .then(data => document.getElementById("text2").innerHTML = JSON.parse(data))
-    .then(data => document.getElementById("text3").innerHTML = data[0]['startLocation']);
+    /* fetch('https://spilg.xyz/api/trips/?startLocation=' + startLocation + '&destination=' + destination, {mode:'cors'}) */
+    .then(response => response.json())
+    .then(json => {
+        document.getElementById("text").innerHTML = "";
+        json.forEach(element => {
+            writeStuff(element['tripID'],'tripID');
+            writeStuff(element['userID'], 'userID');
+            writeStuff(element['seatsAvailable'], 'seatsAvailable');
+            writeStuff(element['startLocation'], 'startLocation');
+            writeStuff(element['destination'], 'destination');
+            writeStuff(element['startTime'], 'startTime');
+            writeStuff("#########","</br>########");
+        })
+    });
 }
 
-
 function writeTrip(){
-    var data = {startLocation : document.getElementById('startLocation').value, destination : document.getElementById('destination').value, price : "123", seatsAvailable : "3", 
-            startTime : "2020-09-15 22:20:31", description : "Sitt still och använd bälte", userID : "user-5f6217df576f20.34313761"};
+    var data = {
+        startLocation : document.getElementById('startLocation').value, 
+        destination : document.getElementById('destination').value, 
+        price : (document.getElementById('price').value), 
+        seatsAvailable : (document.getElementById('seatsAvailable').value), 
+        startTime : "2020-09-15 22:20:31", 
+        description : document.getElementById('description').value, 
+        userID : document.getElementById("userID").value};
+
     fetch("http://localhost/api/trips/", { 
         mode:'cors',
         // Adding method type 
@@ -26,24 +42,107 @@ function writeTrip(){
         } 
     })
     .then(response => response.json()) 
-
-    .then(json => document.getElementById("text").innerHTML = json); 
-    document.getElementById("text2").innerHTML="";
-    document.getElementById("text3").innerHTML="";
+    .then(json => {
+        if('faults' in json){
+            for(i=0; i<json['faults'].length; ++i){
+                writeStuff(json['faults'][i], "Fel");
+            }
+        }
+        else{
+            writeStuff(json['tripID'], "TripID");
+        }
+    })
 }
+
+function bookTrip(){
+    document.getElementById("text").innerHTML = "";
+    var datto = {tripID : document.getElementById("tripID").value, seats : document.getElementById("seats").value, userID : document.getElementById("userID").value}
+    fetch('http://localhost/api/book/', {
+        mode: 'cors',
+        method: "POST",
+        body:JSON.stringify(datto),
+        headers:{
+            'Content-Type': "application/json",
+        }
+    })
+    .then(response => response.json())
+    .then(json => {
+        document.getElementById("text").innerHTML = "";
+        writeStuff(json, "bookingID");
+    });
+}
+
+function deleteBooking(){
+    document.getElementById("text2").innerHTML = "";
+    var val = document.getElementById('bookingID');
+    var datto = {bookingID : val.value};
+    fetch('http://localhost/api/book/' + "?bookingID=" + val.value, {
+        mode: 'cors',
+        method: "DELETE",
+        body:JSON.stringify(datto),
+        headers:{
+            'Content-Type': "application/json",
+        }
+    })
+    .then(response => response.json())
+    .then(json => document.getElementById("text").innerHTML = json);
+}
+
+function getBookings(){
+    document.getElementById("text").innerHTML = "";
+    var userID = document.getElementById("userID").value;
+    fetch('http://localhost/api/book/' + "?userID=" + userID, {mode:'cors'})
+    .then(response => response.json())
+    .then(json => 
+        json['bookings'].forEach(element => {
+            writeStuff(element['bookingID'], 'bookingID');
+            writeStuff(element['tripID'],'tripID');
+            writeStuff(element['userID'], 'userID');
+            writeStuff(element['seats'], 'seats');
+            writeStuff(element['startLocation'], 'startLocation');
+            writeStuff(element['destination'], 'destination');
+            writeStuff(element['startTime'], 'startTime');
+        }));
+}
+
+function writeStuff(stuff, id){
+    document.getElementById("text").innerHTML += id + ": " + stuff + "</br>";
+}
+
 
 </script>  
 <form>
     <label for="startLocation">startLocation: </label><br>
     <input type="text" id="startLocation" name="startLocation" value="Stockholm"><br>
     <label for="destination">destination: </label><br>
-    <input type="text" id="destination" name="destination" value="Kristianstad">
+    <input type="text" id="destination" name="destination" value="Kristianstad"></br>
+    <label for="description">description: </label><br>
+    <input type="text" id="description" name="description" value="Sitt ner och använd bälte"></br>
+    <label for="price">price: </label><br>
+    <input type="number" id="price" name="price" value="123"></br>
+    <label for="seatsAvailable">seatsAvailable: </label><br>
+    <input type="number" id="seatsAvailable" name="seatsAvailable" value="3"></br>
+    
+</br></br></br>
+    <label for="tripID">tripID: </label><br>
+    <input type="text" id="tripID" name="tripID" value="trip-5f624b4ab55db7.19393347"></br>
+    <label for="userID">userID: </label><br>
+    <input type="text" id="userID" name="userID" value="user-5f63b8c0e1d856.66173855"></br>
+    <label for="seats">seats: </label><br>
+    <input type="number" id="seats" name="seats" value="2"></br>
+
+</br>
+    <label for="bookingID">bookingID: </label><br>
+    <input type="text" id="bookingID" name="bookingID" value=""></br>
 </form>
 
 
 </br>
 <button onClick="getTrip()">GetTrip</button>
 <button onClick="writeTrip()">writeTrip</button>
+<button onClick="bookTrip()">BookTrip</button>
+<button onClick="deleteBooking()">Delete booking</button>
+<button onClick="getBookings()">Get all users bookings</button>
 
 <p id="text"></p> </br></br></br></br>
 
