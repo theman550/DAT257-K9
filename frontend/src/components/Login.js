@@ -76,7 +76,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch(`${config.api.url}users/`, {
+    fetch(`${config.api.url}login/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
