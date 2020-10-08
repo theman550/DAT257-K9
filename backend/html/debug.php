@@ -1,6 +1,6 @@
 <?php
 
-include("api.php");
+include_once("api.php");
 
 #### Endast funktioner för debugging #####
 
