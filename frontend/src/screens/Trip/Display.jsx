@@ -33,23 +33,21 @@ const Wrapper = styled.div`
     }
 `;
 
-const ScreensDisplay = ({ trips }) => {
-  return (
-    <Wrapper>
-      {trips.map((trip) => (
-        <TripCard
-          key={trip.tripID}
-          id={trip.tripID}
-          origin={trip.startLocation}
-          destination={trip.destination}
-          driver={trip.driver}
-          datetime={trip.startTime}
-          seats={trip.seatsAvailable}
-        />
-      ))}
-    </Wrapper>
-  );
-};
+const ScreensDisplay = ({ trips }) => (
+  <Wrapper>
+    {trips.map((trip) => (
+      <TripCard
+        key={trip.tripID}
+        id={trip.tripID}
+        origin={trip.startLocation}
+        destination={trip.destination}
+        driver={trip.driver}
+        datetime={trip.startTime}
+        seats={trip.seatsAvailable}
+      />
+    ))}
+  </Wrapper>
+);
 
 ScreensDisplay.propTypes = {
   trips: PropTypes.arrayOf(PropTypes.object).isRequired,

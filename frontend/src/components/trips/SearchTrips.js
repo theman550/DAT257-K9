@@ -183,7 +183,7 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
 
 SearchTrips.propTypes = {
   closeSearch: PropTypes.func.isRequired,
-  getTrips: PropTypes.func.isRequired
+  getTrips: PropTypes.func.isRequired,
 };
 
 export default SearchTrips;

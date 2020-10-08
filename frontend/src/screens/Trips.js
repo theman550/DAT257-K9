@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import Modal, { ModalProvider } from "styled-react-modal";
-import config from "../config";
-import SearchTrip from "../components/trips/SearchTrips";
-import FloatingButtons from "../components/trips/FloatingButtons";
-import DisplayScreen from "./Trip/Display";
-import AddTrip from "../components/trips/AddTrip";
-import Pagination from "../components/trips/Pagination";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import Modal, { ModalProvider } from 'styled-react-modal';
+import config from '../config';
+import SearchTrip from '../components/trips/SearchTrips';
+import FloatingButtons from '../components/trips/FloatingButtons';
+import DisplayScreen from './Trip/Display';
+import AddTrip from '../components/trips/AddTrip';
+import Pagination from '../components/trips/Pagination';
 
 const Trips = ({ showNotification }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -22,12 +22,12 @@ const Trips = ({ showNotification }) => {
 
       if (!res.ok) {
         throw new Error(
-          data.data || data.message || "No error message provided"
+          data.data || data.message || 'No error message provided',
         );
       }
 
-      if (data === "no results found") {
-        showNotification("No results found", "red", 3);
+      if (data === 'no results found') {
+        showNotification('No results found', 'red', 3);
         setFilteredTrips([]);
         return;
       }
@@ -37,23 +37,23 @@ const Trips = ({ showNotification }) => {
           ...trip,
           // mocking the driver
           driver: {
-            firstName: "John",
-            lastName: "Doe",
+            firstName: 'John',
+            lastName: 'Doe',
           },
           startTime: new Date(trip.startTime),
           seatsAvailable: Number.parseInt(trip.seatsAvailable, 10),
           price: Number.parseInt(trip.price, 10),
-        }))
+        })),
       );
     } catch (error) {
-      showNotification("Could not retrieve trips", "red", 3);
+      showNotification('Could not retrieve trips', 'red', 3);
       console.error(error.message);
       setFilteredTrips([]);
     }
   };
 
   useEffect(() => {
-    getTrips("");
+    getTrips('');
   }, []); // eslint-disable-line
 
   return (
@@ -61,7 +61,7 @@ const Trips = ({ showNotification }) => {
       <DisplayScreen
         trips={filteredTrips.slice(
           (page - 1) * tripsPerPage,
-          (page - 1) * tripsPerPage + tripsPerPage
+          (page - 1) * tripsPerPage + tripsPerPage,
         )}
       />
       <ModalProvider>
@@ -87,7 +87,7 @@ const Trips = ({ showNotification }) => {
         </Modal>
       </ModalProvider>
       <Pagination
-        numberOfPages={Math.floor(filteredTrips.length / tripsPerPage)}
+        numberOfPages={Math.ceil(filteredTrips.length / tripsPerPage)}
         page={page}
         setPage={setPage}
       />

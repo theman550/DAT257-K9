@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { PrimaryButton, InactiveButton } from "../UI";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { PrimaryButton, InactiveButton } from '../UI';
 
 const Container = styled.div`
   display: flex;
@@ -39,43 +39,47 @@ const Pagination = ({ numberOfPages, page, setPage }) => {
     const array = Array.from({ length: numberOfPages }, (_, i) => i + 1);
 
     if (array.length < 8) {
-      return array.map((num, index) => {
+      return array.map((num) => {
         if (num === page) {
-          return <ActiveButton key={index}>{num}</ActiveButton>;
-        } else {
-          return <MiddleButton key={index}>{num}</MiddleButton>;
+          return <ActiveButton key={num}>{num}</ActiveButton>;
         }
+        return <MiddleButton key={num} onClick={() => setPage(num)}>{num}</MiddleButton>;
       });
     }
 
-    console.log(array.length)
-
     // Modify based on current page
     if (page < 5) {
-      array.splice(5, array.length - 6, "...");
+      array.splice(5, array.length - 6, -1);
     } else if (page >= 5 && page < array.length - 3) {
-      array.splice(1, page - 3, "...");
-      array.splice(5, array.length - 6, "...");
+      array.splice(1, page - 3, -1);
+      array.splice(5, array.length - 6, -2);
     } else {
-      array.splice(1, array.length - 6, "...");
+      array.splice(1, array.length - 6, -1);
     }
 
-    return array.map((num, index) => {
+    return array.map((num) => {
       if (num === page) {
-        return <ActiveButton key={index}>{num}</ActiveButton>;
-      } else if (num === "...") {
-        return <MiddleButton key={index}>...</MiddleButton>;
-      } else {
-        return <MiddleButton key={index}>{num}</MiddleButton>;
+        return <ActiveButton key={num}>{num}</ActiveButton>;
+      } if (num === -1 || num === -2) {
+        return <MiddleButton key={num}>...</MiddleButton>;
       }
+      return <MiddleButton key={num} onClick={() => setPage(num)}>{num}</MiddleButton>;
     });
   };
 
+  if (numberOfPages === 0) {
+    return null;
+  }
+
   return (
     <Container>
-      <PrevButton>‹</PrevButton>
+      <PrevButton onClick={page === 1 ? () => null : () => setPage(page - 1)}>
+        ‹
+      </PrevButton>
       {createButtonArray()}
-      <NextButton>›</NextButton>
+      <NextButton onClick={page === numberOfPages ? () => null : () => setPage(page + 1)}>
+        ›
+      </NextButton>
     </Container>
   );
 };
