@@ -20,12 +20,6 @@ describe('App', () => {
     expect(screen.getByLabelText('Trips')).toBeInTheDocument();
   });
 
-  // Commented out temporarily. Not relevant anymore?
-  /* it('renders trips page when clicking trips button in navbar', () => {
-    fireEvent.click(screen.getByLabelText('Trips'));
-    expect(screen.getByLabelText('Search')).toBeInTheDocument();
-  }); */
-
   it('renders account page when clicking accout button in navbar', () => {
     fireEvent.click(screen.getByLabelText('Account'));
     expect(screen.getByText('Sign In')).toBeInTheDocument();

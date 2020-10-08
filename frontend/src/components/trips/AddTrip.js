@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Formik, Field } from 'formik';
+import config from '../../config';
 import {
   FieldFactory,
   PrimaryButton,
@@ -90,7 +91,7 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       description: values.description,
     };
 
-    fetch('http://spilg.xyz/api/trips/', {
+    fetch(`${config.api.url}trips/`, {
       method: 'POST',
       mode: 'cors',
       headers: {

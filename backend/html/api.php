@@ -152,19 +152,22 @@ function setExpire($email, $dateInterval)
 	$query = "UPDATE Users SET auth_expires = '$dateToInsert' where email = '$email'";
 	queryDB($query);
 }
-function confirmTokenExpired($email)
+function hasTokenExpired($email)
 {
 	date_default_timezone_set("Europe/Stockholm"); 
 	$query = "SELECT auth_expires FROM Users where email = '$email'";
 	$response = queryDB($query);
 	if(mysqli_num_rows($response) > 0)
 	{
-		$currentTime = date('d-m-y h:i:s');
+		$currentTime = time();//date('d-m-y h:i:s');
 		$row = $response->fetch_row(); // SKA bara ge tillbaka en rad eftersom email alltid är unik i databasen och ger max ett resultat
-		if($currentTime > $row[0])
-			return false;
-		else
+		if($currentTime > strtotime($row[0]))
 			return true;
+		else
+		{
+			echo 'here';
+			return false;
+		}
 	}
 	return false;
 }
@@ -189,7 +192,6 @@ function verifyToken($email, $token)
 // jämnför om lösenord i plaintext angivet för en email matchar den hashade verisionen av det lösenordet
 function tryLogin($email, $password, $rememberMe=0)
 {	
-	// session_start();
 	$token = "error";
 	$row = mysqli_fetch_assoc(getPassword($email));
 	if(password_verify($password, $row['password'])) 
@@ -210,11 +212,13 @@ function tryLogin($email, $password, $rememberMe=0)
 function logUserIn($email)
 {
 	$token = "";
-	if(confirmTokenExpired($email))
-		$token = getTokenFromDB($email);
-	else
+	if(hasTokenExpired($email))
 		$token = createToken($email);
+	else
+		$token = getTokenFromDB($email);
 	setExpire($email, new DateInterval("PT1H"));
+	if (session_status() == PHP_SESSION_NONE)
+		session_start();
 	$_SESSION['loggedin'] = true;
 	$_SESSION["token"] = $token;
 	$_SESSION["email"] = $email;
@@ -243,15 +247,21 @@ function rememberMe() {
         }
     }
 }
-function logout($email, $token)
+function logout()
 {
-	$tokenFromDB = getTokenFromDB($email);
-	if($tokenFromDB == $token)
-	{ 
-		$interval = new DateInterval("P0Y");
-		setExpire($email, $interval); // sätter till nuvarande tiden, dvs nästa gång användaren försöker logga in har token expireat
+	if (session_status() == PHP_SESSION_NONE)
 		session_start();
-		session_destroy();
+	$token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
+	$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+	if($token && $email)
+	{
+		$tokenFromDB = getTokenFromDB($email);
+		if($tokenFromDB == $token)
+		{ 
+			$interval = new DateInterval("P0Y");
+			setExpire($email, $interval); // sätter till nuvarande tiden, dvs nästa gång användaren försöker logga in har token expireat
+			session_destroy();
+		}
 	}
 }
 // tar bort alla tider som gått ut, användning 0 parametrar ger alla tider som expireats utan filter, med extraconditions satt kan t.ex filterExpiredTrips("startLocation = 'lidkoping'"); som ger alla resor som inte gått ut och startar i lidkoping
