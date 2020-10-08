@@ -78,6 +78,7 @@ const Login = () => {
 
     fetch(`${config.api.url}login/`, {
       method: 'POST',
+      mode: 'cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
