@@ -25,11 +25,23 @@
 
 	else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$data = json_decode(file_get_contents("php://input", true));
-		$token = tryLogin($data->email, $data->password);
-		echo json_encode($token);
+		$email = "";
+		$password = "";
+		if(isset($data->email) && isset($data->password)) // om datan skickas i json, annars felmeddelande
+		{
+			$email = $data->email;
+			$password = $data->password;
+		}
+		else // förutsätter att vanlig post används om datan inte skickats i JSON format
+		{
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+		}
+		$token = tryLogin($email, $password);
+		// echo json_encode($token);
 	}
 	else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-		
+		logout();
 	}
 
 ?>

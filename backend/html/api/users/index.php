@@ -22,14 +22,44 @@
 		header('Access-Control-Max-Age: 1000');	
 	}
 
-	else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	else if ($_SERVER['REQUEST_METHOD'] === 'POST') {	
 		$data = json_decode(file_get_contents("php://input", true));
-		$userID = createAccount($data->email, $data->password, $data->firstname, $data->lastname);
-		echo json_encode($userID);
+		$email = $password = $firstname = $lastname = "";
+		if(isset($data->email, $data->password, $data->firstname, $data->lastname))
+		{
+			$email = $data->email;
+			$password = $data->password;
+			$firstname = $data->firstname;
+			$lastname = $data->lastname;
+		}
+		else
+		{
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+			$firstname = $_POST['firstname'];
+			$lastname = $_POST['lastname'];
+		}
+		$userID = createAccount($email, $password, $firstname, $lastname);
+		if($userID == null)
+			http_response_code(400);
+		else
+		{
+			http_response_code(201);
+			logUserIn($email);
+		}
+		//echo json_encode($userID);
 	}
 	else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-		$filterArray = getUserGETParameters();
-		$response = readFilteredTable($filterArray, "Users", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">="));
-		sendResponseQuery($response);
+		if (session_status() == PHP_SESSION_NONE)
+		session_start();
+		if(isset($_SESSION['email']) && isset($_SESSION['token']))
+		{		
+			if(verifyToken($_SESSION['email'], $_SESSION['token']))
+			{	
+				$filterArray = getUserGETParameters();
+				$response = readFilteredTable($filterArray, "Users", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">="));
+				sendResponseQuery($response);
+			}
+		}
 	}
 ?>
