@@ -14,6 +14,7 @@ const StyledInput = FieldFactory(styled.input``);
 const Icon = styled(User)`
 margin:0 auto
 `;
+
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -43,6 +44,7 @@ const StyledSelectRow = styled.div`
   justify-content: space-between;
   margin-top: ${(props) => props.theme.spacing.subsection};
 `;
+
 const Button = css`
   padding: ${(props) => props.theme.size.button};
   width: 100%;
@@ -78,7 +80,7 @@ const Login = ({ showNotification }) => {
       .then((data) => {
         console.log(data);
         if (data.status === 400) {
-          showNotification('Sorry the email or the paswword is not recognized! try again! ', '#CC354E', '5');
+          showNotification('Incorrect username or password ! Please double check and try again later. ', '#CC354E', '5');
           console.log('Bad request');
         } else if (data.status === 201) {
           showNotification('Signed in sucessfully :)', '#378C2E', '7');
