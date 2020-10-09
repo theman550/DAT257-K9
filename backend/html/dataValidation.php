@@ -3,15 +3,15 @@ require_once 'vendor/autoload.php';
 use Assert\LazyAssertionException;
 use Assert\Assert;
 
-function validate($data){
+function validateTrip($data){
 	$dateString = "Y-m-d H:i:s";
 		try{
 			Assert::lazy() 
 			->that($data->startLocation, 	"startLocation","Startlocation not defined")						 	-> notEmpty() -> string()
 			->that($data->destination, 		"destination", 	"Destination not defined") 								-> notEmpty() -> string()
-			->that($data->price, 			"price", 		"Price must be set and be an integer")		 			-> notEmpty() -> integer()
+			->that($data->price, 			"price", 		"Price must be set and be an integer")		 			-> notEmpty()
 			->that($data->startTime,		"date", 		"Date must be set and in format YYYY-MM-DD HH:MM:SS")	-> notEmpty() -> date($dateString)
-			->that($data->seatsAvailable, 	"Seats", 		"Seats must be defined and an integer")		 			-> notEmpty() -> integer()
+			->that($data->seatsAvailable, 	"Seats", 		"Seats must be defined and an integer")		 			-> notEmpty()
 			->that($data->description, 		"description", 	"Desciption missing")									-> notEmpty() -> string()
 			->that($data->userID, 			"userID", 		"UserID invalid or not included with request")			-> notEmpty() -> string() -> startsWith("user-")
 			->verifyNow();
@@ -21,6 +21,14 @@ function validate($data){
 		}
 		return TRUE;
 
+}
+
+function validateUser(){
+
+}
+
+function validateBooking(){
+	return TRUE;
 }
 
 //Skapar en array med alla input-fel
