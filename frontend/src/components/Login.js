@@ -12,8 +12,7 @@ import {
 const StyledInput = FieldFactory(styled.input``);
 
 const Icon = styled(User)`
-margin-left:40%;
-
+margin:0 auto
 `;
 const StyledForm = styled.form`
   display: flex;
@@ -34,7 +33,7 @@ const StyledTextRow = styled.div`
   flex-direction: column;
   margin-top: ${(props) => props.theme.spacing.subsection};
   &:nth-child(1) {
-    margin: 0;
+  margin: 0;
   }
 `;
 
@@ -52,7 +51,7 @@ const Button = css`
 
 const StyledPrimaryButton = styled(PrimaryButton)`
   ${Button}
-  margin-left: ${(props) => props.theme.spacing.subsection};
+  margin: ${(props) => props.theme.spacing.subsection};
 `;
 
 const Login = ({ showNotification }) => {

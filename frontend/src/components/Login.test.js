@@ -11,7 +11,6 @@ const theme = {
     fill: '#1a1a1a',
     alternateFill: '#f0ebff',
     inactive: '#707386',
-
   },
   padding: {
     section: '1rem 1rem',
