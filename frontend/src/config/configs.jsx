@@ -6,7 +6,7 @@
 export default {
   development: {
     api: {
-      url: 'https://spilg.xyz/api/',
+      url: 'http://spilg.xyz/api/',
     },
   },
   testing: {

@@ -37,6 +37,9 @@ const StyledForm = styled.form`
   box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
 `;
 
+const StyledField = styled(Field)`
+margin-top:-12px;
+`;
 const StyledTextRow = styled.div`
   display: flex;
   flex-direction: column;
@@ -102,6 +105,8 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       description: values.description,
     };
 
+    console.log(newvalues);
+
     fetch(`${config.api.url}trips/`, {
       method: 'POST',
       mode: 'cors',
@@ -133,7 +138,7 @@ const AddTrip = ({ closeAdd, showNotification }) => {
     <StyledForm aria-label="AddTrip form" onSubmit={props.handleSubmit}>
       <StyledTextRow>
         <Label htmlFor="from">From</Label>
-        <StyledInput
+        <StyledField
           name="startLocation"
           component={AutoSelect}
           options={options}
@@ -141,12 +146,12 @@ const AddTrip = ({ closeAdd, showNotification }) => {
             fullWidth: true,
             margin: 'normal',
           }}
-          label="Enter Origin..."
+          placeholder="Enter start location.."
         />
       </StyledTextRow>
       <StyledTextRow>
         <Label htmlFor="to">To</Label>
-        <StyledInput
+        <StyledField
           name="destination"
           component={AutoSelect}
           options={options}
@@ -154,7 +159,7 @@ const AddTrip = ({ closeAdd, showNotification }) => {
             fullWidth: true,
             margin: 'normal',
           }}
-          label="Enter destination..."
+          placeholder="Enter destination.."
         />
       </StyledTextRow>
       <StyledSelectRow>
