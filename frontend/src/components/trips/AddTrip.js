@@ -24,6 +24,10 @@ const StyledForm = styled.form`
   box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
 `;
 
+const StyledField = styled(Field)`
+margin-top:-12px;
+`;
+
 const StyledTextRow = styled.div`
   display: flex;
   flex-direction: column;
