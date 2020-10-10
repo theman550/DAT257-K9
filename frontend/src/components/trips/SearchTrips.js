@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import config from '../../config';
@@ -8,6 +8,7 @@ import {
   InactiveButton,
   Label,
 } from '../UI';
+import kommuner from './kommuner.json';
 
 const StyledInput = FieldFactory(styled.input``);
 
@@ -83,6 +84,15 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
   const [seats, setSeats] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const options = [];
+
+  const loadingData = async () => {
+    console.log(kommuner);
+    kommuner.map((detail, index) => {
+      options[index] = detail.Kommun;
+      return options[index];
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -130,6 +140,7 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
     closeSearch();
   };
 
+  useEffect(() => { loadingData(); }, []);
   return (
     <StyledForm aria-label="Search form" onSubmit={handleSubmit}>
       <StyledTextRow>

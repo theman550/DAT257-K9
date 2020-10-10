@@ -10,12 +10,16 @@ import { MapPin } from 'react-feather';
 
 const useStyles = makeStyles({
   option: {
-    border: 'none',
-    outline: 'none',
     fontSize: 17,
     fontFamily: 'Kufam, sans-serif',
     backgroundColor: '#1a1a1a',
     color: '#8064f7',
+    height: '45px',
+    marginTop: '-11px',
+    '&:hover , &:focus , &:active ': {
+      color: 'white',
+      backgroundColor: '#1a1a1a',
+    },
     '& > span': {
       marginRight: 2,
       fontSize: 14,
@@ -35,9 +39,10 @@ const AutoSelect = ({ textFieldProps, ...props }) => {
     <Autocomplete
       {...props}
       onChange={(_, value) => setFieldValue(name, value)}
-      autoSelect
+      autoSelect={false}
       autoHighlight={false}
       autoComplete
+      disableListWrap
       classes={{
         option: classes.option,
       }}
@@ -68,10 +73,6 @@ const AutoSelect = ({ textFieldProps, ...props }) => {
               borderRadius: '5px',
               borderColor: '#707386',
               fontFamily: 'Kufam, sans-serif',
-              '&::placeholder': {
-                color: 'yallow',
-              },
-
             },
 
           }}
