@@ -8,6 +8,7 @@ import Trips from './screens/Trips';
 import Login from './screens/Login';
 import RegisterForm from './components/Form';
 import ErrorBoundary from './components/ErrorBoundary';
+import Account from './screens/Account';
 
 const PageWrapper = styled.div`
   margin-top: ${(props) => props.theme.size.navbar};
@@ -31,14 +32,17 @@ const App = () => {
           {notification
             && <Notification msg={notification.msg} color={notification.color} />}
           <Switch>
-            <Route path="/account">
-              <ErrorBoundary sectionName="Account page">
-                <Account />
-              </ErrorBoundary>
+            <Route path="/login">
+              <Login showNotification={showNotification} />
             </Route>
             <Route path="/register">
               <ErrorBoundary sectionName="Register page">
                 <RegisterForm />
+              </ErrorBoundary>
+            </Route>
+            <Route path="/account">
+              <ErrorBoundary sectionName="Account page">
+                <Account showNotification={showNotification} />
               </ErrorBoundary>
             </Route>
             <Route path="/trips">

@@ -37,7 +37,7 @@ const Wrapper = styled.div`
     align-items: center;
 
     padding: 1rem;
-    margin-bottom: 5rem;
+    margin-bottom: ${(props) => props.theme.spacing.section};
     background-color: ${(props) => props.theme.colors.fill};
 
     // Set each card to have a width of 500px
@@ -62,7 +62,7 @@ const Wrapper = styled.div`
     }
 `;
 
-const ScreensDisplay = ({ filteredTrips }) => {
+const ScreensDisplay = ({ filteredTrips, tripComponent }) => {
   const [trips, setTrips] = useState([]);
 
   const getTrips = async () => {
@@ -101,23 +101,16 @@ const ScreensDisplay = ({ filteredTrips }) => {
 
   return (
     <Wrapper>
-      {trips.map((trip) => (
-        <TripCard
-          key={trip.tripID}
-          id={trip.tripID}
-          origin={trip.startLocation}
-          destination={trip.destination}
-          driver={trip.driver}
-          datetime={trip.startTime}
-          seats={trip.seatsAvailable}
-        />
-      ))}
+      {trips.map((trip) => tripComponent(trip))}
     </Wrapper>
   );
 };
 
 ScreensDisplay.propTypes = {
   filteredTrips: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // tripComponent is a function that is given a trip and
+  // expects a result that renders a trip overview
+  tripComponent: PropTypes.func.isRequired,
 };
 
 export default ScreensDisplay;
