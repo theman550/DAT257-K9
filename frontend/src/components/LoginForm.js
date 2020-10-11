@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import config from '../config';
 
 const Form = styled.form`
 background-color: #262626;
@@ -75,8 +76,9 @@ const LoginForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('http://spilg.xyz/api/users/', {
+    fetch(`${config.api.url}login/`, {
       method: 'POST',
+      mode: 'cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',

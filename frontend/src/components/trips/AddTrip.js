@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Formik, Field } from 'formik';
+import config from '../../config';
 import {
   FieldFactory,
   PrimaryButton,
+  InactiveButton,
   Label,
 } from '../UI';
 
@@ -64,19 +66,21 @@ const StyledSelectColumn = styled.div`
   
 `;
 
-const StyledButton = styled(PrimaryButton)`
+const Button = css`
   padding: 0.75rem;
   height: 80%;
   width: 100%;
   margin-top: 0.75rem;
+`;
 
-  &:nth-of-type(1) {
-    margin-right: 0.75rem;
-  }
+const StyledPrimaryButton = styled(PrimaryButton)`
+  ${Button}
+  margin-left: 0.75rem;
+`;
 
-  &:nth-of-type(2) {
-    margin-left: 0.75rem;
-  }
+const StyledInactiveButton = styled(InactiveButton)`
+  ${Button}
+  margin-right: 0.75rem;
 `;
 
 const AddTrip = ({ closeAdd, showNotification }) => {
@@ -91,7 +95,7 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       description: values.description,
     };
 
-    fetch('http://spilg.xyz/api/trips/', {
+    fetch(`${config.api.url}trips/`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -148,8 +152,8 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       </StyledSelectRow>
 
       <StyledSelectRow>
-        <StyledButton onClick={closeAdd} type="button">Close</StyledButton>
-        <StyledButton type="submit">Add</StyledButton>
+        <StyledInactiveButton onClick={closeAdd} type="button">Close</StyledInactiveButton>
+        <StyledPrimaryButton type="submit">Add</StyledPrimaryButton>
       </StyledSelectRow>
     </StyledForm>
   );
