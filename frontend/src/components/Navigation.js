@@ -74,7 +74,7 @@ const Navigation = ({ isLoggedIn, setIsLoggedIn }) => {
     setIsLoggedIn(false);
 
     try {
-      await fetch(`${config.api.url}users/login/`);
+      await fetch(`${config.api.url}login/`);
     } catch (e) {
       console.error(`Failed to log out ${e.message}`);
     }
