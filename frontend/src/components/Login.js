@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import config from '../config';
 
@@ -70,7 +71,7 @@ color: white;
 font-size: large;
 `;
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = (event) => {
@@ -89,7 +90,10 @@ const Login = () => {
       }),
     })
       .then((response) => response)
-      .then((data) => console.log(data))
+      .then((data) => {
+        setIsLoggedIn(true);
+        console.log(data);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -121,6 +125,10 @@ const Login = () => {
       </P>
     </Form>
   );
+};
+
+Login.propTypes = {
+  setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 export default Login;

@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { User, LogIn, LogOut, Map, MapPin } from 'react-feather';
+import {
+  User,
+  LogIn,
+  LogOut,
+  Map,
+  MapPin,
+} from 'react-feather';
+import config from '../config';
 import { H2 } from './UI';
 
 const Nav = styled.nav`
@@ -63,6 +70,16 @@ const NavIcon = styled.i`
 `;
 
 const Navigation = ({ isLoggedIn, setIsLoggedIn }) => {
+  const logout = async () => {
+    setIsLoggedIn(false);
+
+    try {
+      await fetch(`${config.api.url}users/login/`);
+    } catch (e) {
+      console.error(`Failed to log out ${e.message}`);
+    }
+  };
+
   return (
     <Nav>
       <StyledH2>
@@ -74,24 +91,26 @@ const Navigation = ({ isLoggedIn, setIsLoggedIn }) => {
           </span>
         </Link>
       </StyledH2>
-        {isLoggedIn ?
+      {isLoggedIn
+        ? (
           <div>
             <Link aria-label="Trips" to="/trips"><NavIcon as={MapPin} /></Link>
             <Link aria-label="Account" to="/account"><NavIcon as={User} /></Link>
-            <NavIcon as={LogOut} aria-label="Logout" onClick={() => setIsLoggedIn(false)} />
+            <NavIcon as={LogOut} aria-label="Logout" onClick={logout} />
           </div>
-        :
+        )
+        : (
           <div>
             <Link aria-label="Login" to="/account"><NavIcon as={LogIn} /></Link>
           </div>
-        }
+        )}
     </Nav>
-  )
+  );
 };
 
 Navigation.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  setIsLoggedIn: PropTypes.func.isRequired
+  setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 export default Navigation;

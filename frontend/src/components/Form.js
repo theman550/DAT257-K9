@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { H2 } from './UI/Typography';
 import FieldFactory from './UI/Field';
@@ -63,7 +64,7 @@ const Button = styled(PrimaryButton)`
   cursor: pointer;
   `;
 
-const Form = () => {
+const Form = ({ setIsLoggedIn }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -86,7 +87,10 @@ const Form = () => {
         password,
       }),
     }).then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        setIsLoggedIn(true);
+        console.log(data);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -141,6 +145,10 @@ const Form = () => {
       </F>
     </Wrapper>
   );
+};
+
+Form.propTypes = {
+  setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 export default Form;

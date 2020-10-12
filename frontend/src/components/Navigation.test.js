@@ -33,7 +33,7 @@ describe('Navigation', () => {
       render(
         <ThemeProvider theme={theme}>
           <Router>
-            <Navigation isLoggedIn={true} setIsLoggedIn={() => ''} />
+            <Navigation isLoggedIn setIsLoggedIn={() => ''} />
           </Router>
           ,
         </ThemeProvider>,

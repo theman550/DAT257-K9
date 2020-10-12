@@ -15,7 +15,7 @@ const PageWrapper = styled.div`
 
 const App = () => {
   const [notification, setNotification] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const showNotification = (msg, color, seconds) => {
     setNotification({ msg, color });
@@ -34,12 +34,12 @@ const App = () => {
           <Switch>
             <Route path="/account">
               <ErrorBoundary sectionName="Account page">
-                <Account />
+                <Account setIsLoggedIn={setIsLoggedIn} />
               </ErrorBoundary>
             </Route>
             <Route path="/register">
               <ErrorBoundary sectionName="Register page">
-                <RegisterForm />
+                <RegisterForm setIsLoggedIn={setIsLoggedIn} />
               </ErrorBoundary>
             </Route>
             <Route path="/trips">

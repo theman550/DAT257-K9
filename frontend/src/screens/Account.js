@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Login from '../components/Login';
 
@@ -10,10 +11,14 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const Account = () => (
+const Account = ({ setIsLoggedIn }) => (
   <Container>
-    <Login />
+    <Login setIsLoggedIn={setIsLoggedIn} />
   </Container>
 );
+
+Account.propTypes = {
+  setIsLoggedIn: PropTypes.func.isRequired,
+};
 
 export default Account;
