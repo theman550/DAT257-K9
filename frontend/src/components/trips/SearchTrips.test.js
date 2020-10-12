@@ -13,8 +13,7 @@ describe('SearchTrips', () => {
       <ThemeProvider theme={theme}>
         <SearchTrips
           closeSearch={() => ''}
-          setFilteredTrips={() => ''}
-          showNotification={() => ''}
+          getTrips={() => ''}
         />
       </ThemeProvider>,
     );
