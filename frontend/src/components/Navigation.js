@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { LogIn, Map, MapPin } from 'react-feather';
+import { User, LogIn, LogOut, Map, MapPin } from 'react-feather';
 import { H2 } from './UI';
 
 const Nav = styled.nav`
@@ -51,40 +52,46 @@ const StyledH2 = styled(H2)`
   }
 `;
 
-const StyledLogInIcon = styled(LogIn)`
+const NavIcon = styled.i`
   color: ${(props) => props.theme.colors.primary};
-  margin-left: ${(props) => props.theme.spacing.subsection};
   margin-right: ${(props) => props.theme.spacing.subsection};
+  cursor: pointer;
   
   &:hover {
     color: white;
   }
 `;
 
-const StyledMapPinIcon = styled(MapPin)`
-  color: ${(props) => props.theme.colors.primary};
-  
-  &:hover {
-    color: white;
-  }
-`;
+const Navigation = ({ isLoggedIn, setIsLoggedIn }) => {
+  return (
+    <Nav>
+      <StyledH2>
+        <Link aria-label="Home" to="/">
+          <Map />
+          <span>
+            {' '}
+            Share-a-ride
+          </span>
+        </Link>
+      </StyledH2>
+        {isLoggedIn ?
+          <div>
+            <Link aria-label="Trips" to="/trips"><NavIcon as={MapPin} /></Link>
+            <Link aria-label="Account" to="/account"><NavIcon as={User} /></Link>
+            <NavIcon as={LogOut} aria-label="Logout" onClick={() => setIsLoggedIn(false)} />
+          </div>
+        :
+          <div>
+            <Link aria-label="Login" to="/account"><NavIcon as={LogIn} /></Link>
+          </div>
+        }
+    </Nav>
+  )
+};
 
-const Navigation = () => (
-  <Nav>
-    <StyledH2>
-      <Link aria-label="Home" to="/">
-        <Map />
-        <span>
-          {' '}
-          Share-a-ride
-        </span>
-      </Link>
-    </StyledH2>
-    <div>
-      <Link aria-label="Trips" to="/trips"><StyledMapPinIcon /></Link>
-      <Link aria-label="Account" to="/account"><StyledLogInIcon /></Link>
-    </div>
-  </Nav>
-);
+Navigation.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  setIsLoggedIn: PropTypes.func.isRequired
+};
 
 export default Navigation;

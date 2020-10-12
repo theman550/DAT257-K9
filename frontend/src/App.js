@@ -15,6 +15,7 @@ const PageWrapper = styled.div`
 
 const App = () => {
   const [notification, setNotification] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const showNotification = (msg, color, seconds) => {
     setNotification({ msg, color });
@@ -26,7 +27,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Navigation />
+        <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <PageWrapper>
           {notification
             && <Notification msg={notification.msg} color={notification.color} />}
