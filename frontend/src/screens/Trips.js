@@ -52,6 +52,11 @@ const Trips = ({ showNotification }) => {
     }
   };
 
+  const pageHandler = (pageNumber) => {
+    setPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     getTrips('');
   }, []); // eslint-disable-line
@@ -89,7 +94,7 @@ const Trips = ({ showNotification }) => {
       <Pagination
         numberOfPages={Math.ceil(filteredTrips.length / tripsPerPage)}
         page={page}
-        setPage={setPage}
+        setPage={pageHandler}
       />
       <FloatingButtons
         openSearch={() => setIsSearchOpen(true)}
