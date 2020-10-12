@@ -244,15 +244,21 @@ function rememberMe() {
         }
     }
 }
-function logout($email, $token)
+function logout()
 {
-	$tokenFromDB = getTokenFromDB($email);
-	if($tokenFromDB == $token)
-	{ 
-		$interval = new DateInterval("P0Y");
-		setExpire($email, $interval); // sätter till nuvarande tiden, dvs nästa gång användaren försöker logga in har token expireat
+	if (session_status() == PHP_SESSION_NONE)
 		session_start();
-		session_destroy();
+	$token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
+	$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+	if($token && $email)
+	{
+		$tokenFromDB = getTokenFromDB($email);
+		if($tokenFromDB == $token)
+		{ 
+			$interval = new DateInterval("P0Y");
+			setExpire($email, $interval); // sätter till nuvarande tiden, dvs nästa gång användaren försöker logga in har token expireat
+			session_destroy();
+		}
 	}
 }
 // tar bort alla tider som gått ut, användning 0 parametrar ger alla tider som expireats utan filter, med extraconditions satt kan t.ex filterExpiredTrips("startLocation = 'lidkoping'"); som ger alla resor som inte gått ut och startar i lidkoping
