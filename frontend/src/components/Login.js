@@ -71,7 +71,7 @@ color: white;
 font-size: large;
 `;
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ loggedInUser, setLoggedInUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = (event) => {
@@ -81,18 +81,18 @@ const Login = ({ setIsLoggedIn }) => {
       method: 'POST',
       mode: 'cors',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         Email: email,
         Password: password,
+        token: loggedInUser.token,
+        loggedInEmail: loggedInUser.email,
       }),
     })
       .then((response) => response)
       .then((data) => {
-        setIsLoggedIn(true);
-        console.log(data);
+        setLoggedInUser({ ...data });
       })
       .catch((error) => console.log(error));
   };
@@ -128,7 +128,8 @@ const Login = ({ setIsLoggedIn }) => {
 };
 
 Login.propTypes = {
-  setIsLoggedIn: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.object.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired,
 };
 
 export default Login;

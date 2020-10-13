@@ -11,14 +11,18 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const Account = ({ setIsLoggedIn }) => (
+const Account = ({ loggedInUser, setLoggedInUser }) => (
   <Container>
-    <Login setIsLoggedIn={setIsLoggedIn} />
+    <Login 
+      loggedInUser={loggedInUser}
+      setLoggedInUser={setLoggedInUser}
+    />
   </Container>
 );
 
 Account.propTypes = {
-  setIsLoggedIn: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.object.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired,
 };
 
 export default Account;

@@ -148,7 +148,8 @@ const Form = ({ loggedInUser, setLoggedInUser }) => {
 };
 
 Form.propTypes = {
-  setIsLoggedIn: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.object.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired,
 };
 
 export default Form;
