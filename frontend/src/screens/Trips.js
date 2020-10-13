@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Modal, { ModalProvider } from 'styled-react-modal';
+import styled from 'styled-components';
+import { Loader } from 'react-feather';
 import config from '../config';
 import SearchTrip from '../components/trips/SearchTrips';
 import FloatingButtons from '../components/trips/FloatingButtons';
@@ -8,14 +10,42 @@ import DisplayScreen from './Trip/Display';
 import AddTrip from '../components/trips/AddTrip';
 import Pagination from '../components/trips/Pagination';
 
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Spinner = styled(Loader)`
+  width: 10%;
+  height: 10%;
+  color: ${(props) => props.theme.colors.inactive};
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+  @keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+  }
+`
+
 const Trips = ({ showNotification }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [filteredTrips, setFilteredTrips] = useState([]);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const tripsPerPage = 10;
 
   const getTrips = async (query) => {
+    setIsLoading(true);
+
     try {
       const res = await fetch(`${config.api.url}trips/${query}`);
       const data = await res.json();
@@ -50,6 +80,8 @@ const Trips = ({ showNotification }) => {
       console.error(error.message);
       setFilteredTrips([]);
     }
+
+    setIsLoading(false);
   };
 
   const pageHandler = (pageNumber) => {
@@ -63,12 +95,18 @@ const Trips = ({ showNotification }) => {
 
   return (
     <div>
-      <DisplayScreen
-        trips={filteredTrips.slice(
-          (page - 1) * tripsPerPage,
-          (page - 1) * tripsPerPage + tripsPerPage,
-        )}
-      />
+      {isLoading ?
+        <SpinnerContainer>
+          <Spinner />
+        </SpinnerContainer>
+        :
+        <DisplayScreen
+          trips={filteredTrips.slice(
+            (page - 1) * tripsPerPage,
+            (page - 1) * tripsPerPage + tripsPerPage,
+          )}
+        />
+      }
       <ModalProvider>
         <Modal
           isOpen={isSearchOpen}
@@ -78,6 +116,7 @@ const Trips = ({ showNotification }) => {
           <SearchTrip
             closeSearch={() => setIsSearchOpen(false)}
             getTrips={getTrips}
+            isLoading={isLoading}
           />
         </Modal>
         <Modal
