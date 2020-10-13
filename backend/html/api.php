@@ -6,10 +6,10 @@ include_once("dataValidation.php");
 define("SECRET_KEY", "f402a1dff337b00f3e5c121bb374ccfa802be479b6be1e812282db714a6e5c4fbd02b694a5ffbe073139693fa201719af75c8d876bd878df07534c3f695581cb"); // key ska ligga någon annanstans sen. 
 
 function headers(){
-	header('Access-Control-Allow-Origin: localhost:3000'); // <- Ersätt med wildcard för att använda lokalt
+	header('Access-Control-Allow-Origin: localhost:3000'); // <- Ersätt med null för att använda lokalt
 	header('Content-Type: application/json');
 	header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-	header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Credentials');
 	header('Access-Control-Max-Age: 1000');	
 	header('Access-Control-Allow-Credentials: true');
 }

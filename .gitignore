@@ -1,3 +1,7 @@
 
 servernyckel.pem
 backend/html/phpMyAdmin/
+backend/html/api/book/log.txt
+backend/html/api/login/log.txt
+backend/html/api/trips/log.txt
+backend/html/api/users/log.txt
