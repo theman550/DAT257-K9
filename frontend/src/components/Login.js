@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import config from '../config';
+import Spinner from '../components/Spinner';
 
 const Form = styled.form`
 background-color: #262626;
@@ -73,15 +74,17 @@ font-size: large;
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     fetch(`${config.api.url}login/`, {
       method: 'POST',
       mode: 'cors',
       credentials: 'include',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -90,8 +93,15 @@ const Login = () => {
       }),
     })
       .then((response) => response)
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
+      .then((data) => {
+        setIsLoading(false);
+        console.log(data);
+        // TODO: redirect
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.log(error)
+      });
   };
 
   return (
@@ -115,7 +125,12 @@ const Login = () => {
         </div>
       </Div>
 
-      <Button type="submit" className="button">Submit</Button>
+      <Button type="submit" className="button">
+        {isLoading ?
+          <Spinner /> :
+          'Submit'
+        }
+        </Button>
       <P className="forgot-password text-right">
         Forgot
         <A href="#">password?</A>
