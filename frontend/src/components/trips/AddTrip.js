@@ -1,5 +1,5 @@
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
 import styled, { css } from 'styled-components';
 import { Formik, Field } from 'formik';
 import config from '../../config';
@@ -9,6 +9,7 @@ import {
   InactiveButton,
   Label,
 } from '../UI';
+import Spinner from '../Spinner';
 
 const StyledInput = FieldFactory(Field);
 
@@ -80,9 +81,12 @@ const StyledInactiveButton = styled(InactiveButton)`
 `;
 
 const AddTrip = ({ closeAdd, showNotification }) => {
-  const onSubmit = (values) => {
-    const newvalues = {
+  const [isLoading, setIsLoading] = useState(false);
 
+  const onSubmit = (values) => {
+    setIsLoading(true);
+
+    const newvalues = {
       startLocation: values.startLocation,
       destination: values.destination,
       seatsAvailable: values.seatsAvailable,
@@ -94,6 +98,7 @@ const AddTrip = ({ closeAdd, showNotification }) => {
     fetch(`${config.api.url}trips/`, {
       method: 'POST',
       mode: 'cors',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -106,6 +111,8 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       } else if (data.status === 201) {
         showNotification('Your trip is added succesfully :)', '#378C2E', '7');
       }
+
+      setIsLoading(false);
     });
   };
 
@@ -149,7 +156,12 @@ const AddTrip = ({ closeAdd, showNotification }) => {
 
       <StyledSelectRow>
         <StyledInactiveButton onClick={closeAdd} type="button">Close</StyledInactiveButton>
-        <StyledPrimaryButton type="submit">Add</StyledPrimaryButton>
+        <StyledPrimaryButton type="submit">
+          {isLoading ?
+          <Spinner /> :
+          'Add'
+          }
+        </StyledPrimaryButton>
       </StyledSelectRow>
     </StyledForm>
   );

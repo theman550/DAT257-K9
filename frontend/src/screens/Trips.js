@@ -17,7 +17,11 @@ const Trips = ({ showNotification }) => {
 
   const getTrips = async (query) => {
     try {
-      const res = await fetch(`${config.api.url}trips/${query}`);
+      const res = await fetch(`${config.api.url}trips/${query}`, {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
+      });
       const data = await res.json();
 
       if (!res.ok) {
