@@ -2,9 +2,9 @@
 // $simple=true gör att den by default är true, så man behöver bara skriva queryDB(sql, false) om man vill ha databas-handle 
 function queryDB($sql){
     $connection = connectDB();
-    $result = $connection -> query($sql);   
-	if(!$result) // query failed av någon anledning --> return null, om inte handleat blir det error vid felaktig query
-		return null;
+    $result = $connection -> query($sql);  
+	if(!$result === true) // query failed av någon anledning --> return null, om inte handleat blir det error vid felaktig query
+		return $result->error;
     disconnectDB($connection);
     return $result;
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import config from '../../config';
 import {
   FieldFactory,
   PrimaryButton,
@@ -78,7 +77,7 @@ const StyledInactiveButton = styled(InactiveButton)`
   margin-right: ${(props) => props.theme.spacing.subsection};
 `;
 
-const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
+const SearchTrips = ({ closeSearch, getTrips }) => {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [datetime, setDatetime] = useState('');
@@ -95,47 +94,23 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const createQuery = () => {
+    let query = '';
+
+    if (from !== '') query += `&startLocation=${from}`;
+    if (to !== '') query += `&destination=${to}`;
+    if (datetime !== '') query += `&startTime=${datetime}`;
+    if (seats !== '') query += `&seatsAvailable=${seats}`;
+    if (minPrice !== '') query += `&priceMin=${minPrice}`;
+    if (maxPrice !== '') query += `&priceMax=${maxPrice}`;
+
+    return query === '' ? query : `?${query}`;
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const createQuery = () => {
-      let query = '';
-
-      if (from !== '') query += `&startLocation=${from}`;
-      if (to !== '') query += `&destination=${to}`;
-      if (datetime !== '') query += `&startTime=${datetime}`;
-      if (seats !== '') query += `&seatsAvailable=${seats}`;
-      if (minPrice !== '') query += `&priceMin=${minPrice}`;
-      if (maxPrice !== '') query += `&priceMax=${maxPrice}`;
-
-      return query === '' ? query : `?${query}`;
-    };
-
-    try {
-      const url = `${config.api.url}trips/${createQuery()}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      if (typeof data !== 'string') {
-        setFilteredTrips(
-          data
-            .map((trip) => ({
-              ...trip,
-              driver: {
-                firstName: 'David',
-                lastName: 'Hernandez',
-                // avatarUrl: 'https://vip.nypost.com/wp-content/uploads/sites/2/2015/01/clark1.jpg',
-              },
-              startTime: new Date(trip.startTime),
-              seatsAvailable: Number.parseInt(trip.seatsAvailable, 10),
-              price: Number.parseInt(trip.price, 10),
-            })),
-        );
-      } else {
-        showNotification('No trips found', 'red', 3);
-      }
-    } catch (error) {
-      console.warn('Could not retrieve trips', error.message);
-    }
+    const query = createQuery();
+    getTrips(query);
 
     closeSearch();
   };
@@ -217,8 +192,7 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
 
 SearchTrips.propTypes = {
   closeSearch: PropTypes.func.isRequired,
-  setFilteredTrips: PropTypes.func.isRequired,
-  showNotification: PropTypes.func.isRequired,
+  getTrips: PropTypes.func.isRequired,
 };
 
 export default SearchTrips;
