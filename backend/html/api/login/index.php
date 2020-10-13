@@ -1,23 +1,16 @@
-
-<html>  
-<body>
 <?php
 
 	define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
+	//include(ABS_PATH . "/DAT257-K9/backend/html/api.php");
 	include(ABS_PATH . "/api.php");
-//	include(ABS_PATH . "/agilecourse/api.php");
+	//include(ABS_PATH . "/agilecourse/api.php");
 
+	/* include(dirname(__FILE__) . "\api.php");
+	include(dirname(__FILE__) . "\debug.php");
+	 */
+	 headers();
+	
 
-/*	 if (session_status() == PHP_SESSION_NONE)
-		session_start();
-	 if(isset($_SESSION['loggedin']))
-		{
-			echo 'logged in from session';
-		}*/
-
-
-	headers();
-	 
 	if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 		headers();
 	}
@@ -37,20 +30,16 @@
 			$password = $_POST['password'];
 		}
 		$token = tryLogin($email, $password);
-		// echo json_encode($token);
+	    echo json_encode($token);
 	}
 	else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-		logout();
+		if(isset($data->loggedInEmail) && isset($data->token))
+		{		
+			if(verifyToken($data->loggedInEmail, $data->token) && !hasTokenExpired($data->loggedInEmail))
+			{	
+				logout();
+			}
+		}
 	}
 
 ?>
-
-<form action="" method="post">
-Name: <input type="text" name="password"><br>
-E-mail: <input type="text" name="email"><br>
-<input type="submit">
-</form>
-
-</body>
-</html>
-
