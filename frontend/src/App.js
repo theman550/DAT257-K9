@@ -15,7 +15,7 @@ const PageWrapper = styled.div`
 
 const App = () => {
   const [notification, setNotification] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   const showNotification = (msg, color, seconds) => {
     setNotification({ msg, color });
@@ -27,19 +27,19 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Navigation loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
         <PageWrapper>
           {notification
             && <Notification msg={notification.msg} color={notification.color} />}
           <Switch>
             <Route path="/account">
               <ErrorBoundary sectionName="Account page">
-                <Account setIsLoggedIn={setIsLoggedIn} />
+                <Account setLoggedInUser={setLoggedInUser} />
               </ErrorBoundary>
             </Route>
             <Route path="/register">
               <ErrorBoundary sectionName="Register page">
-                <RegisterForm setIsLoggedIn={setIsLoggedIn} />
+                <RegisterForm setLoggedInUser={setLoggedInUser} />
               </ErrorBoundary>
             </Route>
             <Route path="/trips">

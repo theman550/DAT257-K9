@@ -64,7 +64,7 @@ const Button = styled(PrimaryButton)`
   cursor: pointer;
   `;
 
-const Form = ({ setIsLoggedIn }) => {
+const Form = ({ loggedInUser, setLoggedInUser }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -77,7 +77,6 @@ const Form = ({ setIsLoggedIn }) => {
       method: 'POST',
       mode: 'cors',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -85,11 +84,12 @@ const Form = ({ setIsLoggedIn }) => {
         lastname: lastName,
         email,
         password,
+        token: loggedInUser.token,
+        loggedInEmail: loggedInUser.email,
       }),
     }).then((response) => response.json())
       .then((data) => {
-        setIsLoggedIn(true);
-        console.log(data);
+        setLoggedInUser({ ...data });
       })
       .catch((error) => console.log(error));
   };

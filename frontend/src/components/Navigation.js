@@ -69,9 +69,9 @@ const NavIcon = styled.i`
   }
 `;
 
-const Navigation = ({ isLoggedIn, setIsLoggedIn }) => {
+const Navigation = ({ loggedInUser, setLoggedInUser }) => {
   const logout = async () => {
-    setIsLoggedIn(false);
+    setLoggedInUser(null);
 
     try {
       await fetch(`${config.api.url}login/`);
@@ -91,7 +91,7 @@ const Navigation = ({ isLoggedIn, setIsLoggedIn }) => {
           </span>
         </Link>
       </StyledH2>
-      {isLoggedIn
+      {loggedInUser !== null
         ? (
           <div>
             <Link aria-label="Trips" to="/trips"><NavIcon as={MapPin} /></Link>
@@ -109,8 +109,8 @@ const Navigation = ({ isLoggedIn, setIsLoggedIn }) => {
 };
 
 Navigation.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-  setIsLoggedIn: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.object.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired,
 };
 
 export default Navigation;
