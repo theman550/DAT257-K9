@@ -4,6 +4,7 @@ import { H2 } from './UI/Typography';
 import FieldFactory from './UI/Field';
 import config from '../config';
 import { PrimaryButton } from './UI';
+import Spinner from './Spinner';
 
 const Wrapper = styled.div`
 display: flex;
@@ -69,14 +70,17 @@ const Form = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     fetch(`${config.api.url}users/`, {
       method: 'POST',
       mode: 'cors',
+      credentials: 'include',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -86,8 +90,15 @@ const Form = () => {
         password,
       }),
     }).then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
+      .then((data) => {
+        setIsLoading(false);
+        console.log(data)
+        // TODO: redirect
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.log(error)
+      });
   };
 
   return (
@@ -133,7 +144,12 @@ const Form = () => {
           <tbody>
             <tr>
               <td>
-                <Button type="submit" data-testid="submit" className="button">Submit</Button>
+                <Button type="submit" data-testid="submit" className="button">
+                  {isLoading ?
+                    <Spinner /> :
+                    'Submit'
+                  }
+                </Button>
               </td>
             </tr>
           </tbody>
