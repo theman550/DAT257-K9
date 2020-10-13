@@ -4,8 +4,8 @@
 <?php
 
 	define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
-	//include(ABS_PATH . "/api.php");
-	include(ABS_PATH . "/agilecourse/api.php");
+	include(ABS_PATH . "/api.php");
+//	include(ABS_PATH . "/agilecourse/api.php");
 
 
 /*	 if (session_status() == PHP_SESSION_NONE)
@@ -14,13 +14,12 @@
 		{
 			echo 'logged in from session';
 		}*/
+
+
+	headers();
 	 
 	if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-		header('Access-Control-Allow-Origin: http://localhost:3000');
-		header('Content-Type: application/json');
-		header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-		header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
-		header('Access-Control-Max-Age: 1000');	
+		headers();
 	}
 
 	else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
