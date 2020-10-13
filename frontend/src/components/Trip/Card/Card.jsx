@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Star, Key } from 'react-feather';
 import { Formik, Form, Field } from 'formik';
@@ -13,6 +13,7 @@ import {
   P,
   FieldFactory,
 } from '../../UI';
+import Spinner from '../../Spinner';
 
 const CardHeader = styled.div`
     position: absolute;
@@ -117,34 +118,6 @@ const FieldContainer = styled.div`
     }
 `;
 
-const submitBooking = async (id, numberOfSeats) => {
-  console.log('Submitting booking');
-
-  try {
-    // TODO: Add some type of global message service that can display notifications
-    const res = await fetch('http://splig.xyz/api/trips', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id,
-        seats: numberOfSeats,
-        // TODO: Eventually add userId
-      }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.data || data.message || 'No error message provided');
-    }
-
-    console.log('Successful booking!');
-  } catch (error) {
-    console.warn('Could not submit booking', error.message);
-  }
-};
 
 const TripCard = ({
   id,
@@ -153,95 +126,129 @@ const TripCard = ({
   driver,
   datetime,
   seats: maxSeats,
-}) => (
-  <Card
-    headerContent={(
-      <CardHeader>
-        <Driver>
-          <div className="details">
-            <Star color="white" size="16" />
-            <H3>4.76</H3>
-            <Key color="white" size="16" />
-            <H3>87&apos; Volkswagen</H3>
-          </div>
-          <H3>
-            {driver.firstName}
-            {' '}
-            {driver.lastName}
-          </H3>
-        </Driver>
+}) => {
+  const [isLoading, setIsLoading] = useState(false);
 
-        <AvatarContainer>
-          <P>
-            {driver.firstName.slice(0, 1)}
-            {driver.lastName.slice(0, 1)}
-          </P>
-        </AvatarContainer>
-      </CardHeader>
-        )}
-    bodyContent={(
-      <CardBody>
-        <H2>
-          <span>
-            {origin}
-            {' '}
-            -
-            {' '}
-          </span>
-          <span>{destination}</span>
-        </H2>
+  const submitBooking = async (id, numberOfSeats) => {
+    setIsLoading(true);
 
-        <TripDetails>
-          <div>
-            <H4>Departs at</H4>
+    try {
+      // TODO: Add some type of global message service that can display notifications
+      const res = await fetch('http://splig.xyz/api/trips', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id,
+          seats: numberOfSeats,
+          // TODO: Eventually add userId
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.data || data.message || 'No error message provided');
+      }
+
+      console.log('Successful booking!');
+    } catch (error) {
+      console.warn('Could not submit booking', error.message);
+    }
+
+    setIsLoading(false);
+  };
+
+  return (
+    <Card
+      headerContent={(
+        <CardHeader>
+          <Driver>
+            <div className="details">
+              <Star color="white" size="16" />
+              <H3>4.76</H3>
+              <Key color="white" size="16" />
+              <H3>87&apos; Volkswagen</H3>
+            </div>
             <H3>
-              {datetime.toLocaleString([], {
-                hour: 'numeric',
-                minute: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-              })}
+              {driver.firstName}
+              {' '}
+              {driver.lastName}
             </H3>
-          </div>
-          <div>
-            <H4>With seats</H4>
-            <H3>{maxSeats}</H3>
-          </div>
-        </TripDetails>
+          </Driver>
 
-        <Formik
-          initialValues={{ seats: 1 }}
-          onSubmit={(values) => submitBooking(id, values.seats)}
-        >
-          {({ values, errors }) => (
-            <StyledForm>
-              <FieldContainer>
-                <Label htmlFor="seats">
-                  seats
-                  <SeatsField
-                    id="seats"
-                    name="seats"
-                    type="number"
-                    placeholder="1"
-                    validate={(value) => ((value >= 1 && value <= maxSeats) ? '' : 'Error')}
-                    className={errors.seats ? 'field-error' : null}
-                  />
-                </Label>
-              </FieldContainer>
-              <PrimaryButton type="submit">
-                Book
-                {' '}
-                {values.seats}
-                {' '}
-                seats
-              </PrimaryButton>
-            </StyledForm>
+          <AvatarContainer>
+            <P>
+              {driver.firstName.slice(0, 1)}
+              {driver.lastName.slice(0, 1)}
+            </P>
+          </AvatarContainer>
+        </CardHeader>
           )}
-        </Formik>
-      </CardBody>
-        )}
-  />
-);
+      bodyContent={(
+        <CardBody>
+          <H2>
+            <span>
+              {origin}
+              {' '}
+              -
+              {' '}
+            </span>
+            <span>{destination}</span>
+          </H2>
+
+          <TripDetails>
+            <div>
+              <H4>Departs at</H4>
+              <H3>
+                {datetime.toLocaleString([], {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  month: 'numeric',
+                  day: 'numeric',
+                })}
+              </H3>
+            </div>
+            <div>
+              <H4>With seats</H4>
+              <H3>{maxSeats}</H3>
+            </div>
+          </TripDetails>
+
+          <Formik
+            initialValues={{ seats: 1 }}
+            onSubmit={(values) => submitBooking(id, values.seats)}
+          >
+            {({ values, errors }) => (
+              <StyledForm>
+                <FieldContainer>
+                  <Label htmlFor="seats">
+                    seats
+                    <SeatsField
+                      id="seats"
+                      name="seats"
+                      type="number"
+                      placeholder="1"
+                      validate={(value) => ((value >= 1 && value <= maxSeats) ? '' : 'Error')}
+                      className={errors.seats ? 'field-error' : null}
+                    />
+                  </Label>
+                </FieldContainer>
+                <PrimaryButton type="submit">
+                  {isLoading ?
+                    <Spinner /> :
+                    `Book ${values.seats} seats`
+                  }
+                </PrimaryButton>
+              </StyledForm>
+            )}
+          </Formik>
+        </CardBody>
+          )}
+    />
+  )
+};
 
 TripCard.propTypes = {
   id: PropTypes.string.isRequired,
