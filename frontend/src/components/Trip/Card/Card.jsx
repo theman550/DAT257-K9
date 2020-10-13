@@ -118,7 +118,6 @@ const FieldContainer = styled.div`
     }
 `;
 
-
 const TripCard = ({
   id,
   origin,
@@ -129,7 +128,7 @@ const TripCard = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const submitBooking = async (id, numberOfSeats) => {
+  const submitBooking = async (tripId, numberOfSeats) => {
     setIsLoading(true);
 
     try {
@@ -140,7 +139,7 @@ const TripCard = ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id,
+          id: tripId,
           seats: numberOfSeats,
           // TODO: Eventually add userId
         }),
@@ -236,10 +235,9 @@ const TripCard = ({
                   </Label>
                 </FieldContainer>
                 <PrimaryButton type="submit">
-                  {isLoading ?
-                    <Spinner /> :
-                    `Book ${values.seats} seats`
-                  }
+                  {isLoading
+                    ? <Spinner />
+                    : `Book ${values.seats} seats`}
                 </PrimaryButton>
               </StyledForm>
             )}
@@ -247,7 +245,7 @@ const TripCard = ({
         </CardBody>
           )}
     />
-  )
+  );
 };
 
 TripCard.propTypes = {

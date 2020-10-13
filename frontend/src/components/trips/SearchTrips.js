@@ -179,10 +179,9 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
       <StyledSelectRow>
         <StyledInactiveButton onClick={closeSearch}>Close</StyledInactiveButton>
         <StyledPrimaryButton type="submit">
-          {isLoading ?
-          <Spinner /> :
-          'Search'
-          }
+          {isLoading
+            ? <Spinner />
+            : 'Search'}
         </StyledPrimaryButton>
       </StyledSelectRow>
     </StyledForm>

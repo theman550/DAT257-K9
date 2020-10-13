@@ -92,12 +92,12 @@ const Form = () => {
     }).then((response) => response.json())
       .then((data) => {
         setIsLoading(false);
-        console.log(data)
+        console.log(data);
         // TODO: redirect
       })
       .catch((error) => {
         setIsLoading(false);
-        console.log(error)
+        console.log(error);
       });
   };
 
@@ -145,10 +145,9 @@ const Form = () => {
             <tr>
               <td>
                 <Button type="submit" data-testid="submit" className="button">
-                  {isLoading ?
-                    <Spinner /> :
-                    'Submit'
-                  }
+                  {isLoading
+                    ? <Spinner />
+                    : 'Submit'}
                 </Button>
               </td>
             </tr>

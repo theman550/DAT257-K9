@@ -23,14 +23,12 @@ const RotatingSpinner = styled(Loader)`
         transform:rotate(360deg);
     }
   }
-`
+`;
 
-const Spinner = () => {
-  return (
-    <SpinnerContainer>
-      <RotatingSpinner />
-    </SpinnerContainer>
-  );
-};
+const Spinner = () => (
+  <SpinnerContainer>
+    <RotatingSpinner />
+  </SpinnerContainer>
+);
 
 export default Spinner;

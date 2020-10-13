@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import config from '../config';
-import Spinner from '../components/Spinner';
+import Spinner from './Spinner';
 
 const Form = styled.form`
 background-color: #262626;
@@ -99,7 +99,7 @@ const Login = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        console.log(error)
+        console.log(error);
       });
   };
 
@@ -125,11 +125,10 @@ const Login = () => {
       </Div>
 
       <Button type="submit" className="button">
-        {isLoading ?
-          <Spinner /> :
-          'Submit'
-        }
-        </Button>
+        {isLoading
+          ? <Spinner />
+          : 'Submit'}
+      </Button>
       <P className="forgot-password text-right">
         Forgot
         <A href="#">password?</A>

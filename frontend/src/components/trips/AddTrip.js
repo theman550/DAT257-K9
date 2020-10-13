@@ -157,10 +157,9 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       <StyledSelectRow>
         <StyledInactiveButton onClick={closeAdd} type="button">Close</StyledInactiveButton>
         <StyledPrimaryButton type="submit">
-          {isLoading ?
-          <Spinner /> :
-          'Add'
-          }
+          {isLoading
+            ? <Spinner />
+            : 'Add'}
         </StyledPrimaryButton>
       </StyledSelectRow>
     </StyledForm>
