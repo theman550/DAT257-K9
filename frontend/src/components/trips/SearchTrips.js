@@ -9,6 +9,7 @@ import {
   Label,
 } from '../UI';
 import kommuner from './kommuner.json';
+import DropDown from './DropDown';
 
 const StyledInput = FieldFactory(styled.input``);
 
@@ -96,7 +97,6 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const createQuery = () => {
       let query = '';
 
@@ -145,13 +145,7 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
     <StyledForm aria-label="Search form" onSubmit={handleSubmit}>
       <StyledTextRow>
         <Label htmlFor="from">From</Label>
-        <StyledInput
-          type="text"
-          id="from"
-          value={from}
-          onChange={(e) => setFrom(e.target.value)}
-          placeholder="Enter start location..."
-        />
+        <DropDown items={options} placeholder="Enter startLocation..." id="from" />
       </StyledTextRow>
       <StyledTextRow>
         <Label htmlFor="to">To</Label>
@@ -163,6 +157,7 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
           placeholder="Enter destination..."
         />
       </StyledTextRow>
+
       <StyledSelectRow>
         <StyledSelectColumn>
           <Label htmlFor="datetime">Date/time</Label>
@@ -174,6 +169,7 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
           />
         </StyledSelectColumn>
       </StyledSelectRow>
+
       <StyledSelectRow>
         <StyledSelectColumn>
           <Label htmlFor="seats">Seats</Label>
@@ -187,6 +183,7 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
             placeholder="Enter seats..."
           />
         </StyledSelectColumn>
+
         <StyledSelectColumn>
           <Label htmlFor="price">Price</Label>
           <StyledSelectRow id="price">
@@ -208,6 +205,7 @@ const SearchTrips = ({ closeSearch, setFilteredTrips, showNotification }) => {
             />
           </StyledSelectRow>
         </StyledSelectColumn>
+
       </StyledSelectRow>
       <StyledSelectRow>
         <StyledInactiveButton onClick={closeSearch}>Close</StyledInactiveButton>

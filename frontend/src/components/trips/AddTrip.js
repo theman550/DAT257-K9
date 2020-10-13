@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { Formik, Field } from 'formik';
 import config from '../../config';
 import {
   FieldFactory,
@@ -9,17 +8,11 @@ import {
   Label,
   InactiveButton,
 } from '../UI';
-import AutoSelect from './AutoSelect';
 import kommuner from './kommuner.json';
+import DropDown from './DropDown';
 
-const StyledInput = FieldFactory(Field);
-
-const Div = styled.div`
-max-width:500px;
-width:100%;
-margin: 30% auto;
-margin-top:40%;
-`;
+const StyledInput = FieldFactory(styled.input``);
+const StyledTextArea = FieldFactory(styled.textarea``);
 
 const StyledForm = styled.form`
   display: flex;
@@ -27,7 +20,7 @@ const StyledForm = styled.form`
   background-color: ${(props) => props.theme.colors.fill};
   padding: 1rem;
   margin: 30% auto;
-  margin-top:-1%;
+  margin-top:30%;
   width: 80%;
   color:white;
   max-width: 400px;
@@ -37,13 +30,10 @@ const StyledForm = styled.form`
   box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
 `;
 
-const StyledField = styled(Field)`
-margin-top:-12px;
-`;
 const StyledTextRow = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 0.75rem;
+  margin-top: ${(props) => props.theme.spacing.subsection};
 
   &:nth-child(1) {
     margin: 0;
@@ -52,8 +42,9 @@ const StyledTextRow = styled.div`
 
 const StyledSelectRow = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-between;
-  margin-top: 0.75rem;
+  margin-top: ${(props) => props.theme.spacing.subsection};
 `;
 
 const StyledSelectColumn = styled.div`
@@ -65,48 +56,60 @@ const StyledSelectColumn = styled.div`
     display: none;
   }
 
-  &:nth-child(1) {
-    margin-right: 1rem;
+  &:nth-child(2) {
+    margin-left: ${(props) => props.theme.spacing.subsection};
   }
 
-  &:nth-child(2) {
-    margin-left: 1rem;
-    
+  & > div {
+    margin-top: 0;
   }
-  
 `;
 
 const Button = css`
-  padding: 0.75rem;
-  height: 80%;
+  padding: ${(props) => props.theme.size.button};
   width: 100%;
-  margin-top: 0.75rem;
+  margin-top: ${(props) => props.theme.spacing.subsection};
 `;
 
 const StyledPrimaryButton = styled(PrimaryButton)`
   ${Button}
-  margin-left: 0.75rem;
+  margin-left: ${(props) => props.theme.spacing.subsection};
 `;
 
 const StyledInactiveButton = styled(InactiveButton)`
   ${Button}
-  margin-right: 0.75rem;
+  margin-right: ${(props) => props.theme.spacing.subsection};
 `;
 
 const AddTrip = ({ closeAdd, showNotification }) => {
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
+  const [datetime, setDatetime] = useState('');
+  const [seats, setSeats] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
   const options = [];
-  const onSubmit = (values) => {
+
+  const loadingData = async () => {
+    console.log(kommuner);
+    kommuner.map((detail, index) => {
+      options[index] = detail.Kommun;
+      return options[index];
+    });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
     const newvalues = {
-      startLocation: values.startLocation,
-      destination: values.destination,
-      seatsAvailable: values.seatsAvailable,
-      startTime: `${values.startTime} ${values.time}`,
-      price: values.price,
-      description: values.description,
+      startLocation: from,
+      destination: to,
+      seatsAvailable: seats,
+      startTime: datetime,
+      price,
+      description,
+
     };
-
     console.log(newvalues);
-
     fetch(`${config.api.url}trips/`, {
       method: 'POST',
       mode: 'cors',
@@ -125,67 +128,65 @@ const AddTrip = ({ closeAdd, showNotification }) => {
     });
   };
 
-  const loadingData = async () => {
-    console.log(kommuner);
-    kommuner.map((detail, index) => {
-      options[index] = detail.Kommun;
-      return options[index];
-    });
-  };
+  useEffect(() => { loadingData(); }, []);
+  return (
 
-  const form = (props) => (
-    // eslint-disable-next-line react/prop-types
-    <StyledForm aria-label="AddTrip form" onSubmit={props.handleSubmit}>
+    <StyledForm aria-label="Add form" onSubmit={onSubmit}>
       <StyledTextRow>
         <Label htmlFor="from">From</Label>
-        <StyledField
-          name="startLocation"
-          component={AutoSelect}
-          options={options}
-          textFieldProps={{
-            fullWidth: true,
-            margin: 'normal',
-          }}
-          placeholder="Enter start location.."
-        />
+        <DropDown items={options} placeholder="Enter startLocation..." id="from" />
       </StyledTextRow>
+
       <StyledTextRow>
         <Label htmlFor="to">To</Label>
-        <StyledField
-          name="destination"
-          component={AutoSelect}
-          options={options}
-          textFieldProps={{
-            fullWidth: true,
-            margin: 'normal',
-          }}
-          placeholder="Enter destination.."
-        />
+        <DropDown items={options} placeholder="Enter destination..." id="to" />
       </StyledTextRow>
+
       <StyledSelectRow>
         <StyledSelectColumn>
-          <Label htmlFor="date">Date</Label>
-          <StyledInput name="startTime" type="date" id="date" required />
-        </StyledSelectColumn>
-        <StyledSelectColumn>
-          <Label htmlFor="time">Time</Label>
-          <StyledInput name="time" type="time" required />
+          <Label htmlFor="datetime">Date/time</Label>
+          <StyledInput
+            type="datetime-local"
+            id="datetime"
+            value={datetime}
+            onChange={(e) => setDatetime(e.target.value)}
+          />
         </StyledSelectColumn>
       </StyledSelectRow>
+
       <StyledSelectRow>
         <StyledSelectColumn>
           <Label htmlFor="seats">Seats</Label>
-          <StyledInput name="seatsAvailable" type="number" id="seats" min="0" max="4" />
+          <StyledInput
+            type="number"
+            id="seats"
+            min="1"
+            max="100"
+            value={seats}
+            onChange={(e) => setSeats(e.target.value)}
+            placeholder="Enter seats..."
+          />
         </StyledSelectColumn>
+
         <StyledSelectColumn>
           <Label htmlFor="price">Price</Label>
-          <StyledInput name="price" type="number" id="price" min="0" max="1000" />
+          <StyledInput
+            type="number"
+            min="0"
+            max="1000"
+            id="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder="Price"
+          />
+
         </StyledSelectColumn>
       </StyledSelectRow>
+
       <StyledSelectRow>
         <StyledSelectColumn>
           <Label htmlFor="description">description</Label>
-          <StyledInput name="description" id="description" component="textarea" rows="6" cols="30" />
+          <StyledTextArea id="description" rows="6" cols="30" value={description} onChange={(e) => setDescription(e.target.value)} />
         </StyledSelectColumn>
       </StyledSelectRow>
 
@@ -193,22 +194,8 @@ const AddTrip = ({ closeAdd, showNotification }) => {
         <StyledInactiveButton onClick={closeAdd} type="button">Close</StyledInactiveButton>
         <StyledPrimaryButton type="submit">Add</StyledPrimaryButton>
       </StyledSelectRow>
-    </StyledForm>
-  );
 
-  useEffect(() => { loadingData(); }, []);
-  return (
-    <Div>
-      <Formik
-        data-testid="form"
-        initialValues={{
-          startLocation: '', destination: '', seatsAvailable: 1, startTime: '', time: '', price: 0, description: '',
-        }}
-        onSubmit={onSubmit}
-      >
-        {form}
-      </Formik>
-    </Div>
+    </StyledForm>
   );
 };
 
@@ -216,5 +203,4 @@ AddTrip.propTypes = {
   closeAdd: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
 };
-
 export default AddTrip;
