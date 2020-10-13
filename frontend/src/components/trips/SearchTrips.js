@@ -7,6 +7,7 @@ import {
   InactiveButton,
   Label,
 } from '../UI';
+import Spinner from '../Spinner';
 
 const StyledInput = FieldFactory(styled.input``);
 
@@ -82,6 +83,7 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
   const [seats, setSeats] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const createQuery = () => {
     let query = '';
@@ -96,11 +98,12 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
     return query === '' ? query : `?${query}`;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const query = createQuery();
-    getTrips(query);
+    await getTrips(query);
 
     closeSearch();
   };
@@ -175,7 +178,12 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
       </StyledSelectRow>
       <StyledSelectRow>
         <StyledInactiveButton onClick={closeSearch}>Close</StyledInactiveButton>
-        <StyledPrimaryButton type="submit">Search</StyledPrimaryButton>
+        <StyledPrimaryButton type="submit">
+          {isLoading ?
+          <Spinner /> :
+          'Search'
+          }
+        </StyledPrimaryButton>
       </StyledSelectRow>
     </StyledForm>
   );

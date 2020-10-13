@@ -79,13 +79,14 @@ const Login = () => {
     fetch(`${config.api.url}login/`, {
       method: 'POST',
       mode: 'cors',
+      credentials: 'include',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        Email: email,
-        Password: password,
+        email,
+        password,
       }),
     })
       .then((response) => response)
