@@ -20,10 +20,6 @@ const FieldFactory = (Field) => styled(Field)`
         color: white;
     }
 
-    &:focus {
-        color:white;
-    }
-
     &.field-error {
         border-color: #8c4c4c;
     }

@@ -45,6 +45,7 @@ const App = () => {
                 <Account
                   loggedInUser={loggedInUser}
                   setLoggedInUser={setLoggedInUser}
+                  showNotification={showNotification}
                 />
               </ErrorBoundary>
             </Route>
@@ -53,6 +54,7 @@ const App = () => {
                 <RegisterForm
                   loggedInUser={loggedInUser}
                   setLoggedInUser={setLoggedInUser}
+                  showNotification={showNotification}
                 />
               </ErrorBoundary>
             </Route>
@@ -60,7 +62,10 @@ const App = () => {
               && (
               <Route path="/trips">
                 <ErrorBoundary sectionName="Trip page">
-                  <Trips showNotification={showNotification} />
+                  <Trips 
+                    showNotification={showNotification} 
+                    loggedInUser={loggedInUser}
+                  />
                 </ErrorBoundary>
               </Route>
               )}

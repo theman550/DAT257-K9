@@ -6,7 +6,7 @@ include_once("dataValidation.php");
 define("SECRET_KEY", "f402a1dff337b00f3e5c121bb374ccfa802be479b6be1e812282db714a6e5c4fbd02b694a5ffbe073139693fa201719af75c8d876bd878df07534c3f695581cb"); // key ska ligga någon annanstans sen. 
 
 function headers(){
-	header('Access-Control-Allow-Origin: localhost:3000'); // <- Ersätt med null för att använda lokalt
+	header('Access-Control-Allow-Origin: http://localhost:3000'); // <- Ersätt med null för att använda lokalt
 	header('Content-Type: application/json');
 	header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 	header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Credentials');
@@ -163,19 +163,21 @@ function setExpire($email, $dateInterval)
 	$query = "UPDATE Users SET auth_expires = '$dateToInsert' where email = '$email'";
 	queryDB($query);
 }
-function confirmTokenExpired($email)
+function hasTokenExpired($email)
 {
 	date_default_timezone_set("Europe/Stockholm"); 
 	$query = "SELECT auth_expires FROM Users where email = '$email'";
 	$response = queryDB($query);
 	if(mysqli_num_rows($response) > 0)
 	{
-		$currentTime = date('d-m-y h:i:s');
+		$currentTime = time();//date('d-m-y h:i:s');
 		$row = $response->fetch_row(); // SKA bara ge tillbaka en rad eftersom email alltid är unik i databasen och ger max ett resultat
-		if($currentTime > $row[0])
-			return false;
-		else
+		if($currentTime > strtotime($row[0]))
 			return true;
+		else
+		{
+			return false;
+		}
 	}
 	return false;
 }
@@ -221,15 +223,14 @@ function tryLogin($email, $password, $rememberMe=0)
 function logUserIn($email)
 {
 	$token = "";
-	if(confirmTokenExpired($email))
+	if(!hasTokenExpired($email))
 		$token = getTokenFromDB($email);
 	else
 		$token = createToken($email);
 	setExpire($email, new DateInterval("PT1H"));
-	$_SESSION['loggedin'] = true;
-	$_SESSION["token"] = $token;
-	$_SESSION["email"] = $email;
-	return $token;
+	$tokenMail = array( "email" => $email,
+                    "token" => $token);
+	return $tokenMail;
 }
 function setRememberMe($email, $token)
 {
@@ -254,21 +255,18 @@ function rememberMe() {
         }
     }
 }
-function logout()
+function test ()
 {
-	if (session_status() == PHP_SESSION_NONE)
-		session_start();
-	$token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
-	$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
-	if($token && $email)
-	{
-		$tokenFromDB = getTokenFromDB($email);
-		if($tokenFromDB == $token)
-		{ 
-			$interval = new DateInterval("P0Y");
-			setExpire($email, $interval); // sätter till nuvarande tiden, dvs nästa gång användaren försöker logga in har token expireat
-			session_destroy();
-		}
+	$movie = array( "email" => $email,
+                "token" => $token);
+}
+function logout($email, $token)
+{
+	$tokenFromDB = getTokenFromDB($email);
+	if($tokenFromDB == $token)
+	{ 
+		$interval = new DateInterval("P0Y");
+		setExpire($email, $interval); // sätter till nuvarande tiden, dvs nästa gång användaren försöker logga in har token expireat
 	}
 }
 // tar bort alla tider som gått ut, användning 0 parametrar ger alla tider som expireats utan filter, med extraconditions satt kan t.ex filterExpiredTrips("startLocation = 'lidkoping'"); som ger alla resor som inte gått ut och startar i lidkoping

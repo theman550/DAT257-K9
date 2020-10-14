@@ -1,0 +1,1452 @@
+ [
+        {
+            "Kommunkod": "1440",
+            "Kommun": "Ale",
+            "Folkmängd 31 december 2018": "30,926"
+        },
+        {
+            "Kommunkod": "1489",
+            "Kommun": "Alingsås",
+            "Folkmängd 31 december 2018": "41,070"
+        },
+        {
+            "Kommunkod": "0764",
+            "Kommun": "Alvesta",
+            "Folkmängd 31 december 2018": "20,150"
+        },
+        {
+            "Kommunkod": "0604",
+            "Kommun": "Aneby",
+            "Folkmängd 31 december 2018": "6,832"
+        },
+        {
+            "Kommunkod": "1984",
+            "Kommun": "Arboga",
+            "Folkmängd 31 december 2018": "14,138"
+        },
+        {
+            "Kommunkod": "2506",
+            "Kommun": "Arjeplog",
+            "Folkmängd 31 december 2018": "2,794"
+        },
+        {
+            "Kommunkod": "2505",
+            "Kommun": "Arvidsjaur",
+            "Folkmängd 31 december 2018": "6,334"
+        },
+        {
+            "Kommunkod": "1784",
+            "Kommun": "Arvika",
+            "Folkmängd 31 december 2018": "26,082"
+        },
+        {
+            "Kommunkod": "1882",
+            "Kommun": "Askersund",
+            "Folkmängd 31 december 2018": "11,313"
+        },
+        {
+            "Kommunkod": "2084",
+            "Kommun": "Avesta",
+            "Folkmängd 31 december 2018": "23,323"
+        },
+        {
+            "Kommunkod": "1460",
+            "Kommun": "Bengtsfors",
+            "Folkmängd 31 december 2018": "9,846"
+        },
+        {
+            "Kommunkod": "2326",
+            "Kommun": "Berg",
+            "Folkmängd 31 december 2018": "7,097"
+        },
+        {
+            "Kommunkod": "2403",
+            "Kommun": "Bjurholm",
+            "Folkmängd 31 december 2018": "2,450"
+        },
+        {
+            "Kommunkod": "1260",
+            "Kommun": "Bjuv",
+            "Folkmängd 31 december 2018": "15,501"
+        },
+        {
+            "Kommunkod": "2582",
+            "Kommun": "Boden",
+            "Folkmängd 31 december 2018": "28,064"
+        },
+        {
+            "Kommunkod": "1443",
+            "Kommun": "Bollebygd",
+            "Folkmängd 31 december 2018": "9,427"
+        },
+        {
+            "Kommunkod": "2183",
+            "Kommun": "Bollnäs",
+            "Folkmängd 31 december 2018": "26,991"
+        },
+        {
+            "Kommunkod": "0885",
+            "Kommun": "Borgholm",
+            "Folkmängd 31 december 2018": "10,873"
+        },
+        {
+            "Kommunkod": "2081",
+            "Kommun": "Borlänge",
+            "Folkmängd 31 december 2018": "52,224"
+        },
+        {
+            "Kommunkod": "1490",
+            "Kommun": "Borås",
+            "Folkmängd 31 december 2018": "112,178"
+        },
+        {
+            "Kommunkod": "0127",
+            "Kommun": "Botkyrka",
+            "Folkmängd 31 december 2018": "93,106"
+        },
+        {
+            "Kommunkod": "0560",
+            "Kommun": "Boxholm",
+            "Folkmängd 31 december 2018": "5,449"
+        },
+        {
+            "Kommunkod": "1272",
+            "Kommun": "Bromölla",
+            "Folkmängd 31 december 2018": "12,876"
+        },
+        {
+            "Kommunkod": "2305",
+            "Kommun": "Bräcke",
+            "Folkmängd 31 december 2018": "6,376"
+        },
+        {
+            "Kommunkod": "1231",
+            "Kommun": "Burlöv",
+            "Folkmängd 31 december 2018": "18,360"
+        },
+        {
+            "Kommunkod": "1278",
+            "Kommun": "Båstad",
+            "Folkmängd 31 december 2018": "14,948"
+        },
+        {
+            "Kommunkod": "1438",
+            "Kommun": "Dals-Ed",
+            "Folkmängd 31 december 2018": "4,806"
+        },
+        {
+            "Kommunkod": "0162",
+            "Kommun": "Danderyd",
+            "Folkmängd 31 december 2018": "33,187"
+        },
+        {
+            "Kommunkod": "1862",
+            "Kommun": "Degerfors",
+            "Folkmängd 31 december 2018": "9,665"
+        },
+        {
+            "Kommunkod": "2425",
+            "Kommun": "Dorotea",
+            "Folkmängd 31 december 2018": "2,568"
+        },
+        {
+            "Kommunkod": "1730",
+            "Kommun": "Eda",
+            "Folkmängd 31 december 2018": "8,575"
+        },
+        {
+            "Kommunkod": "0125",
+            "Kommun": "Ekerö",
+            "Folkmängd 31 december 2018": "28,308"
+        },
+        {
+            "Kommunkod": "0686",
+            "Kommun": "Eksjö",
+            "Folkmängd 31 december 2018": "17,667"
+        },
+        {
+            "Kommunkod": "0862",
+            "Kommun": "Emmaboda",
+            "Folkmängd 31 december 2018": "9,400"
+        },
+        {
+            "Kommunkod": "0381",
+            "Kommun": "Enköping",
+            "Folkmängd 31 december 2018": "44,429"
+        },
+        {
+            "Kommunkod": "0484",
+            "Kommun": "Eskilstuna",
+            "Folkmängd 31 december 2018": "105,924"
+        },
+        {
+            "Kommunkod": "1285",
+            "Kommun": "Eslöv",
+            "Folkmängd 31 december 2018": "33,557"
+        },
+        {
+            "Kommunkod": "1445",
+            "Kommun": "Essunga",
+            "Folkmängd 31 december 2018": "5,671"
+        },
+        {
+            "Kommunkod": "1982",
+            "Kommun": "Fagersta",
+            "Folkmängd 31 december 2018": "13,464"
+        },
+        {
+            "Kommunkod": "1382",
+            "Kommun": "Falkenberg",
+            "Folkmängd 31 december 2018": "44,701"
+        },
+        {
+            "Kommunkod": "1499",
+            "Kommun": "Falköping",
+            "Folkmängd 31 december 2018": "33,155"
+        },
+        {
+            "Kommunkod": "2080",
+            "Kommun": "Falun",
+            "Folkmängd 31 december 2018": "58,923"
+        },
+        {
+            "Kommunkod": "1782",
+            "Kommun": "Filipstad",
+            "Folkmängd 31 december 2018": "10,837"
+        },
+        {
+            "Kommunkod": "0562",
+            "Kommun": "Finspång",
+            "Folkmängd 31 december 2018": "21,758"
+        },
+        {
+            "Kommunkod": "0482",
+            "Kommun": "Flen",
+            "Folkmängd 31 december 2018": "16,705"
+        },
+        {
+            "Kommunkod": "1763",
+            "Kommun": "Forshaga",
+            "Folkmängd 31 december 2018": "11,518"
+        },
+        {
+            "Kommunkod": "1439",
+            "Kommun": "Färgelanda",
+            "Folkmängd 31 december 2018": "6,602"
+        },
+        {
+            "Kommunkod": "2026",
+            "Kommun": "Gagnef",
+            "Folkmängd 31 december 2018": "10,271"
+        },
+        {
+            "Kommunkod": "0662",
+            "Kommun": "Gislaved",
+            "Folkmängd 31 december 2018": "29,857"
+        },
+        {
+            "Kommunkod": "0461",
+            "Kommun": "Gnesta",
+            "Folkmängd 31 december 2018": "11,237"
+        },
+        {
+            "Kommunkod": "0617",
+            "Kommun": "Gnosjö",
+            "Folkmängd 31 december 2018": "9,776"
+        },
+        {
+            "Kommunkod": "0980",
+            "Kommun": "Gotland",
+            "Folkmängd 31 december 2018": "59,249"
+        },
+        {
+            "Kommunkod": "1764",
+            "Kommun": "Grums",
+            "Folkmängd 31 december 2018": "9,016"
+        },
+        {
+            "Kommunkod": "1444",
+            "Kommun": "Grästorp",
+            "Folkmängd 31 december 2018": "5,731"
+        },
+        {
+            "Kommunkod": "1447",
+            "Kommun": "Gullspång",
+            "Folkmängd 31 december 2018": "5,293"
+        },
+        {
+            "Kommunkod": "2523",
+            "Kommun": "Gällivare",
+            "Folkmängd 31 december 2018": "17,630"
+        },
+        {
+            "Kommunkod": "2180",
+            "Kommun": "Gävle",
+            "Folkmängd 31 december 2018": "101,455"
+        },
+        {
+            "Kommunkod": "1480",
+            "Kommun": "Göteborg",
+            "Folkmängd 31 december 2018": "571,868"
+        },
+        {
+            "Kommunkod": "1471",
+            "Kommun": "Götene",
+            "Folkmängd 31 december 2018": "13,232"
+        },
+        {
+            "Kommunkod": "0643",
+            "Kommun": "Habo",
+            "Folkmängd 31 december 2018": "12,140"
+        },
+        {
+            "Kommunkod": "1783",
+            "Kommun": "Hagfors",
+            "Folkmängd 31 december 2018": "11,698"
+        },
+        {
+            "Kommunkod": "1861",
+            "Kommun": "Hallsberg",
+            "Folkmängd 31 december 2018": "15,954"
+        },
+        {
+            "Kommunkod": "1961",
+            "Kommun": "Hallstahammar",
+            "Folkmängd 31 december 2018": "16,186"
+        },
+        {
+            "Kommunkod": "1380",
+            "Kommun": "Halmstad",
+            "Folkmängd 31 december 2018": "101,268"
+        },
+        {
+            "Kommunkod": "1761",
+            "Kommun": "Hammarö",
+            "Folkmängd 31 december 2018": "16,483"
+        },
+        {
+            "Kommunkod": "0136",
+            "Kommun": "Haninge",
+            "Folkmängd 31 december 2018": "89,989"
+        },
+        {
+            "Kommunkod": "2583",
+            "Kommun": "Haparanda",
+            "Folkmängd 31 december 2018": "9,785"
+        },
+        {
+            "Kommunkod": "0331",
+            "Kommun": "Heby",
+            "Folkmängd 31 december 2018": "13,910"
+        },
+        {
+            "Kommunkod": "2083",
+            "Kommun": "Hedemora",
+            "Folkmängd 31 december 2018": "15,457"
+        },
+        {
+            "Kommunkod": "1283",
+            "Kommun": "Helsingborg",
+            "Folkmängd 31 december 2018": "145,415"
+        },
+        {
+            "Kommunkod": "1466",
+            "Kommun": "Herrljunga",
+            "Folkmängd 31 december 2018": "9,494"
+        },
+        {
+            "Kommunkod": "1497",
+            "Kommun": "Hjo",
+            "Folkmängd 31 december 2018": "9,176"
+        },
+        {
+            "Kommunkod": "2104",
+            "Kommun": "Hofors",
+            "Folkmängd 31 december 2018": "9,602"
+        },
+        {
+            "Kommunkod": "0126",
+            "Kommun": "Huddinge",
+            "Folkmängd 31 december 2018": "111,722"
+        },
+        {
+            "Kommunkod": "2184",
+            "Kommun": "Hudiksvall",
+            "Folkmängd 31 december 2018": "37,430"
+        },
+        {
+            "Kommunkod": "0860",
+            "Kommun": "Hultsfred",
+            "Folkmängd 31 december 2018": "14,360"
+        },
+        {
+            "Kommunkod": "1315",
+            "Kommun": "Hylte",
+            "Folkmängd 31 december 2018": "10,914"
+        },
+        {
+            "Kommunkod": "0305",
+            "Kommun": "Håbo",
+            "Folkmängd 31 december 2018": "21,564"
+        },
+        {
+            "Kommunkod": "1863",
+            "Kommun": "Hällefors",
+            "Folkmängd 31 december 2018": "6,983"
+        },
+        {
+            "Kommunkod": "2361",
+            "Kommun": "Härjedalen",
+            "Folkmängd 31 december 2018": "10,147"
+        },
+        {
+            "Kommunkod": "2280",
+            "Kommun": "Härnösand",
+            "Folkmängd 31 december 2018": "25,120"
+        },
+        {
+            "Kommunkod": "1401",
+            "Kommun": "Härryda",
+            "Folkmängd 31 december 2018": "37,802"
+        },
+        {
+            "Kommunkod": "1293",
+            "Kommun": "Hässleholm",
+            "Folkmängd 31 december 2018": "52,121"
+        },
+        {
+            "Kommunkod": "1284",
+            "Kommun": "Höganäs",
+            "Folkmängd 31 december 2018": "26,566"
+        },
+        {
+            "Kommunkod": "0821",
+            "Kommun": "Högsby",
+            "Folkmängd 31 december 2018": "6,094"
+        },
+        {
+            "Kommunkod": "1266",
+            "Kommun": "Hörby",
+            "Folkmängd 31 december 2018": "15,635"
+        },
+        {
+            "Kommunkod": "1267",
+            "Kommun": "Höör",
+            "Folkmängd 31 december 2018": "16,637"
+        },
+        {
+            "Kommunkod": "2510",
+            "Kommun": "Jokkmokk",
+            "Folkmängd 31 december 2018": "5,001"
+        },
+        {
+            "Kommunkod": "0123",
+            "Kommun": "Järfälla",
+            "Folkmängd 31 december 2018": "78,480"
+        },
+        {
+            "Kommunkod": "0680",
+            "Kommun": "Jönköping",
+            "Folkmängd 31 december 2018": "139,222"
+        },
+        {
+            "Kommunkod": "2514",
+            "Kommun": "Kalix",
+            "Folkmängd 31 december 2018": "16,058"
+        },
+        {
+            "Kommunkod": "0880",
+            "Kommun": "Kalmar",
+            "Folkmängd 31 december 2018": "68,510"
+        },
+        {
+            "Kommunkod": "1446",
+            "Kommun": "Karlsborg",
+            "Folkmängd 31 december 2018": "6,941"
+        },
+        {
+            "Kommunkod": "1082",
+            "Kommun": "Karlshamn",
+            "Folkmängd 31 december 2018": "32,330"
+        },
+        {
+            "Kommunkod": "1883",
+            "Kommun": "Karlskoga",
+            "Folkmängd 31 december 2018": "30,419"
+        },
+        {
+            "Kommunkod": "1080",
+            "Kommun": "Karlskrona",
+            "Folkmängd 31 december 2018": "66,675"
+        },
+        {
+            "Kommunkod": "1780",
+            "Kommun": "Karlstad",
+            "Folkmängd 31 december 2018": "92,497"
+        },
+        {
+            "Kommunkod": "0483",
+            "Kommun": "Katrineholm",
+            "Folkmängd 31 december 2018": "34,550"
+        },
+        {
+            "Kommunkod": "1715",
+            "Kommun": "Kil",
+            "Folkmängd 31 december 2018": "11,962"
+        },
+        {
+            "Kommunkod": "0513",
+            "Kommun": "Kinda",
+            "Folkmängd 31 december 2018": "9,915"
+        },
+        {
+            "Kommunkod": "2584",
+            "Kommun": "Kiruna",
+            "Folkmängd 31 december 2018": "22,992"
+        },
+        {
+            "Kommunkod": "1276",
+            "Kommun": "Klippan",
+            "Folkmängd 31 december 2018": "17,600"
+        },
+        {
+            "Kommunkod": "0330",
+            "Kommun": "Knivsta",
+            "Folkmängd 31 december 2018": "18,720"
+        },
+        {
+            "Kommunkod": "2282",
+            "Kommun": "Kramfors",
+            "Folkmängd 31 december 2018": "18,423"
+        },
+        {
+            "Kommunkod": "1290",
+            "Kommun": "Kristianstad",
+            "Folkmängd 31 december 2018": "84,908"
+        },
+        {
+            "Kommunkod": "1781",
+            "Kommun": "Kristinehamn",
+            "Folkmängd 31 december 2018": "24,336"
+        },
+        {
+            "Kommunkod": "2309",
+            "Kommun": "Krokom",
+            "Folkmängd 31 december 2018": "14,858"
+        },
+        {
+            "Kommunkod": "1881",
+            "Kommun": "Kumla",
+            "Folkmängd 31 december 2018": "21,640"
+        },
+        {
+            "Kommunkod": "1384",
+            "Kommun": "Kungsbacka",
+            "Folkmängd 31 december 2018": "83,348"
+        },
+        {
+            "Kommunkod": "1960",
+            "Kommun": "Kungsör",
+            "Folkmängd 31 december 2018": "8,667"
+        },
+        {
+            "Kommunkod": "1482",
+            "Kommun": "Kungälv",
+            "Folkmängd 31 december 2018": "45,086"
+        },
+        {
+            "Kommunkod": "1261",
+            "Kommun": "Kävlinge",
+            "Folkmängd 31 december 2018": "31,491"
+        },
+        {
+            "Kommunkod": "1983",
+            "Kommun": "Köping",
+            "Folkmängd 31 december 2018": "26,268"
+        },
+        {
+            "Kommunkod": "1381",
+            "Kommun": "Laholm",
+            "Folkmängd 31 december 2018": "25,491"
+        },
+        {
+            "Kommunkod": "1282",
+            "Kommun": "Landskrona",
+            "Folkmängd 31 december 2018": "45,775"
+        },
+        {
+            "Kommunkod": "1860",
+            "Kommun": "Laxå",
+            "Folkmängd 31 december 2018": "5,637"
+        },
+        {
+            "Kommunkod": "1814",
+            "Kommun": "Lekeberg",
+            "Folkmängd 31 december 2018": "8,116"
+        },
+        {
+            "Kommunkod": "2029",
+            "Kommun": "Leksand",
+            "Folkmängd 31 december 2018": "15,804"
+        },
+        {
+            "Kommunkod": "1441",
+            "Kommun": "Lerum",
+            "Folkmängd 31 december 2018": "42,137"
+        },
+        {
+            "Kommunkod": "0761",
+            "Kommun": "Lessebo",
+            "Folkmängd 31 december 2018": "8,780"
+        },
+        {
+            "Kommunkod": "0186",
+            "Kommun": "Lidingö",
+            "Folkmängd 31 december 2018": "47,818"
+        },
+        {
+            "Kommunkod": "1494",
+            "Kommun": "Lidköping",
+            "Folkmängd 31 december 2018": "39,879"
+        },
+        {
+            "Kommunkod": "1462",
+            "Kommun": "Lilla Edet",
+            "Folkmängd 31 december 2018": "14,046"
+        },
+        {
+            "Kommunkod": "1885",
+            "Kommun": "Lindesberg",
+            "Folkmängd 31 december 2018": "23,575"
+        },
+        {
+            "Kommunkod": "0580",
+            "Kommun": "Linköping",
+            "Folkmängd 31 december 2018": "161,034"
+        },
+        {
+            "Kommunkod": "0781",
+            "Kommun": "Ljungby",
+            "Folkmängd 31 december 2018": "28,573"
+        },
+        {
+            "Kommunkod": "2161",
+            "Kommun": "Ljusdal",
+            "Folkmängd 31 december 2018": "19,033"
+        },
+        {
+            "Kommunkod": "1864",
+            "Kommun": "Ljusnarsberg",
+            "Folkmängd 31 december 2018": "4,846"
+        },
+        {
+            "Kommunkod": "1262",
+            "Kommun": "Lomma",
+            "Folkmängd 31 december 2018": "24,763"
+        },
+        {
+            "Kommunkod": "2085",
+            "Kommun": "Ludvika",
+            "Folkmängd 31 december 2018": "26,946"
+        },
+        {
+            "Kommunkod": "2580",
+            "Kommun": "Luleå",
+            "Folkmängd 31 december 2018": "77,832"
+        },
+        {
+            "Kommunkod": "1281",
+            "Kommun": "Lund",
+            "Folkmängd 31 december 2018": "122,948"
+        },
+        {
+            "Kommunkod": "2481",
+            "Kommun": "Lycksele",
+            "Folkmängd 31 december 2018": "12,228"
+        },
+        {
+            "Kommunkod": "1484",
+            "Kommun": "Lysekil",
+            "Folkmängd 31 december 2018": "14,611"
+        },
+        {
+            "Kommunkod": "1280",
+            "Kommun": "Malmö",
+            "Folkmängd 31 december 2018": "339,313"
+        },
+        {
+            "Kommunkod": "2023",
+            "Kommun": "Malung-Sälen",
+            "Folkmängd 31 december 2018": "10,106"
+        },
+        {
+            "Kommunkod": "2418",
+            "Kommun": "Malå",
+            "Folkmängd 31 december 2018": "3,122"
+        },
+        {
+            "Kommunkod": "1493",
+            "Kommun": "Mariestad",
+            "Folkmängd 31 december 2018": "24,372"
+        },
+        {
+            "Kommunkod": "1463",
+            "Kommun": "Mark",
+            "Folkmängd 31 december 2018": "34,781"
+        },
+        {
+            "Kommunkod": "0767",
+            "Kommun": "Markaryd",
+            "Folkmängd 31 december 2018": "10,260"
+        },
+        {
+            "Kommunkod": "1461",
+            "Kommun": "Mellerud",
+            "Folkmängd 31 december 2018": "9,354"
+        },
+        {
+            "Kommunkod": "0586",
+            "Kommun": "Mjölby",
+            "Folkmängd 31 december 2018": "27,373"
+        },
+        {
+            "Kommunkod": "2062",
+            "Kommun": "Mora",
+            "Folkmängd 31 december 2018": "20,390"
+        },
+        {
+            "Kommunkod": "0583",
+            "Kommun": "Motala",
+            "Folkmängd 31 december 2018": "43,687"
+        },
+        {
+            "Kommunkod": "0642",
+            "Kommun": "Mullsjö",
+            "Folkmängd 31 december 2018": "7,324"
+        },
+        {
+            "Kommunkod": "1430",
+            "Kommun": "Munkedal",
+            "Folkmängd 31 december 2018": "10,503"
+        },
+        {
+            "Kommunkod": "1762",
+            "Kommun": "Munkfors",
+            "Folkmängd 31 december 2018": "3,789"
+        },
+        {
+            "Kommunkod": "1481",
+            "Kommun": "Mölndal",
+            "Folkmängd 31 december 2018": "68,152"
+        },
+        {
+            "Kommunkod": "0861",
+            "Kommun": "Mönsterås",
+            "Folkmängd 31 december 2018": "13,565"
+        },
+        {
+            "Kommunkod": "0840",
+            "Kommun": "Mörbylånga",
+            "Folkmängd 31 december 2018": "15,048"
+        },
+        {
+            "Kommunkod": "0182",
+            "Kommun": "Nacka",
+            "Folkmängd 31 december 2018": "103,656"
+        },
+        {
+            "Kommunkod": "1884",
+            "Kommun": "Nora",
+            "Folkmängd 31 december 2018": "10,737"
+        },
+        {
+            "Kommunkod": "1962",
+            "Kommun": "Norberg",
+            "Folkmängd 31 december 2018": "5,795"
+        },
+        {
+            "Kommunkod": "2132",
+            "Kommun": "Nordanstig",
+            "Folkmängd 31 december 2018": "9,517"
+        },
+        {
+            "Kommunkod": "2401",
+            "Kommun": "Nordmaling",
+            "Folkmängd 31 december 2018": "7,118"
+        },
+        {
+            "Kommunkod": "0581",
+            "Kommun": "Norrköping",
+            "Folkmängd 31 december 2018": "141,676"
+        },
+        {
+            "Kommunkod": "0188",
+            "Kommun": "Norrtälje",
+            "Folkmängd 31 december 2018": "61,769"
+        },
+        {
+            "Kommunkod": "2417",
+            "Kommun": "Norsjö",
+            "Folkmängd 31 december 2018": "4,094"
+        },
+        {
+            "Kommunkod": "0881",
+            "Kommun": "Nybro",
+            "Folkmängd 31 december 2018": "20,350"
+        },
+        {
+            "Kommunkod": "0140",
+            "Kommun": "Nykvarn",
+            "Folkmängd 31 december 2018": "10,923"
+        },
+        {
+            "Kommunkod": "0480",
+            "Kommun": "Nyköping",
+            "Folkmängd 31 december 2018": "56,011"
+        },
+        {
+            "Kommunkod": "0192",
+            "Kommun": "Nynäshamn",
+            "Folkmängd 31 december 2018": "28,290"
+        },
+        {
+            "Kommunkod": "0682",
+            "Kommun": "Nässjö",
+            "Folkmängd 31 december 2018": "31,477"
+        },
+        {
+            "Kommunkod": "2101",
+            "Kommun": "Ockelbo",
+            "Folkmängd 31 december 2018": "5,906"
+        },
+        {
+            "Kommunkod": "1060",
+            "Kommun": "Olofström",
+            "Folkmängd 31 december 2018": "13,516"
+        },
+        {
+            "Kommunkod": "2034",
+            "Kommun": "Orsa",
+            "Folkmängd 31 december 2018": "6,892"
+        },
+        {
+            "Kommunkod": "1421",
+            "Kommun": "Orust",
+            "Folkmängd 31 december 2018": "15,110"
+        },
+        {
+            "Kommunkod": "1273",
+            "Kommun": "Osby",
+            "Folkmängd 31 december 2018": "13,267"
+        },
+        {
+            "Kommunkod": "0882",
+            "Kommun": "Oskarshamn",
+            "Folkmängd 31 december 2018": "26,928"
+        },
+        {
+            "Kommunkod": "2121",
+            "Kommun": "Ovanåker",
+            "Folkmängd 31 december 2018": "11,684"
+        },
+        {
+            "Kommunkod": "0481",
+            "Kommun": "Oxelösund",
+            "Folkmängd 31 december 2018": "12,062"
+        },
+        {
+            "Kommunkod": "2521",
+            "Kommun": "Pajala",
+            "Folkmängd 31 december 2018": "6,039"
+        },
+        {
+            "Kommunkod": "1402",
+            "Kommun": "Partille",
+            "Folkmängd 31 december 2018": "38,443"
+        },
+        {
+            "Kommunkod": "1275",
+            "Kommun": "Perstorp",
+            "Folkmängd 31 december 2018": "7,479"
+        },
+        {
+            "Kommunkod": "2581",
+            "Kommun": "Piteå",
+            "Folkmängd 31 december 2018": "42,116"
+        },
+        {
+            "Kommunkod": "2303",
+            "Kommun": "Ragunda",
+            "Folkmängd 31 december 2018": "5,343"
+        },
+        {
+            "Kommunkod": "2409",
+            "Kommun": "Robertsfors",
+            "Folkmängd 31 december 2018": "6,762"
+        },
+        {
+            "Kommunkod": "1081",
+            "Kommun": "Ronneby",
+            "Folkmängd 31 december 2018": "29,695"
+        },
+        {
+            "Kommunkod": "2031",
+            "Kommun": "Rättvik",
+            "Folkmängd 31 december 2018": "10,907"
+        },
+        {
+            "Kommunkod": "1981",
+            "Kommun": "Sala",
+            "Folkmängd 31 december 2018": "22,816"
+        },
+        {
+            "Kommunkod": "0128",
+            "Kommun": "Salem",
+            "Folkmängd 31 december 2018": "16,786"
+        },
+        {
+            "Kommunkod": "2181",
+            "Kommun": "Sandviken",
+            "Folkmängd 31 december 2018": "39,208"
+        },
+        {
+            "Kommunkod": "0191",
+            "Kommun": "Sigtuna",
+            "Folkmängd 31 december 2018": "48,130"
+        },
+        {
+            "Kommunkod": "1291",
+            "Kommun": "Simrishamn",
+            "Folkmängd 31 december 2018": "19,278"
+        },
+        {
+            "Kommunkod": "1265",
+            "Kommun": "Sjöbo",
+            "Folkmängd 31 december 2018": "19,153"
+        },
+        {
+            "Kommunkod": "1495",
+            "Kommun": "Skara",
+            "Folkmängd 31 december 2018": "18,829"
+        },
+        {
+            "Kommunkod": "2482",
+            "Kommun": "Skellefteå",
+            "Folkmängd 31 december 2018": "72,467"
+        },
+        {
+            "Kommunkod": "1904",
+            "Kommun": "Skinnskatteberg",
+            "Folkmängd 31 december 2018": "4,429"
+        },
+        {
+            "Kommunkod": "1264",
+            "Kommun": "Skurup",
+            "Folkmängd 31 december 2018": "15,759"
+        },
+        {
+            "Kommunkod": "1496",
+            "Kommun": "Skövde",
+            "Folkmängd 31 december 2018": "55,729"
+        },
+        {
+            "Kommunkod": "2061",
+            "Kommun": "Smedjebacken",
+            "Folkmängd 31 december 2018": "10,897"
+        },
+        {
+            "Kommunkod": "2283",
+            "Kommun": "Sollefteå",
+            "Folkmängd 31 december 2018": "19,500"
+        },
+        {
+            "Kommunkod": "0163",
+            "Kommun": "Sollentuna",
+            "Folkmängd 31 december 2018": "72,528"
+        },
+        {
+            "Kommunkod": "0184",
+            "Kommun": "Solna",
+            "Folkmängd 31 december 2018": "80,950"
+        },
+        {
+            "Kommunkod": "2422",
+            "Kommun": "Sorsele",
+            "Folkmängd 31 december 2018": "2,522"
+        },
+        {
+            "Kommunkod": "1427",
+            "Kommun": "Sotenäs",
+            "Folkmängd 31 december 2018": "9,030"
+        },
+        {
+            "Kommunkod": "1230",
+            "Kommun": "Staffanstorp",
+            "Folkmängd 31 december 2018": "24,724"
+        },
+        {
+            "Kommunkod": "1415",
+            "Kommun": "Stenungsund",
+            "Folkmängd 31 december 2018": "26,503"
+        },
+        {
+            "Kommunkod": "0180",
+            "Kommun": "Stockholm",
+            "Folkmängd 31 december 2018": "962,154"
+        },
+        {
+            "Kommunkod": "1760",
+            "Kommun": "Storfors",
+            "Folkmängd 31 december 2018": "4,055"
+        },
+        {
+            "Kommunkod": "2421",
+            "Kommun": "Storuman",
+            "Folkmängd 31 december 2018": "5,912"
+        },
+        {
+            "Kommunkod": "0486",
+            "Kommun": "Strängnäs",
+            "Folkmängd 31 december 2018": "35,761"
+        },
+        {
+            "Kommunkod": "1486",
+            "Kommun": "Strömstad",
+            "Folkmängd 31 december 2018": "13,253"
+        },
+        {
+            "Kommunkod": "2313",
+            "Kommun": "Strömsund",
+            "Folkmängd 31 december 2018": "11,703"
+        },
+        {
+            "Kommunkod": "0183",
+            "Kommun": "Sundbyberg",
+            "Folkmängd 31 december 2018": "50,564"
+        },
+        {
+            "Kommunkod": "2281",
+            "Kommun": "Sundsvall",
+            "Folkmängd 31 december 2018": "98,850"
+        },
+        {
+            "Kommunkod": "1766",
+            "Kommun": "Sunne",
+            "Folkmängd 31 december 2018": "13,261"
+        },
+        {
+            "Kommunkod": "1907",
+            "Kommun": "Surahammar",
+            "Folkmängd 31 december 2018": "10,088"
+        },
+        {
+            "Kommunkod": "1214",
+            "Kommun": "Svalöv",
+            "Folkmängd 31 december 2018": "14,123"
+        },
+        {
+            "Kommunkod": "1263",
+            "Kommun": "Svedala",
+            "Folkmängd 31 december 2018": "21,576"
+        },
+        {
+            "Kommunkod": "1465",
+            "Kommun": "Svenljunga",
+            "Folkmängd 31 december 2018": "10,683"
+        },
+        {
+            "Kommunkod": "1785",
+            "Kommun": "Säffle",
+            "Folkmängd 31 december 2018": "15,643"
+        },
+        {
+            "Kommunkod": "2082",
+            "Kommun": "Säter",
+            "Folkmängd 31 december 2018": "11,123"
+        },
+        {
+            "Kommunkod": "0684",
+            "Kommun": "Sävsjö",
+            "Folkmängd 31 december 2018": "11,631"
+        },
+        {
+            "Kommunkod": "2182",
+            "Kommun": "Söderhamn",
+            "Folkmängd 31 december 2018": "25,721"
+        },
+        {
+            "Kommunkod": "0582",
+            "Kommun": "Söderköping",
+            "Folkmängd 31 december 2018": "14,618"
+        },
+        {
+            "Kommunkod": "0181",
+            "Kommun": "Södertälje",
+            "Folkmängd 31 december 2018": "97,381"
+        },
+        {
+            "Kommunkod": "1083",
+            "Kommun": "Sölvesborg",
+            "Folkmängd 31 december 2018": "17,468"
+        },
+        {
+            "Kommunkod": "1435",
+            "Kommun": "Tanum",
+            "Folkmängd 31 december 2018": "12,873"
+        },
+        {
+            "Kommunkod": "1472",
+            "Kommun": "Tibro",
+            "Folkmängd 31 december 2018": "11,168"
+        },
+        {
+            "Kommunkod": "1498",
+            "Kommun": "Tidaholm",
+            "Folkmängd 31 december 2018": "12,828"
+        },
+        {
+            "Kommunkod": "0360",
+            "Kommun": "Tierp",
+            "Folkmängd 31 december 2018": "21,127"
+        },
+        {
+            "Kommunkod": "2262",
+            "Kommun": "Timrå",
+            "Folkmängd 31 december 2018": "18,060"
+        },
+        {
+            "Kommunkod": "0763",
+            "Kommun": "Tingsryd",
+            "Folkmängd 31 december 2018": "12,407"
+        },
+        {
+            "Kommunkod": "1419",
+            "Kommun": "Tjörn",
+            "Folkmängd 31 december 2018": "15,922"
+        },
+        {
+            "Kommunkod": "1270",
+            "Kommun": "Tomelilla",
+            "Folkmängd 31 december 2018": "13,557"
+        },
+        {
+            "Kommunkod": "1737",
+            "Kommun": "Torsby",
+            "Folkmängd 31 december 2018": "11,719"
+        },
+        {
+            "Kommunkod": "0834",
+            "Kommun": "Torsås",
+            "Folkmängd 31 december 2018": "7,098"
+        },
+        {
+            "Kommunkod": "1452",
+            "Kommun": "Tranemo",
+            "Folkmängd 31 december 2018": "11,874"
+        },
+        {
+            "Kommunkod": "0687",
+            "Kommun": "Tranås",
+            "Folkmängd 31 december 2018": "18,987"
+        },
+        {
+            "Kommunkod": "1287",
+            "Kommun": "Trelleborg",
+            "Folkmängd 31 december 2018": "44,902"
+        },
+        {
+            "Kommunkod": "1488",
+            "Kommun": "Trollhättan",
+            "Folkmängd 31 december 2018": "58,728"
+        },
+        {
+            "Kommunkod": "0488",
+            "Kommun": "Trosa",
+            "Folkmängd 31 december 2018": "13,309"
+        },
+        {
+            "Kommunkod": "0138",
+            "Kommun": "Tyresö",
+            "Folkmängd 31 december 2018": "48,004"
+        },
+        {
+            "Kommunkod": "0160",
+            "Kommun": "Täby",
+            "Folkmängd 31 december 2018": "71,397"
+        },
+        {
+            "Kommunkod": "1473",
+            "Kommun": "Töreboda",
+            "Folkmängd 31 december 2018": "9,312"
+        },
+        {
+            "Kommunkod": "1485",
+            "Kommun": "Uddevalla",
+            "Folkmängd 31 december 2018": "56,259"
+        },
+        {
+            "Kommunkod": "1491",
+            "Kommun": "Ulricehamn",
+            "Folkmängd 31 december 2018": "24,445"
+        },
+        {
+            "Kommunkod": "2480",
+            "Kommun": "Umeå",
+            "Folkmängd 31 december 2018": "127,119"
+        },
+        {
+            "Kommunkod": "0114",
+            "Kommun": "Upplands Väsby",
+            "Folkmängd 31 december 2018": "45,543"
+        },
+        {
+            "Kommunkod": "0139",
+            "Kommun": "Upplands-Bro",
+            "Folkmängd 31 december 2018": "28,756"
+        },
+        {
+            "Kommunkod": "0380",
+            "Kommun": "Uppsala",
+            "Folkmängd 31 december 2018": "225,164"
+        },
+        {
+            "Kommunkod": "0760",
+            "Kommun": "Uppvidinge",
+            "Folkmängd 31 december 2018": "9,581"
+        },
+        {
+            "Kommunkod": "0584",
+            "Kommun": "Vadstena",
+            "Folkmängd 31 december 2018": "7,514"
+        },
+        {
+            "Kommunkod": "0665",
+            "Kommun": "Vaggeryd",
+            "Folkmängd 31 december 2018": "13,980"
+        },
+        {
+            "Kommunkod": "0563",
+            "Kommun": "Valdemarsvik",
+            "Folkmängd 31 december 2018": "7,956"
+        },
+        {
+            "Kommunkod": "0115",
+            "Kommun": "Vallentuna",
+            "Folkmängd 31 december 2018": "33,432"
+        },
+        {
+            "Kommunkod": "2021",
+            "Kommun": "Vansbro",
+            "Folkmängd 31 december 2018": "6,807"
+        },
+        {
+            "Kommunkod": "1470",
+            "Kommun": "Vara",
+            "Folkmängd 31 december 2018": "15,952"
+        },
+        {
+            "Kommunkod": "1383",
+            "Kommun": "Varberg",
+            "Folkmängd 31 december 2018": "63,630"
+        },
+        {
+            "Kommunkod": "0187",
+            "Kommun": "Vaxholm",
+            "Folkmängd 31 december 2018": "12,023"
+        },
+        {
+            "Kommunkod": "1233",
+            "Kommun": "Vellinge",
+            "Folkmängd 31 december 2018": "36,499"
+        },
+        {
+            "Kommunkod": "0685",
+            "Kommun": "Vetlanda",
+            "Folkmängd 31 december 2018": "27,504"
+        },
+        {
+            "Kommunkod": "2462",
+            "Kommun": "Vilhelmina",
+            "Folkmängd 31 december 2018": "6,752"
+        },
+        {
+            "Kommunkod": "0884",
+            "Kommun": "Vimmerby",
+            "Folkmängd 31 december 2018": "15,764"
+        },
+        {
+            "Kommunkod": "2404",
+            "Kommun": "Vindeln",
+            "Folkmängd 31 december 2018": "5,436"
+        },
+        {
+            "Kommunkod": "0428",
+            "Kommun": "Vingåker",
+            "Folkmängd 31 december 2018": "9,136"
+        },
+        {
+            "Kommunkod": "1442",
+            "Kommun": "Vårgårda",
+            "Folkmängd 31 december 2018": "11,658"
+        },
+        {
+            "Kommunkod": "1487",
+            "Kommun": "Vänersborg",
+            "Folkmängd 31 december 2018": "39,411"
+        },
+        {
+            "Kommunkod": "2460",
+            "Kommun": "Vännäs",
+            "Folkmängd 31 december 2018": "8,785"
+        },
+        {
+            "Kommunkod": "0120",
+            "Kommun": "Värmdö",
+            "Folkmängd 31 december 2018": "44,397"
+        },
+        {
+            "Kommunkod": "0683",
+            "Kommun": "Värnamo",
+            "Folkmängd 31 december 2018": "34,428"
+        },
+        {
+            "Kommunkod": "0883",
+            "Kommun": "Västervik",
+            "Folkmängd 31 december 2018": "36,680"
+        },
+        {
+            "Kommunkod": "1980",
+            "Kommun": "Västerås",
+            "Folkmängd 31 december 2018": "152,078"
+        },
+        {
+            "Kommunkod": "0780",
+            "Kommun": "Växjö",
+            "Folkmängd 31 december 2018": "92,567"
+        },
+        {
+            "Kommunkod": "0512",
+            "Kommun": "Ydre",
+            "Folkmängd 31 december 2018": "3,743"
+        },
+        {
+            "Kommunkod": "1286",
+            "Kommun": "Ystad",
+            "Folkmängd 31 december 2018": "30,226"
+        },
+        {
+            "Kommunkod": "1492",
+            "Kommun": "Åmål",
+            "Folkmängd 31 december 2018": "12,720"
+        },
+        {
+            "Kommunkod": "2260",
+            "Kommun": "Ånge",
+            "Folkmängd 31 december 2018": "9,411"
+        },
+        {
+            "Kommunkod": "2321",
+            "Kommun": "Åre",
+            "Folkmängd 31 december 2018": "11,529"
+        },
+        {
+            "Kommunkod": "1765",
+            "Kommun": "Årjäng",
+            "Folkmängd 31 december 2018": "10,011"
+        },
+        {
+            "Kommunkod": "2463",
+            "Kommun": "Åsele",
+            "Folkmängd 31 december 2018": "2,819"
+        },
+        {
+            "Kommunkod": "1277",
+            "Kommun": "Åstorp",
+            "Folkmängd 31 december 2018": "15,987"
+        },
+        {
+            "Kommunkod": "0561",
+            "Kommun": "Åtvidaberg",
+            "Folkmängd 31 december 2018": "11,537"
+        },
+        {
+            "Kommunkod": "0765",
+            "Kommun": "Älmhult",
+            "Folkmängd 31 december 2018": "17,568"
+        },
+        {
+            "Kommunkod": "2039",
+            "Kommun": "Älvdalen",
+            "Folkmängd 31 december 2018": "7,121"
+        },
+        {
+            "Kommunkod": "0319",
+            "Kommun": "Älvkarleby",
+            "Folkmängd 31 december 2018": "9,392"
+        },
+        {
+            "Kommunkod": "2560",
+            "Kommun": "Älvsbyn",
+            "Folkmängd 31 december 2018": "8,140"
+        },
+        {
+            "Kommunkod": "1292",
+            "Kommun": "Ängelholm",
+            "Folkmängd 31 december 2018": "42,131"
+        },
+        {
+            "Kommunkod": "1407",
+            "Kommun": "Öckerö",
+            "Folkmängd 31 december 2018": "12,945"
+        },
+        {
+            "Kommunkod": "0509",
+            "Kommun": "Ödeshög",
+            "Folkmängd 31 december 2018": "5,323"
+        },
+        {
+            "Kommunkod": "1880",
+            "Kommun": "Örebro",
+            "Folkmängd 31 december 2018": "153,367"
+        },
+        {
+            "Kommunkod": "1257",
+            "Kommun": "Örkelljunga",
+            "Folkmängd 31 december 2018": "10,174"
+        },
+        {
+            "Kommunkod": "2284",
+            "Kommun": "Örnsköldsvik",
+            "Folkmängd 31 december 2018": "56,089"
+        },
+        {
+            "Kommunkod": "2380",
+            "Kommun": "Östersund",
+            "Folkmängd 31 december 2018": "63,227"
+        },
+        {
+            "Kommunkod": "0117",
+            "Kommun": "Österåker",
+            "Folkmängd 31 december 2018": "44,831"
+        },
+        {
+            "Kommunkod": "0382",
+            "Kommun": "Östhammar",
+            "Folkmängd 31 december 2018": "22,048"
+        },
+        {
+            "Kommunkod": "1256",
+            "Kommun": "Östra Göinge",
+            "Folkmängd 31 december 2018": "14,915"
+        },
+        {
+            "Kommunkod": "2513",
+            "Kommun": "Överkalix",
+            "Folkmängd 31 december 2018": "3,302"
+        },
+        {
+            "Kommunkod": "2518",
+            "Kommun": "Övertorneå",
+            "Folkmängd 31 december 2018": "4,410"
+        }
+    ]
