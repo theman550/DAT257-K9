@@ -105,7 +105,7 @@ const BookCard = ({ trip }) => {
                 {' '}
                 {values.seats}
                 {' '}
-                seats
+                {(values.seats > 1) ? 'seats' : 'seat'}
               </PrimaryButton>
             </StyledForm>
           )}
