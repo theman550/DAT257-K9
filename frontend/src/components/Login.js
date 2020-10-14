@@ -52,9 +52,21 @@ const StyledPrimaryButton = styled(PrimaryButton)`
   margin-top: ${(props) => props.theme.spacing.subsection};
 `;
 
+const StyledAnchor = styled.a`
+  color: ${(props) => props.theme.colors.inactive};
+  // Remove default underline on anchor elements
+  text-decoration: none;
+`;
+
 const StyledH4 = styled(H4)`
   margin: ${(props) => props.theme.spacing.subsection};
-  color: #707386;
+  color: ${(props) => props.theme.colors.inactive};
+  text-decoration: underline;
+
+  transition: all .2s ease-in-out;
+  &:hover {
+    color: white;
+  }
 `;
 
 const Login = ({ showNotification }) => {
@@ -122,11 +134,11 @@ const Login = ({ showNotification }) => {
         <StyledPrimaryButton type="submit">Sign In</StyledPrimaryButton>
       </StyledSelectRow>
 
-      <a href="register/">
+      <StyledAnchor href="register/">
         <StyledH4>
           Do not have an account? Register here.
         </StyledH4>
-      </a>
+      </StyledAnchor>
 
     </StyledForm>
   );
