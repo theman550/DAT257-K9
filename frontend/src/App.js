@@ -57,7 +57,10 @@ const App = () => {
             </Route>
             <Route path="/account">
               <ErrorBoundary sectionName="Account page">
-                <Account showNotification={showNotification} />
+                <Account
+                  showNotification={showNotification}
+                  loggedInUser={loggedInUser}
+                />
               </ErrorBoundary>
             </Route>
             {loggedInUser !== null
