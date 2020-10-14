@@ -33,13 +33,6 @@
 	    echo json_encode($token);
 	}
 	else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-		if(isset($data->loggedInEmail) && isset($data->token))
-		{		
-			if(verifyToken($data->loggedInEmail, $data->token) && !hasTokenExpired($data->loggedInEmail))
-			{	
-				logout();
-			}
-		}
 	}
 
 ?>
