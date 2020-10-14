@@ -58,16 +58,17 @@ const Button = styled(PrimaryButton)`
   width: 60%;
   cursor: pointer;
   `;
-const Form = ({ shownotification }) => {
+const Form = ({ showNotification }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [redirct, setRedirct] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+
   const handleSubmit = (event) => {
     if (password !== confirmPassword) {
-      shownotification('password is not matched !', 'red', '50');
+      showNotification('password is not matched !', 'red', '50');
       return;
     }
     event.preventDefault();
@@ -85,12 +86,17 @@ const Form = ({ shownotification }) => {
         password,
       }),
     }).then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
-    shownotification('You are now registered ! ', '#8064f7', '7');
-    setRedirct(true);
+      .then((data) => {
+        console.log(data);
+        showNotification('You are now registered!', '#8064f7', '7');
+        setRedirect(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        showNotification('Failed to register', '#CC354E', '7');
+      });
   };
-  if (redirct) {
+  if (redirect) {
     return <Redirect to="/account" />;
   }
   return (
@@ -146,6 +152,6 @@ const Form = ({ shownotification }) => {
   );
 };
 Form.propTypes = {
-  shownotification: PropTypes.func.isRequired,
+  showNotification: PropTypes.func.isRequired,
 };
 export default Form;
