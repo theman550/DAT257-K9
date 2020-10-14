@@ -10,6 +10,7 @@ import {
 } from '../UI';
 import kommuner from './kommuner.json';
 import DropDown from './DropDown';
+import UserPayload from '../../model/UserPayload';
 
 const StyledInput = FieldFactory(styled.input``);
 const StyledTextArea = FieldFactory(styled.textarea``);
@@ -28,10 +29,6 @@ const StyledForm = styled.form`
   -webkit-box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
   -moz-box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
   box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
-`;
-
-const StyledField = styled(Field)`
-margin-top:-12px;
 `;
 
 const StyledTextRow = styled.div`
@@ -213,10 +210,7 @@ const AddTrip = ({ closeAdd, showNotification, loggedInUser }) => {
 AddTrip.propTypes = {
   closeAdd: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
-  loggedInUser: PropTypes.shape({
-    token: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-  }).isRequired,
+  loggedInUser: UserPayload.isRequired,
 };
 
 export default AddTrip;

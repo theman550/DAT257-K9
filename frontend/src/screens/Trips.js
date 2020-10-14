@@ -7,6 +7,8 @@ import FloatingButtons from '../components/trips/FloatingButtons';
 import DisplayScreen from './Trip/Display';
 import AddTrip from '../components/trips/AddTrip';
 import Pagination from '../components/trips/Pagination';
+import BookCard from '../components/Trip/Card/BookCard';
+import UserPayload from '../model/UserPayload';
 
 const Trips = ({ showNotification, loggedInUser }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -16,6 +18,7 @@ const Trips = ({ showNotification, loggedInUser }) => {
   const tripsPerPage = 10;
 
   const getTrips = async (query) => {
+    console.log('Retrieving trips');
     try {
       const res = await fetch(`${config.api.url}trips/${query}`);
       const data = await res.json();
@@ -61,13 +64,20 @@ const Trips = ({ showNotification, loggedInUser }) => {
     getTrips('');
   }, []); // eslint-disable-line
 
-  return (
-    <div>
-      <DisplayScreen
-        trips={filteredTrips.slice(
+  /*
+  <DisplayScreen
+        trips={filteredTrips.length > 0 ? filteredTrips.slice(
           (page - 1) * tripsPerPage,
           (page - 1) * tripsPerPage + tripsPerPage,
-        )}
+        ) : []}
+      />
+  */
+  return (
+    <div>
+      {console.log('filteredTrips', filteredTrips)}
+      <DisplayScreen
+        trips={filteredTrips}
+        tripComponent={(trip) => <BookCard trip={trip} />}
       />
       <ModalProvider>
         <Modal
@@ -107,10 +117,7 @@ const Trips = ({ showNotification, loggedInUser }) => {
 
 Trips.propTypes = {
   showNotification: PropTypes.func.isRequired,
-  loggedInUser: PropTypes.shape({
-    token: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-  }).isRequired,
+  loggedInUser: UserPayload.isRequired,
 };
 
 export default Trips;
