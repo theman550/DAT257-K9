@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { withTheme } from 'styled-components';
 import { Formik, Form, Field } from 'formik';
 import PropTypes from 'prop-types';
 import TripCard from './Card';
@@ -9,6 +9,8 @@ import {
   Label,
   FieldFactory,
 } from '../../UI';
+import UserPayload from '../../../model/UserPayload';
+import ThemeShape from '../../../model/ThemeShape';
 
 const StyledForm = styled(Form)`
     display: flex;
@@ -45,41 +47,54 @@ const FieldContainer = styled.div`
     }
 `;
 
-const submitBooking = async (id, numberOfSeats) => {
-  console.log(`Submitting booking for trip of id: ${id} with ${numberOfSeats} seats`);
+const BookCard = ({
+  trip,
+  showNotification,
+  loggedInUser,
+  theme,
+}) => {
+  const [seats, setSeats] = useState(trip.seatsAvailable);
 
-  try {
-    // Add some type of global message service that can display notifications
-    const res = await fetch('http://splig.xyz/api/trips', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id,
-        seats: numberOfSeats,
-        // Eventually add userId
-      }),
-    });
+  const submitBooking = async (id, numberOfSeats) => {
+    console.log(`Submitting booking for trip of id: ${id} with ${numberOfSeats} seats`);
 
-    const data = await res.json();
+    try {
+      // Add some type of global message service that can display notifications
+      const res = await fetch('http://splig.xyz/api/trips/', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id,
+          seats: numberOfSeats,
+          email: loggedInUser.email,
+          token: loggedInUser.token,
+        }),
+      });
 
-    if (!res.ok) {
-      throw new Error(data.data || data.message || 'No error message provided');
+      const data = await res.json();
+
+      try {
+        if (!res.ok) {
+          throw new Error(data.data || data.message || 'No error message provided');
+        }
+      } catch (error) {
+        return showNotification(error.message, theme.colors.error, 5);
+      }
+    } catch (error) {
+      return showNotification('Could not submit booking', theme.colors.error, 5);
     }
 
     console.log('Successful booking!');
-  } catch (error) {
-    console.warn('Could not submit booking', error.message);
-  }
-};
-
-const BookCard = ({ trip }) => {
-  console.log('BookCard', trip);
+    // Decrease card's seats with numberOfSeats
+    return setSeats(seats - numberOfSeats);
+  };
 
   return (
     <TripCard
-      trip={{ ...trip, driver: { firstName: 'David', lastName: 'Hernandez' } }}
+      trip={{ ...trip, seatsAvailable: seats, driver: { firstName: 'David', lastName: 'Hernandez' } }}
       controlFactory={({ id, maxSeats }) => (
         <Formik
           initialValues={{ seats: 1 }}
@@ -117,6 +132,9 @@ const BookCard = ({ trip }) => {
 
 BookCard.propTypes = {
   trip: PropTypes.shape(TripModel).isRequired,
+  showNotification: PropTypes.func.isRequired,
+  loggedInUser: UserPayload.isRequired,
+  theme: ThemeShape.isRequired,
 };
 
-export default BookCard;
+export default withTheme(BookCard);
