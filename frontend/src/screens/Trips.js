@@ -66,19 +66,13 @@ const Trips = ({ showNotification, loggedInUser, theme }) => {
     getTrips('');
   }, []); // eslint-disable-line
 
-  /*
-  <DisplayScreen
-        trips={filteredTrips.length > 0 ? filteredTrips.slice(
-          (page - 1) * tripsPerPage,
-          (page - 1) * tripsPerPage + tripsPerPage,
-        ) : []}
-      />
-  */
   return (
     <div>
-      {console.log('filteredTrips', filteredTrips)}
       <DisplayScreen
-        trips={filteredTrips}
+        trips={filteredTrips.slice(
+          (page - 1) * tripsPerPage,
+          (page - 1) * tripsPerPage + tripsPerPage,
+        )}
         tripComponent={(trip) => <BookCard trip={trip} />}
       />
       <ModalProvider>
