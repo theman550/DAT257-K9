@@ -4,6 +4,16 @@ include("connectDB.php");
 include_once("debug.php");
 include_once("dataValidation.php");
 define("SECRET_KEY", "f402a1dff337b00f3e5c121bb374ccfa802be479b6be1e812282db714a6e5c4fbd02b694a5ffbe073139693fa201719af75c8d876bd878df07534c3f695581cb"); // key ska ligga någon annanstans sen. 
+
+function headers(){
+	header('Access-Control-Allow-Origin: localhost:3000'); // <- Ersätt med null för att använda lokalt
+	header('Content-Type: application/json');
+	header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Credentials');
+	header('Access-Control-Max-Age: 1000');	
+	header('Access-Control-Allow-Credentials: true');
+}
+
 #skickar query i json-format 
 function sendResponseQuery($response){
 	if ($response->num_rows > 0) {
@@ -244,15 +254,21 @@ function rememberMe() {
         }
     }
 }
-function logout($email, $token)
+function logout()
 {
-	$tokenFromDB = getTokenFromDB($email);
-	if($tokenFromDB == $token)
-	{ 
-		$interval = new DateInterval("P0Y");
-		setExpire($email, $interval); // sätter till nuvarande tiden, dvs nästa gång användaren försöker logga in har token expireat
+	if (session_status() == PHP_SESSION_NONE)
 		session_start();
-		session_destroy();
+	$token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
+	$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+	if($token && $email)
+	{
+		$tokenFromDB = getTokenFromDB($email);
+		if($tokenFromDB == $token)
+		{ 
+			$interval = new DateInterval("P0Y");
+			setExpire($email, $interval); // sätter till nuvarande tiden, dvs nästa gång användaren försöker logga in har token expireat
+			session_destroy();
+		}
 	}
 }
 // tar bort alla tider som gått ut, användning 0 parametrar ger alla tider som expireats utan filter, med extraconditions satt kan t.ex filterExpiredTrips("startLocation = 'lidkoping'"); som ger alla resor som inte gått ut och startar i lidkoping

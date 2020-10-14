@@ -3,8 +3,7 @@
 function getTrip(){
     var startLocation = document.getElementById("startLocation").value;
     var destination = document.getElementById("destination").value;
-    fetch('http://localhost/api/trips/?startLocation=' + startLocation + '&destination=' + destination, {mode:'cors'})
-    /* fetch('https://spilg.xyz/api/trips/?startLocation=' + startLocation + '&destination=' + destination, {mode:'cors'}) */
+     fetch('http://localhost/api/trips/?startLocation=' + startLocation + '&destination=' + destination, {mode:'cors'})
     .then(response => response.json())
     .then(json => {
         document.getElementById("text").innerHTML = "";
@@ -102,7 +101,28 @@ function getBookings(){
             writeStuff(element['startLocation'], 'startLocation');
             writeStuff(element['destination'], 'destination');
             writeStuff(element['startTime'], 'startTime');
+            writeStuff("########</br>","#########");
         }));
+}
+
+function login(){
+    var datto = {"email" : "flippo@hotmail.com", "password" : "hemligt"};
+    fetch('http://localhost/api/login/', {
+        mode: 'cors',
+        method: "POST",
+        credentials: 'include',
+        body:JSON.stringify(datto),
+        headers:{
+            'Content-Type': "application/json",
+        }
+    })
+}
+
+function logout(){
+    fetch('http://localhost/api/login/', {
+        mode: 'cors',
+        method: "GET",
+    })
 }
 
 function writeStuff(stuff, id){
@@ -143,6 +163,8 @@ function writeStuff(stuff, id){
 <button onClick="bookTrip()">BookTrip</button>
 <button onClick="deleteBooking()">Delete booking</button>
 <button onClick="getBookings()">Get all users bookings</button>
+<button onClick="login()">Login</button>
+<button onClick="logout()">Logout</button>
 
 <p id="text"></p> </br></br></br></br>
 
