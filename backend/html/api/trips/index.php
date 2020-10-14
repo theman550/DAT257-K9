@@ -37,6 +37,10 @@ else if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 			http_response_code(201);
 		}
+		else
+		{
+			http_response_code(401); // tänker att vi kör 401:a om felaktigt token/mail och 400:a om requesten är felaktig
+		}
 	}
 	else
 	{
