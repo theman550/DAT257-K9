@@ -112,7 +112,7 @@ const Navigation = ({ loggedInUser, setLoggedInUser }) => {
         )
         : (
           <div>
-            <Link aria-label="Login" to="/account"><NavIcon as={LogIn} /></Link>
+            <Link aria-label="Login" to="/login"><NavIcon as={LogIn} /></Link>
           </div>
         )}
     </Nav>
