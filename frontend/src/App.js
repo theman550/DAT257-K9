@@ -56,11 +56,14 @@ const App = () => {
                 />
               </ErrorBoundary>
             </Route>
-            <Route path="/trips">
-              <ErrorBoundary sectionName="Trip page">
-                <Trips showNotification={showNotification} />
-              </ErrorBoundary>
-            </Route>
+            {loggedInUser !== null
+              && (
+              <Route path="/trips">
+                <ErrorBoundary sectionName="Trip page">
+                  <Trips showNotification={showNotification} />
+                </ErrorBoundary>
+              </Route>
+              )}
             <Route path="/">
               <ErrorBoundary sectionName="Welcome page">
                 <p>Welcome to Share-a-ride</p>
