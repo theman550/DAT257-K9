@@ -8,7 +8,7 @@ import DisplayScreen from './Trip/Display';
 import AddTrip from '../components/trips/AddTrip';
 import Pagination from '../components/trips/Pagination';
 
-const Trips = ({ showNotification }) => {
+const Trips = ({ showNotification, loggedInUser }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [filteredTrips, setFilteredTrips] = useState([]);
@@ -88,6 +88,7 @@ const Trips = ({ showNotification }) => {
           <AddTrip
             closeAdd={() => setIsAddOpen(false)}
             showNotification={showNotification}
+            loggedInUser={loggedInUser}
           />
         </Modal>
       </ModalProvider>
@@ -106,6 +107,10 @@ const Trips = ({ showNotification }) => {
 
 Trips.propTypes = {
   showNotification: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.shape({
+    token: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Trips;

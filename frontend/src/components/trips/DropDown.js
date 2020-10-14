@@ -46,7 +46,6 @@ const DropDown = ({ items, placeholder, valueChange }) => {
   const [text, setText] = useState('');
 
   const updateText = (value) => {
-    console.log('Updating text and propagating value change', value);
     setText(value);
     valueChange(value);
   };

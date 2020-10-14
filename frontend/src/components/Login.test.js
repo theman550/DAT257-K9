@@ -1,6 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Login from './Login';
 
@@ -31,9 +32,11 @@ describe('Login', () => {
   beforeEach(() => {
     render(
       <ThemeProvider theme={theme}>
-        <Login
-          showNotification={() => ''}
-        />
+        <Router>
+          <Login
+            showNotification={() => ''}
+          />
+        </Router>
       </ThemeProvider>,
     );
   });

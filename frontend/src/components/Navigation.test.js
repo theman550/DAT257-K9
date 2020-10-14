@@ -7,26 +7,58 @@ import theme from '../themes/base';
 import Navigation from './Navigation';
 
 describe('Navigation', () => {
-  beforeEach(() => {
-    render(
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Navigation />
-        </Router>
-        ,
-      </ThemeProvider>,
-    );
+  describe('when user is not logged in', () => {
+    beforeEach(() => {
+      render(
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Navigation
+              loggedInUser={null}
+              setLoggedInUser={() => ''}
+            />
+          </Router>
+          ,
+        </ThemeProvider>,
+      );
+    });
+
+    it('renders home button', () => {
+      expect(screen.getByLabelText('Home')).toBeInTheDocument();
+    });
+
+    it('renders login button', () => {
+      expect(screen.getByLabelText('Login')).toBeInTheDocument();
+    });
   });
 
-  it('renders home button', () => {
-    expect(screen.getByLabelText('Home')).toBeInTheDocument();
-  });
+  describe('when user is logged in', () => {
+    beforeEach(() => {
+      render(
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Navigation
+              loggedInUser={{
+                token: 'abcd',
+                email: 'john@doe.com',
+              }}
+              setIsLoggedIn={() => ''}
+            />
+          </Router>
+          ,
+        </ThemeProvider>,
+      );
+    });
 
-  it('renders account button', () => {
-    expect(screen.getByLabelText('Account')).toBeInTheDocument();
-  });
+    it('renders trips button', () => {
+      expect(screen.getByLabelText('Trips')).toBeInTheDocument();
+    });
 
-  it('renders trips button', () => {
-    expect(screen.getByLabelText('Trips')).toBeInTheDocument();
+    it('renders account button', () => {
+      expect(screen.getByLabelText('Account')).toBeInTheDocument();
+    });
+
+    it('renders logout button', () => {
+      expect(screen.getByLabelText('Logout')).toBeInTheDocument();
+    });
   });
 });

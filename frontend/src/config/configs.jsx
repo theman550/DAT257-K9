@@ -11,12 +11,12 @@ export default {
   },
   testing: {
     api: {
-      url: 'https://spilg.xyz/api/',
+      url: 'http://spilg.xyz/api/',
     },
   },
   production: {
     api: {
-      url: 'https://spilg.xyz/api/',
+      url: 'http://spilg.xyz/api/',
     },
   },
 };

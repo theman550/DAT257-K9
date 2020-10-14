@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { User } from 'react-feather';
 import config from '../config';
@@ -52,7 +53,7 @@ const StyledPrimaryButton = styled(PrimaryButton)`
   margin-top: ${(props) => props.theme.spacing.subsection};
 `;
 
-const StyledAnchor = styled.a`
+const StyledAnchor = styled(Link)`
   color: ${(props) => props.theme.colors.inactive};
   // Remove default underline on anchor elements
   text-decoration: none;
@@ -69,34 +70,37 @@ const StyledH4 = styled(H4)`
   }
 `;
 
-const Login = ({ showNotification }) => {
-  const [username, setUsername] = useState('');
+const Login = ({ setLoggedInUser, showNotification }) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newvalue = {
-      Email: username,
-      Password: password,
-    };
+
     fetch(`${config.api.url}login/`, {
       method: 'POST',
       mode: 'cors',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newvalue),
+      body: JSON.stringify({
+        email,
+        password,
+      }),
     })
-      .then((response) => response)
-      .then((data) => {
-        console.log(data);
-        if (data.status === 400) {
-          showNotification('Incorrect username or password ! Please double check and try again later. ', '#CC354E', '5');
-          console.log('Bad request');
-        } else if (data.status === 201) {
-          showNotification('Signed in sucessfully :)', '#8064f7', '7');
+      .then((response) => {
+        if (response.status === 400) {
+          throw new Error('Incorrect username or password');
         }
+
+        showNotification('Signed in sucessfully :)', '#8064f7', '3');
+        return response.json();
+      })
+      .then((data) => {
+        setLoggedInUser({ ...data });
+      })
+      .catch((error) => {
+        showNotification(error.message, '#CC354E', '3');
       });
   };
 
@@ -107,13 +111,13 @@ const Login = ({ showNotification }) => {
       </StyledTextRow>
 
       <StyledTextRow>
-        <Label htmlFor="username">Username</Label>
+        <Label htmlFor="username">Email</Label>
         <StyledInput
           type="email"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter your username.."
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email.."
           data-testid="email"
         />
       </StyledTextRow>
@@ -134,7 +138,7 @@ const Login = ({ showNotification }) => {
         <StyledPrimaryButton type="submit">Sign In</StyledPrimaryButton>
       </StyledSelectRow>
 
-      <StyledAnchor href="register/">
+      <StyledAnchor to="/register">
         <StyledH4>
           Do not have an account? Register here.
         </StyledH4>
@@ -145,6 +149,7 @@ const Login = ({ showNotification }) => {
 };
 
 Login.propTypes = {
+  setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
 };
 

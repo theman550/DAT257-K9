@@ -10,14 +10,27 @@ const Container = styled.div`
   padding: ${(props) => props.theme.padding.section};
 `;
 
-const Account = ({ showNotification }) => (
+const Account = ({ loggedInUser, setLoggedInUser, showNotification }) => (
   <Container>
-    <Login showNotification={showNotification} />
+    <Login
+      loggedInUser={loggedInUser}
+      setLoggedInUser={setLoggedInUser}
+      showNotification={showNotification}
+    />
   </Container>
 );
 
 Account.propTypes = {
+  loggedInUser: PropTypes.shape({
+    token: PropTypes.string,
+    email: PropTypes.string,
+  }),
+  setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
+};
+
+Account.defaultProps = {
+  loggedInUser: null,
 };
 
 export default Account;

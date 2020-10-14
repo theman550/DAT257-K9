@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { H2 } from './UI/Typography';
 import FieldFactory from './UI/Field';
 import config from '../config';
@@ -57,8 +57,9 @@ const Button = styled(PrimaryButton)`
   padding: 10px;
   width: 60%;
   cursor: pointer;
-  `;
-const Form = ({ showNotification }) => {
+`;
+
+const Form = ({ setLoggedInUser, showNotification }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -76,7 +77,6 @@ const Form = ({ showNotification }) => {
       method: 'POST',
       mode: 'cors',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -87,7 +87,7 @@ const Form = ({ showNotification }) => {
       }),
     }).then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        setLoggedInUser({ ...data });
         showNotification('You are now registered!', '#8064f7', '7');
         setRedirect(true);
       })
@@ -151,7 +151,10 @@ const Form = ({ showNotification }) => {
     </Wrapper>
   );
 };
+
 Form.propTypes = {
+  setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
 };
+
 export default Form;
