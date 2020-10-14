@@ -391,6 +391,7 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
                 key={trip.tripID}
                 trip={trip}
                 showNotification={showNotification}
+                loggedInUser={loggedInUser}
               />
             )}
           />
