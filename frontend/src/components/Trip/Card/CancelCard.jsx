@@ -7,6 +7,7 @@ import TripModel from '../../../model/Trip';
 import BookingModel from '../../../model/Booking';
 import ThemeShape from '../../../model/ThemeShape';
 import config from '../../../config';
+import UserPayload from '../../../model/UserPayload';
 import { InactiveButton } from '../../UI';
 
 const StyledForm = styled(Form)`
@@ -26,11 +27,23 @@ const StyledForm = styled(Form)`
     }
 `;
 
-const CancelCard = ({ trip, showNotification, theme }) => {
+const CancelCard = ({
+  trip,
+  loggedInUser,
+  showNotification,
+  theme,
+}) => {
   const cancelBooking = async (id, seats) => {
     console.log(`Cancelling booking with id: ${id} for ${seats} seats`);
 
-    const res = await fetch(`${config.api.url}bookings/${id}/`, { method: 'DELETE', mode: 'cors' });
+    const res = await fetch(`${config.api.url}bookings/${id}/`, {
+      method: 'DELETE',
+      mode: 'cors',
+      body: JSON.stringify({
+        email: loggedInUser.email,
+        token: loggedInUser.token,
+      }),
+    });
     const data = await res.json();
 
     try {
@@ -69,6 +82,7 @@ CancelCard.propTypes = {
     // Expect a booking object, that this component can request to cancel
     booking: PropTypes.shape(BookingModel),
   }).isRequired,
+  loggedInUser: UserPayload.isRequired,
   showNotification: PropTypes.func.isRequired,
   theme: ThemeShape.isRequired,
 };
