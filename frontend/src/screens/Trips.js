@@ -110,7 +110,7 @@ Trips.propTypes = {
   loggedInUser: PropTypes.shape({
     token: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
 };
 
 export default Trips;

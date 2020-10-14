@@ -62,8 +62,8 @@ const App = () => {
               && (
               <Route path="/trips">
                 <ErrorBoundary sectionName="Trip page">
-                  <Trips 
-                    showNotification={showNotification} 
+                  <Trips
+                    showNotification={showNotification}
                     loggedInUser={loggedInUser}
                   />
                 </ErrorBoundary>

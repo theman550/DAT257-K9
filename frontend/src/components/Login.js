@@ -88,19 +88,20 @@ const Login = ({ setLoggedInUser, showNotification }) => {
         password,
       }),
     })
-    .then((response) => {
-      if (response.status === 400) {
-        showNotification('Incorrect username or password ! Please double check and try again later. ', '#CC354E', '5');
-        console.error('Bad request');
-        return;
-      } else if (response.status === 201) {
-        showNotification('Signed in sucessfully :)', '#8064f7', '7');
+      .then((response) => {
+        if (response.status === 400) {
+          throw new Error('Incorrect username or password');
+        }
+
+        showNotification('Signed in sucessfully :)', '#8064f7', '3');
         return response.json();
-      }
-    })
-    .then((data) => {
+      })
+      .then((data) => {
         setLoggedInUser({ ...data });
-    });
+      })
+      .catch((error) => {
+        showNotification(error.message, '#CC354E', '3');
+      });
   };
 
   return (

@@ -115,7 +115,7 @@ const AddTrip = ({ closeAdd, showNotification, loggedInUser }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newvalues),
-      
+
     }).then((respones) => respones).then((data) => {
       if (data.status === 400) {
         showNotification('Sorry ! this is bad request , You should try agian with valid inputs ', '#CC354E', '5');
@@ -212,8 +212,7 @@ AddTrip.propTypes = {
   loggedInUser: PropTypes.shape({
     token: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
 };
 
 export default AddTrip;
-
