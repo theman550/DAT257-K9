@@ -27,23 +27,24 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Navigation 
-          loggedInUser={loggedInUser} 
-          setLoggedInUser={setLoggedInUser} 
+        <Navigation
+          loggedInUser={loggedInUser}
+          setLoggedInUser={setLoggedInUser}
         />
         <PageWrapper>
-          {notification && 
-            <Notification 
-              msg={notification.msg} 
-              color={notification.color} 
+          {notification
+            && (
+            <Notification
+              msg={notification.msg}
+              color={notification.color}
             />
-          }
+            )}
           <Switch>
             <Route path="/account">
               <ErrorBoundary sectionName="Account page">
-                <Account 
-                  loggedInUser={loggedInUser} 
-                  setLoggedInUser={setLoggedInUser} 
+                <Account
+                  loggedInUser={loggedInUser}
+                  setLoggedInUser={setLoggedInUser}
                 />
               </ErrorBoundary>
             </Route>

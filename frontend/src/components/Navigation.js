@@ -74,7 +74,9 @@ const Navigation = ({ loggedInUser, setLoggedInUser }) => {
     setLoggedInUser(null);
 
     try {
-      await fetch(`${config.api.url}login/`);
+      await fetch(`${config.api.url}login/`, {
+        mode: 'cors',
+      });
     } catch (e) {
       console.error(`Failed to log out ${e.message}`);
     }
@@ -109,8 +111,15 @@ const Navigation = ({ loggedInUser, setLoggedInUser }) => {
 };
 
 Navigation.propTypes = {
-  loggedInUser: PropTypes.object.isRequired,
+  loggedInUser: PropTypes.shape({
+    token: PropTypes.string,
+    email: PropTypes.string,
+  }),
   setLoggedInUser: PropTypes.func.isRequired,
+};
+
+Navigation.defaultProps = {
+  loggedInUser: null,
 };
 
 export default Navigation;

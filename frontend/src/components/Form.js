@@ -148,8 +148,15 @@ const Form = ({ loggedInUser, setLoggedInUser }) => {
 };
 
 Form.propTypes = {
-  loggedInUser: PropTypes.object.isRequired,
+  loggedInUser: PropTypes.shape({
+    token: PropTypes.string,
+    email: PropTypes.string,
+  }),
   setLoggedInUser: PropTypes.func.isRequired,
+};
+
+Form.defaultProps = {
+  loggedInUser: null,
 };
 
 export default Form;

@@ -12,7 +12,10 @@ describe('Navigation', () => {
       render(
         <ThemeProvider theme={theme}>
           <Router>
-            <Navigation isLoggedIn={false} setIsLoggedIn={() => ''} />
+            <Navigation
+              loggedInUser={null}
+              setLoggedInUser={() => ''}
+            />
           </Router>
           ,
         </ThemeProvider>,
@@ -33,7 +36,13 @@ describe('Navigation', () => {
       render(
         <ThemeProvider theme={theme}>
           <Router>
-            <Navigation isLoggedIn setIsLoggedIn={() => ''} />
+            <Navigation
+              loggedInUser={{
+                token: 'abcd',
+                email: 'john@doe.com',
+              }}
+              setIsLoggedIn={() => ''}
+            />
           </Router>
           ,
         </ThemeProvider>,

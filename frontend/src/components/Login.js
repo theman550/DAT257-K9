@@ -71,7 +71,7 @@ color: white;
 font-size: large;
 `;
 
-const Login = ({ loggedInUser, setLoggedInUser }) => {
+const Login = ({ setLoggedInUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = (event) => {
@@ -84,14 +84,13 @@ const Login = ({ loggedInUser, setLoggedInUser }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        Email: email,
-        Password: password,
-        token: loggedInUser.token,
-        loggedInEmail: loggedInUser.email,
+        email,
+        password,
       }),
     })
-      .then((response) => response)
+      .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setLoggedInUser({ ...data });
       })
       .catch((error) => console.log(error));
@@ -128,7 +127,6 @@ const Login = ({ loggedInUser, setLoggedInUser }) => {
 };
 
 Login.propTypes = {
-  loggedInUser: PropTypes.object.isRequired,
   setLoggedInUser: PropTypes.func.isRequired,
 };
 

@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const Account = ({ loggedInUser, setLoggedInUser }) => (
   <Container>
-    <Login 
+    <Login
       loggedInUser={loggedInUser}
       setLoggedInUser={setLoggedInUser}
     />
@@ -21,8 +21,15 @@ const Account = ({ loggedInUser, setLoggedInUser }) => (
 );
 
 Account.propTypes = {
-  loggedInUser: PropTypes.object.isRequired,
+  loggedInUser: PropTypes.shape({
+    token: PropTypes.string,
+    email: PropTypes.string,
+  }),
   setLoggedInUser: PropTypes.func.isRequired,
+};
+
+Account.defaultProps = {
+  loggedInUser: null,
 };
 
 export default Account;
