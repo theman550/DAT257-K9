@@ -73,7 +73,13 @@ const Trips = ({ showNotification, loggedInUser, theme }) => {
           (page - 1) * tripsPerPage,
           (page - 1) * tripsPerPage + tripsPerPage,
         )}
-        tripComponent={(trip) => <BookCard trip={trip} />}
+        tripComponent={(trip) => (
+          <BookCard
+            trip={trip}
+            showNotification={showNotification}
+            loggedInUser={loggedInUser}
+          />
+        )}
       />
       <ModalProvider>
         <Modal
