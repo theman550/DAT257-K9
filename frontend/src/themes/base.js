@@ -24,6 +24,8 @@ const theme = {
     inactive: '#707386',
 
     gradient: 'linear-gradient(to right, #8064f7, #f5ba9c)',
+    success: '#8064f7',
+    error: '#f76464',
   },
 
   padding: {
