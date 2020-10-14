@@ -83,7 +83,7 @@ const Navigation = ({ loggedInUser, setLoggedInUser }) => {
           loggedInEmail: loggedInUser.email,
         }),
       });
-      
+
       setLoggedInUser(null);
     } catch (e) {
       console.error(`Failed to log out ${e.message}`);
