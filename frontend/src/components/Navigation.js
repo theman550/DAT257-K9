@@ -71,12 +71,20 @@ const NavIcon = styled.i`
 
 const Navigation = ({ loggedInUser, setLoggedInUser }) => {
   const logout = async () => {
-    setLoggedInUser(null);
-
     try {
-      await fetch(`${config.api.url}login/`, {
+      await fetch(`${config.api.url}logout/`, {
+        method: 'POST',
         mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token: loggedInUser.token,
+          loggedInEmail: loggedInUser.email,
+        }),
       });
+      
+      setLoggedInUser(null);
     } catch (e) {
       console.error(`Failed to log out ${e.message}`);
     }
