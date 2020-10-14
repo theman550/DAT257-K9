@@ -88,18 +88,15 @@ const AddTrip = ({ closeAdd, showNotification }) => {
   const [seats, setSeats] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
-  const options = [];
+  const [options, setOptions] = useState([]);
 
-  const loadingData = async () => {
-    console.log(kommuner);
-    kommuner.map((detail, index) => {
-      options[index] = detail.Kommun;
-      return options[index];
-    });
+  const loadingData = () => {
+    setOptions(kommuner.map((detail) => detail.Kommun));
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const newvalues = {
       startLocation: from,
       destination: to,
@@ -107,9 +104,9 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       startTime: datetime,
       price,
       description,
-
     };
     console.log(newvalues);
+
     fetch(`${config.api.url}trips/`, {
       method: 'POST',
       mode: 'cors',
@@ -130,16 +127,25 @@ const AddTrip = ({ closeAdd, showNotification }) => {
 
   useEffect(() => { loadingData(); }, []);
   return (
-
     <StyledForm aria-label="Add form" onSubmit={onSubmit}>
       <StyledTextRow>
         <Label htmlFor="from">From</Label>
-        <DropDown items={options} placeholder="Enter startLocation..." id="from" />
+        <DropDown
+          items={options}
+          valueChange={(value) => setFrom(value)}
+          placeholder="Enter start location..."
+          id="from"
+        />
       </StyledTextRow>
 
       <StyledTextRow>
         <Label htmlFor="to">To</Label>
-        <DropDown items={options} placeholder="Enter destination..." id="to" />
+        <DropDown
+          items={options}
+          valueChange={(value) => setTo(value)}
+          placeholder="Enter destination..."
+          id="to"
+        />
       </StyledTextRow>
 
       <StyledSelectRow>

@@ -84,14 +84,10 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
   const [seats, setSeats] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-  const options = [];
+  const [options, setOptions] = useState([]);
 
-  const loadingData = async () => {
-    console.log(kommuner);
-    kommuner.map((detail, index) => {
-      options[index] = detail.Kommun;
-      return options[index];
-    });
+  const loadingData = () => {
+    setOptions(kommuner.map((detail) => detail.Kommun));
   };
 
   const createQuery = () => {
@@ -119,17 +115,21 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
   return (
     <StyledForm aria-label="Search form" onSubmit={handleSubmit}>
       <StyledTextRow>
-        <Label htmlFor="from">From</Label>
-        <DropDown items={options} placeholder="Enter startLocation..." id="from" />
+        <Label id="fromLabel">From</Label>
+        <DropDown
+          items={options}
+          valueChange={(value) => setFrom(value)}
+          placeholder="Enter start location..."
+          aria-labelledby="fromLabel"
+        />
       </StyledTextRow>
       <StyledTextRow>
-        <Label htmlFor="to">To</Label>
-        <StyledInput
-          type="text"
-          id="to"
-          value={to}
-          onChange={(e) => setTo(e.target.value)}
+        <Label id="toLabel">To</Label>
+        <DropDown
+          items={options}
+          valueChange={(value) => setTo(value)}
           placeholder="Enter destination..."
+          aria-labelledby="toLabel"
         />
       </StyledTextRow>
 
