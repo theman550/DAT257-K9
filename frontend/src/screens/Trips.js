@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Modal, { ModalProvider } from 'styled-react-modal';
+import { withTheme } from 'styled-components';
 import config from '../config';
+import ThemeShape from '../model/ThemeShape';
 import SearchTrip from '../components/trips/SearchTrips';
 import FloatingButtons from '../components/trips/FloatingButtons';
 import DisplayScreen from './Trip/Display';
@@ -10,7 +12,7 @@ import Pagination from '../components/trips/Pagination';
 import BookCard from '../components/Trip/Card/BookCard';
 import UserPayload from '../model/UserPayload';
 
-const Trips = ({ showNotification, loggedInUser }) => {
+const Trips = ({ showNotification, loggedInUser, theme }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [filteredTrips, setFilteredTrips] = useState([]);
@@ -30,7 +32,7 @@ const Trips = ({ showNotification, loggedInUser }) => {
       }
 
       if (data === 'no results found') {
-        showNotification('No results found', 'red', 3);
+        showNotification('No results found', theme.colors.error, 3);
         setFilteredTrips([]);
         return;
       }
@@ -49,7 +51,7 @@ const Trips = ({ showNotification, loggedInUser }) => {
         })),
       );
     } catch (error) {
-      showNotification('Could not retrieve trips', 'red', 3);
+      showNotification('Could not retrieve trips', theme.colors.error, 3);
       console.error(error.message);
       setFilteredTrips([]);
     }
@@ -118,6 +120,7 @@ const Trips = ({ showNotification, loggedInUser }) => {
 Trips.propTypes = {
   showNotification: PropTypes.func.isRequired,
   loggedInUser: UserPayload.isRequired,
+  theme: ThemeShape.isRequired,
 };
 
-export default Trips;
+export default withTheme(Trips);

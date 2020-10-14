@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { Redirect } from 'react-router-dom';
 import { H2 } from './UI/Typography';
 import FieldFactory from './UI/Field';
 import config from '../config';
 import { PrimaryButton } from './UI';
+import ThemeShape from '../model/ThemeShape';
 
 const Wrapper = styled.div`
 display: flex;
@@ -59,7 +60,7 @@ const Button = styled(PrimaryButton)`
   cursor: pointer;
 `;
 
-const Form = ({ setLoggedInUser, showNotification }) => {
+const Form = ({ setLoggedInUser, showNotification, theme }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -69,7 +70,7 @@ const Form = ({ setLoggedInUser, showNotification }) => {
 
   const handleSubmit = (event) => {
     if (password !== confirmPassword) {
-      showNotification('password is not matched !', 'red', '50');
+      showNotification('password is not matched !', theme.colors.error, '50');
       return;
     }
     event.preventDefault();
@@ -88,12 +89,12 @@ const Form = ({ setLoggedInUser, showNotification }) => {
     }).then((response) => response.json())
       .then((data) => {
         setLoggedInUser({ ...data });
-        showNotification('You are now registered!', '#8064f7', '7');
+        showNotification('You are now registered!', theme.colors.success, '7');
         setRedirect(true);
       })
       .catch((error) => {
         console.log(error);
-        showNotification('Failed to register', '#CC354E', '7');
+        showNotification('Failed to register', theme.colors.error, '7');
       });
   };
   if (redirect) {
@@ -155,6 +156,7 @@ const Form = ({ setLoggedInUser, showNotification }) => {
 Form.propTypes = {
   setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
+  theme: ThemeShape.isRequired,
 };
 
-export default Form;
+export default withTheme(Form);
