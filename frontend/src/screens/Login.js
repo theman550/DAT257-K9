@@ -10,13 +10,17 @@ const Container = styled.div`
   padding: ${(props) => props.theme.padding.section};
 `;
 
-const Account = ({ showNotification }) => (
+const Account = ({ setLoggedInUser, showNotification }) => (
   <Container>
-    <LoginForm showNotification={showNotification} />
+    <LoginForm
+      setLoggedInUser={setLoggedInUser}
+      showNotification={showNotification}
+    />
   </Container>
 );
 
 Account.propTypes = {
+  setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
 };
 

@@ -85,7 +85,7 @@ const StyledInactiveButton = styled(InactiveButton)`
   margin-right: ${(props) => props.theme.spacing.subsection};
 `;
 
-const AddTrip = ({ closeAdd, showNotification }) => {
+const AddTrip = ({ closeAdd, showNotification, loggedInUser }) => {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [datetime, setDatetime] = useState('');
@@ -108,8 +108,9 @@ const AddTrip = ({ closeAdd, showNotification }) => {
       startTime: datetime,
       price,
       description,
+      loggedInEmail: loggedInUser.email,
+      token: loggedInUser.token,
     };
-    console.log(newvalues);
 
     fetch(`${config.api.url}trips/`, {
       method: 'POST',
@@ -118,8 +119,8 @@ const AddTrip = ({ closeAdd, showNotification }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newvalues),
+
     }).then((respones) => respones).then((data) => {
-      console.log(data);
       if (data.status === 400) {
         showNotification('Sorry ! this is bad request , You should try agian with valid inputs ', '#CC354E', '5');
         console.log('Bad request');
@@ -212,5 +213,10 @@ const AddTrip = ({ closeAdd, showNotification }) => {
 AddTrip.propTypes = {
   closeAdd: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.shape({
+    token: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
 };
+
 export default AddTrip;

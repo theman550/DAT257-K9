@@ -16,6 +16,7 @@ const PageWrapper = styled.div`
 
 const App = () => {
   const [notification, setNotification] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   const showNotification = (msg, color, seconds) => {
     setNotification({ msg, color });
@@ -27,17 +28,31 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Navigation />
+        <Navigation
+          loggedInUser={loggedInUser}
+          setLoggedInUser={setLoggedInUser}
+        />
         <PageWrapper>
           {notification
-            && <Notification msg={notification.msg} color={notification.color} />}
+            && (
+            <Notification
+              msg={notification.msg}
+              color={notification.color}
+            />
+            )}
           <Switch>
             <Route path="/login">
-              <Login showNotification={showNotification} />
+              <Login
+                showNotification={showNotification}
+                setLoggedInUser={setLoggedInUser}
+              />
             </Route>
             <Route path="/register">
               <ErrorBoundary sectionName="Register page">
-                <RegisterForm showNotification={showNotification} />
+                <RegisterForm
+                  showNotification={showNotification}
+                  setLoggedInUser={setLoggedInUser}
+                />
               </ErrorBoundary>
             </Route>
             <Route path="/account">
@@ -45,11 +60,17 @@ const App = () => {
                 <Account showNotification={showNotification} />
               </ErrorBoundary>
             </Route>
-            <Route path="/trips">
-              <ErrorBoundary sectionName="Trip page">
-                <Trips showNotification={showNotification} />
-              </ErrorBoundary>
-            </Route>
+            {loggedInUser !== null
+              && (
+              <Route path="/trips">
+                <ErrorBoundary sectionName="Trip page">
+                  <Trips
+                    showNotification={showNotification}
+                    loggedInUser={loggedInUser}
+                  />
+                </ErrorBoundary>
+              </Route>
+              )}
             <Route path="/">
               <ErrorBoundary sectionName="Welcome page">
                 <p>Welcome to Share-a-ride</p>
