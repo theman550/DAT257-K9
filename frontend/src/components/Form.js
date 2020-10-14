@@ -66,6 +66,12 @@ const Form = ({ shownotification }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [redirct, setRedirct] = useState(false);
   const handleSubmit = (event) => {
+
+    if(password!=confirmPassword)
+    {
+    shownotification("password is not matched !" ,"red","50");
+    return;
+    }
     event.preventDefault();
     fetch(`${config.api.url}users/`, {
       method: 'POST',
@@ -83,8 +89,8 @@ const Form = ({ shownotification }) => {
     }).then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
-    shownotification('You are now registered ! ', '#8064f7', '7');
-    setRedirct(true);
+      shownotification('You are now registered ! ', '#8064f7', '7');
+     setRedirct(true);
   };
   if (redirct) {
     return <Redirect to="/account" />;
@@ -97,35 +103,35 @@ const Form = ({ shownotification }) => {
           <tbody>
             <tr>
               <td>
-                <InputText type="text" alt="firstName" name={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="First name" />
+                <InputText type="text" alt="firstName" name={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="First name" required />
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <InputText type="text" alt="lastName" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name" />
+                <InputText type="text" alt="lastName" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name"  required/>
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <InputText type="text" alt="email" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
+                <InputText type="email" alt="email" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email"  required/>
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <InputPassword type="password" alt="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
+                <InputPassword type="password" alt="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" required />
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <InputPassword type="password" alt="confirmPassword" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" />
+                <InputPassword type="password" alt="confirmPassword" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" required />
               </td>
             </tr>
           </tbody>

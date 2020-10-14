@@ -4,20 +4,13 @@
 	include(ABS_PATH . "/api.php");
 	include(ABS_PATH . "/booking.php");
 
-	header('Access-Control-Allow-Origin: *');
-	header('Content-Type: application/json');
-	header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-	header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
-	header('Access-Control-Max-Age: 1000');	
+	headers();
+	
 	if (session_status() == PHP_SESSION_NONE) {
 	    session_start();
 	}
 	if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-		header('Access-Control-Allow-Origin: *');
-		header('Content-Type: application/json');
-		header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-		header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
-		header('Access-Control-Max-Age: 1000');	
+		headers();
 	}
 
 	else if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -94,7 +94,6 @@ function getAllBookingsFromUser($userID){
     $fulsträng = queryDB("SELECT bookings FROM Users WHERE userID = '{$userID}'") -> fetch_assoc()['bookings'];
     $finarray['bookings'] = str_getcsv($fulsträng);
     array_shift($finarray['bookings']); 
-    logga($finarray);
     $dbconnection = connectDB();
     $maffigArray = array();
     for($i = 0; $i<count($finarray['bookings']); $i++){
