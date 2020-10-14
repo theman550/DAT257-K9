@@ -66,11 +66,9 @@ const Form = ({ shownotification }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [redirct, setRedirct] = useState(false);
   const handleSubmit = (event) => {
-
-    if(password!=confirmPassword)
-    {
-    shownotification("password is not matched !" ,"red","50");
-    return;
+    if (password !== confirmPassword) {
+      shownotification('password is not matched !', 'red', '50');
+      return;
     }
     event.preventDefault();
     fetch(`${config.api.url}users/`, {
@@ -89,8 +87,8 @@ const Form = ({ shownotification }) => {
     }).then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
-      shownotification('You are now registered ! ', '#8064f7', '7');
-     setRedirct(true);
+    shownotification('You are now registered ! ', '#8064f7', '7');
+    setRedirct(true);
   };
   if (redirct) {
     return <Redirect to="/account" />;
@@ -110,14 +108,14 @@ const Form = ({ shownotification }) => {
           <tbody>
             <tr>
               <td>
-                <InputText type="text" alt="lastName" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name"  required/>
+                <InputText type="text" alt="lastName" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name" required />
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <InputText type="email" alt="email" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email"  required/>
+                <InputText type="email" alt="email" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" required />
               </td>
             </tr>
           </tbody>
