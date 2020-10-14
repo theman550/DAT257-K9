@@ -1,6 +1,7 @@
 export default [
   {
     tripID: '0',
+    userID: '10',
     startLocation: 'Göteborg',
     destination: 'Malmö',
     driver: {
@@ -8,10 +9,11 @@ export default [
       lastName: 'Hernandez',
     },
     startTime: new Date(),
-    seatsAvailable: 1,
+    seatsAvailable: '1',
   },
   {
     tripID: '1',
+    userID: '11',
     startLocation: 'Göteborg',
     destination: 'Stockholm',
     driver: {
@@ -19,10 +21,11 @@ export default [
       lastName: 'Hernandez',
     },
     startTime: new Date(),
-    seatsAvailable: 4,
+    seatsAvailable: '4',
   },
   {
     tripID: '2',
+    userID: '12',
     startLocation: 'Göteborg',
     destination: 'Kinna',
     driver: {
@@ -30,10 +33,11 @@ export default [
       lastName: 'Hernandez',
     },
     startTime: new Date(),
-    seatsAvailable: 2,
+    seatsAvailable: '2',
   },
   {
     tripID: '3',
+    userID: '13',
     startLocation: 'Göteborg',
     destination: 'Borås',
     driver: {
@@ -41,6 +45,6 @@ export default [
       lastName: 'Hernandez',
     },
     startTime: new Date(),
-    seatsAvailable: 1,
+    seatsAvailable: '1',
   },
 ];

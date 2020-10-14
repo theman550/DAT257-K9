@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 export default {
   tripID: PropTypes.string.isRequired,
+  userID: PropTypes.string.isRequired,
   startLocation: PropTypes.string.isRequired,
   destination: PropTypes.string.isRequired,
   driver: PropTypes.shape({
@@ -9,7 +10,7 @@ export default {
     lastName: PropTypes.string.isRequired,
   }).isRequired,
   startTime: PropTypes.instanceOf(Date).isRequired,
-  seatsAvailable: PropTypes.number.isRequired,
+  seatsAvailable: PropTypes.string.isRequired,
 };
 
 // toTripEntity is a utility function that recognizes differences between
