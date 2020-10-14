@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { User } from 'react-feather';
 import config from '../config';
 import {
   FieldFactory,
   PrimaryButton,
   Label,
+  H4,
 } from './UI';
 
 const StyledInput = FieldFactory(styled.input``);
 
 const Icon = styled(User)`
-margin:0 auto
+  margin: auto
 `;
 
 const StyledForm = styled.form`
@@ -20,7 +21,6 @@ const StyledForm = styled.form`
   flex-direction: column;
   background-color: ${(props) => props.theme.colors.fill};
   padding: ${(props) => props.theme.padding.section};
-  margin: 30% auto;
   width: 90%;
   max-width: 26rem;
   border-radius: ${(props) => props.theme.size.corner};
@@ -45,15 +45,16 @@ const StyledSelectRow = styled.div`
   margin-top: ${(props) => props.theme.spacing.subsection};
 `;
 
-const Button = css`
-  padding: ${(props) => props.theme.size.button};
+const StyledPrimaryButton = styled(PrimaryButton)`
   width: 100%;
+  margin: ${(props) => props.theme.spacing.subsection};
+  padding: ${(props) => props.theme.size.button};
   margin-top: ${(props) => props.theme.spacing.subsection};
 `;
 
-const StyledPrimaryButton = styled(PrimaryButton)`
-  ${Button}
+const StyledH4 = styled(H4)`
   margin: ${(props) => props.theme.spacing.subsection};
+  color: #707386;
 `;
 
 const Login = ({ showNotification }) => {
@@ -62,7 +63,6 @@ const Login = ({ showNotification }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const newvalue = {
       Email: username,
       Password: password,
@@ -83,13 +83,13 @@ const Login = ({ showNotification }) => {
           showNotification('Incorrect username or password ! Please double check and try again later. ', '#CC354E', '5');
           console.log('Bad request');
         } else if (data.status === 201) {
-          showNotification('Signed in sucessfully :)', '#378C2E', '7');
+          showNotification('Signed in sucessfully :)', '#8064f7', '7');
         }
       });
   };
 
   return (
-    <StyledForm aria-label="Signin form" id="email" onSubmit={handleSubmit}>
+    <StyledForm aria-label="Signin form" onSubmit={handleSubmit}>
       <StyledTextRow>
         <Icon size={55} color="#8064f7" />
       </StyledTextRow>
@@ -121,6 +121,13 @@ const Login = ({ showNotification }) => {
       <StyledSelectRow>
         <StyledPrimaryButton type="submit">Sign In</StyledPrimaryButton>
       </StyledSelectRow>
+
+      <a href="register/">
+        <StyledH4>
+          Do not have an account? Register here.
+        </StyledH4>
+      </a>
+
     </StyledForm>
   );
 };

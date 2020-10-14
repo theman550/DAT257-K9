@@ -38,7 +38,7 @@ const App = () => {
             </Route>
             <Route path="/register">
               <ErrorBoundary sectionName="Register page">
-                <RegisterForm />
+                <RegisterForm shownotification={showNotification} />
               </ErrorBoundary>
             </Route>
             <Route path="/trips">
