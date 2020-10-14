@@ -64,7 +64,7 @@ const Button = styled(PrimaryButton)`
   cursor: pointer;
   `;
 
-const Form = ({ loggedInUser, setLoggedInUser }) => {
+const Form = ({ setLoggedInUser }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -84,8 +84,6 @@ const Form = ({ loggedInUser, setLoggedInUser }) => {
         lastname: lastName,
         email,
         password,
-        token: loggedInUser.token,
-        loggedInEmail: loggedInUser.email,
       }),
     }).then((response) => response.json())
       .then((data) => {
@@ -148,15 +146,7 @@ const Form = ({ loggedInUser, setLoggedInUser }) => {
 };
 
 Form.propTypes = {
-  loggedInUser: PropTypes.shape({
-    token: PropTypes.string,
-    email: PropTypes.string,
-  }),
   setLoggedInUser: PropTypes.func.isRequired,
-};
-
-Form.defaultProps = {
-  loggedInUser: null,
 };
 
 export default Form;
