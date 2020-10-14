@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { H2 } from './UI/Typography';
 import FieldFactory from './UI/Field';
 import config from '../config';
@@ -10,7 +12,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 `;
-
 const F = styled.form`
     box-sizing: border-box;
     font-family: Kufam, sans-serif;
@@ -23,18 +24,15 @@ const F = styled.form`
     font-size: medium;
     padding: ${(props) => props.theme.padding.section};
     `;
-
 const H1 = styled(H2)`
     font-size: 38px;
     text-align:center;
     color: ${(props) => props.theme.colors.primary};
     `;
-
 const Table = styled.table`
     margin-left: auto;
     margin-right: auto;
     `;
-
 const InputText = FieldFactory(styled.input`
     width: 100%;
     padding: 12px 20px;
@@ -45,7 +43,6 @@ const InputText = FieldFactory(styled.input`
     border-radius: 15px;
     font-family: Kufam;
     `);
-
 const InputPassword = FieldFactory(styled.input`
     width: 100%;
     padding: 12px 20px;
@@ -56,22 +53,25 @@ const InputPassword = FieldFactory(styled.input`
     border-radius: 15px;
     font-family: Kufam;
     `);
-
 const Button = styled(PrimaryButton)`
   padding: 10px;
   width: 60%;
   cursor: pointer;
   `;
-
-const Form = () => {
+const Form = ({ showNotification }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const [redirect, setRedirect] = useState(false);
 
+  const handleSubmit = (event) => {
+    if (password !== confirmPassword) {
+      showNotification('password is not matched !', 'red', '50');
+      return;
+    }
+    event.preventDefault();
     fetch(`${config.api.url}users/`, {
       method: 'POST',
       mode: 'cors',
@@ -86,10 +86,19 @@ const Form = () => {
         password,
       }),
     }).then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
+      .then((data) => {
+        console.log(data);
+        showNotification('You are now registered!', '#8064f7', '7');
+        setRedirect(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        showNotification('Failed to register', '#CC354E', '7');
+      });
   };
-
+  if (redirect) {
+    return <Redirect to="/account" />;
+  }
   return (
     <Wrapper>
       <F onSubmit={handleSubmit}>
@@ -98,35 +107,35 @@ const Form = () => {
           <tbody>
             <tr>
               <td>
-                <InputText type="text" alt="firstName" name={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="First name" />
+                <InputText type="text" alt="firstName" name={firstName} onChange={(event) => setFirstName(event.target.value)} placeholder="First name" required />
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <InputText type="text" alt="lastName" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name" />
+                <InputText type="text" alt="lastName" name={lastName} onChange={(event) => setLastName(event.target.value)} placeholder="Last name" required />
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <InputText type="text" alt="email" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
+                <InputText type="email" alt="email" name={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" required />
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <InputPassword type="password" alt="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
+                <InputPassword type="password" alt="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" required />
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <InputPassword type="password" alt="confirmPassword" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" />
+                <InputPassword type="password" alt="confirmPassword" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" required />
               </td>
             </tr>
           </tbody>
@@ -142,5 +151,7 @@ const Form = () => {
     </Wrapper>
   );
 };
-
+Form.propTypes = {
+  showNotification: PropTypes.func.isRequired,
+};
 export default Form;
