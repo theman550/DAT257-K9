@@ -13,8 +13,7 @@ describe('SearchTrips', () => {
       <ThemeProvider theme={theme}>
         <SearchTrips
           closeSearch={() => ''}
-          setFilteredTrips={() => ''}
-          showNotification={() => ''}
+          getTrips={() => ''}
         />
       </ThemeProvider>,
     );
@@ -25,11 +24,11 @@ describe('SearchTrips', () => {
   });
 
   test('renders start location input', () => {
-    expect(screen.getByLabelText('From')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Enter start location...')).toBeInTheDocument();
   });
 
   test('renders destination input', () => {
-    expect(screen.getByLabelText('To')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Enter destination...')).toBeInTheDocument();
   });
 
   test('renders datetime selector', () => {
@@ -49,13 +48,13 @@ describe('SearchTrips', () => {
   });
 
   test('should accept a start location', () => {
-    const input = screen.getByLabelText('From');
+    const input = screen.getByPlaceholderText('Enter start location...');
     fireEvent.change(input, { target: { value: 'Göteborg' } });
     expect(input.value).toBe('Göteborg');
   });
 
   test('should accept a destination', () => {
-    const input = screen.getByLabelText('To');
+    const input = screen.getByPlaceholderText('Enter destination...');
     fireEvent.change(input, { target: { value: 'Oslo' } });
     expect(input.value).toBe('Oslo');
   });

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LoginForm from '../components/LoginForm';
 
@@ -6,14 +7,17 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+  padding: ${(props) => props.theme.padding.section};
 `;
 
-const Login = () => (
+const Account = ({ showNotification }) => (
   <Container>
-    <LoginForm />
+    <LoginForm showNotification={showNotification} />
   </Container>
 );
 
-export default Login;
+Account.propTypes = {
+  showNotification: PropTypes.func.isRequired,
+};
+
+export default Account;

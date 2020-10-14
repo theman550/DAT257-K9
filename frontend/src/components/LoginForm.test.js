@@ -1,20 +1,26 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
 import LoginForm from './LoginForm';
+import theme from '../themes/base';
 
-describe('LoginForm', () => {
+describe('Login form', () => {
   beforeEach(() => {
     render(
-      <LoginForm />,
+      <ThemeProvider theme={theme}>
+        <LoginForm
+          showNotification={() => ''}
+        />
+      </ThemeProvider>,
     );
   });
 
-  it('test sin in email address', () => {
+  it('test email address', () => {
     expect(screen.queryAllByTestId('email')).toBeTruthy();
   });
 
-  it('test sin in password', () => {
+  it('test  password', () => {
     expect(screen.queryAllByTestId('password')).toBeTruthy();
   });
 });
