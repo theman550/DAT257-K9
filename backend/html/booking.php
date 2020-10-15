@@ -1,8 +1,4 @@
 <?php 
-include_once("api.php");
-include_once("connectDB.php");
-include_once("debug.php");
-include_once("dataValidation.php");
 function bookTrip($data){
     $validationResult = validateBooking($data); //TBDeveloped, ger bara true
     if($validationResult === TRUE){
