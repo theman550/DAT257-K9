@@ -1,13 +1,9 @@
 <?php
 	define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
 	include(ABS_PATH . "/api.php");
-	//include(ABS_PATH . "/DAT257-K9/backend/html/api.php");
-	//include(ABS_PATH . "/agilecourse/api.php");
 
 	headers();
 
-	//Chrome skickar en pre-flight request av typ OPTIONS som 
-	//vill ha flaggor, den här biten löser det
 	if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 		headers();
 	}
@@ -47,5 +43,8 @@
 		$filterArray = getUserGETParameters();
 		$response = readFilteredTable($filterArray, "Users", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">="));
 		sendResponseQuery($response);	
+	}
+	else{
+		http_response_code(405);
 	}
 ?>

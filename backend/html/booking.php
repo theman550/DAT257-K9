@@ -1,13 +1,8 @@
 <?php 
-include_once("api.php");
-include_once("connectDB.php");
-include_once("debug.php");
-include_once("dataValidation.php");
-
 function bookTrip($data){
-    $validationResult = validateBooking($data); //TBDeveloped
+    $validationResult = validateBooking($data); //TBDeveloped, ger bara true
     if($validationResult === TRUE){
-
+        
         $dbconnection = connectDB();
         
         /* Beräknar antalet säten */
@@ -19,10 +14,9 @@ function bookTrip($data){
 
         if($trip['seatsAvailable'] >= (int)$data->seats){
             $bookingID = createBookingID();
-            //$userID = findUserIDFromToken($data->token);
-            $userID = $data->userID;
+            $userID = findUserIDFromEmail($data->loggedInEmail);
             $availableSeatsAfterBooking = $trip['seatsAvailable']-$data->seats;
-
+            
             /* Skapar den nya bokningen */
             $dbconnection -> query("INSERT INTO Booking (userID, tripID, seats, bookingID, startLocation, destination, startTime) VALUES (
                                     '{$userID}',
@@ -48,6 +42,7 @@ function bookTrip($data){
                                     ");
 
             disconnectDB($dbconnection);
+            http_response_code(201);
             return($bookingID);
         }
         else{
@@ -83,15 +78,14 @@ function deleteBooking($bookingID){
 
     /* Tar bort själva bokningen */
     $dbconnection->query("DELETE FROM Booking WHERE bookingID = '{$bookingID}'");
-    
     disconnectDB($dbconnection);
-
     return ("Succé!");
 }
 
-/* Den här funktionen kanske borde ligga i User-filen istället */
-function getAllBookingsFromUser($userID){
-    $fulsträng = queryDB("SELECT bookings FROM Users WHERE userID = '{$userID}'") -> fetch_assoc()['bookings'];
+/* Den här funktionen kanske borde ligga i User-filen istället? */
+/* Variabelnamnen är jättefina och ska så förbli. */
+function getAllBookingsFromUser($email){
+    $fulsträng = queryDB("SELECT bookings FROM Users WHERE email = '{$email}'") -> fetch_assoc()['bookings'];
     $finarray['bookings'] = str_getcsv($fulsträng);
     array_shift($finarray['bookings']); 
     $dbconnection = connectDB();
@@ -103,27 +97,11 @@ function getAllBookingsFromUser($userID){
     return $maffigArray;
 }
 
-function createBookingID()
-{
+function createBookingID(){
 	return (uniqid('booking-', true));
-}
-
-
-
-
-
-
-
-/* Används ej */
-function findUserIDFromToken($auth){
-    return queryDB("SELECT userID FROM Users WHERE auth = '{$auth}'");
 }
 
 function getBooking($bookingID){
     return queryDB("SELECT * FROM Booking WHERE bookingID='{$bookingID}'");
 }
-
-
-
-
 ?>
