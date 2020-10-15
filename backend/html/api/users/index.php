@@ -1,6 +1,7 @@
 <?php
 	define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
 	include(ABS_PATH . "/api.php");
+	//include(ABS_PATH . "/DAT257-K9/backend/html/api.php");
 	//include(ABS_PATH . "/agilecourse/api.php");
 
 	headers();
@@ -30,25 +31,21 @@
 		}
 		$userID = createAccount($email, $password, $firstname, $lastname);
 		if($userID == null)
+		{
 			http_response_code(400);
+			return;
+		}
 		else
 		{
 			http_response_code(201);
-			logUserIn($email);
+			$tokenMail = logUserIn($email);
 		}
-		//echo json_encode($userID);
+		echo json_encode($tokenMail);
 	}
-	else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-		if (session_status() == PHP_SESSION_NONE)
-		session_start();
-		if(isset($_SESSION['email']) && isset($_SESSION['token']))
-		{		
-			if(verifyToken($_SESSION['email'], $_SESSION['token']))
-			{	
-				$filterArray = getUserGETParameters();
-				$response = readFilteredTable($filterArray, "Users", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">="));
-				sendResponseQuery($response);
-			}
-		}
+	else if ($_SERVER['REQUEST_METHOD'] === 'GET') {	
+		$data = json_decode(file_get_contents("php://input", true));
+		$filterArray = getUserGETParameters();
+		$response = readFilteredTable($filterArray, "Users", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">="));
+		sendResponseQuery($response);	
 	}
 ?>
