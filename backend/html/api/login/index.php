@@ -1,21 +1,14 @@
 <?php
 
 	define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
-	//include(ABS_PATH . "/DAT257-K9/backend/html/api.php");
 	include(ABS_PATH . "/api.php");
-	//include(ABS_PATH . "/agilecourse/api.php");
 
-	/* include(dirname(__FILE__) . "\api.php");
-	include(dirname(__FILE__) . "\debug.php");
-	 */
-	 headers();
-	
+	headers();
 
 	if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 		headers();
 	}
-
-	else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$data = json_decode(file_get_contents("php://input", true));
 		$email = "";
 		$password = "";
@@ -30,9 +23,9 @@
 			$password = $_POST['password'];
 		}
 		$token = tryLogin($email, $password);
-	    echo json_encode($token);
+		echo json_encode($token);
 	}
-	else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+	else{
+		http_response_code(405); //"method not allowed", endast POST ska finnas här
 	}
-
 ?>
