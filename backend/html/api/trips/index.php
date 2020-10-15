@@ -1,8 +1,8 @@
 <?php
 define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
 
-include(ABS_PATH . "/DAT257-K9/backend/html/api.php");
-//include(ABS_PATH . "/api.php");
+//include(ABS_PATH . "/DAT257-K9/backend/html/api.php");
+include(ABS_PATH . "/api.php");
 //include(ABS_PATH . "/agilecourse/api.php");
 
 headers();
