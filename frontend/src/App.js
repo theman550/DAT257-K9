@@ -55,24 +55,27 @@ const App = () => {
                 />
               </ErrorBoundary>
             </Route>
-            <Route path="/account">
-              <ErrorBoundary sectionName="Account page">
-                <Account
-                  showNotification={showNotification}
-                  loggedInUser={loggedInUser}
-                />
-              </ErrorBoundary>
-            </Route>
             {loggedInUser !== null
               && (
-              <Route path="/trips">
-                <ErrorBoundary sectionName="Trip page">
-                  <Trips
-                    showNotification={showNotification}
-                    loggedInUser={loggedInUser}
-                  />
-                </ErrorBoundary>
-              </Route>
+                <>
+                  <Route path="/trips">
+                    <ErrorBoundary sectionName="Trip page">
+                      <Trips
+                        showNotification={showNotification}
+                        loggedInUser={loggedInUser}
+                      />
+                    </ErrorBoundary>
+                  </Route>
+
+                  <Route path="/account">
+                    <ErrorBoundary sectionName="Account page">
+                      <Account
+                        showNotification={showNotification}
+                        loggedInUser={loggedInUser}
+                      />
+                    </ErrorBoundary>
+                  </Route>
+                </>
               )}
             <Route path="/">
               <ErrorBoundary sectionName="Welcome page">
