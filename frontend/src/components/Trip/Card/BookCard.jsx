@@ -11,6 +11,7 @@ import {
 } from '../../UI';
 import UserPayload from '../../../model/UserPayload';
 import ThemeShape from '../../../model/ThemeShape';
+import config from '../../../config';
 
 const StyledForm = styled(Form)`
     display: flex;
@@ -55,19 +56,19 @@ const BookCard = ({
 }) => {
   const [seats, setSeats] = useState(trip.seatsAvailable);
 
-  const submitBooking = async (id, numberOfSeats) => {
-    console.log(`Submitting booking for trip of id: ${id} with ${numberOfSeats} seats`);
+  const submitBooking = async (tripID, numberOfSeats) => {
+    console.log(`Submitting booking for trip of id: ${tripID} with ${numberOfSeats} seats`);
 
     try {
       // Add some type of global message service that can display notifications
-      const res = await fetch('http://splig.xyz/api/trips/', {
+      const res = await fetch(`${config.api.url}trips/`, {
         method: 'POST',
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id,
+          tripID,
           seats: numberOfSeats,
           email: loggedInUser.email,
           token: loggedInUser.token,
@@ -95,10 +96,10 @@ const BookCard = ({
   return (
     <TripCard
       trip={{ ...trip, seatsAvailable: seats, driver: { firstName: 'David', lastName: 'Hernandez' } }}
-      controlFactory={({ id, maxSeats }) => (
+      controlFactory={({ tripID, seatsAvailable }) => (
         <Formik
           initialValues={{ seats: 1 }}
-          onSubmit={(values) => submitBooking(id, values.seats)}
+          onSubmit={(values) => submitBooking(tripID, values.seats)}
         >
           {({ values, errors }) => (
             <StyledForm>
@@ -110,7 +111,7 @@ const BookCard = ({
                     name="seats"
                     type="number"
                     placeholder="1"
-                    validate={(value) => ((value >= 1 && value <= maxSeats) ? '' : 'Error')}
+                    validate={(value) => ((value >= 1 && value <= seatsAvailable) ? '' : 'Error')}
                     className={errors.seats ? 'field-error' : null}
                   />
                 </Label>
