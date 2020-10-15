@@ -11,6 +11,7 @@ import AddTrip from '../components/trips/AddTrip';
 import Pagination from '../components/trips/Pagination';
 import BookCard from '../components/Trip/Card/BookCard';
 import UserPayload from '../model/UserPayload';
+import { toTripEntity } from '../model/Trip';
 
 const Trips = ({ showNotification, loggedInUser, theme }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -38,17 +39,7 @@ const Trips = ({ showNotification, loggedInUser, theme }) => {
       }
 
       setFilteredTrips(
-        data.map((trip) => ({
-          ...trip,
-          // mocking the driver
-          driver: {
-            firstName: 'John',
-            lastName: 'Doe',
-          },
-          startTime: new Date(trip.startTime),
-          seatsAvailable: Number.parseInt(trip.seatsAvailable, 10),
-          price: Number.parseInt(trip.price, 10),
-        })),
+        data.map((trip) => toTripEntity(trip)),
       );
     } catch (error) {
       showNotification('Could not retrieve trips', theme.colors.error, 3);
@@ -75,6 +66,7 @@ const Trips = ({ showNotification, loggedInUser, theme }) => {
         )}
         tripComponent={(trip) => (
           <BookCard
+            key={trip.tripID}
             trip={trip}
             showNotification={showNotification}
             loggedInUser={loggedInUser}

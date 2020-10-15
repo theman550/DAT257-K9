@@ -10,6 +10,7 @@ export default [
     },
     startTime: new Date(),
     seatsAvailable: '1',
+    price: '10',
   },
   {
     tripID: '1',
@@ -22,6 +23,7 @@ export default [
     },
     startTime: new Date(),
     seatsAvailable: '4',
+    price: '15',
   },
   {
     tripID: '2',
@@ -34,6 +36,7 @@ export default [
     },
     startTime: new Date(),
     seatsAvailable: '2',
+    price: '20',
   },
   {
     tripID: '3',
@@ -46,5 +49,6 @@ export default [
     },
     startTime: new Date(),
     seatsAvailable: '1',
+    price: '25',
   },
 ];

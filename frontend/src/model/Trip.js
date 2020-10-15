@@ -10,7 +10,8 @@ export default {
     lastName: PropTypes.string.isRequired,
   }).isRequired,
   startTime: PropTypes.instanceOf(Date).isRequired,
-  seatsAvailable: PropTypes.string.isRequired,
+  seatsAvailable: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
 };
 
 // toTripEntity is a utility function that recognizes differences between
@@ -25,6 +26,8 @@ const toTripEntity = (tripResponse) => ({
     firstName: 'David',
     lastName: 'Hernandez',
   },
+  seatsAvailable: Number.parseInt(tripResponse.seatsAvailable, 10),
+  price: Number.parseInt(tripResponse.price, 10),
 });
 
 export { toTripEntity };
