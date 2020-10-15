@@ -17,7 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	}
 	else if(isset($_GET['price']))
 	{
-		$response = readFilteredTable($filterArray, "Resa", returnStringQuery($filterArray, "=") . returnStringQuery(Array("price"), ">=") . "ORDER BY price ASC");
+		$_GET['startTime'] = date('y-m-d h:i:s');
+		$response = readFilteredTable($filterArray, "Resa", returnStringQuery($filterArray, "=") . returnStringQuery(Array("price", "startTime"), ">=") . "ORDER BY price ASC");
+	}
+	else
+	{
+		$_GET['startTime'] = date('y-m-d h:i:s');
+		$response = readFilteredTable($filterArray, "Resa", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">=") . "ORDER BY startTime ASC");
 	}
 	sendResponseQuery($response);
 }
