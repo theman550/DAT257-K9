@@ -9,6 +9,7 @@ import Login from './screens/Login';
 import RegisterForm from './components/Form';
 import ErrorBoundary from './components/ErrorBoundary';
 import Account from './screens/Account';
+import LandingPage from './screens/LandingPage';
 
 const PageWrapper = styled.div`
   margin-top: ${(props) => props.theme.size.navbar};
@@ -41,13 +42,18 @@ const App = () => {
             />
             )}
           <Switch>
-            <Route path="/login">
+            <Route exact path="/">
+              <ErrorBoundary sectionName="Welcome page">
+                <LandingPage />
+              </ErrorBoundary>
+            </Route>
+            <Route exact path="/login">
               <Login
                 showNotification={showNotification}
                 setLoggedInUser={setLoggedInUser}
               />
             </Route>
-            <Route path="/register">
+            <Route exact path="/register">
               <ErrorBoundary sectionName="Register page">
                 <RegisterForm
                   showNotification={showNotification}
@@ -58,7 +64,7 @@ const App = () => {
             {loggedInUser !== null
               && (
                 <>
-                  <Route path="/trips">
+                  <Route exact path="/trips">
                     <ErrorBoundary sectionName="Trip page">
                       <Trips
                         showNotification={showNotification}
@@ -67,7 +73,7 @@ const App = () => {
                     </ErrorBoundary>
                   </Route>
 
-                  <Route path="/account">
+                  <Route exact path="/account">
                     <ErrorBoundary sectionName="Account page">
                       <Account
                         showNotification={showNotification}
@@ -77,11 +83,6 @@ const App = () => {
                   </Route>
                 </>
               )}
-            <Route path="/">
-              <ErrorBoundary sectionName="Welcome page">
-                <p>Welcome to Share-a-ride</p>
-              </ErrorBoundary>
-            </Route>
           </Switch>
         </PageWrapper>
       </Router>
