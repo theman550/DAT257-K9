@@ -81,7 +81,6 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
     fetch(`${config.api.url}users/`, {
       method: 'POST',
       mode: 'cors',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },

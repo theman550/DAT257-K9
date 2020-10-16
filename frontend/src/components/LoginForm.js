@@ -11,6 +11,7 @@ import {
   Label,
   H4,
 } from './UI';
+import Spinner from '../components/Spinner';
 
 const StyledInput = FieldFactory(styled.input``);
 
@@ -74,9 +75,11 @@ const StyledH4 = styled(H4)`
 const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     fetch(`${config.api.url}login/`, {
       method: 'POST',
@@ -98,9 +101,11 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
         return response.json();
       })
       .then((data) => {
+        setIsLoading(false);
         setLoggedInUser({ ...data });
       })
       .catch((error) => {
+        setIsLoading(false);
         showNotification(error.message, theme.colors.error, '3');
       });
   };
@@ -136,7 +141,13 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
       </StyledTextRow>
 
       <StyledSelectRow>
-        <StyledPrimaryButton type="submit">Sign In</StyledPrimaryButton>
+        <StyledPrimaryButton type="submit">
+          {isLoading ?
+            <Spinner />
+            :
+            'Sign In'
+          }
+        </StyledPrimaryButton>
       </StyledSelectRow>
 
       <StyledAnchor to="/register">

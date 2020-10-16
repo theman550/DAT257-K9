@@ -24,9 +24,7 @@ const Trips = ({ showNotification, loggedInUser, theme }) => {
     console.log('Retrieving trips');
     try {
       const res = await fetch(`${config.api.url}trips/${query}`, {
-        method: 'GET',
         mode: 'cors',
-        credentials: 'include',
       });
       const data = await res.json();
 

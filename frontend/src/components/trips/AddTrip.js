@@ -121,7 +121,6 @@ const AddTrip = ({
     fetch(`${config.api.url}trips/`, {
       method: 'POST',
       mode: 'cors',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -136,6 +135,10 @@ const AddTrip = ({
       }
 
       setIsLoading(false);
+    })
+    .catch((error) => {
+      setIsLoading(false);
+      showNotification('Failed to add trip: ' + error.message);
     });
   };
 

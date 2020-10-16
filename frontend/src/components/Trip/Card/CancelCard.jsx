@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import styled, { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
@@ -9,6 +9,7 @@ import ThemeShape from '../../../model/ThemeShape';
 import config from '../../../config';
 import UserPayload from '../../../model/UserPayload';
 import { InactiveButton } from '../../UI';
+import Spinner from '../../Spinner';
 
 const StyledForm = styled(Form)`
     display: flex;
@@ -33,9 +34,13 @@ const CancelCard = ({
   showNotification,
   theme,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   console.log('CancelCard', trip);
+
   const cancelBooking = async (id, seats) => {
     console.log(`Cancelling booking with id: ${id} for ${seats} seats`);
+    setIsLoading(true);
 
     const res = await fetch(`${config.api.url}booking/`, {
       method: 'DELETE',
@@ -53,9 +58,11 @@ const CancelCard = ({
         throw new Error(data.data || data.message || 'No error message provided');
       }
     } catch (error) {
+      setIsLoading(false);
       return showNotification(error.message, theme.colors.error, 5);
     }
 
+    setIsLoading(false);
     return showNotification('Booking deleted', theme.colors.success, 5);
   };
 
@@ -69,7 +76,13 @@ const CancelCard = ({
         >
           {() => (
             <StyledForm>
-              <InactiveButton type="submit">Cancel booking</InactiveButton>
+              <InactiveButton type="submit">
+                {isLoading ?
+                  <Spinner />
+                  :
+                  'Cancel booking'
+                }
+              </InactiveButton>
             </StyledForm>
           )}
         </Formik>
