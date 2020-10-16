@@ -35,6 +35,7 @@ const Wrapper = styled.div`
 
 const ScreensDisplay = ({ trips, tripComponent }) => (
   <Wrapper>
+    {console.log('display trips', trips)}
     {trips.map((trip) => tripComponent(trip))}
   </Wrapper>
 );

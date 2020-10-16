@@ -60,8 +60,7 @@ const BookCard = ({
     console.log(`Submitting booking for trip of id: ${tripID} with ${numberOfSeats} seats`);
 
     try {
-      // Add some type of global message service that can display notifications
-      const res = await fetch(`${config.api.url}trips/`, {
+      const res = await fetch(`${config.api.url}booking/`, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -69,6 +68,8 @@ const BookCard = ({
         },
         body: JSON.stringify({
           tripID,
+          // TODO: Tell backend to add seats column
+          // TODO: Replace email with user payload's userID
           seats: numberOfSeats,
           loggedInEmail: loggedInUser.email,
           token: loggedInUser.token,

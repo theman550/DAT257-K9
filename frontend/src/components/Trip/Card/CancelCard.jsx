@@ -33,14 +33,16 @@ const CancelCard = ({
   showNotification,
   theme,
 }) => {
+  console.log('CancelCard', trip);
   const cancelBooking = async (id, seats) => {
     console.log(`Cancelling booking with id: ${id} for ${seats} seats`);
 
-    const res = await fetch(`${config.api.url}bookings/${id}/`, {
+    const res = await fetch(`${config.api.url}booking/`, {
       method: 'DELETE',
       mode: 'cors',
       body: JSON.stringify({
-        email: loggedInUser.email,
+        bookingID: id,
+        loggedInEmail: loggedInUser.email,
         token: loggedInUser.token,
       }),
     });
@@ -60,10 +62,10 @@ const CancelCard = ({
   return (
     <TripCard
       trip={trip}
-      controlFactory={({ tripID }) => (
+      controlFactory={() => (
         <Formik
           initialValues={{ seats: 1 }}
-          onSubmit={(values) => cancelBooking(tripID, values.seats)}
+          onSubmit={(values) => cancelBooking(trip.booking.bookingID, values.seats)}
         >
           {() => (
             <StyledForm>
