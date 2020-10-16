@@ -1,5 +1,4 @@
 <?php
-
 	define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
 	include(ABS_PATH . "/api.php");
 
@@ -8,7 +7,7 @@
 	if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 		headers();
 	}
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$data = json_decode(file_get_contents("php://input", true));
 		$email = "";
 		$password = "";
