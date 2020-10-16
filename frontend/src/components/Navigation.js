@@ -11,6 +11,7 @@ import {
 } from 'react-feather';
 import config from '../config';
 import { H2 } from './UI';
+import UserPayload from '../model/UserPayload';
 
 const Nav = styled.nav`
   height: ${(props) => props.theme.size.navbar};
@@ -111,7 +112,7 @@ const Navigation = ({ loggedInUser, setLoggedInUser }) => {
         )
         : (
           <div>
-            <Link aria-label="Login" to="/account"><NavIcon as={LogIn} /></Link>
+            <Link aria-label="Login" to="/login"><NavIcon as={LogIn} /></Link>
           </div>
         )}
     </Nav>
@@ -119,10 +120,7 @@ const Navigation = ({ loggedInUser, setLoggedInUser }) => {
 };
 
 Navigation.propTypes = {
-  loggedInUser: PropTypes.shape({
-    token: PropTypes.string,
-    email: PropTypes.string,
-  }),
+  loggedInUser: UserPayload,
   setLoggedInUser: PropTypes.func.isRequired,
 };
 

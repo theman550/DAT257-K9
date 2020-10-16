@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { User } from 'react-feather';
 import config from '../config';
+import ThemeShape from '../model/ThemeShape';
 import {
   FieldFactory,
   PrimaryButton,
@@ -70,7 +71,7 @@ const StyledH4 = styled(H4)`
   }
 `;
 
-const Login = ({ setLoggedInUser, showNotification }) => {
+const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -93,14 +94,14 @@ const Login = ({ setLoggedInUser, showNotification }) => {
           throw new Error('Incorrect username or password');
         }
 
-        showNotification('Signed in sucessfully :)', '#8064f7', '3');
+        showNotification('Signed in sucessfully :)', theme.colors.success, '3');
         return response.json();
       })
       .then((data) => {
         setLoggedInUser({ ...data });
       })
       .catch((error) => {
-        showNotification(error.message, '#CC354E', '3');
+        showNotification(error.message, theme.colors.error, '3');
       });
   };
 
@@ -148,9 +149,10 @@ const Login = ({ setLoggedInUser, showNotification }) => {
   );
 };
 
-Login.propTypes = {
+LoginForm.propTypes = {
   setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
+  theme: ThemeShape.isRequired,
 };
 
-export default Login;
+export default withTheme(LoginForm);

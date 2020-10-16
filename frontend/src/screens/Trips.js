@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Modal, { ModalProvider } from 'styled-react-modal';
+import { withTheme } from 'styled-components';
 import config from '../config';
+import ThemeShape from '../model/ThemeShape';
 import SearchTrip from '../components/trips/SearchTrips';
 import FloatingButtons from '../components/trips/FloatingButtons';
 import DisplayScreen from './Trip/Display';
 import AddTrip from '../components/trips/AddTrip';
 import Pagination from '../components/trips/Pagination';
+import BookCard from '../components/Trip/Card/BookCard';
+import UserPayload from '../model/UserPayload';
+import { toTripEntity } from '../model/Trip';
 
-const Trips = ({ showNotification, loggedInUser }) => {
+const Trips = ({ showNotification, loggedInUser, theme }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [filteredTrips, setFilteredTrips] = useState([]);
@@ -16,6 +21,7 @@ const Trips = ({ showNotification, loggedInUser }) => {
   const tripsPerPage = 10;
 
   const getTrips = async (query) => {
+    console.log('Retrieving trips');
     try {
       const res = await fetch(`${config.api.url}trips/${query}`);
       const data = await res.json();
@@ -27,26 +33,16 @@ const Trips = ({ showNotification, loggedInUser }) => {
       }
 
       if (data === 'no results found') {
-        showNotification('No results found', 'red', 3);
+        showNotification('No results found', theme.colors.error, 3);
         setFilteredTrips([]);
         return;
       }
 
       setFilteredTrips(
-        data.map((trip) => ({
-          ...trip,
-          // mocking the driver
-          driver: {
-            firstName: 'John',
-            lastName: 'Doe',
-          },
-          startTime: new Date(trip.startTime),
-          seatsAvailable: Number.parseInt(trip.seatsAvailable, 10),
-          price: Number.parseInt(trip.price, 10),
-        })),
+        data.map((trip) => toTripEntity(trip)),
       );
     } catch (error) {
-      showNotification('Could not retrieve trips', 'red', 3);
+      showNotification('Could not retrieve trips', theme.colors.error, 3);
       console.error(error.message);
       setFilteredTrips([]);
     }
@@ -67,6 +63,14 @@ const Trips = ({ showNotification, loggedInUser }) => {
         trips={filteredTrips.slice(
           (page - 1) * tripsPerPage,
           (page - 1) * tripsPerPage + tripsPerPage,
+        )}
+        tripComponent={(trip) => (
+          <BookCard
+            key={trip.tripID}
+            trip={trip}
+            showNotification={showNotification}
+            loggedInUser={loggedInUser}
+          />
         )}
       />
       <ModalProvider>
@@ -107,10 +111,8 @@ const Trips = ({ showNotification, loggedInUser }) => {
 
 Trips.propTypes = {
   showNotification: PropTypes.func.isRequired,
-  loggedInUser: PropTypes.shape({
-    token: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-  }).isRequired,
+  loggedInUser: UserPayload.isRequired,
+  theme: ThemeShape.isRequired,
 };
 
-export default Trips;
+export default withTheme(Trips);

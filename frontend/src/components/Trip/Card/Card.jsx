@@ -1,17 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Star, Key } from 'react-feather';
-import { Formik, Form, Field } from 'formik';
 import PropTypes from 'prop-types';
+import TripModel from '../../../model/Trip';
 import {
   Card,
-  PrimaryButton,
-  Label,
   H2,
   H3,
   H4,
   P,
-  FieldFactory,
 } from '../../UI';
 
 const CardHeader = styled.div`
@@ -59,7 +56,11 @@ const CardBody = styled.div`
 
 const TripDetails = styled.div`
     display: flex;
-    margin-bottom: ${(props) => props.theme.spacing.subsection};
+    
+    // If there are controls below trip details, display margin
+    &:not(:last-child) {
+      margin-bottom: ${(props) => props.theme.spacing.subsection};
+    }
 
     & > div:not(:last-child) {
         margin-right: 4rem;
@@ -82,77 +83,16 @@ const AvatarContainer = styled.div`
     }
 `;
 
-const StyledForm = styled(Form)`
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-
-    & > *:not(:last-child) {
-        margin-right: ${(props) => props.theme.spacing.subsection};
-    }
-
-    & > ${PrimaryButton} {
-        // appearance: none;
-        height: 80%;
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-    }
-`;
-
-const SeatsField = styled(FieldFactory(Field))`
-    // Make width to about 4 characters width
-    width: 6ch;
-`;
-
-const FieldContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    & > label {
-        display: block;
-
-        & > * {
-            display: block;
-        }
-    }
-`;
-
-const submitBooking = async (id, numberOfSeats) => {
-  console.log('Submitting booking');
-
-  try {
-    // TODO: Add some type of global message service that can display notifications
-    const res = await fetch('http://splig.xyz/api/trips', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id,
-        seats: numberOfSeats,
-        // TODO: Eventually add userId
-      }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.data || data.message || 'No error message provided');
-    }
-
-    console.log('Successful booking!');
-  } catch (error) {
-    console.warn('Could not submit booking', error.message);
-  }
-};
-
 const TripCard = ({
-  id,
-  origin,
-  destination,
-  driver,
-  datetime,
-  seats: maxSeats,
+  controlFactory,
+  trip: {
+    tripID,
+    startLocation,
+    destination,
+    driver,
+    startTime,
+    seatsAvailable,
+  },
 }) => (
   <Card
     headerContent={(
@@ -183,7 +123,7 @@ const TripCard = ({
       <CardBody>
         <H2>
           <span>
-            {origin}
+            {startLocation}
             {' '}
             -
             {' '}
@@ -195,7 +135,7 @@ const TripCard = ({
           <div>
             <H4>Departs at</H4>
             <H3>
-              {datetime.toLocaleString([], {
+              {startTime.toLocaleString([], {
                 hour: 'numeric',
                 minute: 'numeric',
                 month: 'numeric',
@@ -205,54 +145,24 @@ const TripCard = ({
           </div>
           <div>
             <H4>With seats</H4>
-            <H3>{maxSeats}</H3>
+            <H3>{seatsAvailable}</H3>
           </div>
         </TripDetails>
 
-        <Formik
-          initialValues={{ seats: 1 }}
-          onSubmit={(values) => submitBooking(id, values.seats)}
-        >
-          {({ values, errors }) => (
-            <StyledForm>
-              <FieldContainer>
-                <Label htmlFor="seats">
-                  seats
-                  <SeatsField
-                    id="seats"
-                    name="seats"
-                    type="number"
-                    placeholder="1"
-                    validate={(value) => ((value >= 1 && value <= maxSeats) ? '' : 'Error')}
-                    className={errors.seats ? 'field-error' : null}
-                  />
-                </Label>
-              </FieldContainer>
-              <PrimaryButton type="submit">
-                Book
-                {' '}
-                {values.seats}
-                {' '}
-                seats
-              </PrimaryButton>
-            </StyledForm>
-          )}
-        </Formik>
+        {controlFactory({
+          tripID, startLocation, destination, driver, startTime, seatsAvailable,
+        })}
       </CardBody>
         )}
   />
 );
 
 TripCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  origin: PropTypes.string.isRequired,
-  destination: PropTypes.string.isRequired,
-  driver: PropTypes.shape({
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
-  }).isRequired,
-  datetime: PropTypes.instanceOf(Date).isRequired,
-  seats: PropTypes.number.isRequired,
+  // controlFactory takes in a trip and generates specific controls
+  // for each card. This means you can send requests with card
+  // details on a control's click
+  controlFactory: PropTypes.func.isRequired,
+  trip: PropTypes.shape(TripModel).isRequired,
 };
 
 export default TripCard;

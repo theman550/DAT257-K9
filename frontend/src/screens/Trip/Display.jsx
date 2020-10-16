@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import TripCard from '../../components/Trip/Card/Card';
 
 const Wrapper = styled.div`
     display: flex;
@@ -9,6 +8,7 @@ const Wrapper = styled.div`
     align-items: center;
 
     padding: 1rem;
+    margin-bottom: ${(props) => props.theme.spacing.section};
     background-color: ${(props) => props.theme.colors.fill};
 
     // Set each card to have a width of 500px
@@ -33,24 +33,15 @@ const Wrapper = styled.div`
     }
 `;
 
-const ScreensDisplay = ({ trips }) => (
+const ScreensDisplay = ({ trips, tripComponent }) => (
   <Wrapper>
-    {trips.map((trip) => (
-      <TripCard
-        key={trip.tripID}
-        id={trip.tripID}
-        origin={trip.startLocation}
-        destination={trip.destination}
-        driver={trip.driver}
-        datetime={trip.startTime}
-        seats={trip.seatsAvailable}
-      />
-    ))}
+    {trips.map((trip) => tripComponent(trip))}
   </Wrapper>
 );
 
 ScreensDisplay.propTypes = {
   trips: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tripComponent: PropTypes.func.isRequired,
 };
 
 export default ScreensDisplay;

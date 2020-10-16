@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Login from '../components/Login';
+import LoginForm from '../components/LoginForm';
 
 const Container = styled.div`
   display: flex;
@@ -10,10 +10,9 @@ const Container = styled.div`
   padding: ${(props) => props.theme.padding.section};
 `;
 
-const Account = ({ loggedInUser, setLoggedInUser, showNotification }) => (
+const Account = ({ setLoggedInUser, showNotification }) => (
   <Container>
-    <Login
-      loggedInUser={loggedInUser}
+    <LoginForm
       setLoggedInUser={setLoggedInUser}
       showNotification={showNotification}
     />
@@ -21,16 +20,8 @@ const Account = ({ loggedInUser, setLoggedInUser, showNotification }) => (
 );
 
 Account.propTypes = {
-  loggedInUser: PropTypes.shape({
-    token: PropTypes.string,
-    email: PropTypes.string,
-  }),
   setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
-};
-
-Account.defaultProps = {
-  loggedInUser: null,
 };
 
 export default Account;

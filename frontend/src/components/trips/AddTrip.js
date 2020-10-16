@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, withTheme } from 'styled-components';
 import config from '../../config';
+import ThemeShape from '../../model/ThemeShape';
 import {
   FieldFactory,
   PrimaryButton,
@@ -10,6 +11,7 @@ import {
 } from '../UI';
 import kommuner from './kommuner.json';
 import DropDown from './DropDown';
+import UserPayload from '../../model/UserPayload';
 
 const StyledInput = FieldFactory(styled.input``);
 const StyledTextArea = FieldFactory(styled.textarea``);
@@ -81,7 +83,12 @@ const StyledInactiveButton = styled(InactiveButton)`
   margin-right: ${(props) => props.theme.spacing.subsection};
 `;
 
-const AddTrip = ({ closeAdd, showNotification, loggedInUser }) => {
+const AddTrip = ({
+  closeAdd,
+  showNotification,
+  loggedInUser,
+  theme,
+}) => {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [datetime, setDatetime] = useState('');
@@ -118,10 +125,10 @@ const AddTrip = ({ closeAdd, showNotification, loggedInUser }) => {
 
     }).then((respones) => respones).then((data) => {
       if (data.status === 400) {
-        showNotification('Sorry ! this is bad request , You should try agian with valid inputs ', '#CC354E', '5');
+        showNotification('Sorry ! this is bad request , You should try agian with valid inputs ', theme.colors.error, '5');
         console.log('Bad request');
       } else if (data.status === 201) {
-        showNotification('Your trip is added succesfully :)', '#378C2E', '7');
+        showNotification('Your trip is added succesfully :)', theme.colors.success, '7');
       }
     });
   };
@@ -209,10 +216,8 @@ const AddTrip = ({ closeAdd, showNotification, loggedInUser }) => {
 AddTrip.propTypes = {
   closeAdd: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
-  loggedInUser: PropTypes.shape({
-    token: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-  }).isRequired,
+  loggedInUser: UserPayload.isRequired,
+  theme: ThemeShape.isRequired,
 };
 
-export default AddTrip;
+export default withTheme(AddTrip);
