@@ -71,7 +71,7 @@ function createTripID()
 
 
 function getTripGETParameters(){
-	return array("startLocation", "destination", "price", "tripID", "seatsAvailable", "description", "userID");
+	return array("startLocation", "destination", "tripID", "seatsAvailable", "description", "userID");
 }
 
 ?>
