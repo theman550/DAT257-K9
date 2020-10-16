@@ -9,6 +9,7 @@ import {
   Label,
   InactiveButton,
 } from '../UI';
+import Spinner from '../Spinner';
 import kommuner from './kommuner.json';
 import DropDown from './DropDown';
 import UserPayload from '../../model/UserPayload';
@@ -96,6 +97,7 @@ const AddTrip = ({
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [options, setOptions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const loadingData = () => {
     setOptions(kommuner.map((detail) => detail.Kommun));
@@ -103,6 +105,8 @@ const AddTrip = ({
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     const newvalues = {
       startLocation: from,
       destination: to,
@@ -130,7 +134,13 @@ const AddTrip = ({
         showNotification('Your trip is added succesfully :)', theme.colors.success, '7');
         closeAdd();
       }
-    });
+
+      setIsLoading(false);
+    })
+      .catch((error) => {
+        setIsLoading(false);
+        showNotification(`Failed to add trip: ${error.message}`);
+      });
   };
 
   useEffect(() => { loadingData(); }, []);
@@ -209,7 +219,11 @@ const AddTrip = ({
 
       <StyledSelectRow>
         <StyledInactiveButton onClick={closeAdd} type="button">Close</StyledInactiveButton>
-        <StyledPrimaryButton type="submit">Add</StyledPrimaryButton>
+        <StyledPrimaryButton type="submit">
+          {isLoading
+            ? <Spinner />
+            : 'Add'}
+        </StyledPrimaryButton>
       </StyledSelectRow>
 
     </StyledForm>

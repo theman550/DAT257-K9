@@ -7,6 +7,7 @@ import {
   InactiveButton,
   Label,
 } from '../UI';
+import Spinner from '../Spinner';
 import kommuner from './kommuner.json';
 import DropDown from './DropDown';
 
@@ -82,8 +83,8 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
   const [to, setTo] = useState('');
   const [datetime, setDatetime] = useState('');
   const [seats, setSeats] = useState('');
-  const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState([]);
 
   const loadingData = () => {
@@ -97,16 +98,17 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
     if (to !== '') query += `&destination=${to}`;
     if (datetime !== '') query += `&startTime=${datetime}`;
     if (seats !== '') query += `&seatsAvailable=${seats}`;
-    if (minPrice !== '') query += `&priceMin=${minPrice}`;
-    if (maxPrice !== '') query += `&priceMax=${maxPrice}`;
+    if (maxPrice !== '') query += `&price=${maxPrice}`;
 
     return query === '' ? query : `?${query}`;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     const query = createQuery();
-    getTrips(query);
+    await getTrips(query);
 
     closeSearch();
   };
@@ -160,31 +162,25 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
         </StyledSelectColumn>
 
         <StyledSelectColumn>
-          <Label htmlFor="price">Price</Label>
-          <StyledSelectRow id="price">
-            <StyledInput
-              type="number"
-              min="0"
-              max="1000"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-              placeholder="Min"
-            />
-            <StyledInput
-              type="number"
-              min="0"
-              max="1000"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-              placeholder="Max"
-            />
-          </StyledSelectRow>
+          <Label htmlFor="price">Max price</Label>
+          <StyledInput
+            type="number"
+            min="0"
+            max="1000"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+            placeholder="Max"
+          />
         </StyledSelectColumn>
 
       </StyledSelectRow>
       <StyledSelectRow>
         <StyledInactiveButton onClick={closeSearch}>Close</StyledInactiveButton>
-        <StyledPrimaryButton type="submit">Search</StyledPrimaryButton>
+        <StyledPrimaryButton type="submit">
+          {isLoading
+            ? <Spinner />
+            : 'Search'}
+        </StyledPrimaryButton>
       </StyledSelectRow>
     </StyledForm>
   );
