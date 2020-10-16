@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
-import { Redirect } from 'react-router-dom';
 import { H2 } from './UI/Typography';
 import FieldFactory from './UI/Field';
 import config from '../config';
@@ -58,6 +57,8 @@ const Button = styled(PrimaryButton)`
   padding: 10px;
   width: 60%;
   cursor: pointer;
+
+  
 `;
 
 const Form = ({ setLoggedInUser, showNotification, theme }) => {
@@ -66,13 +67,8 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [redirect, setRedirect] = useState(false);
 
   const handleSubmit = (event) => {
-    if (password !== confirmPassword) {
-      showNotification('password is not matched !', theme.colors.error, '50');
-      return;
-    }
     event.preventDefault();
     fetch(`${config.api.url}users/`, {
       method: 'POST',
@@ -90,16 +86,13 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
       .then((data) => {
         setLoggedInUser({ ...data });
         showNotification('You are now registered!', theme.colors.success, '7');
-        setRedirect(true);
       })
       .catch((error) => {
         console.log(error);
         showNotification('Failed to register', theme.colors.error, '7');
       });
   };
-  if (redirect) {
-    return <Redirect to="/account" />;
-  }
+
   return (
     <Wrapper>
       <F onSubmit={handleSubmit}>
@@ -129,21 +122,21 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
           <tbody>
             <tr>
               <td>
-                <InputPassword type="password" alt="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" required />
+                <InputPassword className={password !== confirmPassword ? 'field-error' : null} type="password" alt="password" name={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" required />
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <InputPassword type="password" alt="confirmPassword" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" required />
+                <InputPassword className={password !== confirmPassword ? 'field-error' : null} type="password" alt="confirmPassword" name={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirm password" required />
               </td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td>
-                <Button type="submit" data-testid="submit" className="button">Submit</Button>
+                <Button type="submit" data-testid="submit" className="button" disabled={password !== confirmPassword}>Submit</Button>
               </td>
             </tr>
           </tbody>

@@ -84,7 +84,7 @@ const DropDown = ({ items, placeholder, valueChange }) => {
 
   return (
     <Div>
-      <StyledInput onChange={onTextChange} placeholder={placeholder} value={text} type="text" />
+      <StyledInput onChange={onTextChange} placeholder={placeholder} value={text} type="text" required />
       {renderSuggestions()}
     </Div>
   );
