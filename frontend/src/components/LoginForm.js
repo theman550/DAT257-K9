@@ -125,6 +125,7 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email.."
           data-testid="email"
+          required
         />
       </StyledTextRow>
 
@@ -137,6 +138,7 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Enter your password..."
           data-testid="password"
+          required
         />
       </StyledTextRow>
 

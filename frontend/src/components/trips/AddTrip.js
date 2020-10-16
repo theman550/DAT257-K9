@@ -132,6 +132,7 @@ const AddTrip = ({
         console.log('Bad request');
       } else if (data.status === 201) {
         showNotification('Your trip is added succesfully :)', theme.colors.success, '7');
+        closeAdd();
       }
 
       setIsLoading(false);
@@ -173,6 +174,7 @@ const AddTrip = ({
             id="datetime"
             value={datetime}
             onChange={(e) => setDatetime(e.target.value)}
+            required
           />
         </StyledSelectColumn>
       </StyledSelectRow>
@@ -188,6 +190,7 @@ const AddTrip = ({
             value={seats}
             onChange={(e) => setSeats(e.target.value)}
             placeholder="Enter seats..."
+            required
           />
         </StyledSelectColumn>
 
@@ -201,6 +204,7 @@ const AddTrip = ({
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             placeholder="Price"
+            required
           />
 
         </StyledSelectColumn>
@@ -209,7 +213,7 @@ const AddTrip = ({
       <StyledSelectRow>
         <StyledSelectColumn>
           <Label htmlFor="description">description</Label>
-          <StyledTextArea id="description" rows="6" cols="30" value={description} onChange={(e) => setDescription(e.target.value)} />
+          <StyledTextArea id="description" rows="6" cols="30" value={description} onChange={(e) => setDescription(e.target.value)} required />
         </StyledSelectColumn>
       </StyledSelectRow>
 
