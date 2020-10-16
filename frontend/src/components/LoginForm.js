@@ -11,7 +11,7 @@ import {
   Label,
   H4,
 } from './UI';
-import Spinner from '../components/Spinner';
+import Spinner from './Spinner';
 
 const StyledInput = FieldFactory(styled.input``);
 
@@ -142,11 +142,9 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
 
       <StyledSelectRow>
         <StyledPrimaryButton type="submit">
-          {isLoading ?
-            <Spinner />
-            :
-            'Sign In'
-          }
+          {isLoading
+            ? <Spinner />
+            : 'Sign In'}
         </StyledPrimaryButton>
       </StyledSelectRow>
 

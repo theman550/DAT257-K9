@@ -77,11 +77,9 @@ const CancelCard = ({
           {() => (
             <StyledForm>
               <InactiveButton type="submit">
-                {isLoading ?
-                  <Spinner />
-                  :
-                  'Cancel booking'
-                }
+                {isLoading
+                  ? <Spinner />
+                  : 'Cancel booking'}
               </InactiveButton>
             </StyledForm>
           )}

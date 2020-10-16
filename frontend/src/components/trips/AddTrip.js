@@ -136,10 +136,10 @@ const AddTrip = ({
 
       setIsLoading(false);
     })
-    .catch((error) => {
-      setIsLoading(false);
-      showNotification('Failed to add trip: ' + error.message);
-    });
+      .catch((error) => {
+        setIsLoading(false);
+        showNotification(`Failed to add trip: ${error.message}`);
+      });
   };
 
   useEffect(() => { loadingData(); }, []);
