@@ -9,7 +9,8 @@
 	if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 		headers();
 	}
-	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+	else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		if(isset($_GET['userID'])){
 			$response = getAllBookingsFromUser($_GET['userID']);
 		}
@@ -21,7 +22,8 @@
 		}
 		sendResponseString($response);
 	}
-	if(checkToken($data)){
+
+	else if(checkToken($data)){
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$response = bookTrip($data);
 		}

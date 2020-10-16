@@ -91,8 +91,9 @@ function getAllBookingsFromUser($userID){
     $dbconnection = connectDB();
     $maffigArray = array();
     for($i = 0; $i<count($finarray['bookings']); $i++){
-        $maffigArray['bookings'][$i] = $dbconnection -> query("SELECT * FROM Booking WHERE bookingID='" . $finarray['bookings'][$i] . "';") -> fetch_assoc();
+        $maffigArray[$i] = $dbconnection -> query("SELECT * FROM Booking WHERE bookingID='" . $finarray['bookings'][$i] . "';") -> fetch_assoc();
     }
+    logga($maffigArray);
     disconnectDB($dbconnection);
     return $maffigArray;
 }
