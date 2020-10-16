@@ -40,7 +40,7 @@ describe('SearchTrips', () => {
   });
 
   test('renders price selector', () => {
-    expect(screen.getByLabelText('Price')).toBeInTheDocument();
+    expect(screen.getByText('Max price')).toBeInTheDocument();
   });
 
   test('renders search button', () => {
@@ -69,12 +69,6 @@ describe('SearchTrips', () => {
     const input = screen.getByLabelText('Seats');
     fireEvent.change(input, { target: { value: '4' } });
     expect(input.value).toBe('4');
-  });
-
-  test('should accept min price', () => {
-    const input = screen.getByPlaceholderText('Min');
-    fireEvent.change(input, { target: { value: '100' } });
-    expect(input.value).toBe('100');
   });
 
   test('should accept max price', () => {

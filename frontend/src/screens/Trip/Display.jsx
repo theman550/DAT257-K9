@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { H2 } from '../../components/UI/Typography';
 
 const Wrapper = styled.div`
     display: flex;
@@ -33,12 +34,25 @@ const Wrapper = styled.div`
     }
 `;
 
-const ScreensDisplay = ({ trips, tripComponent }) => (
-  <Wrapper>
-    {console.log('display trips', trips)}
-    {trips.map((trip) => tripComponent(trip))}
-  </Wrapper>
-);
+const StyledH2 = styled(H2)`
+  text-align: center;
+`;
+
+const ScreensDisplay = ({ trips, tripComponent }) => {
+  if (trips.length === 0) {
+    return (
+      <Wrapper>
+        <StyledH2>Sorry, no trips found :(</StyledH2>
+      </Wrapper>
+    );
+  }
+
+  return (
+    <Wrapper>
+      {trips.map((trip) => tripComponent(trip))}
+    </Wrapper>
+  );
+};
 
 ScreensDisplay.propTypes = {
   trips: PropTypes.arrayOf(PropTypes.object).isRequired,

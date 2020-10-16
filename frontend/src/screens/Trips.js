@@ -21,7 +21,6 @@ const Trips = ({ showNotification, loggedInUser, theme }) => {
   const tripsPerPage = 10;
 
   const getTrips = async (query) => {
-    console.log('Retrieving trips');
     try {
       const res = await fetch(`${config.api.url}trips/${query}`, {
         mode: 'cors',
@@ -35,7 +34,6 @@ const Trips = ({ showNotification, loggedInUser, theme }) => {
       }
 
       if (data === 'no results found') {
-        showNotification('No results found', theme.colors.error, 3);
         setFilteredTrips([]);
         return;
       }
