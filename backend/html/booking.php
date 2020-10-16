@@ -84,8 +84,8 @@ function deleteBooking($bookingID){
 
 /* Den här funktionen kanske borde ligga i User-filen istället? */
 /* Variabelnamnen är jättefina och ska så förbli. */
-function getAllBookingsFromUser($email){
-    $fulsträng = queryDB("SELECT bookings FROM Users WHERE email = '{$email}'") -> fetch_assoc()['bookings'];
+function getAllBookingsFromUser($userID){
+    $fulsträng = queryDB("SELECT bookings FROM Users WHERE userID = '{$userID}'") -> fetch_assoc()['bookings'];
     $finarray['bookings'] = str_getcsv($fulsträng);
     array_shift($finarray['bookings']); 
     $dbconnection = connectDB();

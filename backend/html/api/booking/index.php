@@ -10,11 +10,14 @@
 		headers();
 	}
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-		if(isset($data->getAllBookings)){
-			$response = getAllBookingsFromUser($data->loggedInEmail);
+		if(isset($_GET['userID'])){
+			$response = getAllBookingsFromUser($_GET['userID']);
+		}
+		else if(isset($_GET['bookingID'])){
+			$response = getBooking($_GET['bookingID'])->fetch_assoc();
 		}
 		else{
-			$response = getBooking($data->bookingID)->fetch_assoc();
+			$response = "Varken userID eller bookingID är satt.";
 		}
 		sendResponseString($response);
 	}
