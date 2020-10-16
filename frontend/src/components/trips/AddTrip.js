@@ -103,7 +103,7 @@ const AddTrip = ({
 
   const onSubmit = async (e) => {
     e.preventDefault();
-     const newvalues = {
+    const newvalues = {
       startLocation: from,
       destination: to,
       seatsAvailable: seats,
@@ -130,7 +130,6 @@ const AddTrip = ({
         showNotification('Your trip is added succesfully :)', theme.colors.success, '7');
         closeAdd();
       }
-      
     });
   };
 
