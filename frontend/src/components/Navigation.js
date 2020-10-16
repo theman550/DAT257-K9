@@ -1,8 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { LogIn, Map, MapPin } from 'react-feather';
+import {
+  User,
+  LogIn,
+  LogOut,
+  Map,
+  MapPin,
+} from 'react-feather';
+import config from '../config';
 import { H2 } from './UI';
+import UserPayload from '../model/UserPayload';
 
 const Nav = styled.nav`
   height: ${(props) => props.theme.size.navbar};
@@ -51,40 +60,72 @@ const StyledH2 = styled(H2)`
   }
 `;
 
-const StyledLogInIcon = styled(LogIn)`
+const NavIcon = styled.i`
   color: ${(props) => props.theme.colors.primary};
-  margin-left: ${(props) => props.theme.spacing.subsection};
   margin-right: ${(props) => props.theme.spacing.subsection};
+  cursor: pointer;
   
   &:hover {
     color: white;
   }
 `;
 
-const StyledMapPinIcon = styled(MapPin)`
-  color: ${(props) => props.theme.colors.primary};
-  
-  &:hover {
-    color: white;
-  }
-`;
+const Navigation = ({ loggedInUser, setLoggedInUser }) => {
+  const logout = async () => {
+    try {
+      await fetch(`${config.api.url}logout/`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token: loggedInUser.token,
+          loggedInEmail: loggedInUser.email,
+        }),
+      });
 
-const Navigation = () => (
-  <Nav>
-    <StyledH2>
-      <Link aria-label="Home" to="/">
-        <Map />
-        <span>
-          {' '}
-          Share-a-ride
-        </span>
-      </Link>
-    </StyledH2>
-    <div>
-      <Link aria-label="Trips" to="/trips"><StyledMapPinIcon /></Link>
-      <Link aria-label="Account" to="/account"><StyledLogInIcon /></Link>
-    </div>
-  </Nav>
-);
+      setLoggedInUser(null);
+    } catch (e) {
+      console.error(`Failed to log out ${e.message}`);
+    }
+  };
+
+  return (
+    <Nav>
+      <StyledH2>
+        <Link aria-label="Home" to="/">
+          <Map />
+          <span>
+            {' '}
+            Share-a-ride
+          </span>
+        </Link>
+      </StyledH2>
+      {loggedInUser !== null
+        ? (
+          <div>
+            <Link aria-label="Trips" to="/trips"><NavIcon as={MapPin} /></Link>
+            <Link aria-label="Account" to="/account"><NavIcon as={User} /></Link>
+            <NavIcon as={LogOut} aria-label="Logout" onClick={logout} />
+          </div>
+        )
+        : (
+          <div>
+            <Link aria-label="Login" to="/login"><NavIcon as={LogIn} /></Link>
+          </div>
+        )}
+    </Nav>
+  );
+};
+
+Navigation.propTypes = {
+  loggedInUser: UserPayload,
+  setLoggedInUser: PropTypes.func.isRequired,
+};
+
+Navigation.defaultProps = {
+  loggedInUser: null,
+};
 
 export default Navigation;

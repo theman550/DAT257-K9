@@ -3,7 +3,7 @@ require_once 'vendor/autoload.php';
 use Assert\LazyAssertionException;
 use Assert\Assert;
 
-function validateTrip($data){
+function validateTrip($data, $userID){
 	$dateString = "Y-m-d H:i:s";
 		try{
 			Assert::lazy() 
@@ -13,21 +13,21 @@ function validateTrip($data){
 			->that($data->startTime,		"date", 		"Date must be set and in format YYYY-MM-DD HH:MM:SS")	-> notEmpty() -> date($dateString)
 			->that($data->seatsAvailable, 	"Seats", 		"Seats must be defined and an integer")		 			-> notEmpty()
 			->that($data->description, 		"description", 	"Desciption missing")									-> notEmpty() -> string()
-			->that($data->userID, 			"userID", 		"UserID invalid or not included with request")			-> notEmpty() -> string() -> startsWith("user-")
+			->that($userID, 				"userID", 		"UserID invalid or not included with request")			-> notEmpty() -> string() -> startsWith("user-")
 			->verifyNow();
 		}
 		catch(LazyAssertionException $errors){
 			return createErrorResponse($errors);
 		}
 		return TRUE;
-
 }
 
 function validateUser(){
-
+	//TODO
 }
 
 function validateBooking(){
+	//TODO
 	return TRUE;
 }
 
@@ -44,7 +44,7 @@ function createErrorResponse($errors){
 
 
 /* 
-Här är koden jag tänkt använda till att validera användardata, börjar med trips tills jag vet mer om users bara.
+Här är koden jag tänkt använda till att validera användardata, börjar med trips tills jag vet mer om users.
 
  	if($type == 'trip'){
     

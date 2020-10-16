@@ -1,7 +1,6 @@
 <?php
-define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
-include(ABS_PATH . "/api.php");
-//include(ABS_PATH . "/agilecourse/api.php");
+	define("ABS_PATH", $_SERVER['DOCUMENT_ROOT']);
+	include(ABS_PATH . "/api.php");
 
 headers();
 
@@ -10,44 +9,36 @@ headers();
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 	headers();
 }
-
-else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-	if (session_status() == PHP_SESSION_NONE)
-		session_start();
-	if(isset($_SESSION['email']) && isset($_SESSION['token']))
-	{		
-		if(verifyToken($_SESSION['email'], $_SESSION['token']))
-		{	
-			$filterArray = getTripGETParameters();
-			$response = readFilteredTable($filterArray, "Resa", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">=") . "ORDER BY startTime ASC");
-			sendResponseQuery($response);
-		}
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+	$filterArray = getTripGETParameters();
+	if(isset($_GET['startTime']))
+	{
+		$response = readFilteredTable($filterArray, "Resa", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">=") . "ORDER BY startTime ASC");
 	}
-}
-
-else if($_SERVER['REQUEST_METHOD'] === 'POST'){
-	if (session_status() == PHP_SESSION_NONE)
-		session_start();
-	if(isset($_SESSION['email']) && isset($_SESSION['token']))
-	{		
-		if(verifyToken($_SESSION['email'], $_SESSION['token']))
-		{	
-			$data = json_decode(file_get_contents("php://input", true));
-			$response = writeTrip($data); // ändra writetrip så att den tar emot alla parametrar som förut så det inte blir error
-			sendResponseString($response);
-			/*if(isset($data->startLocation) && isset($data->destination) && isset($data->price) && isset($data->startTime) && isset($data->seatsAvailable) && isset($data->description) && isset($data->userID))
-			{
-				$response = writeTrip($data->startLocation, $data->destination, $data->price, $data->startTime, $data->seatsAvailable, $data->description, $data->userID); // ändra writetrip så att den tar emot alla parametrar som förut så det inte blir error
-				sendResponseString($response);
-			}*/
-				//$response = writeTrip($_POST['startLocation'], $_POST['destination'], $_POST['price'], $_POST['startTime'], $_POST['seatsAvailable'], $_POST['description'], $_POST['userID']);
-
-			http_response_code(201);
-		}
+	else if(isset($_GET['price']))
+	{
+		$_GET['startTime'] = date('y-m-d h:i:s');
+		$response = readFilteredTable($filterArray, "Resa", returnStringQuery($filterArray, "=") . returnStringQuery(Array("price", "startTime"), ">=") . "ORDER BY price ASC");
 	}
 	else
 	{
-		http_response_code(400);
+		$_GET['startTime'] = date('y-m-d h:i:s');
+		$response = readFilteredTable($filterArray, "Resa", returnStringQuery($filterArray, "=") . returnStringQuery(Array("startTime"), ">=") . "ORDER BY startTime ASC");
 	}
+	sendResponseQuery($response);
+}
+
+else if($_SERVER['REQUEST_METHOD'] === 'POST'){
+	$data = json_decode(file_get_contents("php://input", true));
+	if(checkToken($data)){
+		$response = writeTrip($data); // ändra writetrip så att den tar emot alla parametrar som förut så det inte blir error
+		sendResponseString($response);
+	}
+	else{
+			http_response_code(401); //unauthorized
+		}
+}
+else{
+	http_response_code(400);
 }
 ?>

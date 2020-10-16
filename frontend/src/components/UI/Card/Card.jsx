@@ -7,13 +7,9 @@ const CardContainer = styled.div`
     border-radius: ${(props) => props.theme.size.corner};
     overflow: hidden;
 
-    /* -webkit-box-shadow: -20px 17px 36px 0px rgba(112,115,134,0.1);
-    -moz-box-shadow: -20px 17px 36px 0px rgba(112,115,134,0.1);
-    box-shadow: -20px 17px 36px 0px rgba(112,115,134,0.1); */
-
-    -webkit-box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
-    -moz-box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
-    box-shadow: -10px 10px 40px 0px rgba(10,10,10,0.75);
+    -webkit-box-shadow: -10px 10px 30px 5px rgba(10,10,10,0.95);
+    -moz-box-shadow: -10px 10px 30px 5px rgba(10,10,10,0.95);
+    box-shadow: -10px 10px 30px 5px rgba(10,10,10,0.95);
 `;
 
 const Header = styled.div`

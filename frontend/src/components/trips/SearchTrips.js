@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
@@ -8,6 +8,8 @@ import {
   Label,
 } from '../UI';
 import Spinner from '../Spinner';
+import kommuner from './kommuner.json';
+import DropDown from './DropDown';
 
 const StyledInput = FieldFactory(styled.input``);
 
@@ -84,6 +86,11 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [options, setOptions] = useState([]);
+
+  const loadingData = () => {
+    setOptions(kommuner.map((detail) => detail.Kommun));
+  };
 
   const createQuery = () => {
     let query = '';
@@ -108,28 +115,28 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
     closeSearch();
   };
 
+  useEffect(() => { loadingData(); }, []);
   return (
     <StyledForm aria-label="Search form" onSubmit={handleSubmit}>
       <StyledTextRow>
-        <Label htmlFor="from">From</Label>
-        <StyledInput
-          type="text"
-          id="from"
-          value={from}
-          onChange={(e) => setFrom(e.target.value)}
+        <Label id="fromLabel">From</Label>
+        <DropDown
+          items={options}
+          valueChange={(value) => setFrom(value)}
           placeholder="Enter start location..."
+          aria-labelledby="fromLabel"
         />
       </StyledTextRow>
       <StyledTextRow>
-        <Label htmlFor="to">To</Label>
-        <StyledInput
-          type="text"
-          id="to"
-          value={to}
-          onChange={(e) => setTo(e.target.value)}
+        <Label id="toLabel">To</Label>
+        <DropDown
+          items={options}
+          valueChange={(value) => setTo(value)}
           placeholder="Enter destination..."
+          aria-labelledby="toLabel"
         />
       </StyledTextRow>
+
       <StyledSelectRow>
         <StyledSelectColumn>
           <Label htmlFor="datetime">Date/time</Label>
@@ -141,6 +148,7 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
           />
         </StyledSelectColumn>
       </StyledSelectRow>
+
       <StyledSelectRow>
         <StyledSelectColumn>
           <Label htmlFor="seats">Seats</Label>
@@ -154,6 +162,7 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
             placeholder="Enter seats..."
           />
         </StyledSelectColumn>
+
         <StyledSelectColumn>
           <Label htmlFor="price">Price</Label>
           <StyledSelectRow id="price">
@@ -175,6 +184,7 @@ const SearchTrips = ({ closeSearch, getTrips }) => {
             />
           </StyledSelectRow>
         </StyledSelectColumn>
+
       </StyledSelectRow>
       <StyledSelectRow>
         <StyledInactiveButton onClick={closeSearch}>Close</StyledInactiveButton>

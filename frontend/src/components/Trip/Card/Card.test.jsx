@@ -10,12 +10,21 @@ describe('Trip card', () => {
     render(
       <ThemeProvider theme={theme}>
         <Card
-          id="1"
-          origin="Göteborg"
-          destination="Malmö"
-          seats={4}
-          driver={{ firstName: 'David', lastName: 'Hernandez' }}
-          datetime={new Date('July 16, 2018 16:00:00')}
+          controlFactory={(trip) => <button type="submit">{trip.tripID}</button>}
+          trip={
+            ({
+              tripID: '0-trip-id',
+              userID: '10',
+              startLocation: 'Göteborg',
+              destination: 'Malmö',
+              driver: {
+                firstName: 'David',
+                lastName: 'Hernandez',
+              },
+              startTime: new Date('July 16, 2018 16:00:00'),
+              seatsAvailable: '4',
+            })
+          }
         />
       </ThemeProvider>,
     );
@@ -36,12 +45,22 @@ describe('Trip card', () => {
     });
 
     it('renders the amount of available seats', () => {
-      expect(screen.getByText('seats')).toBeInTheDocument();
+      expect(screen.getByText('With seats')).toBeInTheDocument();
       expect(screen.getByText('4')).toBeInTheDocument();
     });
 
     it('renders the driver\'s name', () => {
       expect(screen.getByText('David Hernandez')).toBeInTheDocument();
+    });
+  });
+
+  describe('can implement controls', () => {
+    it('displays control', () => {
+      expect(screen.getByRole('button')).toBeInTheDocument();
+    });
+
+    it('generates control based on trip input', () => {
+      expect(screen.getByText('0-trip-id')).toBeInTheDocument();
     });
   });
 });
