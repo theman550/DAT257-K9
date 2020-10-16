@@ -68,8 +68,6 @@ const BookCard = ({
         },
         body: JSON.stringify({
           tripID,
-          // TODO: Tell backend to add seats column
-          // TODO: Replace email with user payload's userID
           seats: numberOfSeats,
           loggedInEmail: loggedInUser.email,
           token: loggedInUser.token,

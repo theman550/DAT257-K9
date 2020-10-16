@@ -1,9 +1,14 @@
 <script>
 
+datta = {
+    loggedInEmail : "flippo@hotmail.com",
+    token : "02fae7c80ab8a1c0e3676c6026ec84f13bb3a847dfbe3d8447dd7f45f19c28496dbca0ab141e6d15ad07b7e16debe6e4b4de37b8005cf4a6950e8f44aae27d8e"
+};
+
 function getTrip(){
     var startLocation = document.getElementById("startLocation").value;
     var destination = document.getElementById("destination").value;
-     fetch('http://localhost/api/trips/?startLocation=' + startLocation + '&destination=' + destination, {mode:'cors'})
+     fetch('http://localhost/api/trips/?startLocation=' + startLocation + '&destination=' + destination, {mode:'cors', data:datta})
     .then(response => response.json())
     .then(json => {
         document.getElementById("text").innerHTML = "";
@@ -27,8 +32,9 @@ function writeTrip(){
         seatsAvailable : (document.getElementById('seatsAvailable').value), 
         startTime : "2020-09-15 22:20:31", 
         description : document.getElementById('description').value, 
-        userID : document.getElementById("userID").value};
-
+        userID : document.getElementById("userID").value
+    };
+    data = data+datta;
     fetch("http://localhost/api/trips/", { 
         mode:'cors',
         // Adding method type 
@@ -56,6 +62,7 @@ function writeTrip(){
 function bookTrip(){
     document.getElementById("text").innerHTML = "";
     var datto = {tripID : document.getElementById("tripID").value, seats : document.getElementById("seats").value, userID : document.getElementById("userID").value}
+    datto += datta;
     fetch('http://localhost/api/book/', {
         mode: 'cors',
         method: "POST",
@@ -75,6 +82,7 @@ function deleteBooking(){
     document.getElementById("text2").innerHTML = "";
     var val = document.getElementById('bookingID');
     var datto = {bookingID : val.value};
+    datto += datta;
     fetch('http://localhost/api/book/' + "?bookingID=" + val.value, {
         mode: 'cors',
         method: "DELETE",
@@ -89,8 +97,13 @@ function deleteBooking(){
 
 function getBookings(){
     document.getElementById("text").innerHTML = "";
-    var userID = document.getElementById("userID").value;
-    fetch('http://localhost/api/book/' + "?userID=" + userID, {mode:'cors'})
+    /* var userID = document.getElementById("userID").value; */
+    var datto = {getAllBookings : "true",
+                loggedInEmail : "flippo@hotmail.com",
+                token : "02fae7c80ab8a1c0e3676c6026ec84f13bb3a847dfbe3d8447dd7f45f19c28496dbca0ab141e6d15ad07b7e16debe6e4b4de37b8005cf4a6950e8f44aae27d8e"
+    };
+    console.log(JSON.stringify(datto));
+    fetch('http://localhost/api/book/'/*  + "?userID=" + userID */, {mode:'cors', data:JSON.stringify(datto)})
     .then(response => response.json())
     .then(json => 
         json['bookings'].forEach(element => {
@@ -104,6 +117,7 @@ function getBookings(){
             writeStuff("########</br>","#########");
         }));
 }
+
 
 function login(){
     var datto = {"email" : "flippo@hotmail.com", "password" : "hemligt"};
@@ -122,9 +136,10 @@ function logout(){
     fetch('http://localhost/api/login/', {
         mode: 'cors',
         method: "GET",
+        data : datta,
     })
 }
-
+1
 function writeStuff(stuff, id){
     document.getElementById("text").innerHTML += id + ": " + stuff + "</br>";
 }
