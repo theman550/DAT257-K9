@@ -13,6 +13,7 @@ import Spinner from '../Spinner';
 import kommuner from './kommuner.json';
 import DropDown from './DropDown';
 import UserPayload from '../../model/UserPayload';
+import { toTripResource } from '../../model/Trip';
 
 const StyledInput = FieldFactory(styled.input``);
 const StyledTextArea = FieldFactory(styled.textarea``);
@@ -107,16 +108,14 @@ const AddTrip = ({
     e.preventDefault();
     setIsLoading(true);
 
-    const newvalues = {
+    const trip = toTripResource({
       startLocation: from,
       destination: to,
       seatsAvailable: seats,
-      startTime: datetime,
+      startTime: new Date(datetime),
       price,
       description,
-      loggedInEmail: loggedInUser.email,
-      token: loggedInUser.token,
-    };
+    });
 
     fetch(`${config.api.url}trips/`, {
       method: 'POST',
@@ -124,7 +123,11 @@ const AddTrip = ({
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newvalues),
+      body: JSON.stringify({
+        ...trip,
+        loggedInEmail: loggedInUser.email,
+        token: loggedInUser.token,
+      }),
 
     }).then((respones) => respones).then((data) => {
       if (data.status === 400) {
