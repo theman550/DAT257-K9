@@ -10,6 +10,7 @@ import RegisterForm from './components/Form';
 import ErrorBoundary from './components/ErrorBoundary';
 import Account from './screens/Account';
 import LandingPage from './screens/LandingPage';
+import NotFound from './screens/NotFound';
 
 const PageWrapper = styled.div`
   margin-top: ${(props) => props.theme.size.navbar};
@@ -83,6 +84,7 @@ const App = () => {
                   </Route>
                 </>
               )}
+            <Route component={NotFound} />
           </Switch>
         </PageWrapper>
       </Router>
