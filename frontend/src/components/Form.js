@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
+import { Redirect } from 'react-router-dom';
 import { H2 } from './UI/Typography';
 import FieldFactory from './UI/Field';
 import config from '../config';
@@ -69,6 +70,7 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -91,6 +93,7 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
         setIsLoading(false);
         setLoggedInUser({ ...data });
         showNotification('You are now registered!', theme.colors.success, '7');
+        setRedirect(true);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -98,7 +101,9 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
         showNotification('Failed to register', theme.colors.error, '7');
       });
   };
-
+  if (redirect) {
+    return <Redirect to="/trips" />;
+  }
   return (
     <Wrapper>
       <F onSubmit={handleSubmit}>
