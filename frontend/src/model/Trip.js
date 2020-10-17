@@ -34,11 +34,7 @@ const toResourceDateFormat = (datetime) => {
   // toISOString returns a datetime format such as '2011-10-05T14:48:00.000Z'
   // date = YYYY-MM-DD
   // time = HH:mm:ss.sssZ
-  console.log(datetime.toISOString());
   const [date, time] = datetime.toISOString().split('T');
-  console.log('date', date);
-  console.log('time', time);
-  console.log('time split', time.split('.'));
 
   // Remove time's milliseconds, seconds will suffice
   return `${date} ${time.split('.')[0]}`;

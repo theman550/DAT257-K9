@@ -91,6 +91,7 @@ const Trips = ({ showNotification, loggedInUser, theme }) => {
         >
           <AddTrip
             closeAdd={() => setIsAddOpen(false)}
+            onNewTrip={(trip) => setFilteredTrips([trip, ...filteredTrips])}
             showNotification={showNotification}
             loggedInUser={loggedInUser}
           />
