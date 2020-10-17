@@ -234,6 +234,7 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
     try {
       const res = await fetch(`${config.api.url}users/?email=${loggedInUser.email}`, { mode: 'cors' });
       const data = await res.json();
+      console.log('getUserData data', data);
 
       // Apply response validations, if any error is caught, log the error directly
       // The error is expected not to contain any important information since
@@ -252,21 +253,24 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
         }
       } catch (error) {
         showNotification(error.message, theme.colors.error, 5);
+        return null;
       }
 
-      setUserData(data[0]);
+      return data[0];
     } catch (error) {
       showNotification('Could not retrieve user', theme.colors.error, 5);
+      return null;
     }
   };
 
   const getTrip = async (tripID) => {
     console.log(`Retrieving trip with id: ${tripID}`);
-    let user;
+    let trip;
 
     try {
-      const res = await fetch(`${config.api.url}trips/${tripID}/`, { mode: 'cors' });
+      const res = await fetch(`${config.api.url}trips/?tripID=${tripID}`, { mode: 'cors' });
       const data = await res.json();
+      console.log('getTrip data', data);
 
       try {
         if (!res.ok) {
@@ -276,12 +280,12 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
         showNotification(error.message, theme.colors.error, 5);
       }
 
-      user = data;
+      [trip] = data;
     } catch (error) {
       showNotification('Could not retrieve trip associated with booking', theme.colors.error, 5);
     }
 
-    return user;
+    return trip;
   };
 
   /**
@@ -289,16 +293,13 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
    * (2) Retrieve each booking's related trip.
    * (3) Combine models by placing bookings as a child property of the trip.
    */
-  const getBookedTrips = async () => {
+  const getBookedTrips = async (userId) => {
     console.log('Retrieving bookings');
 
     try {
-      if (userData === null) {
-        throw new Error('Cannot retrieved booked trips, could not find user');
-      }
-
-      const res = await fetch(`${config.api.url}bookings/?userID=${userData.userID}`, { mode: 'cors' });
+      const res = await fetch(`${config.api.url}booking/?userID=${userId}`, { mode: 'cors' });
       const data = await res.json();
+      console.log('Bookings response', data);
 
       try {
         if (!res.ok) {
@@ -306,35 +307,46 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
         }
       } catch (error) {
         showNotification(error.message, theme.colors.error, 5);
+        return [];
       }
 
-      const associatedTrips = data
+      return data
         .map((b) => toBookingEntity(b))
-        .reduce(async (acc, booking) => {
-          const trip = await getTrip(booking.tripID);
+        .map(async (booking) => {
+          const associatedTrip = await getTrip(booking.tripID);
+          const trip = toTripEntity(associatedTrip);
 
           // For each iteration adds a new entry with the key of the related trip's id
           // Where value is the trip properties along with a new property, "booking",
           // that is the user's booking. I'm assuming a user can only place one booking
           return {
-            ...acc,
-            [booking.tripID]: {
-              ...trip,
-              booking,
-            },
+            ...trip,
+            booking,
           };
-        }, {});
-
-      setBookedTrips(associatedTrips);
+        });
     } catch (error) {
+      console.log('error', error.message);
       showNotification('Could not retrieve bookings', theme.colors.error, 5);
+      return [];
     }
   };
 
   // Runs after the first component render
   useEffect(() => {
-    getBookedTrips();
-    getUserData();
+    const getData = async () => {
+      const user = await getUserData();
+      console.log('getUserData result', user);
+      if (user === null || user === undefined) {
+        throw new Error('Cannot retrieve booked trips, could not find user');
+      }
+
+      setUserData(user);
+      const trips = await Promise.all(await getBookedTrips(user.userID));
+      console.log('getBookedTrips result', trips);
+      setBookedTrips(trips);
+    };
+
+    getData();
 
     /* setBookedTrips(
       MockedBookings

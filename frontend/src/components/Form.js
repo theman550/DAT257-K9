@@ -5,6 +5,7 @@ import { H2 } from './UI/Typography';
 import FieldFactory from './UI/Field';
 import config from '../config';
 import { PrimaryButton } from './UI';
+import Spinner from './Spinner';
 import ThemeShape from '../model/ThemeShape';
 
 const Wrapper = styled.div`
@@ -67,9 +68,12 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true);
+
     fetch(`${config.api.url}users/`, {
       method: 'POST',
       mode: 'cors',
@@ -84,10 +88,12 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
       }),
     }).then((response) => response.json())
       .then((data) => {
+        setIsLoading(false);
         setLoggedInUser({ ...data });
         showNotification('You are now registered!', theme.colors.success, '7');
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log(error);
         showNotification('Failed to register', theme.colors.error, '7');
       });
@@ -136,7 +142,11 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
           <tbody>
             <tr>
               <td>
-                <Button type="submit" data-testid="submit" className="button" disabled={password !== confirmPassword}>Submit</Button>
+                <Button type="submit" data-testid="submit" className="button" disabled={password !== confirmPassword}>
+                  {isLoading
+                    ? <Spinner />
+                    : 'Submit'}
+                </Button>
               </td>
             </tr>
           </tbody>

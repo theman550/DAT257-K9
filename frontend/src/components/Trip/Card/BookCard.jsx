@@ -12,6 +12,7 @@ import {
 import UserPayload from '../../../model/UserPayload';
 import ThemeShape from '../../../model/ThemeShape';
 import config from '../../../config';
+import Spinner from '../../Spinner';
 
 const StyledForm = styled(Form)`
     display: flex;
@@ -55,13 +56,14 @@ const BookCard = ({
   theme,
 }) => {
   const [seats, setSeats] = useState(trip.seatsAvailable);
+  const [isLoading, setIsLoading] = useState(false);
 
   const submitBooking = async (tripID, numberOfSeats) => {
     console.log(`Submitting booking for trip of id: ${tripID} with ${numberOfSeats} seats`);
+    setIsLoading(true);
 
     try {
-      // Add some type of global message service that can display notifications
-      const res = await fetch(`${config.api.url}trips/`, {
+      const res = await fetch(`${config.api.url}booking/`, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -70,7 +72,7 @@ const BookCard = ({
         body: JSON.stringify({
           tripID,
           seats: numberOfSeats,
-          email: loggedInUser.email,
+          loggedInEmail: loggedInUser.email,
           token: loggedInUser.token,
         }),
       });
@@ -82,12 +84,15 @@ const BookCard = ({
           throw new Error(data.data || data.message || 'No error message provided');
         }
       } catch (error) {
+        setIsLoading(false);
         return showNotification(error.message, theme.colors.error, 5);
       }
     } catch (error) {
+      setIsLoading(false);
       return showNotification('Could not submit booking', theme.colors.error, 5);
     }
 
+    setIsLoading(false);
     console.log('Successful booking!');
     // Decrease card's seats with numberOfSeats
     return setSeats(seats - numberOfSeats);
@@ -117,11 +122,9 @@ const BookCard = ({
                 </Label>
               </FieldContainer>
               <PrimaryButton type="submit">
-                Book
-                {' '}
-                {values.seats}
-                {' '}
-                {(values.seats > 1) ? 'seats' : 'seat'}
+                {isLoading
+                  ? <Spinner />
+                  : `Book ${values.seats} ${(values.seats > 1) ? 'seats' : 'seat'}`}
               </PrimaryButton>
             </StyledForm>
           )}
