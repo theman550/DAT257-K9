@@ -44,6 +44,7 @@ const App = () => {
             <Route path="/login">
               <Login
                 showNotification={showNotification}
+                loggedInUser={loggedInUser}
                 setLoggedInUser={setLoggedInUser}
               />
             </Route>

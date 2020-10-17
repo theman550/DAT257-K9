@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LoginForm from '../components/LoginForm';
+import UserPayload from '../model/UserPayload';
 
 const Container = styled.div`
   display: flex;
@@ -10,18 +11,24 @@ const Container = styled.div`
   padding: ${(props) => props.theme.padding.section};
 `;
 
-const Account = ({ setLoggedInUser, showNotification }) => (
+const Login = ({ loggedInUser, setLoggedInUser, showNotification }) => (
   <Container>
     <LoginForm
+      loggedInUser={loggedInUser}
       setLoggedInUser={setLoggedInUser}
       showNotification={showNotification}
     />
   </Container>
 );
 
-Account.propTypes = {
+Login.propTypes = {
+  loggedInUser: UserPayload,
   setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
 };
 
-export default Account;
+Login.defaultProps = {
+  loggedInUser: null,
+};
+
+export default Login;

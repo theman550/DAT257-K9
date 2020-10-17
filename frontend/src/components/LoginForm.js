@@ -13,6 +13,7 @@ import {
   H4,
 } from './UI';
 import Spinner from './Spinner';
+import UserPayload from '../model/UserPayload';
 
 const StyledInput = FieldFactory(styled.input``);
 
@@ -73,10 +74,14 @@ const StyledH4 = styled(H4)`
   }
 `;
 
-const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
+const LoginForm = ({
+  loggedInUser,
+  setLoggedInUser,
+  showNotification,
+  theme,
+}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loggedin, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (event) => {
@@ -100,7 +105,6 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
         }
 
         showNotification('Signed in sucessfully :)', theme.colors.success, '5');
-        setLoggedIn(true);
         return response.json();
       })
       .then((data) => {
@@ -113,7 +117,7 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
       });
   };
 
-  if (loggedin) return <Redirect to="/trips" />;
+  if (loggedInUser !== null) return <Redirect to="/trips" />;
 
   return (
     <StyledForm aria-label="Signin form" onSubmit={handleSubmit}>
@@ -166,9 +170,14 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
 };
 
 LoginForm.propTypes = {
+  loggedInUser: UserPayload,
   setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
   theme: ThemeShape.isRequired,
+};
+
+LoginForm.defaultProps = {
+  loggedInUser: null,
 };
 
 export default withTheme(LoginForm);
