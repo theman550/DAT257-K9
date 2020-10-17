@@ -9,7 +9,7 @@ headers();
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 	headers();
 }
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	$filterArray = getTripGETParameters();
 	if(isset($_GET['startTime']))
 	{
@@ -39,6 +39,6 @@ else if($_SERVER['REQUEST_METHOD'] === 'POST'){
 		}
 }
 else{
-	http_response_code(400);
+	http_response_code(405);
 }
 ?>
