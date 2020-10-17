@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styled, { withTheme } from 'styled-components';
 import { User } from 'react-feather';
 import config from '../config';
 import ThemeShape from '../model/ThemeShape';
+
 import {
   FieldFactory,
   PrimaryButton,
@@ -12,6 +13,7 @@ import {
   H4,
 } from './UI';
 import Spinner from './Spinner';
+import UserPayload from '../model/UserPayload';
 
 const StyledInput = FieldFactory(styled.input``);
 
@@ -72,7 +74,12 @@ const StyledH4 = styled(H4)`
   }
 `;
 
-const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
+const LoginForm = ({
+  loggedInUser,
+  setLoggedInUser,
+  showNotification,
+  theme,
+}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -97,7 +104,7 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
           throw new Error('Incorrect username or password');
         }
 
-        showNotification('Signed in sucessfully :)', theme.colors.success, '3');
+        showNotification('Signed in sucessfully :)', theme.colors.success, '5');
         return response.json();
       })
       .then((data) => {
@@ -109,6 +116,8 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
         showNotification(error.message, theme.colors.error, '3');
       });
   };
+
+  if (loggedInUser !== null) return <Redirect to="/trips" />;
 
   return (
     <StyledForm aria-label="Signin form" onSubmit={handleSubmit}>
@@ -161,9 +170,14 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
 };
 
 LoginForm.propTypes = {
+  loggedInUser: UserPayload,
   setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
   theme: ThemeShape.isRequired,
+};
+
+LoginForm.defaultProps = {
+  loggedInUser: null,
 };
 
 export default withTheme(LoginForm);

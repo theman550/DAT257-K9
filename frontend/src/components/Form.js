@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
 import { H2 } from './UI/Typography';
@@ -7,62 +8,72 @@ import config from '../config';
 import { PrimaryButton } from './UI';
 import Spinner from './Spinner';
 import ThemeShape from '../model/ThemeShape';
+import UserPayload from '../model/UserPayload';
 
 const Wrapper = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
 const F = styled.form`
-    box-sizing: border-box;
-    font-family: Kufam, sans-serif;
-    width: 99%;
-    border-radius: 5px;
-    background: ${(props) => props.theme.colors.fill};
-    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
-    text-align: center;
-    background-size: cover;
-    font-size: medium;
-    padding: ${(props) => props.theme.padding.section};
-    `;
+  box-sizing: border-box;
+  font-family: Kufam, sans-serif;
+  width: 99%;
+  border-radius: 5px;
+  background: ${(props) => props.theme.colors.fill};
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  text-align: center;
+  background-size: cover;
+  font-size: medium;
+  padding: ${(props) => props.theme.padding.section};
+`;
+
 const H1 = styled(H2)`
-    font-size: 38px;
-    text-align:center;
-    color: ${(props) => props.theme.colors.primary};
-    `;
+  font-size: 38px;
+  text-align:center;
+  color: ${(props) => props.theme.colors.primary};
+`;
+
 const Table = styled.table`
-    margin-left: auto;
-    margin-right: auto;
-    `;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
 const InputText = FieldFactory(styled.input`
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    background: ${(props) => props.theme.colors.alternateFill};
-    box-sizing: border-box;
-    border: none;
-    border-radius: 15px;
-    font-family: Kufam;
-    `);
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  background: ${(props) => props.theme.colors.alternateFill};
+  box-sizing: border-box;
+  border: none;
+  border-radius: 15px;
+  font-family: Kufam;
+`);
+
 const InputPassword = FieldFactory(styled.input`
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    background: ${(props) => props.theme.colors.alternateFill};
-    box-sizing: border-box;
-    border: none;
-    border-radius: 15px;
-    font-family: Kufam;
-    `);
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  background: ${(props) => props.theme.colors.alternateFill};
+  box-sizing: border-box;
+  border: none;
+  border-radius: 15px;
+  font-family: Kufam;
+`);
+
 const Button = styled(PrimaryButton)`
   padding: 10px;
   width: 60%;
   cursor: pointer;
-
-  
 `;
 
-const Form = ({ setLoggedInUser, showNotification, theme }) => {
+const Form = ({
+  loggedInUser,
+  setLoggedInUser,
+  showNotification,
+  theme,
+}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -98,6 +109,8 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
         showNotification('Failed to register', theme.colors.error, '7');
       });
   };
+
+  if (loggedInUser !== null) return <Redirect to="/trips" />;
 
   return (
     <Wrapper>
@@ -157,9 +170,14 @@ const Form = ({ setLoggedInUser, showNotification, theme }) => {
 };
 
 Form.propTypes = {
+  loggedInUser: UserPayload,
   setLoggedInUser: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
   theme: ThemeShape.isRequired,
+};
+
+Form.defaultProps = {
+  loggedInUser: null,
 };
 
 export default withTheme(Form);

@@ -44,6 +44,7 @@ const App = () => {
             <Route path="/login">
               <Login
                 showNotification={showNotification}
+                loggedInUser={loggedInUser}
                 setLoggedInUser={setLoggedInUser}
               />
             </Route>
@@ -51,6 +52,7 @@ const App = () => {
               <ErrorBoundary sectionName="Register page">
                 <RegisterForm
                   showNotification={showNotification}
+                  loggedInUser={loggedInUser}
                   setLoggedInUser={setLoggedInUser}
                 />
               </ErrorBoundary>
