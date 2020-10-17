@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styled, { withTheme } from 'styled-components';
 import { User } from 'react-feather';
 import config from '../config';
 import ThemeShape from '../model/ThemeShape';
+
 import {
   FieldFactory,
   PrimaryButton,
@@ -74,6 +75,7 @@ const StyledH4 = styled(H4)`
 const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loggedin, setLoggedIn] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -94,7 +96,8 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
           throw new Error('Incorrect username or password');
         }
 
-        showNotification('Signed in sucessfully :)', theme.colors.success, '3');
+        showNotification('Signed in sucessfully :)', theme.colors.success, '5');
+        setLoggedIn(true);
         return response.json();
       })
       .then((data) => {
@@ -104,6 +107,8 @@ const LoginForm = ({ setLoggedInUser, showNotification, theme }) => {
         showNotification(error.message, theme.colors.error, '3');
       });
   };
+
+  if (loggedin) return <Redirect to="/trips" />;
 
   return (
     <StyledForm aria-label="Signin form" onSubmit={handleSubmit}>
