@@ -402,6 +402,9 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
               <CancelCard
                 key={trip.tripID}
                 trip={trip}
+                onTripCancel={() => setBookedTrips(
+                  bookedTrips.filter((b) => b.tripID !== trip.tripID),
+                )}
                 showNotification={showNotification}
                 loggedInUser={loggedInUser}
               />
