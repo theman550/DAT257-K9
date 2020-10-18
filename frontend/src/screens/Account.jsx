@@ -362,16 +362,16 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
           <AvatarContainer>
             <AvatarContent>
               <P>
-                { userData && userData.firstName && userData.firstName.slice(0, 1) }
-                { userData && userData.lastName && userData.lastName.slice(0, 1) }
+                { userData && userData.firstname && userData.firstname.slice(0, 1) }
+                { userData && userData.lastname && userData.lastname.slice(0, 1) }
               </P>
             </AvatarContent>
           </AvatarContainer>
           <UserInformation>
             <H3>
-              {userData && userData.firstName}
+              {userData && userData.firstname}
               {' '}
-              {userData && userData.lastName}
+              {userData && userData.lastname}
             </H3>
           </UserInformation>
         </UserProfile>
@@ -402,6 +402,9 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
               <CancelCard
                 key={trip.tripID}
                 trip={trip}
+                onTripCancel={() => setBookedTrips(
+                  bookedTrips.filter((b) => b.tripID !== trip.tripID),
+                )}
                 showNotification={showNotification}
                 loggedInUser={loggedInUser}
               />

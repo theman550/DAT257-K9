@@ -30,13 +30,12 @@ const StyledForm = styled(Form)`
 
 const CancelCard = ({
   trip,
+  onTripCancel,
   loggedInUser,
   showNotification,
   theme,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log('CancelCard', trip);
 
   const cancelBooking = async (id, seats) => {
     console.log(`Cancelling booking with id: ${id} for ${seats} seats`);
@@ -63,7 +62,8 @@ const CancelCard = ({
     }
 
     setIsLoading(false);
-    return showNotification('Booking deleted', theme.colors.success, 5);
+    showNotification('Booking deleted', theme.colors.success, 5);
+    return onTripCancel();
   };
 
   return (
@@ -95,6 +95,7 @@ CancelCard.propTypes = {
     // Expect a booking object, that this component can request to cancel
     booking: PropTypes.shape(BookingModel),
   }).isRequired,
+  onTripCancel: PropTypes.func.isRequired,
   loggedInUser: UserPayload.isRequired,
   showNotification: PropTypes.func.isRequired,
   theme: ThemeShape.isRequired,
