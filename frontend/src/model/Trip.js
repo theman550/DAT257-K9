@@ -5,10 +5,6 @@ export default {
   userID: PropTypes.string.isRequired,
   startLocation: PropTypes.string.isRequired,
   destination: PropTypes.string.isRequired,
-  driver: PropTypes.shape({
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
-  }).isRequired,
   startTime: PropTypes.instanceOf(Date).isRequired,
   seatsAvailable: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
@@ -21,11 +17,6 @@ const toTripEntity = (tripResponse) => ({
   ...tripResponse,
   // Convert datetime string to Date object
   startTime: new Date(tripResponse.startTime),
-  // Add mock driver data
-  driver: {
-    firstName: 'David',
-    lastName: 'Hernandez',
-  },
   seatsAvailable: Number.parseInt(tripResponse.seatsAvailable, 10),
   price: Number.parseInt(tripResponse.price, 10),
 });

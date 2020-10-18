@@ -100,7 +100,7 @@ const BookCard = ({
 
   return (
     <TripCard
-      trip={{ ...trip, seatsAvailable: seats, driver: { firstName: 'David', lastName: 'Hernandez' } }}
+      trip={{ ...trip, seatsAvailable: seats }}
       controlFactory={({ tripID, seatsAvailable }) => (
         <Formik
           initialValues={{ seats: 1 }}

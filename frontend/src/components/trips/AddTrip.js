@@ -131,7 +131,6 @@ const AddTrip = ({
       }),
 
     }).then((response) => {
-      console.log('response', response);
       if (response.status === 400) {
         showNotification('Sorry ! this is bad request , You should try agian with valid inputs ', theme.colors.error, '5');
         console.log('Bad request');
@@ -140,7 +139,6 @@ const AddTrip = ({
       }
       return response.json();
     }).then((data) => {
-      console.log('data', data);
       onNewTrip(
         toTripEntity({
           ...trip,

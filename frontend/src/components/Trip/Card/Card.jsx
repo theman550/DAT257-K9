@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Star, Key } from 'react-feather';
 import PropTypes from 'prop-types';
 import TripModel from '../../../model/Trip';
+import config from '../../../config';
 import {
   Card,
   H2,
@@ -87,75 +88,101 @@ const TripCard = ({
   controlFactory,
   trip: {
     tripID,
+    userID,
     startLocation,
     destination,
     driver,
     startTime,
     seatsAvailable,
   },
-}) => (
-  <Card
-    headerContent={(
-      <CardHeader>
-        <Driver>
-          <div className="details">
-            <Star color="white" size="16" />
-            <H3>4.76</H3>
-            <Key color="white" size="16" />
-            <H3>87&apos; Volkswagen</H3>
-          </div>
-          <H3>
-            {driver.firstName}
-            {' '}
-            {driver.lastName}
-          </H3>
-        </Driver>
+}) => {
+  const [user, setUser] = useState(null);
 
-        <AvatarContainer>
-          <P>
-            {driver.firstName.slice(0, 1)}
-            {driver.lastName.slice(0, 1)}
-          </P>
-        </AvatarContainer>
-      </CardHeader>
-        )}
-    bodyContent={(
-      <CardBody>
-        <H2>
-          <span>
-            {startLocation}
-            {' '}
-            -
-            {' '}
-          </span>
-          <span>{destination}</span>
-        </H2>
+  useEffect(() => {
+    const getTripUser = async () => {
+      try {
+        const res = await fetch(`${config.api.url}users/?userID=${userID}`, { mode: 'cors' });
+        const data = await res.json();
 
-        <TripDetails>
-          <div>
-            <H4>Departs at</H4>
+        // If there are less or more than 1 user, throw an error
+        if (data.length !== 1) {
+          throw new Error('Could not find a specific user related to trip');
+        }
+
+        setUser(data[0]);
+      } catch (error) {
+        // With user set to null, user data will be replaced with ----
+        setUser(null);
+      }
+    };
+
+    getTripUser();
+  }, [userID]);
+
+  return (
+    <Card
+      headerContent={(
+        <CardHeader>
+          <Driver>
+            <div className="details">
+              <Star color="white" size="16" />
+              <H3>---</H3>
+              <Key color="white" size="16" />
+              <H3>----------</H3>
+            </div>
             <H3>
-              {startTime.toLocaleString([], {
-                hour: 'numeric',
-                minute: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-              })}
+              {user ? user.firstname : '----'}
+              {' '}
+              {user ? user.lastname : '----'}
             </H3>
-          </div>
-          <div>
-            <H4>With seats</H4>
-            <H3>{seatsAvailable}</H3>
-          </div>
-        </TripDetails>
+          </Driver>
 
-        {controlFactory({
-          tripID, startLocation, destination, driver, startTime, seatsAvailable,
-        })}
-      </CardBody>
+          <AvatarContainer>
+            <P>
+              {user ? user.firstname.slice(0, 1) : '-'}
+              {user ? user.lastname.slice(0, 1) : '-'}
+            </P>
+          </AvatarContainer>
+        </CardHeader>
         )}
-  />
-);
+      bodyContent={(
+        <CardBody>
+          <H2>
+            <span>
+              {startLocation}
+              {' '}
+              -
+              {' '}
+            </span>
+            <span>{destination}</span>
+          </H2>
+
+          <TripDetails>
+            <div>
+              <H4>Departs at</H4>
+              <H3>
+                {startTime.toLocaleString([], {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  month: 'numeric',
+                  day: 'numeric',
+                })}
+              </H3>
+            </div>
+            <div>
+              <H4>With seats</H4>
+              <H3>{seatsAvailable}</H3>
+            </div>
+          </TripDetails>
+
+          {controlFactory({
+            tripID, startLocation, destination, driver, startTime, seatsAvailable,
+          })}
+        </CardBody>
+        )}
+    />
+  );
+};
 
 TripCard.propTypes = {
   // controlFactory takes in a trip and generates specific controls
