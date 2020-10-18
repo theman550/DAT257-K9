@@ -13,6 +13,7 @@ import Spinner from '../Spinner';
 import kommuner from './kommuner.json';
 import DropDown from './DropDown';
 import UserPayload from '../../model/UserPayload';
+import { toTripEntity, toTripResource } from '../../model/Trip';
 
 const StyledInput = FieldFactory(styled.input``);
 const StyledTextArea = FieldFactory(styled.textarea``);
@@ -86,6 +87,7 @@ const StyledInactiveButton = styled(InactiveButton)`
 
 const AddTrip = ({
   closeAdd,
+  onNewTrip,
   showNotification,
   loggedInUser,
   theme,
@@ -107,16 +109,14 @@ const AddTrip = ({
     e.preventDefault();
     setIsLoading(true);
 
-    const newvalues = {
+    const trip = toTripResource({
       startLocation: from,
       destination: to,
       seatsAvailable: seats,
-      startTime: datetime,
+      startTime: new Date(datetime),
       price,
       description,
-      loggedInEmail: loggedInUser.email,
-      token: loggedInUser.token,
-    };
+    });
 
     fetch(`${config.api.url}trips/`, {
       method: 'POST',
@@ -124,23 +124,36 @@ const AddTrip = ({
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newvalues),
+      body: JSON.stringify({
+        ...trip,
+        loggedInEmail: loggedInUser.email,
+        token: loggedInUser.token,
+      }),
 
-    }).then((respones) => respones).then((data) => {
-      if (data.status === 400) {
+    }).then((response) => {
+      console.log('response', response);
+      if (response.status === 400) {
         showNotification('Sorry ! this is bad request , You should try agian with valid inputs ', theme.colors.error, '5');
         console.log('Bad request');
-      } else if (data.status === 201) {
+      } else if (response.status === 201) {
         showNotification('Your trip is added succesfully :)', theme.colors.success, '7');
-        closeAdd();
       }
+      return response.json();
+    }).then((data) => {
+      console.log('data', data);
+      onNewTrip(
+        toTripEntity({
+          ...trip,
+          tripID: data.tripID,
+        }),
+      );
 
+      closeAdd();
       setIsLoading(false);
-    })
-      .catch((error) => {
-        setIsLoading(false);
-        showNotification(`Failed to add trip: ${error.message}`);
-      });
+    }).catch(() => {
+      setIsLoading(false);
+      closeAdd();
+    });
   };
 
   useEffect(() => { loadingData(); }, []);
@@ -232,6 +245,7 @@ const AddTrip = ({
 
 AddTrip.propTypes = {
   closeAdd: PropTypes.func.isRequired,
+  onNewTrip: PropTypes.func.isRequired,
   showNotification: PropTypes.func.isRequired,
   loggedInUser: UserPayload.isRequired,
   theme: ThemeShape.isRequired,
