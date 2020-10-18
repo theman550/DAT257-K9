@@ -229,110 +229,110 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
   const [userData, setUserData] = useState(null);
   const [bookedTrips, setBookedTrips] = useState([]);
 
-  const getUserData = async () => {
-    console.log('Retrieving user');
-    try {
-      const res = await fetch(`${config.api.url}users/?email=${loggedInUser.email}`, { mode: 'cors' });
-      const data = await res.json();
-      console.log('getUserData data', data);
-
-      // Apply response validations, if any error is caught, log the error directly
-      // The error is expected not to contain any important information since
-      // it was either thrown here or by the API
-      try {
-        if (!res.ok) {
-          throw new Error(data.data || data.message || 'No error message provided');
-        }
-
-        if (data.length === 0) {
-          throw new Error('No user with that email');
-        }
-
-        if (data.length > 1) {
-          throw new Error('More than one user with the same email');
-        }
-      } catch (error) {
-        showNotification(error.message, theme.colors.error, 5);
-        return null;
-      }
-
-      return data[0];
-    } catch (error) {
-      showNotification('Could not retrieve user', theme.colors.error, 5);
-      return null;
-    }
-  };
-
-  const getTrip = async (tripID) => {
-    console.log(`Retrieving trip with id: ${tripID}`);
-    let trip;
-
-    try {
-      const res = await fetch(`${config.api.url}trips/?tripID=${tripID}`, { mode: 'cors' });
-      const data = await res.json();
-      console.log('getTrip data', data);
-
-      try {
-        if (!res.ok) {
-          throw new Error(data.data || data.message || 'No error message provided');
-        }
-      } catch (error) {
-        showNotification(error.message, theme.colors.error, 5);
-      }
-
-      [trip] = data;
-    } catch (error) {
-      showNotification('Could not retrieve trip associated with booking', theme.colors.error, 5);
-    }
-
-    return trip;
-  };
-
-  /**
-   * (1) Retrieve user's bookings based on the user's id.
-   * (2) Retrieve each booking's related trip.
-   * (3) Combine models by placing bookings as a child property of the trip.
-   */
-  const getBookedTrips = async (userId) => {
-    console.log('Retrieving bookings');
-
-    try {
-      const res = await fetch(`${config.api.url}booking/?userID=${userId}`, { mode: 'cors' });
-      const data = await res.json();
-      console.log('Bookings response', data);
-
-      try {
-        if (!res.ok) {
-          throw new Error(data.data || data.message || 'No error message provided');
-        }
-      } catch (error) {
-        showNotification(error.message, theme.colors.error, 5);
-        return [];
-      }
-
-      return data
-        .map((b) => toBookingEntity(b))
-        .map(async (booking) => {
-          const associatedTrip = await getTrip(booking.tripID);
-          const trip = toTripEntity(associatedTrip);
-
-          // For each iteration adds a new entry with the key of the related trip's id
-          // Where value is the trip properties along with a new property, "booking",
-          // that is the user's booking. I'm assuming a user can only place one booking
-          return {
-            ...trip,
-            booking,
-          };
-        });
-    } catch (error) {
-      console.log('error', error.message);
-      showNotification('Could not retrieve bookings', theme.colors.error, 5);
-      return [];
-    }
-  };
-
   // Runs after the first component render
   useEffect(() => {
+    const getUserData = async () => {
+      console.log('Retrieving user');
+      try {
+        const res = await fetch(`${config.api.url}users/?email=${loggedInUser.email}`, { mode: 'cors' });
+        const data = await res.json();
+        console.log('getUserData data', data);
+
+        // Apply response validations, if any error is caught, log the error directly
+        // The error is expected not to contain any important information since
+        // it was either thrown here or by the API
+        try {
+          if (!res.ok) {
+            throw new Error(data.data || data.message || 'No error message provided');
+          }
+
+          if (data.length === 0) {
+            throw new Error('No user with that email');
+          }
+
+          if (data.length > 1) {
+            throw new Error('More than one user with the same email');
+          }
+        } catch (error) {
+          showNotification(error.message, theme.colors.error, 5);
+          return null;
+        }
+
+        return data[0];
+      } catch (error) {
+        showNotification('Could not retrieve user', theme.colors.error, 5);
+        return null;
+      }
+    };
+
+    const getTrip = async (tripID) => {
+      console.log(`Retrieving trip with id: ${tripID}`);
+      let trip;
+
+      try {
+        const res = await fetch(`${config.api.url}trips/?tripID=${tripID}`, { mode: 'cors' });
+        const data = await res.json();
+        console.log('getTrip data', data);
+
+        try {
+          if (!res.ok) {
+            throw new Error(data.data || data.message || 'No error message provided');
+          }
+        } catch (error) {
+          showNotification(error.message, theme.colors.error, 5);
+        }
+
+        [trip] = data;
+      } catch (error) {
+        showNotification('Could not retrieve trip associated with booking', theme.colors.error, 5);
+      }
+
+      return trip;
+    };
+
+    /**
+     * (1) Retrieve user's bookings based on the user's id.
+     * (2) Retrieve each booking's related trip.
+     * (3) Combine models by placing bookings as a child property of the trip.
+     */
+    const getBookedTrips = async (userId) => {
+      console.log('Retrieving bookings');
+
+      try {
+        const res = await fetch(`${config.api.url}booking/?userID=${userId}`, { mode: 'cors' });
+        const data = await res.json();
+        console.log('Bookings response', data);
+
+        try {
+          if (!res.ok) {
+            throw new Error(data.data || data.message || 'No error message provided');
+          }
+        } catch (error) {
+          showNotification(error.message, theme.colors.error, 5);
+          return [];
+        }
+
+        return data
+          .map((b) => toBookingEntity(b))
+          .map(async (booking) => {
+            const associatedTrip = await getTrip(booking.tripID);
+            const trip = toTripEntity(associatedTrip);
+
+            // For each iteration adds a new entry with the key of the related trip's id
+            // Where value is the trip properties along with a new property, "booking",
+            // that is the user's booking. I'm assuming a user can only place one booking
+            return {
+              ...trip,
+              booking,
+            };
+          });
+      } catch (error) {
+        console.log('error', error.message);
+        showNotification('Could not retrieve bookings', theme.colors.error, 5);
+        return [];
+      }
+    };
+
     const getData = async () => {
       const user = await getUserData();
       console.log('getUserData result', user);
@@ -347,13 +347,7 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
     };
 
     getData();
-
-    /* setBookedTrips(
-      MockedBookings
-        .map((booking) => MockedTrips.find((t) => t.tripID === booking.tripID)),
-    );
-    setUserData({ firstName: 'David', lastName: 'Hernandez' }); */
-  }, []);
+  }, [loggedInUser, showNotification, theme]);
 
   return (
     <Wrapper>
@@ -379,15 +373,15 @@ const Account = ({ showNotification, theme, loggedInUser }) => {
         <UserStatistics>
           <div>
             <H4>Trips taken</H4>
-            <H3>147</H3>
+            <H3>---</H3>
           </div>
           <div>
             <H4>Trips shared</H4>
-            <H3>7</H3>
+            <H3>-</H3>
           </div>
           <div>
             <H4>CO2 emissions prevented</H4>
-            <H3>15 kg</H3>
+            <H3>-- kg</H3>
           </div>
         </UserStatistics>
       </Header>

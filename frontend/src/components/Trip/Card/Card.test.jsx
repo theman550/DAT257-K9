@@ -17,10 +17,6 @@ describe('Trip card', () => {
               userID: '10',
               startLocation: 'Göteborg',
               destination: 'Malmö',
-              driver: {
-                firstName: 'David',
-                lastName: 'Hernandez',
-              },
               startTime: new Date('July 16, 2018 16:00:00'),
               seatsAvailable: '4',
             })
@@ -47,10 +43,6 @@ describe('Trip card', () => {
     it('renders the amount of available seats', () => {
       expect(screen.getByText('With seats')).toBeInTheDocument();
       expect(screen.getByText('4')).toBeInTheDocument();
-    });
-
-    it('renders the driver\'s name', () => {
-      expect(screen.getByText('David Hernandez')).toBeInTheDocument();
     });
   });
 
